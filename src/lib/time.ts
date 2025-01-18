@@ -1,7 +1,21 @@
-import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
+export function parseTime(timeString: string) {
+    if (timeString == "") return null;
 
-dayjs.extend(customParseFormat);
+    const time = timeString.match(/(\d+)(:(\d\d))?\s*(p?)/i);
+    if (time == null) return null;
+
+    let hours = parseInt(time[1], 10);
+    if (hours == 12 && !time[4]) {
+        hours = 0;
+    } else {
+        hours += hours < 12 && time[4] ? 12 : 0;
+    }
+    const d = new Date();
+    d.setHours(hours);
+    d.setMinutes(parseInt(time[3], 10) || 0);
+    d.setSeconds(0, 0);
+    return d;
+}
 
 const thaiNumbers = [
     "ศูนย์",
@@ -19,23 +33,22 @@ const thaiNumbers = [
 ];
 
 function numberToThai(num: number): string {
-    if (num <= 11) return thaiNumbers[num];
-    if (num < 20)
+    if (num <= 11) {
+        return thaiNumbers[num];
+    }
+    if (num < 20) {
         return `สิบ${num % 10 === 1 ? "เอ็ด" : thaiNumbers[num % 10]}`;
+    }
     const tens = Math.floor(num / 10);
     const ones = num % 10;
     return `${thaiNumbers[tens]}สิบ${ones === 1 ? "เอ็ด" : ones > 1 ? thaiNumbers[ones] : ""}`;
 }
 
-export function convertToThaiTime(timeStr: string): string {
-    // const time = dayjs(timeStr, "HH:mm");
+export function convertToThaiTime(time: Date): string {
+    const period = time.getHours() < 12 ? "am" : "pm";
 
-    const [time, period] = timeStr.toLowerCase().split(" ");
-
-    const split = time.split(":").map(Number);
-
-    let hours = split[0];
-    const minutes = split[1];
+    let hours = time.getHours();
+    const minutes = time.getMinutes();
 
     // Convert to 24-hour format
     if (period === "pm" && hours !== 12) hours += 12;

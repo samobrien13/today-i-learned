@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,18 +12,17 @@ import {
     CardDescription,
     CardContent,
 } from "@/components/ui/card";
-import { convertToThaiTime } from "@/lib/time";
+import { convertToThaiTime, parseTime } from "@/lib/time";
 
 export default function ThaiTimeConverter() {
-    const [inputTime, setInputTime] = useState("");
     const [thaiTime, setThaiTime] = useState("");
     const [error, setError] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
-        const timeRegex = /^(0?[1-9]|1[0-2]):[0-5][0-9] (am|pm)$/i;
-        if (timeRegex.test(inputTime)) {
-            setThaiTime(convertToThaiTime(inputTime));
+        const time = parseTime(e.target.value);
+        if (time) {
+            setThaiTime(convertToThaiTime(time));
             setError("");
         } else {
             setError("Please enter a valid time");
@@ -35,34 +35,32 @@ export default function ThaiTimeConverter() {
             <CardHeader>
                 <CardTitle>Thai Time Converter</CardTitle>
                 <CardDescription>
-                    Enter a time in English to get the Thai spoken version
+                    Enter a time to get the spoken Thai version
                 </CardDescription>
             </CardHeader>
-            <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="space-y-2">
-                        <Label htmlFor="time-input">Enter time</Label>
-                        <Input
-                            id="time-input"
-                            type="text"
-                            placeholder="7:45 pm or 19:45"
-                            value={inputTime}
-                            onChange={(e) => setInputTime(e.target.value)}
-                        />
-                    </div>
-                    <Button type="submit">Convert</Button>
-                </form>
+            <CardContent className="flex flex-col gap-4">
+                <Label htmlFor="time-input">Time</Label>
+                <Input
+                    id="time-input"
+                    type="text"
+                    placeholder="7:45 pm or 19:45"
+                    onChange={(e) => onChange(e)}
+                />
                 {error && <p className="mt-2 text-red-500">{error}</p>}
                 {thaiTime && (
-                    <div className="mt-4">
-                        <h3 className="font-semibold">Thai Time:</h3>
-                        <p className="text-2xl">{thaiTime}</p>
-                        <Button asChild>
+                    <div className="flex items-center justify-between gap-2">
+                        <p className="text-3xl">{thaiTime}</p>
+                        <Button asChild variant="outline">
                             <a
                                 href={`https://translate.google.com.au/?sl=auto&tl=en&text=${thaiTime}&op=translate`}
                                 target="_blank"
                             >
-                                Translate
+                                <Image
+                                    src="/google-translate.svg"
+                                    alt="Google Translate"
+                                    width={24}
+                                    height={24}
+                                />
                             </a>
                         </Button>
                     </div>
