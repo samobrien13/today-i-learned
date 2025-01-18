@@ -1,18 +1,38 @@
-export function parseTime(timeString: string) {
+// https://stackoverflow.com/a/8395948
+export function parseTime(timeString: string): Date | null {
     if (timeString == "") return null;
 
-    const time = timeString.match(/(\d+)(:(\d\d))?\s*(p?)/i);
+    const time = timeString.match(/^(\d+)([:\.](\d\d))?\s*((a|(p))m?)?$/i);
+
     if (time == null) return null;
 
+    let m = parseInt(time[3], 10) || 0;
     let hours = parseInt(time[1], 10);
+
+    if (time[4]) time[4] = time[4].toLowerCase();
+
+    // 12 hour time
     if (hours == 12 && !time[4]) {
-        hours = 0;
-    } else {
-        hours += hours < 12 && time[4] ? 12 : 0;
+        hours = 12;
+    } else if (hours == 12 && (time[4] == "am" || time[4] == "a")) {
+        hours += 12;
+    } else if (hours < 12 && time[4] != "am" && time[4] != "a") {
+        hours += 12;
     }
+    // 24 hour time
+    else if (hours > 24 && hours.toString().length >= 3) {
+        if (hours.toString().length == 3) {
+            m = parseInt(hours.toString().substring(1, 3), 10);
+            hours = parseInt(hours.toString().charAt(0), 10);
+        } else if (hours.toString().length == 4) {
+            m = parseInt(hours.toString().substring(2, 4), 10);
+            hours = parseInt(hours.toString().substring(0, 2), 10);
+        }
+    }
+
     const d = new Date();
     d.setHours(hours);
-    d.setMinutes(parseInt(time[3], 10) || 0);
+    d.setMinutes(m);
     d.setSeconds(0, 0);
     return d;
 }
@@ -45,50 +65,37 @@ function numberToThai(num: number): string {
 }
 
 export function convertToThaiTime(time: Date): string {
-    const period = time.getHours() < 12 ? "am" : "pm";
-
-    let hours = time.getHours();
+    const hours = time.getHours();
     const minutes = time.getMinutes();
-
-    // Convert to 24-hour format
-    if (period === "pm" && hours !== 12) hours += 12;
-    if (period === "am" && hours === 12) hours = 0;
 
     let result = "";
 
     // Hours
     if (hours === 0) {
+        // Midnight
         result += "เที่ยงคืน";
     } else if (hours === 12) {
+        // Noon
         result += "เที่ยง";
-    } else {
-        const thaiHour = hours > 12 ? hours - 12 : hours;
-        result += `${numberToThai(thaiHour)} โมง`;
-        if (hours > 12) result += "เย็น";
+    } else if (hours >= 1 && hours < 6) {
+        result += `ตี${numberToThai(hours)}`;
+    } else if (hours >= 6 && hours < 12) {
+        result += `${numberToThai(hours)}โมงเช้า`;
+    } else if (hours >= 13 && hours < 16) {
+        result += `บ่าย${numberToThai(hours - 12)}โมง`;
+    } else if (hours >= 16 && hours < 19) {
+        result += `${numberToThai(hours - 12)}โมงเย็น`;
+    } else if ((hours >= 19 && hours <= 23) || hours === 0) {
+        result += `${numberToThai}ทุ่ม`;
     }
 
     // Minutes
     if (minutes > 0) {
-        if (minutes === 15) {
-            result += "สิบห้านาที";
-        } else if (minutes === 30) {
+        if (minutes === 30) {
             result += "ครึ่ง";
         } else {
-            result += `${numberToThai(minutes)} นาที`;
+            result += `${numberToThai(minutes)}นาที`;
         }
-    }
-
-    // Time period
-    if (hours >= 1 && hours < 6) {
-        result += "ตี";
-    } else if (hours >= 6 && hours < 12) {
-        result += "เช้า";
-    } else if (hours >= 13 && hours < 16) {
-        result += "บ่าย";
-    } else if (hours >= 16 && hours < 19) {
-        result += "เย็น";
-    } else if ((hours >= 19 && hours <= 23) || hours === 0) {
-        result += "ทุ่ม";
     }
 
     return result.trim();
