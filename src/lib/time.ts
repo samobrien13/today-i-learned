@@ -86,7 +86,7 @@ export function convertToThaiTime(time: Date): string {
     } else if (hours >= 16 && hours < 19) {
         result += `${numberToThai(hours - 12)}โมงเย็น`;
     } else if ((hours >= 19 && hours <= 23) || hours === 0) {
-        result += `${numberToThai}ทุ่ม`;
+        result += `${numberToThai(hours - 18)}ทุ่ม`;
     }
 
     // Minutes
