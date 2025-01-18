@@ -31,7 +31,11 @@ export function convertToThaiTime(timeStr: string): string {
     // const time = dayjs(timeStr, "HH:mm");
 
     const [time, period] = timeStr.toLowerCase().split(" ");
-    let [hours, minutes] = time.split(":").map(Number);
+
+    const split = time.split(":").map(Number);
+
+    let hours = split[0];
+    const minutes = split[1];
 
     // Convert to 24-hour format
     if (period === "pm" && hours !== 12) hours += 12;
