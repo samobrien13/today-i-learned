@@ -1,5 +1,4 @@
 import Tab from "@/components/ui/tab";
-import Link from "next/link";
 
 export const metadata = {
     title: "Today I Learned | Tools",
@@ -8,10 +7,12 @@ export const metadata = {
 
 export default function Home() {
     return (
-        <Tab title="Tools">
-            <Link href="/thai-time-converter">
-                <h2>Thai Time Converter</h2>
-            </Link>
+        <Tab title="About">
+            <p>
+                This is a collection of things I&apos;ve learned. I write about
+                programming, web development, and other topics that interest me.
+            </p>
+            <p>I also create tools that I find useful.</p>
         </Tab>
     );
 }
