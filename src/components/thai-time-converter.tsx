@@ -67,7 +67,7 @@ export default function ThaiTimeConverter() {
                             </Button>
                             <Button asChild variant="outline">
                                 <a
-                                    href={`https://chatgpt.com?q=Explain%20${thaiTime}in%20English%20based%20on%20the%20Thai%20way%20of%20telling%20time`}
+                                    href={`https://chatgpt.com?q=Explain%20${thaiTime}%20in%20English%20based%20on%20the%20Thai%20way%20of%20telling%20time`}
                                     target="_blank"
                                 >
                                     <Image
