@@ -50,7 +50,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`${geistSans.variable} ${geistMono.variable} max-w-xl antialiased lg:mx-auto`}
+                className={`${geistSans.variable} ${geistMono.variable} max-w-xl antialiased md:mx-auto`}
             >
                 <main className="flex min-h-screen min-w-0 flex-auto flex-col p-4 md:px-0">
                     <Navbar />
