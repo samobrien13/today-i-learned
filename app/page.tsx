@@ -1,9 +1,11 @@
-import ThaiTimeConverter from "@/components/thai-time-converter";
+import Link from "next/link";
 
 export default function Home() {
     return (
-        <main className="flex min-h-screen flex-col items-center justify-center p-4">
-            <ThaiTimeConverter />
-        </main>
+        <section className="flex-1">
+            <Link href="/thai-time-converter">
+                <h2>Thai Time Converter</h2>
+            </Link>
+        </section>
     );
 }
