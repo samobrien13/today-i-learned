@@ -63,39 +63,48 @@ function numberToThai(num: number): string {
     return `${thaiNumbers[tens]}สิบ${ones === 1 ? "เอ็ด" : ones > 1 ? thaiNumbers[ones] : ""}`;
 }
 
+function convertToThaiHours(hours: number): string {
+    // Hours
+    if (hours === 0) {
+        // Midnight
+        return "เที่ยงคืน";
+    } else if (hours === 12) {
+        // Noon
+        return "เที่ยง";
+    } else if (hours >= 1 && hours < 6) {
+        return `ตี${numberToThai(hours)}`;
+    } else if (hours >= 6 && hours < 11) {
+        return `${numberToThai(hours)}โมง${hours === 7 ? "(เช้า)" : "เช้า"}`;
+    } else if (hours === 11) {
+        return `${numberToThai(hours)}โมง(เช้า)`;
+    } else if (hours >= 13 && hours < 16) {
+        return `บ่าย${numberToThai(hours - 12)}โมง`;
+    } else if (hours >= 16 && hours < 19) {
+        return `${numberToThai(hours - 12)}โมงเย็น`;
+    } else if (hours === 19) {
+        return `(${numberToThai(hours)})ทุ่ม`;
+    } else if ((hours > 19 && hours <= 23) || hours === 0) {
+        return `${numberToThai(hours - 18)}ทุ่ม`;
+    }
+
+    return "";
+}
+
 export function convertToThaiTime(time: Date): string {
     const hours = time.getHours();
     const minutes = time.getMinutes();
 
-    let result = "";
-
-    // Hours
-    if (hours === 0) {
-        // Midnight
-        result += "เที่ยงคืน";
-    } else if (hours === 12) {
-        // Noon
-        result += "เที่ยง";
-    } else if (hours >= 1 && hours < 6) {
-        result += `ตี${numberToThai(hours)}`;
-    } else if (hours >= 6 && hours < 12) {
-        result += `${numberToThai(hours)}โมงเช้า`;
-    } else if (hours >= 13 && hours < 16) {
-        result += `บ่าย${numberToThai(hours - 12)}โมง`;
-    } else if (hours >= 16 && hours < 19) {
-        result += `${numberToThai(hours - 12)}โมงเย็น`;
-    } else if ((hours >= 19 && hours <= 23) || hours === 0) {
-        result += `${numberToThai(hours - 18)}ทุ่ม`;
-    }
-
     // Minutes
-    if (minutes > 0) {
-        if (minutes === 30) {
-            result += "ครึ่ง";
-        } else {
-            result += `${numberToThai(minutes)}นาที`;
-        }
+    if (minutes === 0) {
+        return convertToThaiHours(hours);
     }
 
-    return result.trim();
+    if (minutes === 30) {
+        return `${convertToThaiHours(hours)}ครึ่ง`;
+    } else if (minutes < 30) {
+        return `${convertToThaiHours(hours)}${numberToThai(minutes)}นาที`;
+    } else {
+        return `${convertToThaiHours(hours)}${numberToThai(minutes)}นาที
+            อีก${numberToThai(60 - minutes)}นาที${convertToThaiHours(hours + 1)}`;
+    }
 }
