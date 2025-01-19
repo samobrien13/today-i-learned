@@ -51,7 +51,7 @@ const thaiNumbers = [
     "สิบเอ็ด",
 ];
 
-function numberToThai(num: number): string {
+export function numberToThai(num: number): string {
     if (num <= 11) {
         return thaiNumbers[num];
     }
@@ -79,7 +79,7 @@ function numberToThai(num: number): string {
     return `${tensText}${onesText}`;
 }
 
-function convertToThaiHours(hours: number): string {
+export function convertToThaiHours(hours: number): string {
     // Hours
     if (hours === 0) {
         // Midnight
@@ -120,7 +120,6 @@ export function convertToThaiTime(time: Date): string {
     } else if (minutes < 30) {
         return `${convertToThaiHours(hours)}${numberToThai(minutes)}นาที`;
     } else {
-        return `${convertToThaiHours(hours)}${numberToThai(minutes)}นาที
-            อีก${numberToThai(60 - minutes)}นาที${convertToThaiHours(hours + 1)}`;
+        return `${convertToThaiHours(hours)}${numberToThai(minutes)}นาที\nอีก${numberToThai(60 - minutes)}นาที${convertToThaiHours(hours + 1)}`;
     }
 }
