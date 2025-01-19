@@ -9,15 +9,17 @@ type BlogProps = {
 function Blog({ title, date, children }: BlogProps) {
     return (
         <section className="flex flex-1 flex-col gap-4">
-            <h1 className="text-2xl">{title}</h1>
-            <p>Date: {formatDate(date)}</p>
+            <div>
+                <h1 className="text-2xl">{title}</h1>
+                <p className="text-sm font-semibold">{formatDate(date)}</p>
+            </div>
             <article className="flex flex-col gap-2">{children}</article>
         </section>
     );
 }
 
 export function BlogHeading({ children }: { children: React.ReactNode }) {
-    return <h2>{children}</h2>;
+    return <h2 className="text-xl">{children}</h2>;
 }
 
 export function BlogParagraph({ children }: { children: React.ReactNode }) {

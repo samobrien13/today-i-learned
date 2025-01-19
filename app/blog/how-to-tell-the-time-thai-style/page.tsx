@@ -1,5 +1,5 @@
 import ThaiTimeConverter from "@/components/thai-time-converter";
-import Blog, { BlogParagraph } from "@/components/ui/blog";
+import Blog, { BlogHeading, BlogParagraph } from "@/components/ui/blog";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { HOW_TO_TELL_THE_TIME_THAI_STYLE } from "@/data/blog";
 import { Metadata } from "next";
@@ -16,17 +16,27 @@ function HowToTellTheTimeThaiStyle() {
             date={HOW_TO_TELL_THE_TIME_THAI_STYLE.date}
         >
             <BlogParagraph>
+                Thai people use a different system to tell the time compared to
+                the Western system. The day is divided into four parts: morning,
+                afternoon, evening, and night.
+            </BlogParagraph>
+            <BlogHeading>Before sunrise</BlogHeading>
+            <BlogParagraph>
                 Before 6am, Thai use “ตี___” for early morning time.
             </BlogParagraph>
+            <BlogHeading>After sunrise</BlogHeading>
             <BlogParagraph>
                 After the sun rises, Thai use “___โมงเช้า” for morning time.
             </BlogParagraph>
+            <BlogHeading>After noon</BlogHeading>
             <BlogParagraph>
                 From 1-4pm, Thai use “บ่าย___โมง” for afternoon time.
             </BlogParagraph>
+            <BlogHeading>Late afternoon</BlogHeading>
             <BlogParagraph>
-                Between 5-6pm, Thai use “บ่าย___เย็น” for evening time.
+                Between 5-6pm, Thai use “บ่าย___เย็น” for late afternoon time.
             </BlogParagraph>
+            <BlogHeading>Evening</BlogHeading>
             <BlogParagraph>
                 After noon, Thai use “___ทุ่ม” for evening time.
             </BlogParagraph>
