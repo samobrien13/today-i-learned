@@ -1,3 +1,4 @@
+import { BLOG_ARTICLES } from "@/data/blog";
 import { formatDate } from "@/lib/date";
 import Link from "next/link";
 
@@ -5,14 +6,6 @@ export const metadata = {
     title: "Today I Learned | Blog",
     description: "Read my blog posts",
 };
-
-const BLOG_ARTICLES = [
-    {
-        date: "2025-01-19",
-        title: "How to tell the time Thai style",
-        slug: "how-to-tell-the-time-thai-style",
-    },
-];
 
 function Blog() {
     return (

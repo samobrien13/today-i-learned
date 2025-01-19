@@ -1,16 +1,20 @@
 import ThaiTimeConverter from "@/components/thai-time-converter";
 import Blog, { BlogParagraph } from "@/components/ui/blog";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import { HOW_TO_TELL_THE_TIME_THAI_STYLE } from "@/data/blog";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "How to tell the time Thai style",
-    description: "Learn how to tell the time Thai style",
+    title: HOW_TO_TELL_THE_TIME_THAI_STYLE.metaTitle,
+    description: HOW_TO_TELL_THE_TIME_THAI_STYLE.metaDescription,
 };
 
 function HowToTellTheTimeThaiStyle() {
     return (
-        <Blog title="How to tell the time Thai style" date="2025-01-19">
+        <Blog
+            title={HOW_TO_TELL_THE_TIME_THAI_STYLE.title}
+            date={HOW_TO_TELL_THE_TIME_THAI_STYLE.date}
+        >
             <BlogParagraph>
                 Before 6am, Thai use “ตี___” for early morning time.
             </BlogParagraph>
@@ -73,51 +77,51 @@ function HowToTellTheTimeThaiStyle() {
                         <TableCell>สิบเอ็ดโมงเช้า</TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell>12 BlogParagraph.m. (noon)</TableCell>
+                        <TableCell>12 p.m. (noon)</TableCell>
                         <TableCell>เที่ยง</TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell>1 BlogParagraph.m.</TableCell>
+                        <TableCell>1 p.m.</TableCell>
                         <TableCell>บ่ายโมง</TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell>2 BlogParagraph.m.</TableCell>
+                        <TableCell>2 p.m.</TableCell>
                         <TableCell>บ่ายสองโมง</TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell>3 BlogParagraph.m.</TableCell>
+                        <TableCell>3 p.m.</TableCell>
                         <TableCell>บ่ายสามโมง</TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell>4 BlogParagraph.m.</TableCell>
+                        <TableCell>4 p.m.</TableCell>
                         <TableCell>บ่ายสี่โมง</TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell>5 BlogParagraph.m.</TableCell>
+                        <TableCell>5 p.m.</TableCell>
                         <TableCell>ห้าโมงเย็น</TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell>6 BlogParagraph.m.</TableCell>
+                        <TableCell>6 p.m.</TableCell>
                         <TableCell>หกโมงเย็น</TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell>7 BlogParagraph.m.</TableCell>
+                        <TableCell>7 p.m.</TableCell>
                         <TableCell>เจ็ดทุ่ม</TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell>8 BlogParagraph.m.</TableCell>
+                        <TableCell>8 p.m.</TableCell>
                         <TableCell>สองทุ่ม</TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell>9 BlogParagraph.m.</TableCell>
+                        <TableCell>9 p.m.</TableCell>
                         <TableCell>สามทุ่ม</TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell>10 BlogParagraph.m.</TableCell>
+                        <TableCell>10 p.m.</TableCell>
                         <TableCell>สี่ทุ่ม</TableCell>
                     </TableRow>
                     <TableRow>
-                        <TableCell>11 BlogParagraph.m.</TableCell>
+                        <TableCell>11 p.m.</TableCell>
                         <TableCell>ห้าทุ่ม</TableCell>
                     </TableRow>
                     <TableRow>
