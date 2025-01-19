@@ -31,7 +31,7 @@ export default function ThaiTimeConverter() {
     };
 
     return (
-        <Card className="mx-auto w-full max-w-md">
+        <Card className="mx-auto w-full max-w-lg">
             <CardHeader>
                 <CardTitle>Thai Time Converter</CardTitle>
                 <CardDescription>
@@ -52,19 +52,34 @@ export default function ThaiTimeConverter() {
                         <p className="whitespace-pre-line text-3xl">
                             {thaiTime}
                         </p>
-                        <Button asChild variant="outline">
-                            <a
-                                href={`https://translate.google.com.au/?sl=auto&tl=en&text=${thaiTime}&op=translate`}
-                                target="_blank"
-                            >
-                                <Image
-                                    src="/google-translate.svg"
-                                    alt="Google Translate"
-                                    width={24}
-                                    height={24}
-                                />
-                            </a>
-                        </Button>
+                        <div className="flex gap-2">
+                            <Button asChild variant="outline">
+                                <a
+                                    href={`https://translate.google.com.au/?sl=auto&tl=en&text=${thaiTime}&op=translate`}
+                                    target="_blank"
+                                >
+                                    <Image
+                                        src="/google-translate.svg"
+                                        alt="Google Translate"
+                                        width={24}
+                                        height={24}
+                                    />
+                                </a>
+                            </Button>
+                            <Button asChild variant="outline">
+                                <a
+                                    href={`https://chatgpt.com?q=Explain%20${thaiTime}in%20English%20based%20on%20the%20Thai%20way%20of%20telling%20time`}
+                                    target="_blank"
+                                >
+                                    <Image
+                                        src="/chat-gpt.svg"
+                                        alt="ChatGPT"
+                                        width={24}
+                                        height={24}
+                                    />
+                                </a>
+                            </Button>
+                        </div>
                     </div>
                 )}
             </CardContent>
