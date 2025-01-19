@@ -55,12 +55,28 @@ function numberToThai(num: number): string {
     if (num <= 11) {
         return thaiNumbers[num];
     }
-    if (num < 20) {
-        return `สิบ${num % 10 === 1 ? "เอ็ด" : thaiNumbers[num % 10]}`;
-    }
+
     const tens = Math.floor(num / 10);
+
+    let tensText = "";
+    if (tens === 1) {
+        tensText = "สิบ";
+    } else if (tens === 2) {
+        tensText = "ยี่สิบ";
+    } else {
+        tensText = thaiNumbers[tens] + "สิบ";
+    }
+
     const ones = num % 10;
-    return `${thaiNumbers[tens]}สิบ${ones === 1 ? "เอ็ด" : ones > 1 ? thaiNumbers[ones] : ""}`;
+
+    let onesText = "";
+    if (ones === 1) {
+        onesText = "เอ็ด";
+    } else if (ones > 1) {
+        onesText = thaiNumbers[ones];
+    }
+
+    return `${tensText}${onesText}`;
 }
 
 function convertToThaiHours(hours: number): string {
