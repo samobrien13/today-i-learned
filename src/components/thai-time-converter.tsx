@@ -31,7 +31,7 @@ export default function ThaiTimeConverter() {
     };
 
     return (
-        <Card className="mx-auto w-full">
+        <Card className="mx-auto my-4 w-full">
             <CardHeader>
                 <CardTitle>Thai Time Converter</CardTitle>
                 <CardDescription>
