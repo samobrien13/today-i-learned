@@ -16,11 +16,10 @@ export function parseTime(timeString: string): Date | null {
         hours = 12;
     } else if (hours == 12 && (time[4] == "am" || time[4] == "a")) {
         hours += 12;
-    } else if (hours < 12 && time[4] != "am" && time[4] != "a") {
+    } else if (hours < 12 && (time[4] === "pm" || time[4] === "p")) {
         hours += 12;
-    }
-    // 24 hour time
-    else if (hours > 24 && hours.toString().length >= 3) {
+    } else if (hours > 24 && hours.toString().length >= 3) {
+        // 24 hour time
         if (hours.toString().length == 3) {
             m = parseInt(hours.toString().substring(1, 3), 10);
             hours = parseInt(hours.toString().charAt(0), 10);
