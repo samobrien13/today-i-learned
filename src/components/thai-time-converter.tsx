@@ -42,8 +42,7 @@ export default function ThaiTimeConverter() {
                 <Label htmlFor="time-input">Time</Label>
                 <Input
                     id="time-input"
-                    type="text"
-                    placeholder="7:45 pm or 19:45"
+                    type="time"
                     onChange={(e) => onChange(e)}
                 />
                 {error && <p className="mt-2 text-red-500">{error}</p>}
