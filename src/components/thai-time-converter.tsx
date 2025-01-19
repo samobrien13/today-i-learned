@@ -47,11 +47,11 @@ export default function ThaiTimeConverter() {
                 />
                 {error && <p className="mt-2 text-red-500">{error}</p>}
                 {thaiTime && (
-                    <div className="flex items-center justify-between gap-2">
+                    <div className="flex flex-wrap justify-between gap-2">
                         <p className="whitespace-pre-line text-3xl">
                             {thaiTime}
                         </p>
-                        <div className="flex gap-2">
+                        <div className="flex flex-row gap-2">
                             <Button asChild variant="outline">
                                 <a
                                     href={`https://translate.google.com.au/?sl=auto&tl=en&text=${thaiTime}&op=translate`}
