@@ -80,6 +80,14 @@ body {
     * {
         @apply border-border;
     }
+    html {
+        overflow-y: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
     body {
         @apply bg-background text-foreground;
     }
