@@ -1,5 +1,5 @@
 import Tab from "@/components/ui/tab";
-import { Link } from "next-view-transitions";
+import { Link } from "@/components/ui/link";
 
 export const metadata = {
     title: "Tools | Today I Learned",

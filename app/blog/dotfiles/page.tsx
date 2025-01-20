@@ -6,6 +6,7 @@ import Blog, {
     BlogPre,
     BlogUnorderedList,
 } from "@/components/ui/blog";
+import { Link } from "@/components/ui/link";
 import { DOTFILES } from "@/data/blog";
 import { ArrowUpRight } from "lucide-react";
 import { Metadata } from "next";
@@ -18,15 +19,15 @@ export const metadata: Metadata = {
 function HowToTellTheTimeThaiStyle() {
     return (
         <Blog title={DOTFILES.title} date={DOTFILES.date} slug={DOTFILES.slug}>
-            <a
-                className="flex items-center transition-all hover:text-muted-foreground"
+            <Link
+                className="flex items-center"
                 rel="noopener noreferrer"
                 target="_blank"
                 href="https://github.com/samobrien13/dotfiles"
             >
                 <ArrowUpRight strokeWidth={1} />
                 <p className="ml-2 h-7">repository</p>
-            </a>
+            </Link>
             <BlogParagraph>
                 Dotfiles are hidden files that store configuration settings for
                 various programs on your computer. They are often used to
@@ -75,9 +76,9 @@ function HowToTellTheTimeThaiStyle() {
                 have copilot for autocompletion. Fugitive is used for git
                 actions. Other than that I don&apos;t really use anything
                 outside the command line. Set up is heavily based on{" "}
-                <a href="https://www.youtube.com/watch?v=w7i4amO_zaE">
+                <Link href="https://www.youtube.com/watch?v=w7i4amO_zaE">
                     theprimeagen
-                </a>
+                </Link>
                 .
             </BlogParagraph>
             <BlogHeading>tmux</BlogHeading>
