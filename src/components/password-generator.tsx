@@ -9,11 +9,11 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
+import { Copy, RefreshCw } from "lucide-react";
 import { generatePassword } from "@/lib/password";
 
 function PasswordGenerator() {
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState(generatePassword());
 
     return (
         <Card className="mx-auto w-full">
@@ -31,24 +31,27 @@ function PasswordGenerator() {
                     server
                 </CardDescription>
             </CardHeader>
-            <CardContent className="flex flex-col gap-4">
-                <Button onClick={() => setPassword(generatePassword())}>
-                    Generate Password
-                </Button>
-                {password ? (
-                    <div className="flex flex-row items-center gap-2">
-                        <p className="text-lg">{password}</p>
-                        <Button
-                            variant="outline"
-                            onClick={() => {
-                                navigator.clipboard.writeText(password);
-                                // TODO: Show a toast message
-                            }}
-                        >
-                            <Copy />
-                        </Button>
-                    </div>
-                ) : null}
+            <CardContent className="flex flex-row items-center gap-4">
+                <p className="font-mono text-lg">{password}</p>
+                <div className="flex flex-row gap-2">
+                    <Button
+                        variant="outline"
+                        onClick={() => {
+                            navigator.clipboard.writeText(password);
+                            // TODO: Show a toast message
+                        }}
+                    >
+                        <Copy />
+                    </Button>
+                    <Button
+                        variant="outline"
+                        onClick={() => {
+                            setPassword(generatePassword());
+                        }}
+                    >
+                        <RefreshCw />
+                    </Button>
+                </div>
             </CardContent>
         </Card>
     );
