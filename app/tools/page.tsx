@@ -25,6 +25,14 @@ export default function Home() {
             >
                 Recipe Generator
             </Link>
+            <Link
+                href="/tools/password-generator"
+                style={{
+                    viewTransitionName: "password-generator-title",
+                }}
+            >
+                Password Generator
+            </Link>
         </Tab>
     );
 }
