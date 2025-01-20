@@ -25,17 +25,17 @@ export const DOTFILES: BlogData = {
     metaDescription: "My dotfiles setup; Neovim, Zsh, and more",
 };
 
-export const COLOUR_PALLETTE: BlogData = {
-    title: "Colour Pallete",
-    description: "How to create a colour pallete",
+export const COLOUR_PALETTE: BlogData = {
+    title: "Colour Palette",
+    description: "How to create a colour palette",
     date: "2025-01-22",
     slug: "colour-palette",
     metaTitle: "Colour Pallete",
-    metaDescription: "My colour pallete",
+    metaDescription: "My colour palette",
 };
 
 export const BLOG_ARTICLES: BlogData[] = [
-    COLOUR_PALLETTE,
+    COLOUR_PALETTE,
     DOTFILES,
     HOW_TO_TELL_THE_TIME_THAI_STYLE,
 ];
