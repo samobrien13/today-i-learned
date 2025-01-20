@@ -1,7 +1,7 @@
 import Tab from "@/components/ui/tab";
 
 export const metadata = {
-    title: "Today I Learned | Tools",
+    title: "Home | Today I Learned",
     description: "Tools I've created",
 };
 

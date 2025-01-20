@@ -2,7 +2,7 @@ import Tab from "@/components/ui/tab";
 import { Link } from "next-view-transitions";
 
 export const metadata = {
-    title: "Today I Learned | Tools",
+    title: "Tools | Today I Learned",
     description: "Tools I've created",
 };
 

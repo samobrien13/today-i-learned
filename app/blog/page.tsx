@@ -4,7 +4,7 @@ import { formatDate } from "@/lib/date";
 import { Link } from "next-view-transitions";
 
 export const metadata = {
-    title: "Today I Learned | Blog",
+    title: "Blog | Today I Learned",
     description: "Read my blog posts",
 };
 
