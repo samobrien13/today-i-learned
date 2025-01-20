@@ -18,6 +18,7 @@ export const metadata: Metadata = {
     metadataBase: new URL("https://todayilearned.au"),
     title: "Today I Learned",
     description: "Collection of tools and articles about things I've learned",
+    themeColor: "#0a0a0a",
     robots: {
         index: true,
         follow: true,
