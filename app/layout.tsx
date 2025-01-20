@@ -19,7 +19,6 @@ export const metadata: Metadata = {
     metadataBase: new URL("https://todayilearned.au"),
     title: "Today I Learned",
     description: "Collection of tools and articles about things I've learned",
-    themeColor: "#0a0a0a",
     robots: {
         index: true,
         follow: true,
@@ -32,18 +31,18 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <ViewTransitions>
-            <html lang="en">
-                <body
-                    className={`${geistSans.variable} ${geistMono.variable} max-w-xl antialiased md:mx-auto`}
-                >
+        <html lang="en">
+            <body
+                className={`${geistSans.variable} ${geistMono.variable} max-w-xl antialiased md:mx-auto`}
+            >
+                <ViewTransitions>
                     <main className="flex min-h-screen min-w-0 flex-auto flex-col p-4 md:px-0">
                         <Navbar />
                         {children}
                         <Footer />
                     </main>
-                </body>
-            </html>
-        </ViewTransitions>
+                </ViewTransitions>
+            </body>
+        </html>
     );
 }

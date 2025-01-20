@@ -14,10 +14,21 @@ function Blog() {
             {BLOG_ARTICLES.map((article) => (
                 <Link key={article.slug} href={`blog/${article.slug}`}>
                     <article className="flex flex-col md:flex-row md:gap-2">
-                        <p className="text-muted-foreground">
+                        <p
+                            className="text-muted-foreground"
+                            style={{
+                                viewTransitionName: `blog-article-date-${article.slug}`,
+                            }}
+                        >
                             {formatDate(article.date)}
                         </p>
-                        <h2>{article.title}</h2>
+                        <h2
+                            style={{
+                                viewTransitionName: `blog-article-title-${article.slug}`,
+                            }}
+                        >
+                            {article.title}
+                        </h2>
                     </article>
                 </Link>
             ))}

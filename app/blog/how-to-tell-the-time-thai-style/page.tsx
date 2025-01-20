@@ -14,6 +14,7 @@ function HowToTellTheTimeThaiStyle() {
         <Blog
             title={HOW_TO_TELL_THE_TIME_THAI_STYLE.title}
             date={HOW_TO_TELL_THE_TIME_THAI_STYLE.date}
+            slug={HOW_TO_TELL_THE_TIME_THAI_STYLE.slug}
         >
             <BlogParagraph>
                 Thai people use a different system to tell the time compared to

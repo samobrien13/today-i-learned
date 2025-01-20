@@ -3,15 +3,30 @@ import { formatDate } from "@/lib/date";
 type BlogProps = {
     title: string;
     date: string;
+    slug: string;
     children: React.ReactNode;
 };
 
-function Blog({ title, date, children }: BlogProps) {
+function Blog({ title, date, slug, children }: BlogProps) {
     return (
         <section className="flex flex-1 flex-col gap-4">
             <div>
-                <h1 className="text-2xl">{title}</h1>
-                <p className="text-sm font-semibold">{formatDate(date)}</p>
+                <h1
+                    className="text-2xl"
+                    style={{
+                        viewTransitionName: `blog-article-title-${slug}`,
+                    }}
+                >
+                    {title}
+                </h1>
+                <p
+                    className="text-sm font-semibold"
+                    style={{
+                        viewTransitionName: `blog-article-date-${slug}`,
+                    }}
+                >
+                    {formatDate(date)}
+                </p>
             </div>
             <article className="flex flex-col gap-2">{children}</article>
         </section>

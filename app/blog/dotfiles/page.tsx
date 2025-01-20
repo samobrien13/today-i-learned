@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 function HowToTellTheTimeThaiStyle() {
     return (
-        <Blog title={DOTFILES.title} date={DOTFILES.date}>
+        <Blog title={DOTFILES.title} date={DOTFILES.date} slug={DOTFILES.slug}>
             <a
                 className="flex items-center transition-all hover:text-muted-foreground"
                 rel="noopener noreferrer"

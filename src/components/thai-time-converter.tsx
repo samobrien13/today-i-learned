@@ -33,7 +33,13 @@ export default function ThaiTimeConverter() {
     return (
         <Card className="mx-auto w-full">
             <CardHeader>
-                <CardTitle>Thai Time Converter</CardTitle>
+                <CardTitle
+                    style={{
+                        viewTransitionName: "thai-time-converter-title",
+                    }}
+                >
+                    Thai Time Converter
+                </CardTitle>
                 <CardDescription>
                     Enter a time to get the spoken Thai version
                 </CardDescription>
