@@ -9,9 +9,8 @@ export const metadata = {
 export default function Home() {
     return (
         <Tab title="Tools">
-            <Link href="/tools/thai-time-converter">
-                <h2>Thai Time Converter</h2>
-            </Link>
+            <Link href="/tools/thai-time-converter">Thai Time Converter</Link>
+            <Link href="/tools/recipe-generator">Recipe Generator</Link>
         </Tab>
     );
 }
