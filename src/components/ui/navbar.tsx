@@ -1,4 +1,6 @@
 import { Link } from "next-view-transitions";
+import { Button } from "@/components/ui/button";
+import { ThemeButton } from "../theme-button";
 
 const navItems = [
     {
@@ -23,7 +25,7 @@ function Navbar() {
                     className="fade relative flex scroll-pr-6 flex-row items-start px-0 pb-0 md:relative md:overflow-auto"
                     id="nav"
                 >
-                    <div className="flex flex-row space-x-0 pr-10">
+                    <div className="flex flex-1 flex-row space-x-0 pr-10">
                         {navItems.map(({ name, path }) => {
                             return (
                                 <Link
@@ -36,6 +38,7 @@ function Navbar() {
                             );
                         })}
                     </div>
+                    <ThemeButton />
                 </nav>
             </div>
         </aside>
