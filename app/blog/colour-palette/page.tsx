@@ -1,7 +1,13 @@
 "use client";
 
 import Blog, { BlogParagraph } from "@/components/ui/blog";
-import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
 import { COLOUR_PALLETTE } from "@/data/blog";
 import { useEffect, useState } from "react";
 import { isHex } from "@/lib/colour";
@@ -68,6 +74,13 @@ function ColourPallette() {
                 app.
             </BlogParagraph>
             <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableCell>Name</TableCell>
+                        <TableCell>Value (HSL)</TableCell>
+                        <TableCell className="text-right">Colour</TableCell>
+                    </TableRow>
+                </TableHeader>
                 <TableBody>
                     {palette.map((color) => (
                         <TableRow key={color.name}>
@@ -75,7 +88,7 @@ function ColourPallette() {
                             <TableCell>{color.value}</TableCell>
                             <TableCell>
                                 <div
-                                    className="h-8 w-8 rounded-md"
+                                    className="ml-auto mr-0 h-8 w-8 rounded-md"
                                     style={{
                                         backgroundColor: isHex(color.value)
                                             ? color.value
