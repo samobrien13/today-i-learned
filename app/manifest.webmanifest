@@ -1,5 +1,6 @@
 {
     "name": "Today I Learned",
+    "start_url": "/tools",
     "short_name": "TiL",
     "icons": [
         {
