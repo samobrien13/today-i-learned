@@ -14,7 +14,7 @@ function Blog() {
             {BLOG_ARTICLES.map((article) => (
                 <Link key={article.slug} href={`blog/${article.slug}`}>
                     <article className="flex flex-col md:flex-row md:gap-2">
-                        <p className="text-gray-400">
+                        <p className="text-muted-foreground">
                             {formatDate(article.date)}
                         </p>
                         <h2>{article.title}</h2>

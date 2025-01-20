@@ -81,10 +81,10 @@ export default function RecipeGenerator() {
                     return (
                         <section
                             key={title}
-                            className="flex flex-col space-y-2 rounded-xl border border-gray-200 p-2"
+                            className="flex flex-col space-y-2 rounded-xl border border-border p-2"
                         >
                             <div className="flex flex-row justify-between">
-                                <h3 className="font-semibold text-gray-400">
+                                <h3 className="font-semibold text-muted-foreground">
                                     {title}
                                 </h3>
                                 <Button

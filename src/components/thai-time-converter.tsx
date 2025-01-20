@@ -45,7 +45,7 @@ export default function ThaiTimeConverter() {
                     type="time"
                     onChange={(e) => onChange(e)}
                 />
-                {error && <p className="mt-2 text-red-500">{error}</p>}
+                {error && <p className="mt-2 text-destructive">{error}</p>}
                 {thaiTime && (
                     <div className="flex flex-wrap justify-between gap-2">
                         <p className="whitespace-pre-line text-3xl">
