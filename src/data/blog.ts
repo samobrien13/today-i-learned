@@ -16,4 +16,16 @@ export const HOW_TO_TELL_THE_TIME_THAI_STYLE: BlogData = {
     metaDescription: "Learn how to tell the time Thai style",
 };
 
-export const BLOG_ARTICLES: BlogData[] = [HOW_TO_TELL_THE_TIME_THAI_STYLE];
+export const DOTFILES: BlogData = {
+    title: "Dotfiles",
+    description: "My dotfiles setup; Neovim, Zsh, and more",
+    date: "2025-01-21",
+    slug: "dotfiles",
+    metaTitle: "Dotfiles",
+    metaDescription: "My dotfiles setup; Neovim, Zsh, and more",
+};
+
+export const BLOG_ARTICLES: BlogData[] = [
+    DOTFILES,
+    HOW_TO_TELL_THE_TIME_THAI_STYLE,
+];

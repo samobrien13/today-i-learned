@@ -26,4 +26,28 @@ export function BlogParagraph({ children }: { children: React.ReactNode }) {
     return <p>{children}</p>;
 }
 
+export function BlogPre({ children }: { children: React.ReactNode }) {
+    return (
+        <pre className="overflow-auto rounded-md bg-muted p-4 text-muted-foreground">
+            {children}
+        </pre>
+    );
+}
+
+export function BlogCode({ children }: { children: React.ReactNode }) {
+    return (
+        <code className="rounded-md p-1 text-sm text-muted-foreground">
+            {children}
+        </code>
+    );
+}
+
+export function BlogUnorderedList({ children }: { children: React.ReactNode }) {
+    return <ul className="list-inside list-disc">{children}</ul>;
+}
+
+export function BlogListItem({ children }: { children: React.ReactNode }) {
+    return <li>{children}</li>;
+}
+
 export default Blog;
