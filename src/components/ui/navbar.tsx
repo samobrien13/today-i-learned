@@ -1,16 +1,19 @@
 import { Link } from "next-view-transitions";
 
-const navItems = {
-    "/": {
+const navItems = [
+    {
         name: "about",
+        path: "/",
     },
-    "/blog": {
+    {
         name: "blog",
+        path: "/blog",
     },
-    "/tools": {
+    {
         name: "tools",
+        path: "/tools",
     },
-};
+];
 
 function Navbar() {
     return (
@@ -21,7 +24,7 @@ function Navbar() {
                     id="nav"
                 >
                     <div className="flex flex-row space-x-0 pr-10">
-                        {Object.entries(navItems).map(([path, { name }]) => {
+                        {navItems.map(({ name, path }) => {
                             return (
                                 <Link
                                     key={path}
