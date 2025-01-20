@@ -1,7 +1,7 @@
 import Tab from "@/components/ui/tab";
 import { BLOG_ARTICLES } from "@/data/blog";
 import { formatDate } from "@/lib/date";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 export const metadata = {
     title: "Today I Learned | Blog",

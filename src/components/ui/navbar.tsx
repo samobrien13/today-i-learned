@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 const navItems = {
     "/": {
@@ -26,7 +26,7 @@ function Navbar() {
                                 <Link
                                     key={path}
                                     href={path}
-                                    className="relative m-1 flex px-2 py-1 align-middle transition-all hover:text-neutral-800 dark:hover:text-neutral-200"
+                                    className="hover:text-neutral-800 dark:hover:text-neutral-200 relative m-1 flex px-2 py-1 align-middle transition-all"
                                 >
                                     {name}
                                 </Link>
