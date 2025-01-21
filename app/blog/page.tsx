@@ -1,7 +1,7 @@
 import Tab from "@/components/ui/tab";
 import { BLOG_ARTICLES } from "@/data/blog";
 import { formatDate } from "@/lib/date";
-import { Link } from "next-view-transitions";
+import { Link } from "@/components/ui/link";
 
 export const metadata = {
     title: "Blog | Today I Learned",
@@ -13,9 +13,9 @@ function Blog() {
         <Tab title="Blog">
             {BLOG_ARTICLES.map((article) => (
                 <Link key={article.slug} href={`blog/${article.slug}`}>
-                    <article className="flex flex-col md:flex-row md:gap-2">
+                    <article className="flex flex-col">
                         <p
-                            className="text-muted-foreground"
+                            className="text-xs font-semibold"
                             style={{
                                 viewTransitionName: `blog-article-date-${article.slug}`,
                             }}
