@@ -1,9 +1,7 @@
 "use client";
 
-import useLocalStorage from "@/hooks/useLocalStorage";
-
+import useLocalStorage from "@/hooks/use-local-storage";
 import { ingredients } from "@/data/ingredients";
-
 import { Button } from "@/components/ui/button";
 import { CopyCheckIcon } from "lucide-react";
 import Image from "next/image";

@@ -52,6 +52,7 @@ function PasswordGenerator() {
                             navigator.clipboard.writeText(password);
                             toast({
                                 title: "Password copied to clipboard",
+                                duration: 2000,
                             });
                         }}
                     >
