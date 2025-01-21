@@ -14,6 +14,8 @@ import { isHex } from "@/lib/colour";
 
 import tailwindConfig from "../../../tailwind.config";
 import { useTheme } from "next-themes";
+import { Link } from "@/components/ui/link";
+import { ArrowUpRight } from "lucide-react";
 
 const colours = tailwindConfig.theme.colors as Record<
     string,
@@ -73,10 +75,28 @@ function ColourPalette() {
             date={COLOUR_PALETTE.date}
             slug={COLOUR_PALETTE.slug}
         >
+            <Link
+                className="flex items-center"
+                rel="noopener noreferrer"
+                target="_blank"
+                href="https://www.refactoringui.com/"
+            >
+                <ArrowUpRight strokeWidth={1} />
+                <p className="ml-2 h-7">refactoring ui</p>
+            </Link>
             <BlogParagraph>
-                A color palette is a set of colors that work well together. It
-                can be used to create a cohesive look and feel for a website or
-                app.
+                I highly recommend Refactoring UI, written by the creators of
+                Tailwind CSS. It&apos;s the only design resource you need for
+                learning how to design half decent UI without being a designer.
+            </BlogParagraph>
+            <BlogParagraph>
+                HSL (Hue, Saturation, Lightness) is favoured as a more intuitive
+                representation of colour than RGB or Hex.
+            </BlogParagraph>
+            <BlogParagraph>
+                Hue is a colour&apos;s position on the colour wheel, saturation
+                is the intensity of the colour, and lightness is how bright the
+                colour is relative to black.
             </BlogParagraph>
             <Table>
                 <TableHeader>
