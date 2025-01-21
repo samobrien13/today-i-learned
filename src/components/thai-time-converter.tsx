@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,24 +15,20 @@ import {
 import { convertToThaiTime, parseTime } from "@/lib/time";
 
 export default function ThaiTimeConverter() {
-    const [thaiTime, setThaiTime] = useState("");
-    const [error, setError] = useState("");
+    const [time, setTime] = useState("");
 
     useEffect(() => {
-        setThaiTime(() => convertToThaiTime(new Date()));
+        setTime(() =>
+            new Date().toLocaleTimeString("en-AU", {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false,
+            }),
+        );
     }, []);
 
-    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault();
-        const time = parseTime(e.target.value);
-        if (time) {
-            setThaiTime(convertToThaiTime(time));
-            setError("");
-        } else {
-            setError("Please enter a valid time");
-            setThaiTime("");
-        }
-    };
+    const parsedTime = parseTime(time);
+    const thaiTime = parsedTime ? convertToThaiTime(parsedTime) : null;
 
     return (
         <Card className="mx-auto w-full">
@@ -58,44 +54,44 @@ export default function ThaiTimeConverter() {
                         minute: "2-digit",
                         hour12: false,
                     })}
-                    onChange={(e) => onChange(e)}
+                    onChange={(e) => setTime(e.target.value)}
                 />
-                {error && <p className="mt-2 text-destructive">{error}</p>}
-                {thaiTime && (
-                    <div className="flex flex-wrap justify-between gap-2">
-                        <p className="whitespace-pre-line text-3xl">
+
+                <div className="flex flex-wrap justify-end gap-2">
+                    {thaiTime && (
+                        <p className="flex-1 whitespace-pre-line text-3xl">
                             {thaiTime}
                         </p>
-                        <div className="flex flex-row gap-2">
-                            <Button asChild variant="outline">
-                                <a
-                                    href={`https://translate.google.com.au/?sl=auto&tl=en&text=${thaiTime}&op=translate`}
-                                    target="_blank"
-                                >
-                                    <Image
-                                        src="/google-translate.svg"
-                                        alt="Google Translate"
-                                        width={24}
-                                        height={24}
-                                    />
-                                </a>
-                            </Button>
-                            <Button asChild variant="outline">
-                                <a
-                                    href={`https://chatgpt.com?q=Explain%20${thaiTime}%20in%20English%20based%20on%20the%20Thai%20way%20of%20telling%20time`}
-                                    target="_blank"
-                                >
-                                    <Image
-                                        src="/chat-gpt.svg"
-                                        alt="ChatGPT"
-                                        width={24}
-                                        height={24}
-                                    />
-                                </a>
-                            </Button>
-                        </div>
+                    )}
+                    <div className="flex flex-col gap-2">
+                        <Button asChild variant="outline">
+                            <a
+                                href={`https://translate.google.com.au/?sl=auto&tl=en&text=${thaiTime}&op=translate`}
+                                target="_blank"
+                            >
+                                <Image
+                                    src="/google-translate.svg"
+                                    alt="Google Translate"
+                                    width={24}
+                                    height={24}
+                                />
+                            </a>
+                        </Button>
+                        <Button asChild variant="outline">
+                            <a
+                                href={`https://chatgpt.com?q=Explain%20${thaiTime}%20in%20English%20based%20on%20the%20Thai%20way%20of%20telling%20time`}
+                                target="_blank"
+                            >
+                                <Image
+                                    src="/chat-gpt.svg"
+                                    alt="ChatGPT"
+                                    width={24}
+                                    height={24}
+                                />
+                            </a>
+                        </Button>
                     </div>
-                )}
+                </div>
             </CardContent>
         </Card>
     );
