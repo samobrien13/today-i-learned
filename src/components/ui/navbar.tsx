@@ -30,7 +30,7 @@ function Navbar() {
                                 <Link
                                     key={path}
                                     href={path}
-                                    className="px-2 py-1"
+                                    className="px-3 py-2"
                                 >
                                     {name}
                                 </Link>
