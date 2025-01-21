@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,8 +15,12 @@ import {
 import { convertToThaiTime, parseTime } from "@/lib/time";
 
 export default function ThaiTimeConverter() {
-    const [thaiTime, setThaiTime] = useState(convertToThaiTime(new Date()));
+    const [thaiTime, setThaiTime] = useState("");
     const [error, setError] = useState("");
+
+    useEffect(() => {
+        setThaiTime(() => convertToThaiTime(new Date()));
+    }, []);
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
