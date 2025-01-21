@@ -15,7 +15,7 @@ import {
 import { convertToThaiTime, parseTime } from "@/lib/time";
 
 export default function ThaiTimeConverter() {
-    const [thaiTime, setThaiTime] = useState("");
+    const [thaiTime, setThaiTime] = useState(convertToThaiTime(new Date()));
     const [error, setError] = useState("");
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -49,6 +49,11 @@ export default function ThaiTimeConverter() {
                 <Input
                     id="time-input"
                     type="time"
+                    defaultValue={new Date().toLocaleTimeString("en-AU", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: false,
+                    })}
                     onChange={(e) => onChange(e)}
                 />
                 {error && <p className="mt-2 text-destructive">{error}</p>}
