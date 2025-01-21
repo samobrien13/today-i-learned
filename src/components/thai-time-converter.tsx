@@ -64,7 +64,7 @@ export default function ThaiTimeConverter() {
                         </p>
                     )}
                     <div className="flex flex-col gap-2">
-                        <Button asChild variant="outline">
+                        <Button asChild variant="secondary">
                             <a
                                 href={`https://translate.google.com.au/?sl=auto&tl=en&text=${thaiTime}&op=translate`}
                                 target="_blank"
@@ -77,7 +77,7 @@ export default function ThaiTimeConverter() {
                                 />
                             </a>
                         </Button>
-                        <Button asChild variant="outline">
+                        <Button asChild variant="secondary">
                             <a
                                 href={`https://chatgpt.com?q=Explain%20${thaiTime}%20in%20English%20based%20on%20the%20Thai%20way%20of%20telling%20time`}
                                 target="_blank"
