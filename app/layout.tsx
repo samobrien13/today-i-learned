@@ -34,7 +34,7 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning>
             {/* suppressHydrationWarning required by next-themes */}
             <body
-                className={`${geistSans.variable} ${geistMono.variable} max-w-xl antialiased md:mx-auto`}
+                className={`${geistSans.variable} ${geistMono.variable} antialiased md:mx-auto md:max-w-xl`}
             >
                 <Providers>
                     <main className="flex min-h-screen min-w-0 flex-auto flex-col p-4 md:px-0">
