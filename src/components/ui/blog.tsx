@@ -12,7 +12,7 @@ function Blog({ title, date, slug, children }: BlogProps) {
         <section className="flex flex-1 flex-col gap-4">
             <div>
                 <h1
-                    className="text-2xl"
+                    className="text-2xl text-primary"
                     style={{
                         viewTransitionName: `blog-article-title-${slug}`,
                     }}

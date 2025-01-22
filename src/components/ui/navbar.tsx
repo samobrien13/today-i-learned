@@ -1,21 +1,6 @@
 import { Link } from "@/components/ui/link";
 import { ThemeButton } from "../theme-button";
 
-const NAV_ITEMS = [
-    {
-        name: "home",
-        path: "/",
-    },
-    {
-        name: "rants",
-        path: "/rants",
-    },
-    {
-        name: "tools",
-        path: "/tools",
-    },
-];
-
 function Navbar() {
     return (
         <aside className="-ml-[8px] mb-16 tracking-tight">
@@ -25,17 +10,15 @@ function Navbar() {
                     id="nav"
                 >
                     <div className="flex flex-1 flex-row pr-10">
-                        {NAV_ITEMS.map(({ name, path }) => {
-                            return (
-                                <Link
-                                    key={path}
-                                    href={path}
-                                    className="px-3 py-2"
-                                >
-                                    {name}
-                                </Link>
-                            );
-                        })}
+                        <Link href="/" className="px-3 py-2">
+                            TiL
+                        </Link>
+                        <Link href="/rants" className="px-3 py-2">
+                            rants
+                        </Link>
+                        <Link href="/tools" className="px-3 py-2">
+                            tools
+                        </Link>
                     </div>
                     <ThemeButton />
                 </nav>

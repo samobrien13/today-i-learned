@@ -1,131 +1,124 @@
-"use client";
-
-import Blog, { BlogParagraph } from "@/components/ui/blog";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
+import Blog, { BlogHeading, BlogParagraph } from "@/components/ui/blog";
 import { COLOUR_PALETTE } from "@/data/blog";
-import { useEffect, useState } from "react";
-import { isHex } from "@/lib/colour";
-
-import tailwindConfig from "../../../tailwind.config";
-import { useTheme } from "next-themes";
 import { Link } from "@/components/ui/link";
 import { ArrowUpRight } from "lucide-react";
-
-const colours = tailwindConfig.theme.colors as Record<
-    string,
-    string | Record<string, string>
->;
-
-type Colour = {
-    name: string;
-    value: string;
-};
+import { Card, CardDescription, CardTitle } from "@/components/ui/card";
+import {
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Colours } from "@/components/colours";
 
 function ColourPalette() {
-    const [palette, setPalette] = useState<Colour[]>([]);
-    const { theme } = useTheme();
-
-    useEffect(() => {
-        // Update as a callback to ensure the latest theme is used
-        setPalette(() => {
-            const newPalette: Colour[] = [];
-            Object.keys(colours).forEach((key) => {
-                const colour = colours[key];
-
-                if (typeof colour === "string") {
-                    newPalette.push({
-                        name: key,
-                        value: window
-                            .getComputedStyle(document.documentElement)
-                            .getPropertyValue(`--${key}`),
-                    });
-                } else {
-                    Object.keys(colour).forEach((subKey) => {
-                        if (subKey === "DEFAULT") {
-                            newPalette.push({
-                                name: key,
-                                value: window
-                                    .getComputedStyle(document.documentElement)
-                                    .getPropertyValue(`--${key}`),
-                            });
-                        } else {
-                            newPalette.push({
-                                name: `${key}-${subKey}`,
-                                value: window
-                                    .getComputedStyle(document.documentElement)
-                                    .getPropertyValue(`--${key}-${subKey}`),
-                            });
-                        }
-                    });
-                }
-            });
-            return newPalette;
-        });
-    }, [theme]);
-
     return (
-        <Blog
-            title={COLOUR_PALETTE.title}
-            date={COLOUR_PALETTE.date}
-            slug={COLOUR_PALETTE.slug}
-        >
-            <Link
-                className="flex items-center"
-                rel="noopener noreferrer"
-                target="_blank"
-                href="https://www.refactoringui.com/"
-            >
-                <ArrowUpRight strokeWidth={1} />
-                <p className="ml-2 h-7">refactoring ui</p>
-            </Link>
-            <BlogParagraph>
-                I highly recommend Refactoring UI, written by the creators of
-                Tailwind CSS. It&apos;s the only design resource you need for
-                learning how to design half decent UI without being a designer.
-            </BlogParagraph>
-            <BlogParagraph>
-                HSL (Hue, Saturation, Lightness) is favoured as a more intuitive
-                representation of colour than RGB or Hex.
-            </BlogParagraph>
-            <BlogParagraph>
-                Hue is a colour&apos;s position on the colour wheel, saturation
-                is the intensity of the colour, and lightness is how bright the
-                colour is relative to black.
-            </BlogParagraph>
-            <Table>
-                <TableHeader>
-                    <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell>Value (HSL)</TableCell>
-                        <TableCell className="text-right">Colour</TableCell>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {palette.map((color) => (
-                        <TableRow key={color.name}>
-                            <TableCell>{color.name}</TableCell>
-                            <TableCell>{color.value}</TableCell>
-                            <TableCell>
-                                <div
-                                    className="ml-auto mr-0 h-8 w-8 rounded-md"
-                                    style={{
-                                        backgroundColor: isHex(color.value)
-                                            ? color.value
-                                            : `hsl(${color.value})`,
-                                    }}
-                                />
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </Blog>
+        <>
+            <div className="theme-custom">
+                <Blog
+                    title={COLOUR_PALETTE.title}
+                    date={COLOUR_PALETTE.date}
+                    slug={COLOUR_PALETTE.slug}
+                >
+                    <Link
+                        className="flex items-center"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        href="https://www.refactoringui.com/"
+                    >
+                        <ArrowUpRight strokeWidth={1} />
+                        <p className="ml-2 h-7">refactoring ui</p>
+                    </Link>
+                    <BlogParagraph>
+                        I highly recommend Refactoring UI, written by the
+                        creators of Tailwind CSS. It&apos;s the only design
+                        resource you need for learning how to design half decent
+                        UI without being a designer.
+                    </BlogParagraph>
+                    <BlogParagraph>
+                        HSL (Hue, Saturation, Lightness) is favoured as a more
+                        intuitive representation of colour than RGB or Hex.
+                    </BlogParagraph>
+                    <BlogParagraph>
+                        Hue is a colour&apos;s position on the colour wheel,
+                        saturation is the intensity of the colour, and lightness
+                        is how bright the colour is relative to black.
+                    </BlogParagraph>
+                    <BlogHeading>Default</BlogHeading>
+                    <BlogParagraph>
+                        Default background is used for the background of the
+                        page. Default foreground is used for text.
+                    </BlogParagraph>
+                    <BlogHeading>Card</BlogHeading>
+                    <Card className="flex flex-col gap-2 p-4">
+                        <CardTitle>Title</CardTitle>
+                        <CardDescription>
+                            Cards use a different shade for the background and
+                            the foreground. They also make use of the border
+                            colour.
+                        </CardDescription>
+                    </Card>
+                    <div className="pb-20">
+                        <HoverCard>
+                            <HoverCardTrigger>
+                                <BlogHeading>Popover</BlogHeading>
+                                <BlogParagraph>
+                                    Popovers are used for displaying information
+                                    in elements like tooltips or dropdowns.
+                                </BlogParagraph>
+                            </HoverCardTrigger>
+                            <HoverCardContent>
+                                <BlogParagraph>
+                                    Like this hover card
+                                </BlogParagraph>
+                            </HoverCardContent>
+                        </HoverCard>
+                    </div>
+                    <BlogHeading>Primary</BlogHeading>
+                    <BlogParagraph>
+                        Primary colours are used for primary actions or
+                        elements.
+                    </BlogParagraph>
+                    <Button>Primary Button</Button>
+                    <BlogHeading>Secondary</BlogHeading>
+                    <BlogParagraph>
+                        Secondary colours are used for secondary actions or
+                        elements.
+                    </BlogParagraph>
+                    <Button variant="secondary">Secondary Button</Button>
+                    <BlogHeading>Muted</BlogHeading>
+                    <BlogParagraph>
+                        Muted colours are used for elements that are not the
+                        primary focus, and secondary text.
+                    </BlogParagraph>
+                    <BlogHeading>Accent</BlogHeading>
+                    <BlogParagraph>
+                        Accent colours are used for highlighting elements and
+                        mild hover effects.
+                    </BlogParagraph>
+                    <BlogHeading>Destructive</BlogHeading>
+                    <BlogParagraph>
+                        Destructive colours are used for destructive actions.
+                    </BlogParagraph>
+                    <Button variant="destructive">Destructive Button</Button>
+                    <BlogHeading>Border</BlogHeading>
+                    <BlogParagraph>Default border colour</BlogParagraph>
+                    <BlogHeading>Input, Ring</BlogHeading>
+                    <BlogParagraph>
+                        Input is used for the border colour of input elements.
+                        Ring is used for the border colour of focused input
+                    </BlogParagraph>
+                    <Input placeholder="Input" />
+                    <BlogHeading>Custom</BlogHeading>
+                    <BlogParagraph>
+                        Finally we have a set of chart colours that are used
+                        whenever a splash of colour is needed.
+                    </BlogParagraph>
+                    <Colours />
+                </Blog>
+            </div>
+        </>
     );
 }
 
