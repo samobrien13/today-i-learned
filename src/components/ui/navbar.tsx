@@ -10,10 +10,7 @@ function Navbar() {
                     id="nav"
                 >
                     <div className="flex flex-1 flex-row pr-10">
-                        <Link
-                            href="/"
-                            className="rounded-full bg-primary px-3 py-2"
-                        >
+                        <Link href="/" className="px-3 py-2">
                             TiL
                         </Link>
                         <Link href="/rants" className="px-3 py-2">
