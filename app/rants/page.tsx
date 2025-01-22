@@ -4,15 +4,15 @@ import { formatDate } from "@/lib/date";
 import { Link } from "@/components/ui/link";
 
 export const metadata = {
-    title: "Blog | Today I Learned",
-    description: "Read my blog posts",
+    title: "Rants | Today I Learned",
+    description: "Read my rants about all sorts of things.",
 };
 
-function Blog() {
+function Rants() {
     return (
-        <Tab title="Blog">
+        <Tab title="Rants">
             {BLOG_ARTICLES.map((article) => (
-                <Link key={article.slug} href={`blog/${article.slug}`}>
+                <Link key={article.slug} href={`/rants/${article.slug}`}>
                     <article className="flex flex-col">
                         <p
                             className="text-xs font-semibold"
@@ -36,4 +36,4 @@ function Blog() {
     );
 }
 
-export default Blog;
+export default Rants;

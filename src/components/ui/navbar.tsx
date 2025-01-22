@@ -7,8 +7,8 @@ const NAV_ITEMS = [
         path: "/",
     },
     {
-        name: "blog",
-        path: "/blog",
+        name: "rants",
+        path: "/rants",
     },
     {
         name: "tools",
