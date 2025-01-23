@@ -11,40 +11,40 @@ export default function Home() {
     return (
         <Tab title="Tools">
             <Card>
-                <CardHeader>
-                    <Link
-                        href="/tools/thai-time-converter"
-                        style={{
-                            viewTransitionName: "thai-time-converter-title",
-                        }}
-                    >
+                <Link
+                    href="/tools/thai-time-converter"
+                    style={{
+                        viewTransitionName: "thai-time-converter-title",
+                    }}
+                >
+                    <CardHeader>
                         <CardTitle>Thai Time Converter</CardTitle>
-                    </Link>
-                </CardHeader>
+                    </CardHeader>
+                </Link>
             </Card>
             <Card>
-                <CardHeader>
-                    <Link
-                        href="/tools/recipe-generator"
-                        style={{
-                            viewTransitionName: "recipe-generator-title",
-                        }}
-                    >
+                <Link
+                    href="/tools/recipe-generator"
+                    style={{
+                        viewTransitionName: "recipe-generator-title",
+                    }}
+                >
+                    <CardHeader>
                         <CardTitle>Recipe Generator</CardTitle>
-                    </Link>
-                </CardHeader>
+                    </CardHeader>
+                </Link>
             </Card>
             <Card>
-                <CardHeader>
-                    <Link
-                        href="/tools/password-generator"
-                        style={{
-                            viewTransitionName: "password-generator-title",
-                        }}
-                    >
+                <Link
+                    href="/tools/password-generator"
+                    style={{
+                        viewTransitionName: "password-generator-title",
+                    }}
+                >
+                    <CardHeader>
                         <CardTitle>Password Generator</CardTitle>
-                    </Link>
-                </CardHeader>
+                    </CardHeader>
+                </Link>
             </Card>
         </Tab>
     );
