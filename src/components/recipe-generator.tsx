@@ -67,15 +67,14 @@ export default function RecipeGenerator() {
     };
 
     return (
-        <Card className="mx-auto w-full">
+        <Card
+            className="mx-auto w-full"
+            style={{
+                viewTransitionName: "recipe-generator-card",
+            }}
+        >
             <CardHeader>
-                <CardTitle
-                    style={{
-                        viewTransitionName: "recipe-generator-title",
-                    }}
-                >
-                    Recipe Generator
-                </CardTitle>
+                <CardTitle>Recipe Generator</CardTitle>
                 <CardDescription>
                     Generate a recipe from a list of ingredients.
                 </CardDescription>

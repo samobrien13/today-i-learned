@@ -10,37 +10,34 @@ export const metadata = {
 export default function Home() {
     return (
         <Tab title="Tools">
-            <Card>
-                <Link
-                    href="/tools/thai-time-converter"
-                    style={{
-                        viewTransitionName: "thai-time-converter-title",
-                    }}
-                >
+            <Card
+                style={{
+                    viewTransitionName: "thai-time-converter-card",
+                }}
+            >
+                <Link href="/tools/thai-time-converter">
                     <CardHeader>
                         <CardTitle>Thai Time Converter</CardTitle>
                     </CardHeader>
                 </Link>
             </Card>
-            <Card>
-                <Link
-                    href="/tools/recipe-generator"
-                    style={{
-                        viewTransitionName: "recipe-generator-title",
-                    }}
-                >
+            <Card
+                style={{
+                    viewTransitionName: "recipe-generator-card",
+                }}
+            >
+                <Link href="/tools/recipe-generator">
                     <CardHeader>
                         <CardTitle>Recipe Generator</CardTitle>
                     </CardHeader>
                 </Link>
             </Card>
-            <Card>
-                <Link
-                    href="/tools/password-generator"
-                    style={{
-                        viewTransitionName: "password-generator-title",
-                    }}
-                >
+            <Card
+                style={{
+                    viewTransitionName: "password-generator-card",
+                }}
+            >
+                <Link href="/tools/password-generator">
                     <CardHeader>
                         <CardTitle>Password Generator</CardTitle>
                     </CardHeader>

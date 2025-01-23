@@ -31,15 +31,14 @@ export default function ThaiTimeConverter() {
     const thaiTime = parsedTime ? convertToThaiTime(parsedTime) : null;
 
     return (
-        <Card className="mx-auto w-full">
+        <Card
+            className="mx-auto w-full"
+            style={{
+                viewTransitionName: "thai-time-converter-card",
+            }}
+        >
             <CardHeader>
-                <CardTitle
-                    style={{
-                        viewTransitionName: "thai-time-converter-title",
-                    }}
-                >
-                    Thai Time Converter
-                </CardTitle>
+                <CardTitle>Thai Time Converter</CardTitle>
                 <CardDescription>
                     Enter a time to get the spoken Thai version
                 </CardDescription>

@@ -22,15 +22,14 @@ function PasswordGenerator() {
     }, []);
 
     return (
-        <Card className="mx-auto w-full">
+        <Card
+            className="mx-auto w-full"
+            style={{
+                viewTransitionName: "password-generator-card",
+            }}
+        >
             <CardHeader>
-                <CardTitle
-                    style={{
-                        viewTransitionName: "password-generator-title",
-                    }}
-                >
-                    Password Generator
-                </CardTitle>
+                <CardTitle>Password Generator</CardTitle>
                 <CardDescription>
                     Get a secure password that works for most websites.
                     Passwords are generated client side and never sent to any
