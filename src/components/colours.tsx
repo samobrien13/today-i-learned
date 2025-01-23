@@ -11,6 +11,9 @@ import { Slider } from "@/components/ui/slider";
 import { useEffect, useState } from "react";
 import tailwindConfig from "../../tailwind.config";
 import { useTheme } from "next-themes";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
+import { Copy } from "lucide-react";
 
 const tailwindColours = tailwindConfig.theme.colors as Record<
     string,
@@ -47,6 +50,7 @@ type HSL = {
 
 function Colours() {
     const { theme } = useTheme();
+    const { toast } = useToast();
     const [customColours, setCustomColours] = useState<Map<string, Colour>>(
         new Map(),
     );
@@ -70,16 +74,16 @@ function Colours() {
             return newPalette;
         });
     }, [theme]);
+
+    const css = Array.from(customColours.values())
+        .map((color) => `--${color.name}: ${color.h} ${color.s}% ${color.l}%`)
+        .join(";\n\t\t\t\t\t");
+
     return (
         <>
             <style>{`
                 .theme-custom {
-                    ${Array.from(customColours.values())
-                        .map(
-                            (color) =>
-                                `--${color.name}: ${color.h} ${color.s}% ${color.l}%`,
-                        )
-                        .join(";\n\t\t\t\t\t")}
+                    ${css}
                 }
             `}</style>
             <Table>
@@ -167,6 +171,18 @@ function Colours() {
                     ))}
                 </TableBody>
             </Table>
+            <Button
+                variant="outline"
+                onClick={() => {
+                    navigator.clipboard.writeText(css);
+                    toast({
+                        title: "CSS variables copied to clipboard",
+                        duration: 2000,
+                    });
+                }}
+            >
+                <Copy />
+            </Button>
         </>
     );
 }
