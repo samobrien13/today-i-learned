@@ -9,8 +9,10 @@ export default function Home() {
                 programming, web development, and other topics that interest me.
             </p>
             <p>
-                I spend most of my time working with Next.js and Expo, but I
-                often venture into other areas.
+                I spend most of my time working with{" "}
+                <Link href="https://nextjs.org/">Next.js</Link> and{" "}
+                <Link href="https://expo.dev/">Expo</Link>, but I often venture
+                into other areas.
             </p>
             <p>
                 I also create&nbsp;
