@@ -21,6 +21,9 @@ export const metadata: Metadata = {
         template: "%s | TiL",
         default: "Today I Learned",
     },
+    openGraph: {
+        images: ["/icon_x512.png"],
+    },
     description: "Collection of rants and tools about things I've learned",
     keywords: ["programming", "web development", "tools", "blog"],
     robots: {
