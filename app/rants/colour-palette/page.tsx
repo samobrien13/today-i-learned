@@ -31,7 +31,7 @@ function ColourPalette() {
                         href="https://www.refactoringui.com/"
                     >
                         <ArrowUpRight strokeWidth={1} />
-                        <p className="ml-2 h-7">refactoring ui</p>
+                        <span className="ml-2 h-7">refactoring ui</span>
                     </Link>
                     <BlogParagraph>
                         I highly recommend Refactoring UI, written by the
