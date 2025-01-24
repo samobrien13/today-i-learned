@@ -51,14 +51,14 @@ export function BlogPre({ children }: { children: React.ReactNode }) {
 
 export function BlogCode({ children }: { children: React.ReactNode }) {
     return (
-        <code className="rounded-md p-1 text-sm text-muted-foreground">
+        <code className="rounded-sm bg-muted p-1 text-sm text-muted-foreground">
             {children}
         </code>
     );
 }
 
 export function BlogUnorderedList({ children }: { children: React.ReactNode }) {
-    return <ul className="list-inside list-disc">{children}</ul>;
+    return <ul className="ml-4 flex list-disc flex-col gap-2">{children}</ul>;
 }
 
 export function BlogListItem({ children }: { children: React.ReactNode }) {

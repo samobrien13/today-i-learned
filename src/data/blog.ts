@@ -34,7 +34,19 @@ export const COLOUR_PALETTE: BlogData = {
     metaDescription: "My colour palette",
 };
 
+export const HOW_TO_FIND_AND_REPLACE_FROM_THE_COMMAND_LINE: BlogData = {
+    title: "How to find and replace from the command line",
+    description:
+        "Use sed on OSX to find and replace text across multiple files",
+    date: "2025-01-25",
+    slug: "how-to-find-and-replace-from-the-command-line",
+    metaTitle: "How to find and replace from the command line",
+    metaDescription:
+        "Use sed on OSX to find and replace text across multiple files",
+};
+
 export const BLOG_ARTICLES: BlogData[] = [
+    HOW_TO_FIND_AND_REPLACE_FROM_THE_COMMAND_LINE,
     COLOUR_PALETTE,
     DOTFILES,
     HOW_TO_TELL_THE_TIME_THAI_STYLE,
