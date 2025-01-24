@@ -13,6 +13,7 @@ import {
     CardContent,
 } from "@/components/ui/card";
 import { convertToThaiTime, parseTime } from "@/lib/time";
+import { THAI_TIME_CONVERTER } from "@/data/tools";
 
 export default function ThaiTimeConverter() {
     const [time, setTime] = useState("");
@@ -34,13 +35,13 @@ export default function ThaiTimeConverter() {
         <Card
             className="mx-auto w-full"
             style={{
-                viewTransitionName: "thai-time-converter-card",
+                viewTransitionName: `${THAI_TIME_CONVERTER.slug}-card`,
             }}
         >
             <CardHeader>
-                <CardTitle>Thai Time Converter</CardTitle>
+                <CardTitle>{THAI_TIME_CONVERTER.title}</CardTitle>
                 <CardDescription>
-                    Enter a time to get the spoken Thai version
+                    {THAI_TIME_CONVERTER.description}
                 </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col gap-4">

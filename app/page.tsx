@@ -16,7 +16,6 @@ export default function Home() {
                 I also create
                 <Link href="/tools"> tools</Link> that I find useful.
             </p>
-            <div className="p-16 font-mono text-6xl text-primary">TiL</div>
         </Tab>
     );
 }

@@ -16,6 +16,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { CheckedState } from "@radix-ui/react-checkbox";
 import { Metadata } from "next";
+import { RECIPE_GENERATOR } from "@/data/tools";
 
 export const metadata: Metadata = {
     title: "Recipe Generator",
@@ -70,13 +71,13 @@ export default function RecipeGenerator() {
         <Card
             className="mx-auto w-full"
             style={{
-                viewTransitionName: "recipe-generator-card",
+                viewTransitionName: `${RECIPE_GENERATOR.slug}-card`,
             }}
         >
             <CardHeader>
-                <CardTitle>Recipe Generator</CardTitle>
+                <CardTitle>{RECIPE_GENERATOR.title}</CardTitle>
                 <CardDescription>
-                    Generate a recipe from a list of ingredients.
+                    {RECIPE_GENERATOR.description}
                 </CardDescription>
             </CardHeader>
             <CardContent className="flex w-full flex-col gap-2">

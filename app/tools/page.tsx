@@ -1,6 +1,14 @@
 import Tab from "@/components/ui/tab";
 import { Link } from "@/components/ui/link";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import { TOOLS } from "@/data/tools";
+import Routes from "@/constants/Routes";
 
 export const metadata = {
     title: "Tools",
@@ -10,39 +18,25 @@ export const metadata = {
 export default function Home() {
     return (
         <Tab title="Tools">
-            <Card
-                style={{
-                    viewTransitionName: "thai-time-converter-card",
-                }}
-            >
-                <Link href="/tools/thai-time-converter">
-                    <CardHeader>
-                        <CardTitle>Thai Time Converter</CardTitle>
-                    </CardHeader>
-                </Link>
-            </Card>
-            <Card
-                style={{
-                    viewTransitionName: "recipe-generator-card",
-                }}
-            >
-                <Link href="/tools/recipe-generator">
-                    <CardHeader>
-                        <CardTitle>Recipe Generator</CardTitle>
-                    </CardHeader>
-                </Link>
-            </Card>
-            <Card
-                style={{
-                    viewTransitionName: "password-generator-card",
-                }}
-            >
-                <Link href="/tools/password-generator">
-                    <CardHeader>
-                        <CardTitle>Password Generator</CardTitle>
-                    </CardHeader>
-                </Link>
-            </Card>
+            {TOOLS.map((tool) => (
+                <Card
+                    key={tool.title}
+                    style={{
+                        viewTransitionName: `${tool.slug}-card`,
+                    }}
+                >
+                    <Link href={Routes.TOOL(tool.slug)}>
+                        <CardHeader>
+                            <CardTitle>{tool.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <CardDescription>
+                                {tool.description}
+                            </CardDescription>
+                        </CardContent>
+                    </Link>
+                </Card>
+            ))}
         </Tab>
     );
 }

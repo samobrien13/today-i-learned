@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Copy, RefreshCw } from "lucide-react";
 import { generatePassword } from "@/lib/password";
 import { useToast } from "@/hooks/use-toast";
+import { PASSWORD_GENERATOR } from "@/data/tools";
 
 function PasswordGenerator() {
     const { toast } = useToast();
@@ -25,13 +26,15 @@ function PasswordGenerator() {
         <Card
             className="mx-auto w-full"
             style={{
-                viewTransitionName: "password-generator-card",
+                viewTransitionName: `${PASSWORD_GENERATOR.slug}-card`,
             }}
         >
             <CardHeader>
-                <CardTitle>Password Generator</CardTitle>
+                <CardTitle>{PASSWORD_GENERATOR.title}</CardTitle>
                 <CardDescription>
-                    Get a secure password that works for most websites.
+                    {PASSWORD_GENERATOR.description}
+                </CardDescription>
+                <CardDescription>
                     Passwords are generated client side and never sent to any
                     server
                 </CardDescription>
