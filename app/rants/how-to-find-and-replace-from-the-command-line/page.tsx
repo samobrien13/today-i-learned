@@ -35,10 +35,9 @@ function HowToTellTheTimeThaiStyle() {
             <BlogParagraph>
                 Once in a while, I find myself needing to replace a string in
                 multiple files. There&apos;s no build in functionality in Neovim
-                to do this but you can use the command line to do this. Every
-                time I search how to do it though I come across the above
-                stackoverflow thread and spend half an hour working out how to
-                do it.
+                to do this but you can use the command line. Every time I search
+                how to do it though I come across the above stackoverflow thread
+                and spend half an hour working out how to do it.
             </BlogParagraph>
             <BlogParagraph>
                 The following command will do the job on OSX:
