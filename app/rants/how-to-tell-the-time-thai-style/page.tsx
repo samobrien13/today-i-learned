@@ -4,10 +4,7 @@ import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { HOW_TO_TELL_THE_TIME_THAI_STYLE } from "@/data/blog";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-    title: HOW_TO_TELL_THE_TIME_THAI_STYLE.metaTitle,
-    description: HOW_TO_TELL_THE_TIME_THAI_STYLE.metaDescription,
-};
+export const metadata: Metadata = HOW_TO_TELL_THE_TIME_THAI_STYLE;
 
 function HowToTellTheTimeThaiStyle() {
     return (

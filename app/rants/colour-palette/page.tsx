@@ -11,6 +11,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Colours } from "@/components/colours";
+import { Metadata } from "next";
+
+export const metadata: Metadata = COLOUR_PALETTE;
 
 function ColourPalette() {
     return (

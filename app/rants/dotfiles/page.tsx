@@ -11,10 +11,7 @@ import { DOTFILES } from "@/data/blog";
 import { ArrowUpRight } from "lucide-react";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-    title: DOTFILES.metaTitle,
-    description: DOTFILES.metaDescription,
-};
+export const metadata: Metadata = DOTFILES;
 
 function HowToTellTheTimeThaiStyle() {
     return (

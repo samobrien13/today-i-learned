@@ -17,8 +17,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://todayilearned.au"),
-    title: "Today I Learned",
-    description: "Collection of tools and articles about things I've learned",
+    title: {
+        template: "%s | TiL",
+        default: "Today I Learned",
+    },
+    description: "Collection of rants and tools about things I've learned",
+    keywords: ["programming", "web development", "tools", "blog"],
     robots: {
         index: true,
         follow: true,

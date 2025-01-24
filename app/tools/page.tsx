@@ -3,7 +3,7 @@ import { Link } from "@/components/ui/link";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const metadata = {
-    title: "Tools | Today I Learned",
+    title: "Tools",
     description: "Tools I've created",
 };
 

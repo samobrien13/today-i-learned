@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 
 export const metadata = {
-    title: "Rants | Today I Learned",
+    title: "Rants",
     description: "Read my rants about all sorts of things.",
 };
 

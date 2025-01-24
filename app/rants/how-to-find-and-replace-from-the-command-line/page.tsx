@@ -11,10 +11,7 @@ import { HOW_TO_FIND_AND_REPLACE_FROM_THE_COMMAND_LINE } from "@/data/blog";
 import { ArrowUpRight } from "lucide-react";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-    title: HOW_TO_FIND_AND_REPLACE_FROM_THE_COMMAND_LINE.metaTitle,
-    description: HOW_TO_FIND_AND_REPLACE_FROM_THE_COMMAND_LINE.metaDescription,
-};
+export const metadata: Metadata = HOW_TO_FIND_AND_REPLACE_FROM_THE_COMMAND_LINE;
 
 function HowToTellTheTimeThaiStyle() {
     return (

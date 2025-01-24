@@ -1,10 +1,5 @@
 import Tab from "@/components/ui/tab";
 
-export const metadata = {
-    title: "Home | Today I Learned",
-    description: "Tools I've created",
-};
-
 export default function Home() {
     return (
         <Tab title="About">
