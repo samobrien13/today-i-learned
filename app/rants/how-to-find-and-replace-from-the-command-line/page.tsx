@@ -72,17 +72,6 @@ function HowToTellTheTimeThaiStyle() {
             </BlogUnorderedList>
             <BlogHeading>Possible Issues and Fixes</BlogHeading>
             <BlogParagraph>
-                If running this on Linux,{" "}
-                <BlogCode>sed -i &apos;&apos;</BlogCode> will cause an error.
-                Instead, use:
-            </BlogParagraph>
-            <BlogPre>
-                <BlogCode>
-                    find ./ -type f -exec sed -i &apos;s/replace text/replace
-                    text/&apos; {"{}"} \;
-                </BlogCode>
-            </BlogPre>
-            <BlogParagraph>
                 If replace text or replace text contains slashes (/), use a
                 different delimiter like |:
             </BlogParagraph>
