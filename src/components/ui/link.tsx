@@ -9,8 +9,11 @@ function Link(props: LinkComponentProps) {
         <NextViewLink
             {...props}
             className={clsx(
-                "transition-all hover:text-muted-foreground",
+                "transition-all hover:text-muted-foreground [&_span]:font-mono",
                 props.className,
+                {
+                    "font-mono": typeof props.children === "string",
+                },
             )}
         />
     );

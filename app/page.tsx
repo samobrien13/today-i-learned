@@ -13,8 +13,8 @@ export default function Home() {
                 often venture into other areas.
             </p>
             <p>
-                I also create
-                <Link href="/tools"> tools</Link> that I find useful.
+                I also create&nbsp;
+                <Link href="/tools">tools</Link> that I find useful.
             </p>
         </Tab>
     );

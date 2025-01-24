@@ -1,5 +1,6 @@
 import { Link } from "@/components/ui/link";
 import { ThemeButton } from "../theme-button";
+import Routes from "@/constants/Routes";
 
 function Navbar() {
     return (
@@ -10,13 +11,13 @@ function Navbar() {
                     id="nav"
                 >
                     <div className="flex flex-1 flex-row pr-10">
-                        <Link href="/" className="px-3 py-2">
+                        <Link href={Routes.HOME} className="px-3 py-2">
                             TiL
                         </Link>
-                        <Link href="/rants" className="px-3 py-2">
+                        <Link href={Routes.RANTS} className="px-3 py-2">
                             rants
                         </Link>
-                        <Link href="/tools" className="px-3 py-2">
+                        <Link href={Routes.TOOLS} className="px-3 py-2">
                             tools
                         </Link>
                     </div>

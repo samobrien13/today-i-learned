@@ -23,7 +23,7 @@ function HowToTellTheTimeThaiStyle() {
                 href="https://github.com/samobrien13/dotfiles"
             >
                 <ArrowUpRight strokeWidth={1} />
-                <p className="ml-2 h-7">repository</p>
+                <span className="ml-2 h-7">repository</span>
             </Link>
             <BlogParagraph>
                 Dotfiles are hidden files that store configuration settings for

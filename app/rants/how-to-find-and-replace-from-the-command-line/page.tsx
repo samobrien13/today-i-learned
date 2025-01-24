@@ -27,7 +27,7 @@ function HowToTellTheTimeThaiStyle() {
                 href="https://stackoverflow.com/questions/11392478/how-to-replace-a-string-in-multiple-files-in-linux-command-line"
             >
                 <ArrowUpRight strokeWidth={1} />
-                <p className="ml-2 h-7">reference</p>
+                <span className="ml-2 h-7">reference</span>
             </Link>
             <BlogParagraph>
                 Once in a while, I find myself needing to replace a string in

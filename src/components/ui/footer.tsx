@@ -11,7 +11,7 @@ function Footer() {
                 href="https://github.com/samobrien13"
             >
                 <ArrowUpRight strokeWidth={1} />
-                <p className="ml-2 h-7">github</p>
+                <span className="ml-2 h-7">github</span>
             </Link>
             <p>© {new Date().getFullYear()} MIT Licensed</p>
         </footer>
