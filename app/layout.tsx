@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     },
     description: "Collection of rants and tools about things I've learned",
     keywords: ["programming", "web development", "tools", "blog"],
+    alternates: {
+        canonical: "https://todayilearned.au",
+    },
     robots: {
         index: true,
         follow: true,
