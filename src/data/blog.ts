@@ -21,11 +21,11 @@ export const DOTFILES: BlogData = {
     slug: "dotfiles",
 };
 
-export const COLOUR_PALETTE: BlogData = {
-    title: "Colour Palette",
-    description: "How to create a colour palette",
+export const DESIGN_SYSTEM: BlogData = {
+    title: "Design System",
+    description: "My design system",
     date: "2025-01-22",
-    slug: "colour-palette",
+    slug: "design-system",
 };
 
 export const HOW_TO_FIND_AND_REPLACE_FROM_THE_COMMAND_LINE: BlogData = {
@@ -38,7 +38,7 @@ export const HOW_TO_FIND_AND_REPLACE_FROM_THE_COMMAND_LINE: BlogData = {
 
 export const BLOG_ARTICLES: BlogData[] = [
     HOW_TO_FIND_AND_REPLACE_FROM_THE_COMMAND_LINE,
-    COLOUR_PALETTE,
+    DESIGN_SYSTEM,
     DOTFILES,
     HOW_TO_TELL_THE_TIME_THAI_STYLE,
 ];

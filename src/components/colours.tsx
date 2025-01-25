@@ -172,6 +172,7 @@ function Colours() {
                 </TableBody>
             </Table>
             <Button
+                className="mt-4 w-full"
                 variant="outline"
                 onClick={() => {
                     navigator.clipboard.writeText(css);
