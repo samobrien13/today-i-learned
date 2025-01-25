@@ -5,7 +5,6 @@ import Blog, {
 } from "@/components/ui/blog";
 import { DESIGN_SYSTEM } from "@/data/blog";
 import { Link } from "@/components/ui/link";
-import { ArrowUpRight } from "lucide-react";
 import {
     Card,
     CardContent,
