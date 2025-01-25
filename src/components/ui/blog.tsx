@@ -67,7 +67,7 @@ export function BlogCode({ children }: { children: React.ReactNode }) {
 
 export function BlogUnorderedList({ children }: { children: React.ReactNode }) {
     return (
-        <ul className="ml-4 flex list-disc flex-col gap-2 py-6">{children}</ul>
+        <ul className="ml-4 flex list-disc flex-col gap-2 pb-6">{children}</ul>
     );
 }
 
