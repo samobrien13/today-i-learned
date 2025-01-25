@@ -34,12 +34,21 @@ function PasswordGenerator() {
                 <CardDescription>
                     {PASSWORD_GENERATOR.description}
                 </CardDescription>
-                <CardDescription>
-                    Passwords are generated client side and never sent to any
-                    server
-                </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-row flex-wrap items-center gap-4">
+                <CardDescription>
+                    I have chosen to make 16 character passwords with letters
+                    (uppercase and lowercase), numbers and a single symbol
+                    (chosen from a small group of nice special characters). This
+                    is super secure and should satisfy the requirements of most
+                    websites, though you&nbsp;ll still get the odd website that
+                    limits you to 12 characters or doesn&apos;t allow special
+                    characters or something else ridiculous.
+                </CardDescription>
+                <CardDescription>
+                    Passwords are generated client side and never sent to any
+                    server.
+                </CardDescription>
                 <p className="font-mono text-lg">
                     {password.length > 0 ? (
                         password
