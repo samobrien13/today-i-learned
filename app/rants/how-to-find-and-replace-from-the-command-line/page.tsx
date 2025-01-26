@@ -22,8 +22,7 @@ function HowToTellTheTimeThaiStyle() {
         >
             <Link
                 className="flex items-center"
-                rel="noopener noreferrer"
-                target="_blank"
+                external
                 href="https://stackoverflow.com/questions/11392478/how-to-replace-a-string-in-multiple-files-in-linux-command-line"
             >
                 <ArrowUpRight strokeWidth={1} />

@@ -35,15 +35,13 @@ function DesignSystem() {
                 >
                     <BlogParagraph>
                         I highly recommend{" "}
-                        <Link
-                            rel="noopener noreferrer"
-                            target="_blank"
-                            href="https://www.refactoringui.com/"
-                        >
+                        <Link href="https://www.refactoringui.com/" external>
                             Refactoring UI
                         </Link>
                         , written by the creators of{" "}
-                        <Link href="https://tailwindcss.com">Tailwind CSS</Link>
+                        <Link href="https://tailwindcss.com" external>
+                            Tailwind CSS
+                        </Link>
                         . It&apos;s the only design resource you need for
                         learning how to design half decent UI without being a
                         designer.
@@ -57,7 +55,10 @@ function DesignSystem() {
                         use another CSS framework again.
                     </BlogParagraph>
                     <BlogParagraph>
-                        I use <Link href="https://ui.shadcn.com/">shadcn</Link>{" "}
+                        I use{" "}
+                        <Link href="https://ui.shadcn.com/" external>
+                            shadcn
+                        </Link>{" "}
                         as my component library. There are only so many times I
                         can be bothered to build the same button for each new
                         project. Shadcn is a collection of bare components that

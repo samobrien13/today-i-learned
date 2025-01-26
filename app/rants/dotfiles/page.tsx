@@ -13,13 +13,12 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = DOTFILES;
 
-function HowToTellTheTimeThaiStyle() {
+function Dotfiles() {
     return (
         <Blog title={DOTFILES.title} date={DOTFILES.date} slug={DOTFILES.slug}>
             <Link
                 className="flex items-center"
-                rel="noopener noreferrer"
-                target="_blank"
+                external
                 href="https://github.com/samobrien13/dotfiles"
             >
                 <ArrowUpRight strokeWidth={1} />
@@ -88,4 +87,4 @@ function HowToTellTheTimeThaiStyle() {
     );
 }
 
-export default HowToTellTheTimeThaiStyle;
+export default Dotfiles;

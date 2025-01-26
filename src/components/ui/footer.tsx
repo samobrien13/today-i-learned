@@ -6,8 +6,7 @@ function Footer() {
         <footer className="mt-16 flex flex-col gap-4">
             <Link
                 className="flex items-center"
-                rel="noopener noreferrer"
-                target="_blank"
+                external
                 href="https://github.com/samobrien13"
             >
                 <ArrowUpRight strokeWidth={1} />
