@@ -1,4 +1,4 @@
-import Blog, { BlogHeading, BlogParagraph } from "@/components/ui/blog";
+import Blog, { BlogParagraph } from "@/components/ui/blog";
 import { Link } from "@/components/ui/link";
 import { PLEASE_DONT_VALIDATE_MY_NAME } from "@/data/blog";
 import { Metadata } from "next";
