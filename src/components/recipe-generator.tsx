@@ -80,7 +80,7 @@ export default function RecipeGenerator() {
                     {RECIPE_GENERATOR.description}
                 </CardDescription>
             </CardHeader>
-            <CardContent className="flex w-full flex-col gap-2">
+            <CardContent className="flex w-full flex-col gap-4">
                 {ingredients.map(({ title, items }) => {
                     return (
                         <section
@@ -124,7 +124,7 @@ export default function RecipeGenerator() {
                         </section>
                     );
                 })}
-                <Button asChild variant="outline" disabled>
+                <Button asChild disabled className="mt-2">
                     <a
                         href={
                             selectedIngredients.length === 0
