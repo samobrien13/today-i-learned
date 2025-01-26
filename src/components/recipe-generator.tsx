@@ -4,7 +4,6 @@ import useLocalStorage from "@/hooks/use-local-storage";
 import { ingredients } from "@/data/ingredients";
 import { Button } from "@/components/ui/button";
 import { CopyCheckIcon } from "lucide-react";
-import Image from "next/image";
 import {
     Card,
     CardContent,
@@ -17,6 +16,7 @@ import { Label } from "@/components/ui/label";
 import { CheckedState } from "@radix-ui/react-checkbox";
 import { Metadata } from "next";
 import { RECIPE_GENERATOR } from "@/data/tools";
+import { ChatGPT } from "@/components/ui/icons";
 
 export const metadata: Metadata = {
     title: "Recipe Generator",
@@ -134,12 +134,7 @@ export default function RecipeGenerator() {
                         target="_blank"
                     >
                         Generate
-                        <Image
-                            src="/chat-gpt.svg"
-                            alt="ChatGPT"
-                            width={24}
-                            height={24}
-                        />
+                        <ChatGPT />
                     </a>
                 </Button>
             </CardContent>

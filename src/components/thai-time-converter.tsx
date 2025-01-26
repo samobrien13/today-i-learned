@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,6 +13,7 @@ import {
 } from "@/components/ui/card";
 import { convertToThaiTime, parseTime } from "@/lib/time";
 import { THAI_TIME_CONVERTER } from "@/data/tools";
+import { ChatGPT, GoogleTranslate } from "@/components/ui/icons";
 
 export default function ThaiTimeConverter() {
     const [time, setTime] = useState("");
@@ -69,12 +69,7 @@ export default function ThaiTimeConverter() {
                                 href={`https://translate.google.com.au/?sl=auto&tl=en&text=${thaiTime}&op=translate`}
                                 target="_blank"
                             >
-                                <Image
-                                    src="/google-translate.svg"
-                                    alt="Google Translate"
-                                    width={24}
-                                    height={24}
-                                />
+                                <GoogleTranslate />
                             </a>
                         </Button>
                         <Button asChild variant="secondary">
@@ -82,12 +77,7 @@ export default function ThaiTimeConverter() {
                                 href={`https://chatgpt.com?q=Explain%20${thaiTime}%20in%20English%20based%20on%20the%20Thai%20way%20of%20telling%20time`}
                                 target="_blank"
                             >
-                                <Image
-                                    src="/chat-gpt.svg"
-                                    alt="ChatGPT"
-                                    width={24}
-                                    height={24}
-                                />
+                                <ChatGPT />
                             </a>
                         </Button>
                     </div>
