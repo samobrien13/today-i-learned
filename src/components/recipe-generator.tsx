@@ -29,7 +29,7 @@ export default function RecipeGenerator() {
     >("input", []);
 
     const query =
-        "Generate a recipe using some but definitely not all of the following ingredients: " +
+        "Create a delicious recipe using a selection of the following ingredients: " +
         selectedIngredients.join(", ");
 
     const onSelectAll = (title: string) => {
@@ -85,9 +85,9 @@ export default function RecipeGenerator() {
                     return (
                         <section
                             key={title}
-                            className="flex flex-col space-y-2 rounded-xl border border-border p-2"
+                            className="flex flex-col gap-4 p-2"
                         >
-                            <div className="flex flex-row justify-between">
+                            <div className="flex flex-row items-center justify-between">
                                 <h3 className="font-semibold text-muted-foreground">
                                     {title}
                                 </h3>
@@ -98,7 +98,7 @@ export default function RecipeGenerator() {
                                     <CopyCheckIcon />
                                 </Button>
                             </div>
-                            <div className="grid grid-cols-2 gap-1 md:grid-cols-3">
+                            <div className="grid grid-cols-2 gap-2">
                                 {items.map(({ id, name }) => {
                                     return (
                                         <div
