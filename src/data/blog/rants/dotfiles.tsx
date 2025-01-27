@@ -1,11 +1,10 @@
 import {
-    BlogCode,
     BlogHeading,
     BlogListItem,
     BlogParagraph,
-    BlogPre,
     BlogUnorderedList,
 } from "@/components/ui/blog";
+import { CodeBlock } from "@/components/ui/code-block";
 import { Link } from "@/components/ui/link";
 import { BlogData } from "@/data/blog";
 import { ArrowUpRight } from "lucide-react";
@@ -61,14 +60,9 @@ function Dotfiles() {
                 To initialise my dotfiles on a new machine, I use the following
                 commands to set up a bare git repository:
             </BlogParagraph>
-            <BlogPre>
-                <BlogCode>
-                    git clone --bare https://github.com/samobrien13/dotfiles.git
-                    $HOME/.cfg{"\n"}alias dotfiles=&apos;usr/bin/git
-                    --git-dir=$HOME/.dotfiles/ --work-tree=$HOME&apos;{"\n"}
-                    dotfiles checkout
-                </BlogCode>
-            </BlogPre>
+            <CodeBlock language="bash">
+                {`git clone --bare https://github.com/samobrien13/dotfiles.git $HOME/.cfg\nalias dotfiles='usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'\ndotfiles checkout`}
+            </CodeBlock>
             <BlogHeading>Neovim</BlogHeading>
             <BlogParagraph>
                 Neovim is my editor of choice, and I have a few plugins that I

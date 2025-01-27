@@ -3,9 +3,9 @@ import {
     BlogHeading,
     BlogListItem,
     BlogParagraph,
-    BlogPre,
     BlogUnorderedList,
 } from "@/components/ui/blog";
+import { CodeBlock } from "@/components/ui/code-block";
 import { Link } from "@/components/ui/link";
 import { BlogData } from "@/data/blog";
 import { ArrowUpRight } from "lucide-react";
@@ -40,12 +40,9 @@ function HowToFindAndReplaceFromTheCommandLine() {
             <BlogParagraph>
                 The following command will do the job on OSX:
             </BlogParagraph>
-            <BlogPre>
-                <BlogCode>
-                    LC_ALL=C find ./ -type f -exec sed -i &apos;&apos; -e
-                    &apos;s/replace text/replace text/&apos; {"{}"} \;
-                </BlogCode>
-            </BlogPre>
+            <CodeBlock language="bash">
+                {`LC_ALL=C find ./ -type f -exec sed -i '' -e & '/find text/replace text/'{} ; `}
+            </CodeBlock>
             <BlogUnorderedList>
                 <BlogListItem>
                     <BlogCode>LC_ALL=C</BlogCode> is used to ensure consistent
@@ -73,23 +70,16 @@ function HowToFindAndReplaceFromTheCommandLine() {
                 If replace text or replace text contains slashes (/), use a
                 different delimiter like |:
             </BlogParagraph>
-            <BlogPre>
-                <BlogCode>
-                    LC_ALL=C find ./ -type f -exec sed -i &apos;&apos; -e
-                    &apos;s|replace/text|replace/text|&apos; {"{}"} \;
-                </BlogCode>
-            </BlogPre>
+            <CodeBlock language="bash">
+                {`LC_ALL=C find ./ -type f -exec sed -i '' -e & 's|find/text|replace/text|' {} ;`}
+            </CodeBlock>
             <BlogParagraph>
                 If modifying a large number of files, consider using xargs to
                 avoid spawning a new sed process for each file:
             </BlogParagraph>
-            <BlogPre>
-                <BlogCode>
-                    LC_ALL=C find ./ -type f -exec grep -Iq . {} \; -print |
-                    xargs sed -i &apos;&apos; -e &apos;s/replace text/replace
-                    text/&apos; {"{}"} \;
-                </BlogCode>
-            </BlogPre>
+            <CodeBlock language="bash">
+                {`LC_ALL=C find ./ -type f -exec grep -Iq . {} ; -print | xargs sed -i '' -e '/find text/replace text/' {} ;`}
+            </CodeBlock>
             <BlogParagraph>
                 The grep command is used to filter out binary files, because
                 we&apos;re writing code, and we have binary files in our

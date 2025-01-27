@@ -1,4 +1,5 @@
 import { formatDate } from "@/lib/date";
+import { Button } from "./button";
 
 type BlogProps = {
     title: string;
@@ -47,6 +48,32 @@ export function BlogSubHeading({ children }: { children: React.ReactNode }) {
 
 export function BlogParagraph({ children }: { children: React.ReactNode }) {
     return <p className="pb-6">{children}</p>;
+}
+
+export function BlogPre({ children }: { children: React.ReactNode }) {
+    return (
+        <div>
+            <div className="mb-2 flex items-center justify-between">
+                <p className="text-sm text-muted-foreground">Code</p>
+                <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={() => {
+                        navigator.clipboard.writeText(css);
+                        toast({
+                            title: "CSS variables copied to clipboard",
+                            duration: 2000,
+                        });
+                    }}
+                >
+                    <CopyIcon />
+                </Button>
+            </div>
+            <pre className="mb-6 overflow-auto rounded-md bg-muted p-4 text-muted-foreground">
+                {children}
+            </pre>
+        </div>
+    );
 }
 
 export function BlogCode({ children }: { children: React.ReactNode }) {
