@@ -21,6 +21,7 @@ function ThemeButton() {
 
     return (
         <Button
+            aria-label="Toggle theme"
             variant="outline"
             size="icon"
             onClick={() => {
