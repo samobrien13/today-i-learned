@@ -186,7 +186,7 @@ function HowToTellTheTimeThaiStyle() {
             <BlogParagraph>
                 I have developed a thai time converter to help convert times
                 into the spoken Thai sentences. I generally avoid
-                transliterating Thai into the Latin alphabet as there&apos; no
+                transliterating Thai into the Latin alphabet as there&apos;s no
                 standard way to do this and my eyes always gravitate towards the
                 latin alphabet instead of the Thai script. Definitely learn how
                 to read Thai script if you want to learn Thai!
