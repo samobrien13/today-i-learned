@@ -148,7 +148,7 @@ function DesignSystem() {
             <BlogSubHeading>Custom</BlogSubHeading>
             <BlogParagraph>
                 Finally we have a set of chart colours that are used whenever a
-                splash of colour is needed.
+                splash of colour is needed, mainly for syntax highlighting.
             </BlogParagraph>
             <Colours />
         </div>
