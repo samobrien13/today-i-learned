@@ -1,4 +1,4 @@
-import Blog, {
+import {
     BlogCode,
     BlogHeading,
     BlogListItem,
@@ -7,19 +7,21 @@ import Blog, {
     BlogUnorderedList,
 } from "@/components/ui/blog";
 import { Link } from "@/components/ui/link";
-import { HOW_TO_FIND_AND_REPLACE_FROM_THE_COMMAND_LINE } from "@/data/blog";
+import { BlogData } from "@/data/blog";
 import { ArrowUpRight } from "lucide-react";
-import { Metadata } from "next";
 
-export const metadata: Metadata = HOW_TO_FIND_AND_REPLACE_FROM_THE_COMMAND_LINE;
+export const HOW_TO_FIND_AND_REPLACE_FROM_THE_COMMAND_LINE: BlogData = {
+    title: "How to find and replace from the command line",
+    description:
+        "Use sed on OSX to find and replace text across multiple files",
+    date: "2025-01-25",
+    slug: "how-to-find-and-replace-from-the-command-line",
+    component: <HowToFindAndReplaceFromTheCommandLine />,
+};
 
-function HowToTellTheTimeThaiStyle() {
+function HowToFindAndReplaceFromTheCommandLine() {
     return (
-        <Blog
-            title={HOW_TO_FIND_AND_REPLACE_FROM_THE_COMMAND_LINE.title}
-            date={HOW_TO_FIND_AND_REPLACE_FROM_THE_COMMAND_LINE.date}
-            slug={HOW_TO_FIND_AND_REPLACE_FROM_THE_COMMAND_LINE.slug}
-        >
+        <>
             <Link
                 className="flex items-center"
                 external
@@ -97,8 +99,6 @@ function HowToTellTheTimeThaiStyle() {
                 Hopefully I never need to visit that stackoverflow thread
                 again...
             </BlogParagraph>
-        </Blog>
+        </>
     );
 }
-
-export default HowToTellTheTimeThaiStyle;

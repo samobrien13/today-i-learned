@@ -9,10 +9,14 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
     title: "Rants",
     description: "Read my rants about all sorts of things.",
+    alternates: {
+        canonical: "https://todayilearned.au/rants",
+    },
 };
 
 function Rants() {

@@ -1,18 +1,19 @@
 import ThaiTimeConverter from "@/components/thai-time-converter";
-import Blog, { BlogHeading, BlogParagraph } from "@/components/ui/blog";
+import { BlogHeading, BlogParagraph } from "@/components/ui/blog";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { HOW_TO_TELL_THE_TIME_THAI_STYLE } from "@/data/blog";
-import { Metadata } from "next";
+import { BlogData } from "@/data/blog";
 
-export const metadata: Metadata = HOW_TO_TELL_THE_TIME_THAI_STYLE;
+export const HOW_TO_TELL_THE_TIME_THAI_STYLE: BlogData = {
+    title: "How to tell the time Thai style",
+    description: "Learn how to tell the time Thai style",
+    date: "2025-01-19",
+    slug: "how-to-tell-the-time-thai-style",
+    component: <HowToTellTheTimeThaiStyle />,
+};
 
 function HowToTellTheTimeThaiStyle() {
     return (
-        <Blog
-            title={HOW_TO_TELL_THE_TIME_THAI_STYLE.title}
-            date={HOW_TO_TELL_THE_TIME_THAI_STYLE.date}
-            slug={HOW_TO_TELL_THE_TIME_THAI_STYLE.slug}
-        >
+        <>
             <BlogParagraph>
                 Thai people use a different system to tell the time compared to
                 the Western system. The day is divided into four parts: morning,
@@ -192,8 +193,6 @@ function HowToTellTheTimeThaiStyle() {
                 to read Thai script if you want to learn Thai!
             </BlogParagraph>
             <ThaiTimeConverter />
-        </Blog>
+        </>
     );
 }
-
-export default HowToTellTheTimeThaiStyle;

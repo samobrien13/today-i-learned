@@ -1,4 +1,4 @@
-import Blog, {
+import {
     BlogCode,
     BlogHeading,
     BlogListItem,
@@ -7,15 +7,20 @@ import Blog, {
     BlogUnorderedList,
 } from "@/components/ui/blog";
 import { Link } from "@/components/ui/link";
-import { DOTFILES } from "@/data/blog";
+import { BlogData } from "@/data/blog";
 import { ArrowUpRight } from "lucide-react";
-import { Metadata } from "next";
 
-export const metadata: Metadata = DOTFILES;
+export const DOTFILES: BlogData = {
+    title: "Dotfiles",
+    description: "My dotfiles setup; Neovim, Zsh, and more",
+    date: "2025-01-21",
+    slug: "dotfiles",
+    component: <Dotfiles />,
+};
 
 function Dotfiles() {
     return (
-        <Blog title={DOTFILES.title} date={DOTFILES.date} slug={DOTFILES.slug}>
+        <>
             <Link
                 className="flex items-center"
                 external
@@ -83,8 +88,6 @@ function Dotfiles() {
                 includes the tmux-sessionizer script which allows me to lookup
                 all my repos and open them in a new tmux session.
             </BlogParagraph>
-        </Blog>
+        </>
     );
 }
-
-export default Dotfiles;

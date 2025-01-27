@@ -1,17 +1,18 @@
-import Blog, { BlogParagraph } from "@/components/ui/blog";
+import { BlogParagraph } from "@/components/ui/blog";
 import { Link } from "@/components/ui/link";
-import { PLEASE_DONT_VALIDATE_MY_NAME } from "@/data/blog";
-import { Metadata } from "next";
+import { BlogData } from "@/data/blog";
 
-export const metadata: Metadata = PLEASE_DONT_VALIDATE_MY_NAME;
+export const PLEASE_DONT_VALIDATE_MY_NAME: BlogData = {
+    title: "Please don't validate my name",
+    description: "Why you shouldn't validate names (or most things)",
+    date: "2025-01-26",
+    slug: "please-dont-validate-my-name",
+    component: <PleaseDontValidateMyName />,
+};
 
 function PleaseDontValidateMyName() {
     return (
-        <Blog
-            title={PLEASE_DONT_VALIDATE_MY_NAME.title}
-            date={PLEASE_DONT_VALIDATE_MY_NAME.date}
-            slug={PLEASE_DONT_VALIDATE_MY_NAME.slug}
-        >
+        <>
             <BlogParagraph>
                 Every time I sign up for a new service, I&apos;m often
                 traumatised when having to enter my name. I have a simple Irish
@@ -60,7 +61,7 @@ function PleaseDontValidateMyName() {
                 </Link>{" "}
                 of all time...
             </BlogParagraph>
-        </Blog>
+        </>
     );
 }
 

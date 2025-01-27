@@ -63,7 +63,6 @@ function Colours() {
                 const value = window
                     .getComputedStyle(document.documentElement)
                     .getPropertyValue(`--${key}`);
-                console.log("value", value);
                 newPalette.set(key, {
                     name: key,
                     h: Number(value.split(" ")[0]),
