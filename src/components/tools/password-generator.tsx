@@ -35,7 +35,7 @@ function PasswordGenerator() {
                     {PASSWORD_GENERATOR.description}
                 </CardDescription>
             </CardHeader>
-            <CardContent className="flex flex-row flex-wrap items-center gap-4">
+            <CardContent className="flex flex-col gap-4">
                 <CardDescription>
                     I have chosen to make 16 character passwords with letters
                     (uppercase and lowercase), numbers and a single symbol
@@ -49,38 +49,40 @@ function PasswordGenerator() {
                     Passwords are generated client side and never sent to any
                     server.
                 </CardDescription>
-                <p className="font-mono text-lg">
-                    {password.length > 0 ? (
-                        password
-                    ) : (
-                        <>Generating...&nbsp;&nbsp;&nbsp;</>
-                    )}
-                </p>
-                <div className="flex flex-row gap-2">
-                    <Button
-                        variant="outline"
-                        onClick={() => {
-                            navigator.clipboard.writeText(password);
-                            toast({
-                                title: "Password copied to clipboard",
-                                duration: 2000,
-                            });
-                        }}
-                    >
-                        <Copy />
-                    </Button>
-                    <Button
-                        variant="outline"
-                        onClick={() => {
-                            setPassword(generatePassword());
-                        }}
-                    >
-                        <RefreshCw />
-                    </Button>
+                <div className="flex flex-row flex-wrap items-center gap-4">
+                    <p className="font-mono text-lg">
+                        {password.length > 0 ? (
+                            password
+                        ) : (
+                            <>Generating...&nbsp;&nbsp;&nbsp;</>
+                        )}
+                    </p>
+                    <div className="flex flex-row gap-2">
+                        <Button
+                            variant="outline"
+                            onClick={() => {
+                                navigator.clipboard.writeText(password);
+                                toast({
+                                    title: "Password copied to clipboard",
+                                    duration: 2000,
+                                });
+                            }}
+                        >
+                            <Copy />
+                        </Button>
+                        <Button
+                            variant="outline"
+                            onClick={() => {
+                                setPassword(generatePassword());
+                            }}
+                        >
+                            <RefreshCw />
+                        </Button>
+                    </div>
                 </div>
             </CardContent>
         </Card>
     );
 }
 
-export default PasswordGenerator;
+export { PasswordGenerator };

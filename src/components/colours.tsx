@@ -9,34 +9,11 @@ import {
 } from "@/components/ui/table";
 import { Slider } from "@/components/ui/slider";
 import { useEffect, useState } from "react";
-import tailwindConfig from "../../tailwind.config";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Copy } from "lucide-react";
-
-const tailwindColours = tailwindConfig.theme.colors as Record<
-    string,
-    string | Record<string, string>
->;
-
-const colours: string[] = [];
-
-Object.keys(tailwindColours).forEach((key) => {
-    const colour = tailwindColours[key];
-
-    if (typeof colour === "string") {
-        colours.push(key);
-    } else {
-        Object.keys(colour).forEach((subKey) => {
-            if (subKey === "DEFAULT") {
-                colours.push(key);
-            } else {
-                colours.push(`${key}-${subKey}`);
-            }
-        });
-    }
-});
+import { keys } from "@/constants/colours";
 
 type Colour = {
     name: string;
@@ -59,7 +36,7 @@ function Colours() {
         // Update as a callback to ensure the latest theme is used
         setCustomColours(() => {
             const newPalette: Map<string, Colour> = new Map();
-            colours.forEach((key) => {
+            keys.forEach((key) => {
                 const value = window
                     .getComputedStyle(document.documentElement)
                     .getPropertyValue(`--${key}`);
