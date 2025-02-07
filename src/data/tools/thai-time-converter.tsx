@@ -19,6 +19,7 @@ export const THAI_TIME_CONVERTER: ToolData = {
     title: "Thai Time Converter",
     description: "Enter a time to get the spoken Thai version",
     slug: "thai-time-converter",
+    component: <ThaiTimeConverter />,
 };
 
 function ThaiTimeConverter() {
