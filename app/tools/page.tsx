@@ -16,7 +16,6 @@ export const metadata = {
 };
 
 export default function Home() {
-    console.log(TOOLS);
     return (
         <Tab title="Tools">
             {TOOLS.map((tool) => (
