@@ -12,14 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Copy, RefreshCw } from "lucide-react";
 import { generatePassword } from "@/lib/password";
 import { useToast } from "@/hooks/use-toast";
-import { ToolData } from "@/data/tools";
-
-export const PASSWORD_GENERATOR: ToolData = {
-    title: "Password Generator",
-    description: "Generate a secure password",
-    slug: "password-generator",
-    component: <PasswordGenerator />,
-};
+import { PASSWORD_GENERATOR } from "../";
 
 function PasswordGenerator() {
     const { toast } = useToast();
@@ -90,4 +83,4 @@ function PasswordGenerator() {
     );
 }
 
-export default PasswordGenerator;
+export { PasswordGenerator };

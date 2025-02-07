@@ -15,14 +15,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { CheckedState } from "@radix-ui/react-checkbox";
 import { ChatGPT } from "@/components/ui/icons";
-import { ToolData } from "@/data/tools";
-
-export const RECIPE_GENERATOR: ToolData = {
-    title: "Recipe Generator",
-    description: "Generate a recipe from a list of ingredients.",
-    slug: "recipe-generator",
-    component: <RecipeGenerator />,
-};
+import { RECIPE_GENERATOR } from "../";
 
 function RecipeGenerator() {
     const [selectedIngredients, setSelectedIngredients] = useLocalStorage<
@@ -143,4 +136,4 @@ function RecipeGenerator() {
     );
 }
 
-export default RecipeGenerator;
+export { RecipeGenerator };

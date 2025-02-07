@@ -23,7 +23,7 @@ import {
     Tooltip,
 } from "chart.js";
 import { cssVar } from "@/constants/colours";
-import { ToolData } from "@/data/tools";
+import { MORTGAGE_CALCULATOR } from "../";
 
 ChartJS.register(
     CategoryScale,
@@ -33,13 +33,6 @@ ChartJS.register(
     Title,
     Tooltip,
 );
-
-export const MORTGAGE_CALCULATOR: ToolData = {
-    title: "Mortgage Calculator",
-    description: "Calculate how long it will take to pay off your mortgage",
-    slug: "mortgage-calculator",
-    component: <MortgageCalculator />,
-};
 
 function MortgageCalculator() {
     const [interestRate, setInterestRate] = useLocalStorage(
@@ -141,4 +134,4 @@ function MortgageCalculator() {
     );
 }
 
-export default MortgageCalculator;
+export { MortgageCalculator };

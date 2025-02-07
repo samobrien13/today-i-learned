@@ -13,14 +13,7 @@ import {
 } from "@/components/ui/card";
 import { convertToThaiTime, parseTime } from "@/lib/time";
 import { ChatGPT, GoogleTranslate } from "@/components/ui/icons";
-import { ToolData } from "@/data/tools";
-
-export const THAI_TIME_CONVERTER: ToolData = {
-    title: "Thai Time Converter",
-    description: "Enter a time to get the spoken Thai version",
-    slug: "thai-time-converter",
-    component: <ThaiTimeConverter />,
-};
+import { THAI_TIME_CONVERTER } from "../";
 
 function ThaiTimeConverter() {
     const [time, setTime] = useState("");
@@ -94,4 +87,4 @@ function ThaiTimeConverter() {
     );
 }
 
-export default ThaiTimeConverter;
+export { ThaiTimeConverter };
