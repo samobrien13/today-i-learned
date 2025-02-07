@@ -15,7 +15,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { CheckedState } from "@radix-ui/react-checkbox";
 import { ChatGPT } from "@/components/ui/icons";
-import { RECIPE_GENERATOR } from "../";
+import { RECIPE_GENERATOR } from "@/data/tools";
 
 function RecipeGenerator() {
     const [selectedIngredients, setSelectedIngredients] = useLocalStorage<

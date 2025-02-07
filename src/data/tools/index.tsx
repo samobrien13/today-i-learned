@@ -1,7 +1,7 @@
-import { ThaiTimeConverter } from "./components/thai-time-converter";
-import { MortgageCalculator } from "./components/mortgage-calculator";
-import { RecipeGenerator } from "./components/recipe-generator";
-import { PasswordGenerator } from "./components/password-generator";
+import { ThaiTimeConverter } from "@/components/tools/thai-time-converter";
+import { MortgageCalculator } from "@/components/tools/mortgage-calculator";
+import { RecipeGenerator } from "@/components/tools/recipe-generator";
+import { PasswordGenerator } from "@/components/tools/password-generator";
 
 import { Metadata } from "next";
 import { ReactNode } from "react";

@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/card";
 import { convertToThaiTime, parseTime } from "@/lib/time";
 import { ChatGPT, GoogleTranslate } from "@/components/ui/icons";
-import { THAI_TIME_CONVERTER } from "../";
+import { THAI_TIME_CONVERTER } from "@/data/tools";
 
 function ThaiTimeConverter() {
     const [time, setTime] = useState("");

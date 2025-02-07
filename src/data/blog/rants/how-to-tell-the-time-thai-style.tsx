@@ -1,4 +1,4 @@
-import { ThaiTimeConverter } from "@/data/tools/components/thai-time-converter";
+import { ThaiTimeConverter } from "@/components/tools/thai-time-converter";
 import { BlogHeading, BlogParagraph } from "@/components/ui/blog";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { BlogData } from "@/data/blog";

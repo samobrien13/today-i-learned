@@ -23,7 +23,7 @@ import {
     Tooltip,
 } from "chart.js";
 import { cssVar } from "@/constants/colours";
-import { MORTGAGE_CALCULATOR } from "../";
+import { MORTGAGE_CALCULATOR } from "@/data/tools";
 
 ChartJS.register(
     CategoryScale,
