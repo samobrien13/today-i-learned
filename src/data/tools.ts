@@ -24,8 +24,15 @@ export const PASSWORD_GENERATOR: ToolsData = {
     slug: "password-generator",
 };
 
+export const MORTGAGE_CALCULATOR: ToolsData = {
+    title: "Mortgage Calculator",
+    description: "Calculate how long it will take to pay off your mortgage",
+    slug: "mortgage-calculator",
+};
+
 export const TOOLS: ToolsData[] = [
     THAI_TIME_CONVERTER,
     RECIPE_GENERATOR,
     PASSWORD_GENERATOR,
+    MORTGAGE_CALCULATOR,
 ];
