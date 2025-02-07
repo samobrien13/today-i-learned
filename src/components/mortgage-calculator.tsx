@@ -22,8 +22,8 @@ import {
     LineElement,
     Title,
     Tooltip,
-    Legend,
 } from "chart.js";
+import { cssVar } from "@/constants/colours";
 
 ChartJS.register(
     CategoryScale,
@@ -32,7 +32,6 @@ ChartJS.register(
     LineElement,
     Title,
     Tooltip,
-    Legend,
 );
 
 export default function MortgageCalculator() {
@@ -94,20 +93,29 @@ export default function MortgageCalculator() {
                     max={100000}
                     step={100}
                 />
-                <Label>Years to 0</Label>
-                <p>
-                    {yearsToPayOff} years
-                    {monthsToPayOff > 0 && `, ${monthsToPayOff} months`}
-                </p>
                 <Line
+                    className="py-4"
+                    title="Years to 0"
+                    options={{
+                        scales: {
+                            x: {
+                                ticks: {
+                                    maxTicksLimit: payments.length / 12,
+                                    stepSize: 12,
+                                },
+                            },
+                        },
+                    }}
                     data={{
-                        labels: payments,
+                        labels: payments.map((_, index) =>
+                            Math.floor(index / 12),
+                        ),
                         datasets: [
                             {
-                                label: "Payments",
+                                label: "Principal",
                                 data: payments,
-                                borderColor: "rgb(255, 99, 132)",
-                                backgroundColor: "rgba(255, 99, 132, 0.5)",
+                                borderColor: `hsl(${cssVar("--chart-2")})`,
+                                backgroundColor: `hsla(${cssVar("--chart-2")}`,
                                 pointRadius: 0,
                                 fill: false,
                                 tension: 0.1,
@@ -117,6 +125,10 @@ export default function MortgageCalculator() {
                     height={300}
                     width={300}
                 />
+                <p>
+                    {yearsToPayOff} years
+                    {monthsToPayOff > 0 && `, ${monthsToPayOff} months`}
+                </p>
             </CardContent>
         </Card>
     );
