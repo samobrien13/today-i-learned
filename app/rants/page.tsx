@@ -20,7 +20,6 @@ export const metadata: Metadata = {
 };
 
 function Rants() {
-    console.log(BLOG_ARTICLES);
     return (
         <Tab title="Rants">
             {BLOG_ARTICLES.map((article) => (
