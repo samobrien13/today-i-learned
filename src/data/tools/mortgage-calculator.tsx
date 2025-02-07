@@ -9,8 +9,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { MORTGAGE_CALCULATOR } from "@/data/tools";
-import { Input } from "./ui/input";
+import { Input } from "@/components/ui/input";
 import calculateMortgage from "@/lib/mortgage";
 import { Line } from "react-chartjs-2";
 import React from "react";
@@ -24,6 +23,7 @@ import {
     Tooltip,
 } from "chart.js";
 import { cssVar } from "@/constants/colours";
+import { ToolData } from "@/data/tools";
 
 ChartJS.register(
     CategoryScale,
@@ -34,7 +34,14 @@ ChartJS.register(
     Tooltip,
 );
 
-export default function MortgageCalculator() {
+export const MORTGAGE_CALCULATOR: ToolData = {
+    title: "Mortgage Calculator",
+    description: "Calculate how long it will take to pay off your mortgage",
+    slug: "mortgage-calculator",
+    component: <MortgageCalculator />,
+};
+
+function MortgageCalculator() {
     const [interestRate, setInterestRate] = useLocalStorage(
         "mortgage:interestRate",
         5,
@@ -133,3 +140,5 @@ export default function MortgageCalculator() {
         </Card>
     );
 }
+
+export default MortgageCalculator;

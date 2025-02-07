@@ -12,10 +12,16 @@ import {
     CardContent,
 } from "@/components/ui/card";
 import { convertToThaiTime, parseTime } from "@/lib/time";
-import { THAI_TIME_CONVERTER } from "@/data/tools";
 import { ChatGPT, GoogleTranslate } from "@/components/ui/icons";
+import { ToolData } from "@/data/tools";
 
-export default function ThaiTimeConverter() {
+export const THAI_TIME_CONVERTER: ToolData = {
+    title: "Thai Time Converter",
+    description: "Enter a time to get the spoken Thai version",
+    slug: "thai-time-converter",
+};
+
+function ThaiTimeConverter() {
     const [time, setTime] = useState("");
 
     useEffect(() => {
@@ -86,3 +92,5 @@ export default function ThaiTimeConverter() {
         </Card>
     );
 }
+
+export default ThaiTimeConverter;

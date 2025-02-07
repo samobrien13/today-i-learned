@@ -14,10 +14,17 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { CheckedState } from "@radix-ui/react-checkbox";
-import { RECIPE_GENERATOR } from "@/data/tools";
 import { ChatGPT } from "@/components/ui/icons";
+import { ToolData } from "@/data/tools";
 
-export default function RecipeGenerator() {
+export const RECIPE_GENERATOR: ToolData = {
+    title: "Recipe Generator",
+    description: "Generate a recipe from a list of ingredients.",
+    slug: "recipe-generator",
+    component: <RecipeGenerator />,
+};
+
+function RecipeGenerator() {
     const [selectedIngredients, setSelectedIngredients] = useLocalStorage<
         Array<string>
     >("input", []);
@@ -135,3 +142,5 @@ export default function RecipeGenerator() {
         </Card>
     );
 }
+
+export default RecipeGenerator;
