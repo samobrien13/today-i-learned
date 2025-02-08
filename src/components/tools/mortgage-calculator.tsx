@@ -23,7 +23,7 @@ import {
 import { cssVar } from "@/constants/colours";
 import { MORTGAGE_CALCULATOR } from "@/data/tools";
 import { Button } from "../ui/button";
-import { PlusIcon } from "lucide-react";
+import { PlusIcon, TrashIcon } from "lucide-react";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
 
@@ -80,7 +80,7 @@ function MortgageCalculator() {
                 </div>
                 {values.map((value, index) => (
                     <React.Fragment key={index}>
-                        <div className="flex flex-row gap-2">
+                        <div className="flex flex-row items-end gap-2">
                             <div className="flex flex-1 flex-col gap-2">
                                 <Label>Interest Rate</Label>
                                 <Input
@@ -131,6 +131,18 @@ function MortgageCalculator() {
                                     step={100}
                                 />
                             </div>
+                            <Button
+                                size="icon"
+                                disabled={values.length === 1}
+                                variant="outline"
+                                onClick={() =>
+                                    setValues(
+                                        values.filter((_, i) => i !== index),
+                                    )
+                                }
+                            >
+                                <TrashIcon className="h-4 w-4" />
+                            </Button>
                         </div>
                     </React.Fragment>
                 ))}
@@ -140,8 +152,15 @@ function MortgageCalculator() {
                             setValues([
                                 ...values,
                                 {
-                                    interestRate: 5,
-                                    payment: 5000,
+                                    interestRate:
+                                        values.length > 0
+                                            ? values[values.length - 1]
+                                                  .interestRate
+                                            : 5,
+                                    payment:
+                                        values.length > 0
+                                            ? values[values.length - 1].payment
+                                            : 5000,
                                 },
                             ])
                         }
@@ -149,42 +168,45 @@ function MortgageCalculator() {
                         Add <PlusIcon className="h-4 w-4" />
                     </Button>
                 ) : null}
-                <Line
-                    redraw
-                    className="py-4"
-                    title="Years to 0"
-                    color="hsl(var(--chart-3))"
-                    options={{
-                        scales: {
-                            y: {
-                                grid: {
-                                    color: `hsl(${cssVar("--muted-foreground")})`,
+                {paymentSets.length > 0 ? (
+                    <Line
+                        redraw
+                        className="py-4"
+                        title="Years to 0"
+                        color="hsl(var(--chart-3))"
+                        options={{
+                            scales: {
+                                y: {
+                                    grid: {
+                                        color: `hsl(${cssVar("--muted-foreground")})`,
+                                    },
+                                    ticks: {
+                                        color: `hsl(${cssVar("--card-foreground")})`,
+                                    },
                                 },
-                                ticks: {
-                                    color: `hsl(${cssVar("--card-foreground")})`,
+                                x: {
+                                    grid: {
+                                        color: `hsl(${cssVar("--muted-foreground")})`,
+                                    },
+                                    ticks: {
+                                        color: `hsl(${cssVar("--card-foreground")})`,
+                                        maxTicksLimit:
+                                            paymentSets[0].length / 12,
+                                        stepSize: 12,
+                                    },
                                 },
                             },
-                            x: {
-                                grid: {
-                                    color: `hsl(${cssVar("--muted-foreground")})`,
-                                },
-                                ticks: {
-                                    color: `hsl(${cssVar("--card-foreground")})`,
-                                    maxTicksLimit: paymentSets[0].length / 12,
-                                    stepSize: 12,
-                                },
-                            },
-                        },
-                    }}
-                    data={{
-                        labels: paymentSets[0].map((_, index) =>
-                            Math.floor(index / 12),
-                        ),
-                        datasets,
-                    }}
-                    height={300}
-                    width={300}
-                />
+                        }}
+                        data={{
+                            labels: paymentSets[0].map((_, index) =>
+                                Math.floor(index / 12),
+                            ),
+                            datasets,
+                        }}
+                        height={300}
+                        width={300}
+                    />
+                ) : null}
             </CardContent>
         </Card>
     );
