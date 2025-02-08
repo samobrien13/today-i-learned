@@ -34,7 +34,6 @@ export async function generateMetadata({
 
 async function ToolPage({ params }: ToolPageProps) {
     const { slug } = await params;
-    console.log(TOOLS);
     const tool = TOOLS.find((t) => t.slug === slug);
 
     if (!tool) {

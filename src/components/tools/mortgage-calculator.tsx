@@ -19,36 +19,39 @@ import {
     LinearScale,
     PointElement,
     LineElement,
-    Title,
-    Tooltip,
 } from "chart.js";
 import { cssVar } from "@/constants/colours";
 import { MORTGAGE_CALCULATOR } from "@/data/tools";
+import { Button } from "../ui/button";
+import { PlusIcon } from "lucide-react";
 
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
 
 function MortgageCalculator() {
-    const [interestRate, setInterestRate] = useLocalStorage(
-        "mortgage:interestRate",
-        5,
-    );
     const [principal, setPrincipal] = useLocalStorage(
         "mortgage:principal",
         500000,
     );
-    const [payment, setPayment] = useLocalStorage("mortgage:payment", 5000);
+    const [values, setValues] = useLocalStorage("mortgage:values", [
+        {
+            interestRate: 5,
+            payment: 5000,
+        },
+    ]);
 
-    const payments = calculateMortgage(interestRate, principal, payment);
+    const paymentSets = values.map((value) =>
+        calculateMortgage(value.interestRate, principal, value.payment),
+    );
 
-    const yearsToPayOff = Math.floor(payments.length / 12);
-    const monthsToPayOff = payments.length % 12;
+    const datasets = paymentSets.map((paymentSet, index) => ({
+        label: `Interest Rate ${index + 1}`,
+        data: paymentSet,
+        borderColor: `hsl(${cssVar(`--chart-${index + 1}`)})`,
+        backgroundColor: `hsl(${cssVar(`--chart-${index + 1}`)}`,
+        pointRadius: 0,
+        fill: false,
+        tension: 0.1,
+    }));
 
     return (
         <Card
@@ -64,71 +67,124 @@ function MortgageCalculator() {
                 </CardDescription>
             </CardHeader>
             <CardContent className="flex w-full flex-col gap-4">
-                <Label>Interest Rate</Label>
-                <Input
-                    value={interestRate}
-                    onChange={(e) =>
-                        setInterestRate(parseFloat(e.target.value))
-                    }
-                    type="number"
-                    min={0}
-                    max={100}
-                    step={0.01}
-                />
-                <Label>Principal</Label>
-                <Input
-                    value={principal}
-                    onChange={(e) => setPrincipal(parseInt(e.target.value))}
-                    type="number"
-                    min={0}
-                    max={10000000}
-                    step={1000}
-                />
-                <Label>Monthly Payment</Label>
-                <Input
-                    value={payment}
-                    onChange={(e) => setPayment(parseInt(e.target.value))}
-                    type="number"
-                    min={0}
-                    max={100000}
-                    step={100}
-                />
+                <div className="flex flex-col gap-2">
+                    <Label>Principal</Label>
+                    <Input
+                        value={principal}
+                        onChange={(e) => setPrincipal(parseInt(e.target.value))}
+                        type="number"
+                        min={0}
+                        max={10000000}
+                        step={1000}
+                    />
+                </div>
+                {values.map((value, index) => (
+                    <React.Fragment key={index}>
+                        <div className="flex flex-row gap-2">
+                            <div className="flex flex-1 flex-col gap-2">
+                                <Label>Interest Rate</Label>
+                                <Input
+                                    value={value.interestRate}
+                                    onChange={(e) =>
+                                        setValues(
+                                            values.map((v, i) =>
+                                                i === index
+                                                    ? {
+                                                          ...v,
+                                                          interestRate:
+                                                              parseFloat(
+                                                                  e.target
+                                                                      .value,
+                                                              ),
+                                                      }
+                                                    : v,
+                                            ),
+                                        )
+                                    }
+                                    type="number"
+                                    min={0}
+                                    max={100}
+                                    step={0.01}
+                                />
+                            </div>
+                            <div className="flex flex-1 flex-col gap-2">
+                                <Label>Monthly Payment</Label>
+                                <Input
+                                    value={value.payment}
+                                    onChange={(e) =>
+                                        setValues(
+                                            values.map((v, i) =>
+                                                i === index
+                                                    ? {
+                                                          ...v,
+                                                          payment: parseInt(
+                                                              e.target.value,
+                                                          ),
+                                                      }
+                                                    : v,
+                                            ),
+                                        )
+                                    }
+                                    type="number"
+                                    min={0}
+                                    max={100000}
+                                    step={100}
+                                />
+                            </div>
+                        </div>
+                    </React.Fragment>
+                ))}
+                {values.length < 5 ? (
+                    <Button
+                        onClick={() =>
+                            setValues([
+                                ...values,
+                                {
+                                    interestRate: 5,
+                                    payment: 5000,
+                                },
+                            ])
+                        }
+                    >
+                        Add <PlusIcon className="h-4 w-4" />
+                    </Button>
+                ) : null}
                 <Line
+                    redraw
                     className="py-4"
                     title="Years to 0"
+                    color="hsl(var(--chart-3))"
                     options={{
                         scales: {
-                            x: {
+                            y: {
+                                grid: {
+                                    color: `hsl(${cssVar("--muted-foreground")})`,
+                                },
                                 ticks: {
-                                    maxTicksLimit: payments.length / 12,
+                                    color: `hsl(${cssVar("--card-foreground")})`,
+                                },
+                            },
+                            x: {
+                                grid: {
+                                    color: `hsl(${cssVar("--muted-foreground")})`,
+                                },
+                                ticks: {
+                                    color: `hsl(${cssVar("--card-foreground")})`,
+                                    maxTicksLimit: paymentSets[0].length / 12,
                                     stepSize: 12,
                                 },
                             },
                         },
                     }}
                     data={{
-                        labels: payments.map((_, index) =>
+                        labels: paymentSets[0].map((_, index) =>
                             Math.floor(index / 12),
                         ),
-                        datasets: [
-                            {
-                                label: "Principal",
-                                data: payments,
-                                borderColor: `hsl(${cssVar("--chart-2")})`,
-                                backgroundColor: `hsla(${cssVar("--chart-2")}`,
-                                pointRadius: 0,
-                                fill: false,
-                                tension: 0.1,
-                            },
-                        ],
+                        datasets,
                     }}
                     height={300}
                     width={300}
                 />
-                <p>
-                    {yearsToPayOff} years
-                    {monthsToPayOff > 0 && `, ${monthsToPayOff} months`}
-                </p>
             </CardContent>
         </Card>
     );
