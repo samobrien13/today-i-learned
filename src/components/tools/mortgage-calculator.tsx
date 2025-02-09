@@ -52,6 +52,16 @@ function MortgageCalculator() {
             payment: 5000,
             offset: 0,
         },
+        {
+            interestRate: 4.8,
+            payment: 5000,
+            offset: 0,
+        },
+        {
+            interestRate: 5,
+            payment: 5000,
+            offset: 10000,
+        },
     ]);
 
     const paymentSets = values.map((value) =>
