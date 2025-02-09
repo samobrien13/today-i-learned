@@ -1,13 +1,12 @@
 import { formatDate } from "@/lib/date";
+import { Link } from "./link";
+import { Badge } from "./badge";
+import { BlogData } from "@/data/blog";
+import Routes from "@/constants/Routes";
 
-type BlogProps = {
-    title: string;
-    date: string;
-    slug: string;
-    children: React.ReactNode;
-};
+type BlogProps = BlogData;
 
-function Blog({ title, date, slug, children }: BlogProps) {
+function Blog({ title, date, slug, component, tags }: BlogProps) {
     return (
         <article className="flex flex-1 flex-col gap-4">
             <header>
@@ -28,7 +27,18 @@ function Blog({ title, date, slug, children }: BlogProps) {
                     {formatDate(date)}
                 </p>
             </header>
-            <div>{children}</div>
+            <div>{component}</div>
+            {tags.length > 0 ? (
+                <div className="flex flex-row flex-wrap gap-2 pb-4">
+                    {Array.from(new Set(tags)).map((tag) => {
+                        return (
+                            <Link key={tag} href={Routes.RANTS([tag])}>
+                                <Badge variant="secondary">{tag}</Badge>
+                            </Link>
+                        );
+                    })}
+                </div>
+            ) : null}
         </article>
     );
 }

@@ -41,11 +41,7 @@ async function RantPage({ params }: RantPageProps) {
         notFound();
     }
 
-    return (
-        <Blog title={blog.title} date={blog.date} slug={blog.slug}>
-            {blog.component}
-        </Blog>
-    );
+    return <Blog {...blog} />;
 }
 
 export default RantPage;

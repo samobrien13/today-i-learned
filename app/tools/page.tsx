@@ -54,10 +54,8 @@ async function Tools({ searchParams }: { searchParams: SearchParams }) {
                             <Link
                                 key={tag}
                                 href={Routes.TOOLS(Array.from(set))}
-                                className="text-sm text-muted-foreground"
                             >
                                 <Badge
-                                    className="text-sm text-muted-foreground"
                                     variant={
                                         tagsArray.includes(tag)
                                             ? "default"

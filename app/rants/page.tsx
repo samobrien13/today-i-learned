@@ -60,10 +60,8 @@ async function Rants({ searchParams }: { searchParams: SearchParams }) {
                             <Link
                                 key={tag}
                                 href={Routes.RANTS(Array.from(set))}
-                                className="text-sm text-muted-foreground"
                             >
                                 <Badge
-                                    className="text-sm text-muted-foreground"
                                     variant={
                                         tagsArray.includes(tag)
                                             ? "default"
