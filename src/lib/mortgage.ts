@@ -3,8 +3,8 @@ function calculateMortgage(
     interestRate: number,
     payment: number,
     offset: number,
-    acc: number[] = [],
-) {
+    acc: [number, number][] = [],
+): [number, number][] {
     if (
         isNaN(interestRate) ||
         isNaN(principal) ||
@@ -30,7 +30,7 @@ function calculateMortgage(
 
     return calculateMortgage(newAmount, interestRate, payment, offset, [
         ...acc,
-        principalWithOffset,
+        [principalWithOffset, interest],
     ]);
 }
 

@@ -22,8 +22,15 @@ import {
 } from "chart.js";
 import { cssVar } from "@/constants/colours";
 import { MORTGAGE_CALCULATOR } from "@/data/tools";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { PlusIcon, TrashIcon } from "lucide-react";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
 
@@ -49,14 +56,27 @@ function MortgageCalculator() {
         ),
     );
 
+    console.log(paymentSets);
+    console.log(paymentSets[0]);
+    console.log(paymentSets[0][0]);
+
     const datasets = paymentSets.map((paymentSet, index) => ({
-        label: `Interest Rate ${index + 1}`,
-        data: paymentSet,
+        label: `Set ${index + 1}`,
+        data: paymentSet.map(([principal]) => principal),
         borderColor: `hsl(${cssVar(`--chart-${index + 1}`)})`,
         backgroundColor: `hsl(${cssVar(`--chart-${index + 1}`)}`,
         pointRadius: 0,
         fill: false,
         tension: 0.1,
+    }));
+
+    const tableData = paymentSets.map((paymentSet) => ({
+        yearsToZero: Math.floor(paymentSet.length / 12),
+        monthsToZero: paymentSet.length % 12,
+        interestPaid: paymentSet.reduce(
+            (acc, [, interest]) => acc + interest,
+            0,
+        ),
     }));
 
     return (
@@ -241,6 +261,24 @@ function MortgageCalculator() {
                         width={300}
                     />
                 ) : null}
+                <Table className="mb-6">
+                    <TableHeader>
+                        <TableRow>
+                            <TableCell>Years to 0</TableCell>
+                            <TableCell>Interest Paid</TableCell>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {tableData.map((data, index) => (
+                            <TableRow key={index}>
+                                <TableCell>{`${data.yearsToZero} years ${data.monthsToZero} months`}</TableCell>
+                                <TableCell>
+                                    {data.interestPaid.toFixed(0)}
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
             </CardContent>
         </Card>
     );
