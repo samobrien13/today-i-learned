@@ -56,10 +56,6 @@ function MortgageCalculator() {
         ),
     );
 
-    console.log(paymentSets);
-    console.log(paymentSets[0]);
-    console.log(paymentSets[0][0]);
-
     const datasets = paymentSets.map((paymentSet, index) => ({
         label: `Set ${index + 1}`,
         data: paymentSet.map(([principal]) => principal),
