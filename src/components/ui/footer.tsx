@@ -3,7 +3,7 @@ import { Link } from "@/components/ui/link";
 
 function Footer() {
     return (
-        <footer className="mt-16 flex flex-col gap-4">
+        <footer className="mt-12 flex flex-col gap-4">
             <Link
                 className="flex items-center"
                 external
