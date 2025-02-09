@@ -21,7 +21,10 @@ export const metadata: Metadata = {
 
 function Rants() {
     return (
-        <Tab title="Rants">
+        <Tab
+            title={metadata.title as string}
+            subtitle={metadata.description as string}
+        >
             {BLOG_ARTICLES.map((article) => (
                 <Card key={article.slug}>
                     <Link href={`/rants/${article.slug}`}>

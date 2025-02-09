@@ -9,15 +9,19 @@ import {
 } from "@/components/ui/card";
 import { TOOLS } from "@/data/tools";
 import Routes from "@/constants/Routes";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
     title: "Tools",
     description: "Tools I've created",
 };
 
 export default function Home() {
     return (
-        <Tab title="Tools">
+        <Tab
+            title={metadata.title as string}
+            subtitle={metadata.description as string}
+        >
             {TOOLS.map((tool) => (
                 <Card
                     key={tool.title}
