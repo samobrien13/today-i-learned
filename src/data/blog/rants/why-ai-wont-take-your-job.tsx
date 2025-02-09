@@ -4,7 +4,7 @@ import Routes from "@/constants/Routes";
 import { BlogData } from "@/data/blog";
 
 export const WHY_AI_WONT_TAKE_YOUR_JOB: BlogData = {
-    title: "Why AI won't take your job",
+    title: "Why AI (probably) won't take your job",
     description:
         "Why the world requires engineers and how to ensure you remain valuable",
     date: "2025-02-09",
