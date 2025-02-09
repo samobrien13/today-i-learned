@@ -14,10 +14,10 @@ function Navbar() {
                         <Link href={Routes.HOME} className="px-3 py-2">
                             TiL
                         </Link>
-                        <Link href={Routes.RANTS} className="px-3 py-2">
+                        <Link href={Routes.RANTS([])} className="px-3 py-2">
                             rants
                         </Link>
-                        <Link href={Routes.TOOLS} className="px-3 py-2">
+                        <Link href={Routes.TOOLS([])} className="px-3 py-2">
                             tools
                         </Link>
                     </div>

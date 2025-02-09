@@ -10,19 +10,68 @@ import {
 import { TOOLS } from "@/data/tools";
 import Routes from "@/constants/Routes";
 import { Metadata } from "next";
+import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
     title: "Tools",
     description: "Tools I've created",
 };
 
-export default function Home() {
+type SearchParams = Promise<{
+    "tags[]": string | string[] | undefined;
+}>;
+
+async function Tools({ searchParams }: { searchParams: SearchParams }) {
+    const { "tags[]": tags } = await searchParams;
+    const tagsArray = tags ? (Array.isArray(tags) ? tags : [tags]) : [];
+
+    const tagsSet = new Set(tagsArray);
+    const allTags = new Set(TOOLS.flatMap((tool) => tool.tags));
+
+    const filteredTools =
+        tagsArray.length > 0
+            ? TOOLS.filter((tool) => tool.tags.some((tag) => tagsSet.has(tag)))
+            : TOOLS;
+
     return (
         <Tab
             title={metadata.title as string}
             subtitle={metadata.description as string}
         >
-            {TOOLS.map((tool) => (
+            {allTags.size > 0 ? (
+                <div className="flex flex-row flex-wrap gap-2 pb-4">
+                    {Array.from(allTags).map((tag) => {
+                        const isSelected = tagsSet.has(tag);
+                        const set = new Set(tagsSet);
+
+                        if (isSelected) {
+                            set.delete(tag);
+                        } else {
+                            set.add(tag);
+                        }
+
+                        return (
+                            <Link
+                                key={tag}
+                                href={Routes.TOOLS(Array.from(set))}
+                                className="text-sm text-muted-foreground"
+                            >
+                                <Badge
+                                    className="text-sm text-muted-foreground"
+                                    variant={
+                                        tagsArray.includes(tag)
+                                            ? "default"
+                                            : "secondary"
+                                    }
+                                >
+                                    {tag}
+                                </Badge>
+                            </Link>
+                        );
+                    })}
+                </div>
+            ) : null}
+            {filteredTools.map((tool) => (
                 <Card
                     key={tool.title}
                     style={{
@@ -44,3 +93,5 @@ export default function Home() {
         </Tab>
     );
 }
+
+export default Tools;

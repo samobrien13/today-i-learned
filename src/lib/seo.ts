@@ -27,13 +27,13 @@ const getSitemapLinks = (): Array<SiteMapRoute> => {
             priority: 0.8,
         },
         {
-            path: Routes.RANTS,
+            path: Routes.RANTS([]),
             lastModifiedDate: BUILD_DATE,
             changeFrequency: "daily",
             priority: 1,
         },
         {
-            path: Routes.TOOLS,
+            path: Routes.TOOLS([]),
             lastModifiedDate: BUILD_DATE,
             changeFrequency: "monthly",
             priority: 0.8,
