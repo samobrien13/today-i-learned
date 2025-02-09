@@ -42,6 +42,7 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+    productionBrowserSourceMaps: true,
     experimental: {
         reactCompiler: true,
     },
