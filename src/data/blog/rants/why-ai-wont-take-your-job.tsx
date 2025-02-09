@@ -6,7 +6,7 @@ import { BlogData } from "@/data/blog";
 export const WHY_AI_WONT_TAKE_YOUR_JOB: BlogData = {
     title: "Why AI won't take your job",
     description:
-        "Why the world requires engineers and how to ensure you're valuable",
+        "Why the world requires engineers and how to ensure you remain valuable",
     date: "2025-02-09",
     slug: "why-ai-wont-take-your-job",
     tags: ["ai", "engineering"],
@@ -100,6 +100,16 @@ function WhyAiWontTakeYourJob() {
                 catching simple mistakes and I&apos;ve seen some advertised that
                 show the AI picking up simple linting errors, easily
                 accomplished with existing tools.
+            </BlogParagraph>
+            <BlogParagraph>
+                It has been nearly a year since{" "}
+                <Link href="https://devin.ai/" external>
+                    Devin
+                </Link>{" "}
+                was announced, and similar tools that were touted as a
+                replacement for humans, and we&apos;re yet to see any real world
+                impact. Even Devin is now marketed as an &qout;AI teammate&quot;
+                as opposed to an actual replacement (a much better strategy!).
             </BlogParagraph>
             <BlogParagraph>
                 I&apos;ve been pretty impressed with{" "}
