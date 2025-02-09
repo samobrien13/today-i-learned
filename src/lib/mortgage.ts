@@ -1,4 +1,4 @@
-function calculateMortgage(
+export function calculatePaymentSet(
     principal: number,
     interestRate: number,
     payment: number,
@@ -14,24 +14,33 @@ function calculateMortgage(
         return acc;
     }
 
+    if (principal < 0) {
+        return [...acc, [principal, 0]];
+    }
+
     const principalWithOffset = principal - offset;
 
     const interest = (principalWithOffset * interestRate) / 100 / 12;
 
-    if (interest <= 0 || interest > payment) {
+    if (interest > payment) {
         return acc;
     }
 
-    const newAmount = principal - payment + interest;
+    const newAmount = principal - payment + (interest > 0 ? interest : 0);
 
-    if (newAmount - offset < 0) {
-        return acc;
-    }
-
-    return calculateMortgage(newAmount, interestRate, payment, offset, [
+    return calculatePaymentSet(newAmount, interestRate, payment, offset, [
         ...acc,
-        [principalWithOffset, interest],
+        [principal, interest],
     ]);
 }
 
-export default calculateMortgage;
+export function getTableData(paymentSets: [number, number][][]) {
+    return paymentSets.map((paymentSet) => ({
+        yearsToZero: Math.floor(paymentSet.length / 12),
+        monthsToZero: paymentSet.length % 12,
+        interestPaid: paymentSet.reduce(
+            (acc, [, interest]) => acc + interest,
+            0,
+        ),
+    }));
+}

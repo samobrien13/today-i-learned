@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import calculateMortgage from "@/lib/mortgage";
+import { calculatePaymentSet, getTableData } from "@/lib/mortgage";
 import { Line } from "react-chartjs-2";
 import React from "react";
 import {
@@ -19,6 +19,7 @@ import {
     LinearScale,
     PointElement,
     LineElement,
+    Tooltip,
 } from "chart.js";
 import { cssVar } from "@/constants/colours";
 import { MORTGAGE_CALCULATOR } from "@/data/tools";
@@ -32,7 +33,13 @@ import {
     TableRow,
 } from "@/components/ui/table";
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Tooltip,
+);
 
 function MortgageCalculator() {
     const [principal, setPrincipal] = useLocalStorage(
@@ -48,7 +55,7 @@ function MortgageCalculator() {
     ]);
 
     const paymentSets = values.map((value) =>
-        calculateMortgage(
+        calculatePaymentSet(
             principal,
             value.interestRate,
             value.payment,
@@ -56,25 +63,11 @@ function MortgageCalculator() {
         ),
     );
 
-    const datasets = paymentSets.map((paymentSet, index) => ({
-        label: `Set ${index + 1}`,
-        data: paymentSet.map(([principal]) => principal),
-        borderColor: `hsl(${cssVar(`--chart-${index + 1}`)})`,
-        backgroundColor: `hsl(${cssVar(`--chart-${index + 1}`)}`,
-        pointRadius: 0,
-        fill: false,
-        tension: 0.1,
-    }));
+    const maxSetLength = Math.max(
+        ...paymentSets.map((paymentSet) => paymentSet.length),
+    );
 
-    const tableData = paymentSets.map((paymentSet) => ({
-        yearsToZero: Math.floor(paymentSet.length / 12),
-        monthsToZero: paymentSet.length % 12,
-        interestPaid: paymentSet.reduce(
-            (acc, [, interest]) => acc + interest,
-            0,
-        ),
-    }));
-
+    const tableData = getTableData(paymentSets);
     return (
         <Card
             className="mx-auto w-full"
@@ -106,7 +99,11 @@ function MortgageCalculator() {
                             <div className="flex flex-col gap-2">
                                 <Label>Interest Rate</Label>
                                 <Input
-                                    value={value.interestRate}
+                                    value={
+                                        isNaN(value.interestRate)
+                                            ? ""
+                                            : value.interestRate
+                                    }
                                     onChange={(e) => {
                                         setValues(
                                             values.map((v, i) =>
@@ -132,7 +129,11 @@ function MortgageCalculator() {
                             <div className="flex flex-1 flex-col gap-2">
                                 <Label>Monthly Payment</Label>
                                 <Input
-                                    value={value.payment}
+                                    value={
+                                        isNaN(value.payment)
+                                            ? ""
+                                            : value.payment
+                                    }
                                     onChange={(e) => {
                                         setValues(
                                             values.map((v, i) =>
@@ -156,7 +157,9 @@ function MortgageCalculator() {
                             <div className="flex flex-1 flex-col gap-2">
                                 <Label>Offset</Label>
                                 <Input
-                                    value={value.offset}
+                                    value={
+                                        isNaN(value.offset) ? "" : value.offset
+                                    }
                                     onChange={(e) => {
                                         setValues(
                                             values.map((v, i) =>
@@ -233,6 +236,7 @@ function MortgageCalculator() {
                                     ticks: {
                                         color: `hsl(${cssVar("--card-foreground")})`,
                                     },
+                                    min: 0,
                                 },
                                 x: {
                                     grid: {
@@ -240,18 +244,27 @@ function MortgageCalculator() {
                                     },
                                     ticks: {
                                         color: `hsl(${cssVar("--card-foreground")})`,
-                                        maxTicksLimit:
-                                            paymentSets[0].length / 12,
+                                        maxTicksLimit: maxSetLength / 12,
                                         stepSize: 12,
                                     },
                                 },
                             },
                         }}
                         data={{
-                            labels: paymentSets[0].map((_, index) =>
-                                Math.floor(index / 12),
+                            labels: Array.from({ length: maxSetLength }).map(
+                                (_, index) => Math.floor(index / 12),
                             ),
-                            datasets,
+                            datasets: paymentSets.map((paymentSet, index) => ({
+                                label: `Set ${index + 1}`,
+                                data: paymentSet.map(
+                                    ([principal]) => principal,
+                                ),
+                                borderColor: `hsl(${cssVar(`--chart-${index + 1}`)})`,
+                                backgroundColor: `hsl(${cssVar(`--chart-${index + 1}`)}`,
+                                pointRadius: 0,
+                                fill: false,
+                                tension: 0.1,
+                            })),
                         }}
                         height={300}
                         width={300}
