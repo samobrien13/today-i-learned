@@ -115,7 +115,7 @@ function WhyAiWontTakeYourJob() {
             </BlogParagraph>
             <BlogParagraph>
                 If you split the software world into engineering and product, I
-                think we&apos;re going to see the roles converge. AI is be good
+                think we&apos;re going to see the roles converge. AI is good
                 enough for a non-engineer to get started on a project. But they
                 will need to have a solid understanding of how to control an AI
                 to get the outputs they want. This kind of understanding is an
