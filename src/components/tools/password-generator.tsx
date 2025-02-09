@@ -41,7 +41,7 @@ function PasswordGenerator() {
                     (uppercase and lowercase), numbers and a single symbol
                     (chosen from a small group of nice special characters). This
                     is super secure and should satisfy the requirements of most
-                    websites, though you&nbsp;ll still get the odd website that
+                    websites, though you&apos;ll still get the odd website that
                     limits you to 12 characters or doesn&apos;t allow special
                     characters or something else ridiculous.
                 </CardDescription>
