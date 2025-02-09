@@ -14,6 +14,7 @@ export const DOTFILES: BlogData = {
     description: "My dotfiles setup; Neovim, Zsh, and more",
     date: "2025-01-21",
     slug: "dotfiles",
+    tags: ["engineering"],
     component: <Dotfiles />,
 };
 

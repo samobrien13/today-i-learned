@@ -1,13 +1,15 @@
 import { BlogHeading, BlogParagraph } from "@/components/ui/blog";
 import { Link } from "@/components/ui/link";
 import Routes from "@/constants/Routes";
+import { BlogData } from "@/data/blog";
 
-export const WHY_AI_WONT_TAKE_YOUR_JOB = {
+export const WHY_AI_WONT_TAKE_YOUR_JOB: BlogData = {
     title: "Why AI won't take your job",
     description:
         "Why the world requires engineers and how to ensure you're valuable",
     date: "2025-02-09",
     slug: "why-ai-wont-take-your-job",
+    tags: ["ai", "engineering"],
     component: <WhyAiWontTakeYourJob />,
 };
 

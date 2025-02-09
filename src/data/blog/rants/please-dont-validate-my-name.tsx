@@ -7,6 +7,7 @@ export const PLEASE_DONT_VALIDATE_MY_NAME: BlogData = {
     description: "Why you shouldn't validate names (or most things)",
     date: "2025-01-26",
     slug: "please-dont-validate-my-name",
+    tags: ["engineering"],
     component: <PleaseDontValidateMyName />,
 };
 

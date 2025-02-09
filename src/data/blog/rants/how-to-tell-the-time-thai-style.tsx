@@ -8,6 +8,7 @@ export const HOW_TO_TELL_THE_TIME_THAI_STYLE: BlogData = {
     description: "Learn how to tell the time Thai style",
     date: "2025-01-19",
     slug: "how-to-tell-the-time-thai-style",
+    tags: ["langauge"],
     component: <HowToTellTheTimeThaiStyle />,
 };
 

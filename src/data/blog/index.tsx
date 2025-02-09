@@ -13,6 +13,7 @@ export type BlogData = {
     description: string;
     date: string;
     slug: string;
+    tags: string[];
     component: ReactNode;
 } & Metadata;
 

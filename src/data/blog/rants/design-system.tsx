@@ -26,6 +26,7 @@ export const DESIGN_SYSTEM: BlogData = {
     description: "My design system",
     date: "2025-01-22",
     slug: "design-system",
+    tags: ["engineering", "design"],
     component: <DesignSystem />,
 };
 
