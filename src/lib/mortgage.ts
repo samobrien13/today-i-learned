@@ -1,28 +1,36 @@
 function calculateMortgage(
-    interestRate: number,
     principal: number,
+    interestRate: number,
     payment: number,
+    offset: number,
     acc: number[] = [],
 ) {
-    if (isNaN(interestRate) || isNaN(principal) || isNaN(payment)) {
+    if (
+        isNaN(interestRate) ||
+        isNaN(principal) ||
+        isNaN(payment) ||
+        isNaN(offset)
+    ) {
         return acc;
     }
 
-    const interest = (principal * interestRate) / 100 / 12;
+    const principalWithOffset = principal - offset;
 
-    if (interest > payment) {
+    const interest = (principalWithOffset * interestRate) / 100 / 12;
+
+    if (interest <= 0 || interest > payment) {
         return acc;
     }
 
     const newAmount = principal - payment + interest;
 
-    if (newAmount <= 0) {
+    if (newAmount - offset < 0) {
         return acc;
     }
 
-    return calculateMortgage(interestRate, newAmount, payment, [
+    return calculateMortgage(newAmount, interestRate, payment, offset, [
         ...acc,
-        principal,
+        principalWithOffset,
     ]);
 }
 

@@ -36,11 +36,17 @@ function MortgageCalculator() {
         {
             interestRate: 5,
             payment: 5000,
+            offset: 0,
         },
     ]);
 
     const paymentSets = values.map((value) =>
-        calculateMortgage(value.interestRate, principal, value.payment),
+        calculateMortgage(
+            principal,
+            value.interestRate,
+            value.payment,
+            value.offset,
+        ),
     );
 
     const datasets = paymentSets.map((paymentSet, index) => ({
@@ -81,11 +87,11 @@ function MortgageCalculator() {
                 {values.map((value, index) => (
                     <React.Fragment key={index}>
                         <div className="flex flex-row items-end gap-2">
-                            <div className="flex flex-1 flex-col gap-2">
+                            <div className="flex flex-col gap-2">
                                 <Label>Interest Rate</Label>
                                 <Input
                                     value={value.interestRate}
-                                    onChange={(e) =>
+                                    onChange={(e) => {
                                         setValues(
                                             values.map((v, i) =>
                                                 i === index
@@ -99,8 +105,8 @@ function MortgageCalculator() {
                                                       }
                                                     : v,
                                             ),
-                                        )
-                                    }
+                                        );
+                                    }}
                                     type="number"
                                     min={0}
                                     max={100}
@@ -111,7 +117,7 @@ function MortgageCalculator() {
                                 <Label>Monthly Payment</Label>
                                 <Input
                                     value={value.payment}
-                                    onChange={(e) =>
+                                    onChange={(e) => {
                                         setValues(
                                             values.map((v, i) =>
                                                 i === index
@@ -123,12 +129,36 @@ function MortgageCalculator() {
                                                       }
                                                     : v,
                                             ),
-                                        )
-                                    }
+                                        );
+                                    }}
                                     type="number"
                                     min={0}
                                     max={100000}
                                     step={100}
+                                />
+                            </div>
+                            <div className="flex flex-1 flex-col gap-2">
+                                <Label>Offset</Label>
+                                <Input
+                                    value={value.offset}
+                                    onChange={(e) => {
+                                        setValues(
+                                            values.map((v, i) =>
+                                                i === index
+                                                    ? {
+                                                          ...v,
+                                                          offset: parseInt(
+                                                              e.target.value,
+                                                          ),
+                                                      }
+                                                    : v,
+                                            ),
+                                        );
+                                    }}
+                                    type="number"
+                                    min={0}
+                                    max={principal}
+                                    step={1000}
                                 />
                             </div>
                             <Button
@@ -161,6 +191,10 @@ function MortgageCalculator() {
                                         values.length > 0
                                             ? values[values.length - 1].payment
                                             : 5000,
+                                    offset:
+                                        values.length > 0
+                                            ? values[values.length - 1].offset
+                                            : 0,
                                 },
                             ])
                         }
