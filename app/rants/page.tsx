@@ -27,9 +27,7 @@ type SearchParams = Promise<{
 
 async function Rants({ searchParams }: { searchParams: SearchParams }) {
     const { "tags[]": tags } = await searchParams;
-    console.log(tags);
     const tagsArray = tags ? (Array.isArray(tags) ? tags : [tags]) : [];
-    console.log(tagsArray);
 
     const tagsSet = new Set(tagsArray);
     const allTags = new Set(BLOG_ARTICLES.flatMap((article) => article.tags));
