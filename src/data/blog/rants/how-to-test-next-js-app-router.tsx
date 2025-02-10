@@ -16,9 +16,12 @@ function HowToTestNextJsAppRouter() {
     return (
         <>
             <BlogParagraph>
-                Searching for a good solution to test a Next.js app router is a
-                something that I&apos;ve been struggling with for a while. I
-                recently stumbled upon a tidbit hidden in the Next.js docs for{" "}
+                Searching for a good solution to test a{" "}
+                <Link href="https://nextjs.org/docs/app" external>
+                    Next.js app router
+                </Link>{" "}
+                is a something that I&apos;ve been struggling with for a while.
+                I recently stumbled upon a tidbit hidden in the Next.js docs for{" "}
                 <Link
                     href="https://nextjs.org/docs/app/building-your-application/testing/vitest"
                     external
