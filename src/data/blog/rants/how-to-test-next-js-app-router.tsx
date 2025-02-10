@@ -59,7 +59,7 @@ function HowToTestNextJsAppRouter() {
     await expect(() =>
       Page({
         params: {
-          id: 'id',
+            parent: 'not-a-valid-parent',
         },
       }),
     ).rejects.toEqual(new Error('NEXT_NOT_FOUND'));
@@ -69,8 +69,8 @@ function HowToTestNextJsAppRouter() {
     await expect(() =>
       Page({
         params: {
-          parent: 'does-not-exist',
-          id: 'uid',
+          parent: 'parent',
+          id: 'does-not-exist',
         },
       }),
     ).rejects.toEqual(new Error('NEXT_REDIRECT')); // TODO: Where?
