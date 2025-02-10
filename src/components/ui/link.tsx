@@ -13,10 +13,11 @@ function Link({ external, className, ...props }: LinkComponentProps) {
             target={external ? "_blank" : undefined}
             rel={external ? "noopener noreferrer" : undefined}
             className={clsx(
-                "transition-all [word-spacing:-4px] hover:text-muted-foreground [&_span]:font-mono",
+                "transition-all hover:text-muted-foreground [&_span]:font-mono",
                 className,
                 {
-                    "font-mono": typeof props.children === "string",
+                    "font-mono [word-spacing:-4px]":
+                        typeof props.children === "string",
                 },
             )}
         />
