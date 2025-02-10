@@ -21,6 +21,15 @@ const theme = {
     "hljs-variable": {
         color: "hsl(var(--chart-3))",
     },
+    "hljs-attr": {
+        color: "hsl(var(--chart-4))",
+    },
+    "hljs-keyword": {
+        color: "hsl(var(--chart-5))",
+    },
+    "hljs-function": {
+        color: "hsl(var(--muted-foreground))",
+    },
     "hljs-comment": {
         color: "hsl(var(--muted-foreground))",
     },
@@ -53,7 +62,7 @@ function CodeBlock({ language, children }: CodeBlockProps) {
                 customStyle={{
                     padding: "1rem 0.5rem",
                     backgroundColor: "hsl(var(--card))",
-                    color: "hsl(var(--card-foreground))",
+                    color: "hsl(var(--muted-foreground))",
                     overflowX: "auto",
                 }}
                 lineNumberStyle={{
