@@ -20,8 +20,8 @@ function HowToTestNextJsAppRouter() {
                 <Link href="https://nextjs.org/docs/app" external>
                     Next.js app router
                 </Link>{" "}
-                is a something that I&apos;ve been struggling with for a while.
-                I recently stumbled upon a tidbit hidden in the Next.js docs for{" "}
+                is something that I&apos;ve been struggling with for a while. I
+                recently stumbled upon a tidbit hidden in the Next.js docs for{" "}
                 <Link
                     href="https://nextjs.org/docs/app/building-your-application/testing/vitest"
                     external
@@ -35,7 +35,8 @@ function HowToTestNextJsAppRouter() {
                 Rather than waiting around for a proper testing solution, I
                 decided to follow the end-to-end testing path. One thing that
                 makes this extremely powerful is being about to use Vercel for
-                deployments. Also hidden in the Vercel docs is about running{" "}
+                deployments. Also hidden in the Vercel docs is a section about
+                running{" "}
                 <Link href="https://vercel.com/guides/how-can-i-run-end-to-end-tests-after-my-vercel-preview-deployment">
                     end-to-end tests on Vercel Preview Deployments
                 </Link>
