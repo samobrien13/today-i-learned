@@ -52,7 +52,7 @@ export function BlogSubHeading({ children }: { children: React.ReactNode }) {
 }
 
 export function BlogParagraph({ children }: { children: React.ReactNode }) {
-    return <p className="pb-6">{children}</p>;
+    return <p className="pb-6 leading-relaxed">{children}</p>;
 }
 
 export function BlogCode({ children }: { children: React.ReactNode }) {
