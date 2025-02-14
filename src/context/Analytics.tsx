@@ -1,5 +1,6 @@
 "use client";
 
+import { env } from "@/env";
 import { usePathname, useSearchParams } from "next/navigation";
 import Posthog from "posthog-js";
 import { PostHogProvider, usePostHog } from "posthog-js/react";
@@ -42,9 +43,9 @@ export function SuspendedPostHogPageView() {
 
 function AnalyticsProvider({ children }: AnalyticsProviderProps) {
     useEffect(() => {
-        if (process.env.NEXT_PUBLIC_POSTHOG_KEY) {
-            Posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-                api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+        if (env.NEXT_PUBLIC_POSTHOG_KEY) {
+            Posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY, {
+                api_host: env.NEXT_PUBLIC_POSTHOG_HOST,
                 person_profiles: "always",
             });
         }
