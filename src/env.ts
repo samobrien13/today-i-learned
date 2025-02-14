@@ -4,8 +4,8 @@ import { z } from "zod";
 export const env = createEnv({
     server: {},
     client: {
-        NEXT_PUBLIC_POSTHOG_KEY: z.string().startsWith("phc_").optional(),
-        NEXT_PUBLIC_POSTHOG_HOST: z.string().url().optional(),
+        NEXT_PUBLIC_POSTHOG_KEY: z.string().startsWith("phc_"),
+        NEXT_PUBLIC_POSTHOG_HOST: z.string().url(),
     },
     // If you're using Next.js < 13.4.4, you'll need to specify the runtimeEnv manually
     runtimeEnv: {
