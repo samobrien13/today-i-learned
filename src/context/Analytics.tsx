@@ -3,7 +3,7 @@
 import { usePathname, useSearchParams } from "next/navigation";
 import Posthog from "posthog-js";
 import { PostHogProvider, usePostHog } from "posthog-js/react";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 
 type AnalyticsProviderProps = {
     children: React.ReactNode;
@@ -29,6 +29,17 @@ function PageView() {
     return null;
 }
 
+// Wrap this in Suspense to avoid the useSearchParams usage above
+// from de-opting the whole app into client-side rendering
+// See: https://nextjs.org/docs/messages/deopted-into-client-rendering
+export function SuspendedPostHogPageView() {
+    return (
+        <Suspense fallback={null}>
+            <PageView />
+        </Suspense>
+    );
+}
+
 function AnalyticsProvider({ children }: AnalyticsProviderProps) {
     useEffect(() => {
         if (process.env.NEXT_PUBLIC_POSTHOG_KEY) {
@@ -41,7 +52,7 @@ function AnalyticsProvider({ children }: AnalyticsProviderProps) {
 
     return (
         <PostHogProvider client={Posthog}>
-            <PageView />
+            <SuspendedPostHogPageView />
             {children}
         </PostHogProvider>
     );
