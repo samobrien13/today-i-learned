@@ -32,7 +32,11 @@ async function networkFirst(request) {
 
 const fetchEvent = () => {
     self.addEventListener("fetch", (e) => {
-        e.respondWith(networkFirst(e.request));
+        if (e.request.method === "GET") {
+            e.respondWith(networkFirst(e.request));
+        } else {
+            e.respondWith(fetch(e.request));
+        }
     });
 };
 
