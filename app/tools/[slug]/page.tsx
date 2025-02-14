@@ -6,7 +6,7 @@ type ToolPageProps = {
     params: Promise<{ slug: string }>;
 };
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
     return TOOLS.map((t) => ({
         slug: t.slug,
     }));

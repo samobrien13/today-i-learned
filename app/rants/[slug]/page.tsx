@@ -7,7 +7,7 @@ type RantPageProps = {
     params: Promise<{ slug: string }>;
 };
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
     return BLOG_ARTICLES.map((post) => ({
         slug: post.slug,
     }));
