@@ -3,7 +3,7 @@ import "@/env";
 
 const CONTENT_SECURITY_POLICY = `
     default-src 'self';
-    script-src 'self' 'unsafe-eval' 'unsafe-inline';
+    script-src 'self' 'unsafe-eval' 'unsafe-inline' https://us-assets.i.posthog.com;
     style-src 'self' 'unsafe-inline';
     img-src * blob: data:;
     media-src 'none';
