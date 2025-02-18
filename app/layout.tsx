@@ -42,6 +42,7 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    console.log(env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID);
     return (
         <html lang="en" suppressHydrationWarning>
             {/* suppressHydrationWarning required by next-themes */}
