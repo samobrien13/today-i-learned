@@ -79,8 +79,7 @@ function HowToTestNextJsAppRouter() {
       }),
     ).rejects.toEqual(new Error('NEXT_REDIRECT')); // TODO: Where?
   });
-});
-            `}
+});`}
             </CodeBlock>
             <BlogParagraph>
                 Unfortunately due to the way that Next.js throws the errors
