@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import "@/env";
 
 const CONTENT_SECURITY_POLICY = `
     default-src 'self';
