@@ -36,8 +36,8 @@ function HowMuchTimeTheRbaRateCutWillSaveYou() {
             </BlogParagraph>
             <BlogParagraph>
                 Today&apos;s rate cut is 0.25%. With most retail interest rates
-                around the 6% mark, this will be about a saving of about $80 a
-                month, on a $500,000 mortgage.
+                around the 6% mark, this will be a saving of about $80 a month,
+                on a $500,000 mortgage.
             </BlogParagraph>
             <BlogParagraph>
                 However, if we maintain the same repayments we can look at how
@@ -57,8 +57,8 @@ function HowMuchTimeTheRbaRateCutWillSaveYou() {
                 the end a whole 4 months faster!
             </BlogParagraph>
             <BlogParagraph>
-                Not quite as exciting as I&apos;d hope for, but maybe with a few
-                more cuts we might be able to shave off a few years.
+                Not quite as exciting as I&apos;d hoped for! But maybe with a
+                few more cuts we might be able to shave off a few years.
             </BlogParagraph>
             <BlogParagraph>
                 Try out my mortgage calculator for yourself below:
