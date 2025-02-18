@@ -5,6 +5,7 @@ import { DOTFILES } from "./rants/dotfiles";
 import { HOW_TO_TELL_THE_TIME_THAI_STYLE } from "./rants/how-to-tell-the-time-thai-style";
 import { WHY_AI_WONT_TAKE_YOUR_JOB } from "./rants/why-ai-wont-take-your-job";
 import { HOW_TO_TEST_NEXT_JS_APP_ROUTER } from "./rants/how-to-test-next-js-app-router";
+import { HOW_MUCH_TIME_THE_RBA_RATE_CUT_WILL_SAVE_YOU } from "./rants/how-much-time-the-rba-rate-cut-will-save-you";
 
 import { Metadata } from "next";
 import { ReactNode } from "react";
@@ -19,6 +20,7 @@ export type BlogData = {
 } & Metadata;
 
 export const BLOG_ARTICLES: BlogData[] = [
+    HOW_MUCH_TIME_THE_RBA_RATE_CUT_WILL_SAVE_YOU,
     HOW_TO_TEST_NEXT_JS_APP_ROUTER,
     WHY_AI_WONT_TAKE_YOUR_JOB,
     PLEASE_DONT_VALIDATE_MY_NAME,
