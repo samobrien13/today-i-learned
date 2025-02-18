@@ -4,14 +4,10 @@ import { z } from "zod";
 export const env = createEnv({
     server: {},
     client: {
-        NEXT_PUBLIC_POSTHOG_KEY: z.string().startsWith("phc_"),
-        NEXT_PUBLIC_POSTHOG_HOST: z.string().url(),
         NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: z.string().startsWith("G-"),
     },
     // If you're using Next.js < 13.4.4, you'll need to specify the runtimeEnv manually
     runtimeEnv: {
-        NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
-        NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
         NEXT_PUBLIC_GOOGLE_ANALYTICS_ID:
             process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID,
     },

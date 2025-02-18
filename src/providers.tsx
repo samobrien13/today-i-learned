@@ -4,7 +4,6 @@ import { ViewTransitions } from "next-view-transitions";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/toaster";
 import { useEffect } from "react";
-import AnalyticsProvider from "@/context/Analytics";
 
 type ProvidersProps = {
     children: React.ReactNode;
@@ -20,10 +19,8 @@ function Providers({ children }: ProvidersProps) {
     return (
         <ViewTransitions>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-                <AnalyticsProvider>
-                    <Toaster />
-                    {children}
-                </AnalyticsProvider>
+                <Toaster />
+                {children}
             </ThemeProvider>
         </ViewTransitions>
     );
