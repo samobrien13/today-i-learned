@@ -29,19 +29,17 @@ function Blog({ title, description, date, slug, component, tags }: BlogProps) {
                 </p>
             </header>
             <div>{component}</div>
-            <div className="flex flex-row items-center gap-4">
+            <div className="flex flex-row items-center gap-2">
                 <Share title={title} text={description} />
-                {tags.length > 0 ? (
-                    <div className="flex flex-row flex-wrap gap-2">
-                        {Array.from(new Set(tags)).map((tag) => {
-                            return (
-                                <Link key={tag} href={Routes.RANTS([tag])}>
-                                    <Badge variant="secondary">{tag}</Badge>
-                                </Link>
-                            );
-                        })}
-                    </div>
-                ) : null}
+                {tags.length > 0
+                    ? Array.from(new Set(tags)).map((tag) => {
+                          return (
+                              <Link key={tag} href={Routes.RANTS([tag])}>
+                                  <Badge variant="secondary">{tag}</Badge>
+                              </Link>
+                          );
+                      })
+                    : null}
             </div>
         </article>
     );
