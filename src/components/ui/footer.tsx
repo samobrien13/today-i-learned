@@ -15,7 +15,7 @@ function Footer() {
                 <Link
                     className="flex items-center"
                     external
-                    href="https://www.linkedin.com/in/sam-o-brien-8a48a0a1/"
+                    href="https://www.linkedin.com/in/samobrien13"
                 >
                     <LinkedIn />
                 </Link>
