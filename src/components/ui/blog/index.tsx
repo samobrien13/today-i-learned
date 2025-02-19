@@ -3,12 +3,13 @@ import { Link } from "../link";
 import { Badge } from "../badge";
 import { BlogData } from "@/data/blog";
 import Routes from "@/constants/Routes";
+import Share from "../share";
 
 type BlogProps = BlogData;
 
 function Blog({ title, date, slug, component, tags }: BlogProps) {
     return (
-        <article className="flex flex-1 flex-col gap-4">
+        <article className="flex flex-1 flex-col gap-8">
             <header>
                 <h1
                     className="text-2xl font-semibold text-primary"
@@ -28,17 +29,20 @@ function Blog({ title, date, slug, component, tags }: BlogProps) {
                 </p>
             </header>
             <div>{component}</div>
-            {tags.length > 0 ? (
-                <div className="flex flex-row flex-wrap gap-2 pb-4">
-                    {Array.from(new Set(tags)).map((tag) => {
-                        return (
-                            <Link key={tag} href={Routes.RANTS([tag])}>
-                                <Badge variant="secondary">{tag}</Badge>
-                            </Link>
-                        );
-                    })}
-                </div>
-            ) : null}
+            <div className="flex flex-row items-center gap-4">
+                <Share />
+                {tags.length > 0 ? (
+                    <div className="flex flex-row flex-wrap gap-2">
+                        {Array.from(new Set(tags)).map((tag) => {
+                            return (
+                                <Link key={tag} href={Routes.RANTS([tag])}>
+                                    <Badge variant="secondary">{tag}</Badge>
+                                </Link>
+                            );
+                        })}
+                    </div>
+                ) : null}
+            </div>
         </article>
     );
 }
