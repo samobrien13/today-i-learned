@@ -1,5 +1,5 @@
-import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/components/ui/link";
+import { Github, LinkedIn } from "@/components/ui/icons";
 
 function Footer() {
     return (
@@ -10,16 +10,14 @@ function Footer() {
                     external
                     href="https://github.com/samobrien13"
                 >
-                    <ArrowUpRight strokeWidth={1} />
-                    <span className="ml-2 h-7">github</span>
+                    <Github />
                 </Link>
                 <Link
                     className="flex items-center"
                     external
                     href="https://www.linkedin.com/in/sam-o-brien-8a48a0a1/"
                 >
-                    <ArrowUpRight strokeWidth={1} />
-                    <span className="ml-2 h-7">linkedin</span>
+                    <LinkedIn />
                 </Link>
             </div>
             <p>© {new Date().getFullYear()} MIT Licensed</p>
