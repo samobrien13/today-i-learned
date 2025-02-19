@@ -8,10 +8,14 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 
 type CodeBlockProps = {
     language: string;
+    filename: string;
     children: string;
 };
 
 const theme = {
+    "hljs-title": {
+        color: "hsl(var(--chart-1))",
+    },
     "hljs-built_in": {
         color: "hsl(var(--chart-1))",
     },
@@ -27,6 +31,12 @@ const theme = {
     "hljs-keyword": {
         color: "hsl(var(--chart-5))",
     },
+    "hljs-number": {
+        color: "hsl(var(--muted-foreground))",
+    },
+    "hljs-literal": {
+        color: "hsl(var(--muted-foreground))",
+    },
     "hljs-function": {
         color: "hsl(var(--muted-foreground))",
     },
@@ -35,14 +45,15 @@ const theme = {
     },
 } as const;
 
-function CodeBlock({ language, children }: CodeBlockProps) {
+function CodeBlock({ language, filename, children }: CodeBlockProps) {
     const { toast } = useToast();
 
     return (
         <Card className="divide-y-border mb-6 divide-y">
             <div className="flex items-center px-4 py-2">
                 <CardDescription className="flex-1 font-mono">
-                    {language}
+                    {language}{" "}
+                    <span className="text-foreground">{filename}</span>
                 </CardDescription>
                 <Button
                     variant="outline"
