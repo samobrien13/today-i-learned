@@ -6,7 +6,7 @@ import { BlogData } from "@/data/blog";
 export const HOW_TO_IMPLEMENT_DEEP_LINKS_WITH_EXPO_ROUTER: BlogData = {
     title: "How to implement deep links with Expo Router",
     description:
-        "Learn bypass the default Expo Router link handling and use branch deep links",
+        "Learn how to bypass the default Expo Router link handling and use branch deep links",
     date: "2025-02-19",
     slug: "how-to-implement-deep-links-with-expo-router",
     tags: ["engineering", "expo"],
@@ -31,7 +31,7 @@ function HowToImplementDeepLinksWithExpoRouter() {
                     external
                 >
                     Expo Router
-                </Link>
+                </Link>{" "}
                 as an alternative to{" "}
                 <Link href="https://reactnavigation.org/" external>
                     React Navigation
