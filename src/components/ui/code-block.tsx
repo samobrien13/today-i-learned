@@ -8,7 +8,7 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 
 type CodeBlockProps = {
     language: string;
-    filename: string;
+    filename?: string;
     children: string;
 };
 
@@ -43,6 +43,9 @@ const theme = {
     "hljs-comment": {
         color: "hsl(var(--muted-foreground))",
     },
+    "hljs-params": {
+        color: "hsl(var(--foreground))",
+    },
 } as const;
 
 function CodeBlock({ language, filename, children }: CodeBlockProps) {
@@ -51,9 +54,11 @@ function CodeBlock({ language, filename, children }: CodeBlockProps) {
     return (
         <Card className="divide-y-border mb-6 divide-y">
             <div className="flex items-center px-4 py-2">
-                <CardDescription className="flex-1 font-mono">
-                    {language}{" "}
-                    <span className="text-foreground">{filename}</span>
+                <CardDescription className="flex-1 space-x-4 font-mono">
+                    <span>{language}</span>
+                    {filename ? (
+                        <span className="text-foreground">{filename}</span>
+                    ) : null}
                 </CardDescription>
                 <Button
                     variant="outline"
