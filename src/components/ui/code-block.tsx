@@ -77,6 +77,7 @@ function CodeBlock({ language, filename, children }: CodeBlockProps) {
             <SyntaxHighlighter
                 customStyle={{
                     padding: "1rem 0.5rem",
+                    fontSize: "0.875rem",
                     backgroundColor: "hsl(var(--card))",
                     color: "hsl(var(--muted-foreground))",
                     overflowX: "auto",

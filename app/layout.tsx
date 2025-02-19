@@ -61,7 +61,7 @@ export default function RootLayout({
                 </Script>
             </head>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased md:mx-auto md:max-w-xl`}
+                className={`${geistSans.variable} ${geistMono.variable} antialiased md:mx-auto md:max-w-[42rem]`}
             >
                 <Providers>
                     <main className="flex min-h-screen min-w-0 flex-auto flex-col p-4 md:px-0">
