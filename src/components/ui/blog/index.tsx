@@ -7,7 +7,7 @@ import Share from "../share";
 
 type BlogProps = BlogData;
 
-function Blog({ title, date, slug, component, tags }: BlogProps) {
+function Blog({ title, description, date, slug, component, tags }: BlogProps) {
     return (
         <article className="flex flex-1 flex-col gap-8">
             <header>
@@ -30,7 +30,7 @@ function Blog({ title, date, slug, component, tags }: BlogProps) {
             </header>
             <div>{component}</div>
             <div className="flex flex-row items-center gap-4">
-                <Share />
+                <Share title={title} text={description} />
                 {tags.length > 0 ? (
                     <div className="flex flex-row flex-wrap gap-2">
                         {Array.from(new Set(tags)).map((tag) => {
