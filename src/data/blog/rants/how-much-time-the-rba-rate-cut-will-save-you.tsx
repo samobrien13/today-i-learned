@@ -1,6 +1,7 @@
 import { Line } from "@/components/line";
 import { MortgageCalculator } from "@/components/tools/mortgage-calculator";
 import { BlogParagraph } from "@/components/ui/blog";
+import { Card } from "@/components/ui/card";
 import { BlogData } from "@/data/blog";
 import { calculatePaymentSet } from "@/lib/mortgage";
 
@@ -48,9 +49,14 @@ function HowMuchTimeTheRbaRateCutWillSaveYou() {
                 repayments at a 6% interest rate and what would be the new 5.75%
                 interest rate.
             </BlogParagraph>
-            {paymentSets.length > 0 ? (
-                <Line paymentSets={paymentSets} maxSetLength={maxSetLength} />
-            ) : null}
+            <Card className="mb-6 p-6">
+                {paymentSets.length > 0 ? (
+                    <Line
+                        paymentSets={paymentSets}
+                        maxSetLength={maxSetLength}
+                    />
+                ) : null}
+            </Card>
             <BlogParagraph>
                 At the 6% interest rate, you&apos;ll pay off the mortgage in 16
                 years and 6 months. At the new interest rate you&apos;ll reach
