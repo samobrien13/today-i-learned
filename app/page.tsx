@@ -9,6 +9,11 @@ export default function Home() {
                 programming, web development, and other topics that interest me.
             </p>
             <p>
+                I have been working professionally as a software engineer for
+                over 10 years, and worked in a variety of roles in Australia and
+                around the world.
+            </p>
+            <p>
                 I spend most of my time working with{" "}
                 <Link href="https://nextjs.org/">Next.js</Link> and{" "}
                 <Link href="https://expo.dev/">Expo</Link>, but I often venture
