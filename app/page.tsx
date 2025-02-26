@@ -11,26 +11,23 @@ export default function Home() {
             <p>A collection of my creations</p>
             <div className="flex flex-row items-center justify-center gap-4">
                 <Button asChild variant="secondary">
-                    <Link href={Routes.RANTS([])}>
-                        {/* this is to override the default link mono font, need a better way to have a button link */}
-                        <div
-                            style={{
-                                viewTransitionName: "tab-rants",
-                            }}
-                        >
-                            Rants
-                        </div>
+                    <Link
+                        href={Routes.RANTS([])}
+                        style={{
+                            viewTransitionName: "tab-rants",
+                        }}
+                    >
+                        Rants
                     </Link>
                 </Button>
                 <Button asChild variant="secondary">
-                    <Link href={Routes.TOOLS([])}>
-                        <div
-                            style={{
-                                viewTransitionName: "tab-tools",
-                            }}
-                        >
-                            Tools
-                        </div>
+                    <Link
+                        href={Routes.TOOLS([])}
+                        style={{
+                            viewTransitionName: "tab-tools",
+                        }}
+                    >
+                        Tools
                     </Link>
                 </Button>
             </div>
