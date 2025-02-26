@@ -14,6 +14,7 @@ import {
 import { convertToThaiTime, parseTime } from "@/lib/time";
 import { ChatGPT, GoogleTranslate } from "@/components/ui/icons";
 import { THAI_TIME_CONVERTER } from "@/data/tools";
+import { Link } from "../ui/link";
 
 function ThaiTimeConverter() {
     const [time, setTime] = useState("");
@@ -65,20 +66,20 @@ function ThaiTimeConverter() {
                     )}
                     <div className="flex flex-col gap-2">
                         <Button asChild variant="secondary">
-                            <a
+                            <Link
                                 href={`https://translate.google.com.au/?sl=auto&tl=en&text=${thaiTime}&op=translate`}
-                                target="_blank"
+                                external
                             >
                                 <GoogleTranslate />
-                            </a>
+                            </Link>
                         </Button>
                         <Button asChild variant="secondary">
-                            <a
+                            <Link
                                 href={`https://chatgpt.com?q=Explain%20${thaiTime}%20in%20English%20based%20on%20the%20Thai%20way%20of%20telling%20time`}
-                                target="_blank"
+                                external
                             >
                                 <ChatGPT />
-                            </a>
+                            </Link>
                         </Button>
                     </div>
                 </div>

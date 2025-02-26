@@ -50,8 +50,10 @@ export default {
                 "4": "hsl(var(--chart-4))",
                 "5": "hsl(var(--chart-5))",
             },
+            transparent: "transparent",
         },
         extend: {
+            backgroundImage: {},
             borderRadius: {
                 lg: "var(--radius)",
                 md: "calc(var(--radius) - 2px)",

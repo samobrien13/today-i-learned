@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     openGraph: {
         images: ["/icon_x512.png"],
     },
-    description: "Collection of rants and tools about things I've learned",
+    description: "Collection of rants and tools I've created over the years.",
     keywords: ["programming", "web development", "tools", "blog"],
     alternates: {
         canonical: "https://todayilearned.au",
