@@ -44,6 +44,7 @@ async function Rants({ searchParams }: { searchParams: SearchParams }) {
             title={metadata.title as string}
             subtitle={metadata.description as string}
         >
+            <div className="bg-linear-to-r flex h-24 w-24 items-center justify-center rounded-full from-primary to-primary-foreground" />
             {allTags.size > 0 ? (
                 <div className="flex flex-row flex-wrap gap-2 pb-4">
                     {Array.from(allTags).map((tag) => {
