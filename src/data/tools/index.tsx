@@ -3,9 +3,19 @@ import { MortgageCalculator } from "@/components/tools/mortgage-calculator";
 import { RecipeGenerator } from "@/components/tools/recipe-generator";
 import { PasswordGenerator } from "@/components/tools/password-generator";
 import { ColourConverter } from "@/components/tools/colour-converter";
+import { RubberDuck } from "@/components/tools/rubber-duck";
 
 import { Metadata } from "next";
 import { ReactNode } from "react";
+
+export const RUBBER_DUCK: ToolData = {
+    title: "Rubber Duck",
+    description:
+        "No matter what you ask, the rubber duck knows exactly what to suggest!",
+    slug: "rubber-duck",
+    tags: ["engineering"],
+    component: <RubberDuck />,
+};
 
 export const COLOUR_CONVERTER: ToolData = {
     title: "Colour Converter",
@@ -56,6 +66,7 @@ export type ToolData = {
 } & Metadata;
 
 export const TOOLS: ToolData[] = [
+    RUBBER_DUCK,
     COLOUR_CONVERTER,
     THAI_TIME_CONVERTER,
     MORTGAGE_CALCULATOR,
