@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { HexColorPicker } from "react-colorful";
 import {
     Card,
     CardContent,
@@ -65,7 +66,23 @@ function ColourConverter() {
                 </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col gap-8">
-                {/* TODO: Add colour picker */}
+                <div className="flex flex-row gap-8">
+                    <HexColorPicker
+                        className="flex-1"
+                        color={hex}
+                        onChange={(value) => {
+                            setHEX(value);
+                            setRGB(hexToRGB(value));
+                            setHSL(hexToHSL(value));
+                        }}
+                    />
+                    <div
+                        className="flex-1 rounded-lg"
+                        style={{
+                            backgroundColor: hex,
+                        }}
+                    />
+                </div>
                 <div className="flex flex-col gap-3 md:flex-row">
                     <div className="flex flex-1 flex-col gap-2">
                         <Label htmlFor="hsl-h">Hue</Label>
@@ -73,11 +90,13 @@ function ColourConverter() {
                             id="hsl-h"
                             type="number"
                             step={1}
+                            min={0}
+                            max={360}
                             value={hsl.h}
                             onChange={(e) => {
                                 const newHSL = {
                                     ...hsl,
-                                    h: parseInt(e.target.value),
+                                    h: parseFloat(e.target.value),
                                 };
                                 setHSL(newHSL);
 
@@ -100,10 +119,13 @@ function ColourConverter() {
                             id="hsl-s"
                             type="number"
                             value={hsl.s}
+                            step={1}
+                            min={0}
+                            max={100}
                             onChange={(e) => {
                                 const newHSL = {
                                     ...hsl,
-                                    s: parseInt(e.target.value),
+                                    s: parseFloat(e.target.value),
                                 };
                                 setHSL(newHSL);
 
@@ -128,10 +150,13 @@ function ColourConverter() {
                             id="hsl-l"
                             type="number"
                             value={hsl.l}
+                            step={1}
+                            min={0}
+                            max={100}
                             onChange={(e) => {
                                 const newHSL = {
                                     ...hsl,
-                                    l: parseInt(e.target.value),
+                                    l: parseFloat(e.target.value),
                                 };
                                 setHSL(newHSL);
 
@@ -158,6 +183,9 @@ function ColourConverter() {
                             id="rgb-r"
                             type="number"
                             value={rgb.r}
+                            step={1}
+                            min={0}
+                            max={255}
                             onChange={(e) => {
                                 const newRGB = {
                                     ...rgb,
@@ -184,6 +212,9 @@ function ColourConverter() {
                             id="rgb-g"
                             type="number"
                             value={rgb.g}
+                            step={1}
+                            min={0}
+                            max={255}
                             onChange={(e) => {
                                 const newRGB = {
                                     ...rgb,
@@ -210,6 +241,9 @@ function ColourConverter() {
                             id="rgb-b"
                             type="number"
                             value={rgb.b}
+                            step={1}
+                            min={0}
+                            max={255}
                             onChange={(e) => {
                                 const newRGB = {
                                     ...rgb,
