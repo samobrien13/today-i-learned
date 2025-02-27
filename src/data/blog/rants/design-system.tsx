@@ -20,6 +20,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Colours } from "@/components/colours";
+import { ColourConverter } from "@/components/tools/colour-converter";
 
 export const DESIGN_SYSTEM: BlogData = {
     title: "Design System",
@@ -76,8 +77,12 @@ function DesignSystem() {
             <BlogParagraph>
                 Hue is a colour&apos;s position on the colour wheel, saturation
                 is the intensity of the colour, and lightness is how bright the
-                colour is relative to black.
+                colour is relative to black. Use my colour converter tool to see
+                how this works.
             </BlogParagraph>
+            <div className="pb-4">
+                <ColourConverter />
+            </div>
             <BlogSubHeading>Default</BlogSubHeading>
             <BlogParagraph>
                 Default background is used for the background of the page.

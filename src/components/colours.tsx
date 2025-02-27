@@ -14,16 +14,11 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Copy } from "lucide-react";
 import { keys } from "@/constants/colours";
+import { HSL } from "@/lib/colours";
 
 type Colour = {
     name: string;
 } & HSL;
-
-type HSL = {
-    h: number;
-    s: number;
-    l: number;
-};
 
 function Colours() {
     const { theme } = useTheme();
@@ -37,6 +32,7 @@ function Colours() {
         setCustomColours(() => {
             const newPalette: Map<string, Colour> = new Map();
             keys.forEach((key) => {
+                if (key === "transparent") return;
                 const value = window
                     .getComputedStyle(document.documentElement)
                     .getPropertyValue(`--${key}`);
