@@ -92,7 +92,7 @@ function ColourConverter() {
                             step={1}
                             min={0}
                             max={360}
-                            value={hsl.h}
+                            value={isNaN(hsl.h) ? "" : hsl.h}
                             onChange={(e) => {
                                 const newHSL = {
                                     ...hsl,
@@ -118,7 +118,7 @@ function ColourConverter() {
                         <Input
                             id="hsl-s"
                             type="number"
-                            value={hsl.s}
+                            value={isNaN(hsl.s) ? "" : hsl.s}
                             step={1}
                             min={0}
                             max={100}
@@ -149,7 +149,7 @@ function ColourConverter() {
                         <Input
                             id="hsl-l"
                             type="number"
-                            value={hsl.l}
+                            value={isNaN(hsl.l) ? "" : hsl.l}
                             step={1}
                             min={0}
                             max={100}
@@ -182,7 +182,7 @@ function ColourConverter() {
                         <Input
                             id="rgb-r"
                             type="number"
-                            value={rgb.r}
+                            value={isNaN(rgb.r) ? "" : rgb.r}
                             step={1}
                             min={0}
                             max={255}
@@ -211,7 +211,7 @@ function ColourConverter() {
                         <Input
                             id="rgb-g"
                             type="number"
-                            value={rgb.g}
+                            value={isNaN(rgb.g) ? "" : rgb.g}
                             step={1}
                             min={0}
                             max={255}
@@ -240,7 +240,7 @@ function ColourConverter() {
                         <Input
                             id="rgb-b"
                             type="number"
-                            value={rgb.b}
+                            value={isNaN(rgb.b) ? "" : rgb.b}
                             step={1}
                             min={0}
                             max={255}
