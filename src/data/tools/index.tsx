@@ -9,7 +9,7 @@ import { ReactNode } from "react";
 
 export const COLOUR_CONVERTER: ToolData = {
     title: "Colour Converter",
-    description: "Convert a colour between HEX, RGB, and HSL formats.",
+    description: "Convert a colour between HSL, RGB and HEX formats",
     slug: "colour-converter",
     tags: ["design"],
     component: <ColourConverter />,

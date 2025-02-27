@@ -41,6 +41,16 @@ function ColourConverter() {
 
     const [hexError, setHexError] = useState(false);
 
+    const clearErrors = () => {
+        setHueError(false);
+        setSaturationError(false);
+        setLightnessError(false);
+        setRedError(false);
+        setGreenError(false);
+        setBlueError(false);
+        setHexError(false);
+    };
+
     return (
         <Card
             className="mx-auto w-full"
@@ -54,10 +64,10 @@ function ColourConverter() {
                     {COLOUR_CONVERTER.description}
                 </CardDescription>
             </CardHeader>
-            <CardContent className="flex flex-col gap-4">
+            <CardContent className="flex flex-col gap-8">
                 {/* TODO: Add colour picker */}
-                <div className="flex flex-row gap-4">
-                    <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-3 md:flex-row">
+                    <div className="flex flex-1 flex-col gap-2">
                         <Label htmlFor="hsl-h">Hue</Label>
                         <Input
                             id="hsl-h"
@@ -74,17 +84,17 @@ function ColourConverter() {
                                 if (validateHSL(newHSL)) {
                                     setRGB(hslToRGB(newHSL));
                                     setHEX(hslToHex(newHSL));
-                                    setHueError(false);
+                                    clearErrors();
                                 } else {
                                     setHueError(true);
                                 }
                             }}
                         />
-                        <div className="text-sm text-destructive">
-                            {hueError ? "Hue must be between 0 and 360" : null}
+                        <div className="h-5 text-sm text-destructive">
+                            {hueError ? "Must be between 0 and 360" : null}
                         </div>
                     </div>
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-1 flex-col gap-2">
                         <Label>Saturation</Label>
                         <Input
                             id="hsl-s"
@@ -100,19 +110,19 @@ function ColourConverter() {
                                 if (validateHSL(newHSL)) {
                                     setRGB(hslToRGB(newHSL));
                                     setHEX(hslToHex(newHSL));
-                                    setSaturationError(false);
+                                    clearErrors();
                                 } else {
                                     setSaturationError(true);
                                 }
                             }}
                         />
-                        <div className="text-sm text-destructive">
+                        <div className="h-5 text-sm text-destructive">
                             {saturationError
-                                ? "Saturation must be between 0 and 100"
+                                ? "Must be between 0 and 100"
                                 : null}
                         </div>
                     </div>
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-1 flex-col gap-2">
                         <Label>Lightness</Label>
                         <Input
                             id="hsl-l"
@@ -128,21 +138,21 @@ function ColourConverter() {
                                 if (validateHSL(newHSL)) {
                                     setRGB(hslToRGB(newHSL));
                                     setHEX(hslToHex(newHSL));
-                                    setLightnessError(false);
+                                    clearErrors();
                                 } else {
                                     setLightnessError(true);
                                 }
                             }}
                         />
-                        <div className="text-sm text-destructive">
+                        <div className="h-5 text-sm text-destructive">
                             {lightnessError
-                                ? "Lightness must be between 0 and 100"
+                                ? "Must be between 0 and 100"
                                 : null}
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-row gap-4">
-                    <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-3 md:flex-row">
+                    <div className="flex flex-1 flex-col gap-2">
                         <Label htmlFor="rgb-r">Red</Label>
                         <Input
                             id="rgb-r"
@@ -158,17 +168,17 @@ function ColourConverter() {
                                 if (validateRGB(newRGB)) {
                                     setHSL(rgbToHSL(newRGB));
                                     setHEX(rgbToHex(newRGB));
-                                    setRedError(false);
+                                    clearErrors();
                                 } else {
                                     setRedError(true);
                                 }
                             }}
                         />
-                        <div className="text-sm text-destructive">
-                            {redError ? "Red must be between 0 and 255" : null}
+                        <div className="h-5 text-sm text-destructive">
+                            {redError ? "Must be between 0 and 255" : null}
                         </div>
                     </div>
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-1 flex-col gap-2">
                         <Label>Green</Label>
                         <Input
                             id="rgb-g"
@@ -184,19 +194,17 @@ function ColourConverter() {
                                 if (validateRGB(newRGB)) {
                                     setHSL(rgbToHSL(newRGB));
                                     setHEX(rgbToHex(newRGB));
-                                    setGreenError(false);
+                                    clearErrors();
                                 } else {
                                     setGreenError(true);
                                 }
                             }}
                         />
-                        <div className="text-sm text-destructive">
-                            {greenError
-                                ? "Green must be between 0 and 255"
-                                : null}
+                        <div className="h-5 text-sm text-destructive">
+                            {greenError ? "Must be between 0 and 255" : null}
                         </div>
                     </div>
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-1 flex-col gap-2">
                         <Label>Blue</Label>
                         <Input
                             id="rgb-b"
@@ -212,16 +220,14 @@ function ColourConverter() {
                                 if (validateRGB(newRGB)) {
                                     setHSL(rgbToHSL(newRGB));
                                     setHEX(rgbToHex(newRGB));
-                                    setBlueError(false);
+                                    clearErrors();
                                 } else {
                                     setBlueError(true);
                                 }
                             }}
                         />
-                        <div className="text-sm text-destructive">
-                            {blueError
-                                ? "Blue must be between 0 and 255"
-                                : null}
+                        <div className="h-5 text-sm text-destructive">
+                            {blueError ? "Must be between 0 and 255" : null}
                         </div>
                     </div>
                 </div>
@@ -238,13 +244,13 @@ function ColourConverter() {
                             if (validateHEX(newHex)) {
                                 setRGB(hexToRGB(newHex));
                                 setHSL(hexToHSL(newHex));
-                                setHexError(false);
+                                clearErrors();
                             } else {
                                 setHexError(true);
                             }
                         }}
                     />
-                    <div className="text-sm text-destructive">
+                    <div className="h-5 text-sm text-destructive">
                         {hexError ? "Invalid hex code" : null}
                     </div>
                 </div>
