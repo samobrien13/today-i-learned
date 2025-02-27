@@ -115,9 +115,9 @@ export function rgbToHSL(rgb: RGB): HSL {
         }
         h /= 6;
     }
-    h *= 360;
-    s *= 100;
-    l *= 100;
+    h = Math.round(h * 360 * 100) / 100;
+    s = Math.round(s * 100 * 100) / 100;
+    l = Math.round(l * 100 * 100) / 100;
     return { h, s, l };
 }
 
