@@ -95,7 +95,7 @@ export function rgbToHSL(rgb: RGB): HSL {
     const max = Math.max(r, g, b);
     const min = Math.min(r, g, b);
     let h: number, s: number;
-    const l: number = (max + min) / 2;
+    let l: number = (max + min) / 2;
     if (max === min) {
         h = s = 0;
     } else {
@@ -115,6 +115,9 @@ export function rgbToHSL(rgb: RGB): HSL {
         }
         h /= 6;
     }
+    h *= 360;
+    s *= 100;
+    l *= 100;
     return { h, s, l };
 }
 

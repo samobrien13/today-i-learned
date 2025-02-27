@@ -53,7 +53,7 @@ function ColourConverter() {
                     <Input
                         id="hsl-h"
                         type="number"
-                        value={hsl.h}
+                        value={hsl.h.toFixed(2)}
                         onChange={(e) => {
                             const newHSL = {
                                 ...hsl,
@@ -72,7 +72,7 @@ function ColourConverter() {
                     <Input
                         id="hsl-s"
                         type="number"
-                        value={hsl.s}
+                        value={hsl.s.toFixed(2)}
                         onChange={(e) => {
                             const newHSL = {
                                 ...hsl,
@@ -89,7 +89,7 @@ function ColourConverter() {
                     <Input
                         id="hsl-l"
                         type="number"
-                        value={hsl.l}
+                        value={hsl.l.toFixed(2)}
                         onChange={(e) => {
                             const newHSL = {
                                 ...hsl,
