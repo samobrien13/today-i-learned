@@ -2,9 +2,18 @@ import { ThaiTimeConverter } from "@/components/tools/thai-time-converter";
 import { MortgageCalculator } from "@/components/tools/mortgage-calculator";
 import { RecipeGenerator } from "@/components/tools/recipe-generator";
 import { PasswordGenerator } from "@/components/tools/password-generator";
+import { ColourConverter } from "@/components/tools/colour-converter";
 
 import { Metadata } from "next";
 import { ReactNode } from "react";
+
+export const COLOUR_CONVERTER: ToolData = {
+    title: "Colour Converter",
+    description: "Convert a colour between HEX, RGB, and HSL formats.",
+    slug: "colour-converter",
+    tags: ["design"],
+    component: <ColourConverter />,
+};
 
 export const THAI_TIME_CONVERTER: ToolData = {
     title: "Thai Time Converter",
@@ -47,6 +56,7 @@ export type ToolData = {
 } & Metadata;
 
 export const TOOLS: ToolData[] = [
+    COLOUR_CONVERTER,
     THAI_TIME_CONVERTER,
     MORTGAGE_CALCULATOR,
     RECIPE_GENERATOR,
