@@ -22,6 +22,36 @@ const theme: ThemeInput = {
             },
         },
         {
+            scope: "operator",
+            settings: {
+                foreground: "hsl(var(--chart-1))",
+            },
+        },
+        {
+            scope: "storage",
+            settings: {
+                foreground: "hsl(var(--chart-1))",
+            },
+        },
+        {
+            scope: "class",
+            settings: {
+                foreground: "hsl(var(--chart-7))",
+            },
+        },
+        {
+            scope: "regexp",
+            settings: {
+                foreground: "hsl(var(--chart-2))",
+            },
+        },
+        {
+            scope: "parameter",
+            settings: {
+                foreground: "hsl(var(--chart-5))",
+            },
+        },
+        {
             scope: "comment",
             settings: {
                 foreground: "hsl(var(--muted-foreground))",
