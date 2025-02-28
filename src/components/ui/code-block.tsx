@@ -4,52 +4,80 @@ import { Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardDescription } from "./card";
-import SyntaxHighlighter from "react-syntax-highlighter";
+import { BundledLanguage, createHighlighter, ThemeInput } from "shiki";
 
 type CodeBlockProps = {
-    language: string;
+    language: BundledLanguage;
     filename?: string;
     children: string;
 };
 
-const theme = {
-    "hljs-title": {
-        color: "hsl(var(--chart-1))",
-    },
-    "hljs-built_in": {
-        color: "hsl(var(--chart-1))",
-    },
-    "hljs-string": {
-        color: "hsl(var(--chart-2))",
-    },
-    "hljs-variable": {
-        color: "hsl(var(--chart-3))",
-    },
-    "hljs-attr": {
-        color: "hsl(var(--chart-4))",
-    },
-    "hljs-keyword": {
-        color: "hsl(var(--chart-5))",
-    },
-    "hljs-number": {
-        color: "hsl(var(--muted-foreground))",
-    },
-    "hljs-literal": {
-        color: "hsl(var(--muted-foreground))",
-    },
-    "hljs-function": {
-        color: "hsl(var(--muted-foreground))",
-    },
-    "hljs-comment": {
-        color: "hsl(var(--muted-foreground))",
-    },
-    "hljs-params": {
-        color: "hsl(var(--foreground))",
-    },
-} as const;
+const theme: ThemeInput = {
+    name: "today-i-learned",
+    settings: [
+        {
+            settings: {
+                background: "hsl(var(--card-background))",
+                foreground: "hsl(var(--card-foreground))",
+            },
+        },
+        {
+            scope: ["class"],
+            settings: {
+                foreground: "hsl(var(--primary))",
+            },
+        },
+        {
+            scope: ["variable", "parameter"],
+            settings: {
+                foreground: "hsl(var(--chart-1))",
+            },
+        },
+        {
+            scope: ["string", "regexp", "meta.type"],
+            settings: {
+                foreground: "hsl(var(--chart-2))",
+            },
+        },
+        {
+            scope: ["number", "entity"],
+            settings: {
+                foreground: "hsl(var(--chart-3))",
+            },
+        },
+        {
+            scope: ["constant"],
+            settings: {
+                foreground: "hsl(var(--chart-4))",
+            },
+        },
+        {
+            scope: ["operator", "storage", "keyword"],
+            settings: {
+                foreground: "hsl(var(--chart-5))",
+            },
+        },
+        {
+            scope: ["comment", "punctuation"],
+            settings: {
+                foreground: "hsl(var(--muted-foreground))",
+            },
+        },
+    ],
+};
+
+const highlighter = await createHighlighter({
+    themes: [theme],
+    langs: ["typescript", "javascript", "json", "bash", "shell", "css", "html"],
+});
 
 function CodeBlock({ language, filename, children }: CodeBlockProps) {
     const { toast } = useToast();
+
+    const code = highlighter.codeToHtml(children, {
+        lang: language,
+        theme: "today-i-learned",
+    });
 
     return (
         <Card className="divide-y-border mb-6 divide-y">
@@ -74,23 +102,10 @@ function CodeBlock({ language, filename, children }: CodeBlockProps) {
                     <Copy />
                 </Button>
             </div>
-            <SyntaxHighlighter
-                customStyle={{
-                    padding: "1rem 0.5rem",
-                    fontSize: "0.875rem",
-                    backgroundColor: "hsl(var(--card))",
-                    color: "hsl(var(--muted-foreground))",
-                    overflowX: "auto",
-                }}
-                lineNumberStyle={{
-                    color: "hsl(var(--muted-foreground))",
-                }}
-                style={theme}
-                language={language}
-                showLineNumbers
-            >
-                {children}
-            </SyntaxHighlighter>
+            <div
+                className="overflow-y-auto p-4"
+                dangerouslySetInnerHTML={{ __html: code }}
+            />
         </Card>
     );
 }
