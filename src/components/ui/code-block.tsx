@@ -138,7 +138,10 @@ function CodeBlock({ language, filename, children }: CodeBlockProps) {
                     <Copy />
                 </Button>
             </div>
-            <div className="p-4" dangerouslySetInnerHTML={{ __html: code }} />
+            <div
+                className="overflow-y-auto p-4"
+                dangerouslySetInnerHTML={{ __html: code }}
+            />
         </Card>
     );
 }
