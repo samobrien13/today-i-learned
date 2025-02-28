@@ -104,10 +104,10 @@ function RubberDuck() {
                                     </div>
                                 ) : null}
                                 <div
-                                    className={`inline-block rounded-lg p-3 ${
+                                    className={`inline-block px-4 py-2 ${
                                         message.sender === "user"
-                                            ? "justify-start bg-primary text-primary-foreground"
-                                            : "bg-secondary text-secondary-foreground"
+                                            ? "justify-start rounded-r-lg rounded-tl-lg bg-primary text-primary-foreground"
+                                            : "rounded-l-lg rounded-br-lg bg-secondary text-secondary-foreground"
                                     }`}
                                 >
                                     {message.text}
