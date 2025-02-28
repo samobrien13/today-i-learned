@@ -92,7 +92,7 @@ function RubberDuck() {
                                 }`}
                             >
                                 {message.sender === "bot" ? (
-                                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted">
+                                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-muted">
                                         <Image
                                             src="/images/rubber-duck.png"
                                             alt="Rubber Duck"
