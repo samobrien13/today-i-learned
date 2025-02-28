@@ -32,6 +32,7 @@ function RubberDuck() {
     const [messages, setMessages] = useState<Message[]>([]);
     const formRef = useRef<HTMLFormElement>(null);
     const chatRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -55,6 +56,7 @@ function RubberDuck() {
         }, 500);
 
         formRef.current?.reset();
+        inputRef.current?.blur();
     };
 
     useEffect(() => {
@@ -123,6 +125,7 @@ function RubberDuck() {
                     className="flex flex-row gap-4 border-t p-6"
                 >
                     <Input
+                        ref={inputRef}
                         name="message"
                         type="text"
                         placeholder="Type your message..."
