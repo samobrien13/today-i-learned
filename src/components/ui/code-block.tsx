@@ -18,7 +18,7 @@ const theme: ThemeInput = {
         {
             settings: {
                 background: "hsl(var(--card-background))",
-                foreground: "hsl(var(--chart-1))",
+                foreground: "hsl(var(--card-foreground))",
             },
         },
         {
