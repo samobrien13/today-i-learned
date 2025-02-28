@@ -38,6 +38,12 @@ const getSitemapLinks = (): Array<SiteMapRoute> => {
             changeFrequency: "monthly",
             priority: 0.8,
         },
+        {
+            path: Routes.ABOUT,
+            lastModifiedDate: BUILD_DATE,
+            changeFrequency: "monthly",
+            priority: 0.8,
+        },
     ];
 
     BLOG_ARTICLES.forEach((article) => {

@@ -22,81 +22,45 @@ const theme: ThemeInput = {
             },
         },
         {
-            scope: "operator",
+            scope: ["class"],
+            settings: {
+                foreground: "hsl(var(--primary))",
+            },
+        },
+        {
+            scope: ["variable", "parameter"],
             settings: {
                 foreground: "hsl(var(--chart-1))",
             },
         },
         {
-            scope: "storage",
-            settings: {
-                foreground: "hsl(var(--chart-1))",
-            },
-        },
-        {
-            scope: "class",
-            settings: {
-                foreground: "hsl(var(--chart-7))",
-            },
-        },
-        {
-            scope: "regexp",
+            scope: ["string", "regexp", "meta.type"],
             settings: {
                 foreground: "hsl(var(--chart-2))",
             },
         },
         {
-            scope: "parameter",
-            settings: {
-                foreground: "hsl(var(--chart-5))",
-            },
-        },
-        {
-            scope: "comment",
-            settings: {
-                foreground: "hsl(var(--muted-foreground))",
-            },
-        },
-        {
-            scope: "keyword",
-            settings: {
-                foreground: "hsl(var(--chart-1))",
-            },
-        },
-        {
-            scope: "string",
-            settings: {
-                foreground: "hsl(var(--chart-2))",
-            },
-        },
-        {
-            scope: "number",
+            scope: ["number", "entity"],
             settings: {
                 foreground: "hsl(var(--chart-3))",
             },
         },
         {
-            scope: "punctuation",
-            settings: {
-                foreground: "hsl(var(--muted-foreground))",
-            },
-        },
-        {
-            scope: "constant",
+            scope: ["constant"],
             settings: {
                 foreground: "hsl(var(--chart-4))",
             },
         },
         {
-            scope: "variable",
+            scope: ["operator", "storage", "keyword"],
             settings: {
                 foreground: "hsl(var(--chart-5))",
             },
         },
         {
-            scope: "entity",
+            scope: ["comment", "punctuation"],
             settings: {
-                foreground: "hsl(var(--chart-3))",
+                foreground: "hsl(var(--muted-foreground))",
             },
         },
     ],
