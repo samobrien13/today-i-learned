@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const CONTENT_SECURITY_POLICY = `
     default-src 'self';
-    script-src 'self' 'unsafe-eval' 'unsafe-inline' https://us-assets.i.posthog.com https://www.googletagmanager.com;
+    script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://vercel.live;
     style-src 'self' 'unsafe-inline';
     img-src * blob: data:;
     media-src 'none';
