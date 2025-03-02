@@ -1,5 +1,6 @@
 import { Link } from "@/components/ui/link";
 import { Github, LinkedIn } from "@/components/ui/icons";
+import Routes from "@/constants/Routes";
 
 function Footer() {
     return (
@@ -19,8 +20,13 @@ function Footer() {
                 >
                     <LinkedIn />
                 </Link>
+                <Link href={Routes.ABOUT} className="px-3 py-2">
+                    about
+                </Link>
             </div>
-            <p>© {new Date().getFullYear()} MIT Licensed</p>
+            <p className="font-mono">
+                © {new Date().getFullYear()} MIT Licensed
+            </p>
         </footer>
     );
 }

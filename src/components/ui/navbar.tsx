@@ -20,9 +20,6 @@ function Navbar() {
                         <Link href={Routes.TOOLS([])} className="px-3 py-2">
                             tools
                         </Link>
-                        <Link href={Routes.ABOUT} className="px-3 py-2">
-                            about
-                        </Link>
                     </div>
                     <ThemeButton />
                 </nav>
