@@ -7,7 +7,7 @@ export const PLEASE_USE_REACT_QUERY: BlogData = {
     title: "Please use React Query!",
     description:
         "Learn how React Query can dramatically simplify your data fetching and state management",
-    date: "2025-02-19",
+    date: "2025-03-02",
     slug: "please-use-react-query",
     tags: ["engineering", "react"],
     component: <PleaseUseReactQuery />,
