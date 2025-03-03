@@ -66,6 +66,7 @@ const theme: ThemeInput = {
     ],
 };
 
+// This shouldn't work with await?
 const highlighter = await createHighlighter({
     themes: [theme],
     langs: ["typescript", "javascript", "json", "bash", "shell", "css", "html"],

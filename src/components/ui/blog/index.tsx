@@ -4,6 +4,8 @@ import { Badge } from "../badge";
 import { BlogData } from "@/data/blog";
 import Routes from "@/constants/Routes";
 import Share from "../share";
+import Feedback from "../feedback";
+import Likes from "../likes";
 
 type BlogProps = BlogData;
 
@@ -41,6 +43,8 @@ function Blog({ title, description, date, slug, component, tags }: BlogProps) {
                       })
                     : null}
             </div>
+            <Likes slug={slug} />
+            <Feedback slug={slug} />
         </article>
     );
 }
