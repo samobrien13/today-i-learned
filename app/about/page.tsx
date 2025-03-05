@@ -1,5 +1,13 @@
 import { Link } from "@/components/ui/link";
 import Tab from "@/components/ui/tab";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "About",
+    alternates: {
+        canonical: "https://todayilearned.au/about",
+    },
+};
 
 export default function About() {
     return (
