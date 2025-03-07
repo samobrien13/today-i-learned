@@ -1,4 +1,4 @@
-import { BlogHeading, BlogParagraph } from "@/components/ui/blog";
+import { BlogCode, BlogHeading, BlogParagraph } from "@/components/ui/blog";
 import { CodeBlock } from "@/components/ui/code-block";
 import { Link } from "@/components/ui/link";
 import { BlogData } from "@/data/blog";
@@ -193,6 +193,15 @@ export function useDeeplinkObserver() {
     }, []);
 }`}
             </CodeBlock>
+            <BlogParagraph>
+                Note that depending on what you want to acheive you may need the{" "}
+                <BlogCode>getLatestReferringParams</BlogCode>
+                as well as the <BlogCode>subscribe</BlogCode> method. The{" "}
+                <BlogCode>subscribe</BlogCode> method will be triggered when the
+                app is already open and the user clicks a branch link, whereas
+                the <BlogCode>getLatestReferringParams</BlogCode> will be
+                triggered when the app is opened from a branch link.
+            </BlogParagraph>
             <BlogParagraph>
                 This code subscribes to deeplink events using the branch SDK and
                 handles them. Branch returns an object to say whether the

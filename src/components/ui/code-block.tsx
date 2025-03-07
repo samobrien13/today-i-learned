@@ -1,10 +1,11 @@
 "use client";
 
-import { Copy } from "lucide-react";
+import { Copy, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardDescription } from "./card";
 import { BundledLanguage, createHighlighter, ThemeInput } from "shiki";
+import { JavaScript, TypeScript } from "./icons";
 
 type CodeBlockProps = {
     language: BundledLanguage;
@@ -80,11 +81,27 @@ function CodeBlock({ language, filename, children }: CodeBlockProps) {
         theme: "today-i-learned",
     });
 
+    function languageToIcon(language: BundledLanguage) {
+        switch (language) {
+            case "typescript":
+                return <TypeScript />;
+            case "javascript":
+                return <JavaScript />;
+            case "json":
+                return "json";
+            case "bash":
+            case "shell":
+                return <Terminal />;
+            default:
+                return language;
+        }
+    }
+
     return (
         <Card className="divide-y-border mb-6 divide-y">
             <div className="flex items-center px-4 py-2">
-                <CardDescription className="flex-1 space-x-4 font-mono">
-                    <span>{language}</span>
+                <CardDescription className="flex flex-1 items-center gap-4 font-mono">
+                    <span>{languageToIcon(language)}</span>
                     {filename ? (
                         <span className="text-foreground">{filename}</span>
                     ) : null}
