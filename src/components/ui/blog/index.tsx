@@ -1,4 +1,3 @@
-import { formatDate } from "@/lib/date";
 import { Link } from "../link";
 import { Badge } from "../badge";
 import { BlogData } from "@/data/blog";
@@ -6,6 +5,7 @@ import Routes from "@/constants/Routes";
 import Share from "../share";
 import Feedback from "../feedback";
 import Likes from "../likes";
+import BlogDate from "./date";
 
 type BlogProps = BlogData;
 
@@ -21,26 +21,19 @@ function Blog({ title, description, date, slug, component, tags }: BlogProps) {
                 >
                     {title}
                 </h1>
-                <p
-                    className="text-sm font-semibold"
-                    style={{
-                        viewTransitionName: `blog-article-date-${slug}`,
-                    }}
-                >
-                    {formatDate(date)}
-                </p>
+                <BlogDate date={date} slug={slug} />
             </header>
             <div>{component}</div>
             <div className="flex flex-row items-center gap-2">
                 <Share title={title} text={description} />
                 {tags.length > 0
                     ? Array.from(new Set(tags)).map((tag) => {
-                          return (
-                              <Link key={tag} href={Routes.RANTS([tag])}>
-                                  <Badge variant="secondary">{tag}</Badge>
-                              </Link>
-                          );
-                      })
+                        return (
+                            <Link key={tag} href={Routes.RANTS([tag])}>
+                                <Badge variant="secondary">{tag}</Badge>
+                            </Link>
+                        );
+                    })
                     : null}
             </div>
             <Likes slug={slug} />

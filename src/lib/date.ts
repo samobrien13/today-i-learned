@@ -27,15 +27,6 @@ export function formatDate(date: Date | string): string {
             day: "numeric",
         }).format(date);
     }
-    if (days > 0) {
-        return rtf.format(0 - days, "day");
-    }
-    if (hours > 0) {
-        return rtf.format(0 - hours, "hour");
-    }
-    if (minutes > 0) {
-        return rtf.format(0 - minutes, "minute");
-    }
 
-    return rtf.format(0 - diff, "second");
+    return rtf.format(0 - days, "day");
 }
