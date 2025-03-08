@@ -3,29 +3,25 @@ import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import useScrollThreshold from "./use-scroll-threshold";
 
 export function useBlogs(tagsArray: string[]) {
-
     const query = useInfiniteQuery({
         queryKey: ["blogs", tagsArray],
-        queryFn: ({ pageParam }) => getBlogs(tagsArray, pageParam as number),
+        queryFn: ({ pageParam }) => getBlogs(tagsArray, pageParam),
         placeholderData: keepPreviousData,
         getNextPageParam: (lastPage) => {
-            let nextPage: number | undefined = undefined;
+            let nextPage: string | undefined = undefined;
             if (lastPage?.next) {
                 nextPage = lastPage.next;
             }
             return nextPage;
         },
-        getPreviousPageParam: (lastPage) => {
-            let previousPage: number | undefined = undefined;
-            if (lastPage?.previous) {
-                previousPage = lastPage.previous;
-            }
-            return previousPage;
-        },
-        initialPageParam: 1,
+        initialPageParam: "",
     });
 
-    useScrollThreshold(query.fetchNextPage, query.hasNextPage, query.isFetchingNextPage);
+    useScrollThreshold(
+        query.fetchNextPage,
+        query.hasNextPage,
+        query.isFetchingNextPage,
+    );
 
     return {
         ...query,

@@ -32,9 +32,9 @@ async function Rants({ searchParams }: { searchParams: SearchParams }) {
     ];
 
     await queryClient.prefetchInfiniteQuery({
-        initialPageParam: 1,
+        initialPageParam: '',
         queryKey: ["blogs", tagsArray],
-        queryFn: ({ pageParam }) => getBlogs(tagsArray, pageParam as number),
+        queryFn: ({ pageParam }) => getBlogs(tagsArray, pageParam),
     });
 
     return (

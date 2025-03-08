@@ -4,15 +4,19 @@ import { BLOG_ARTICLES } from "@/data/blog";
 
 const PAGE_SIZE = 5;
 
-export const getBlogs = async (tags: string[], page = 1) => {
+export const getBlogs = async (tags: string[], cursor?: string) => {
+    const index = cursor
+        ? BLOG_ARTICLES.findIndex((article) => article.slug === cursor)
+        : 0;
+
+    const filteredBlogs = BLOG_ARTICLES.filter((article) =>
+        tags.length > 0 ? article.tags.some((tag) => tags.includes(tag)) : true,
+    );
+    const blogs = filteredBlogs.slice(index, index + PAGE_SIZE);
+
     return {
-        total: Math.ceil(BLOG_ARTICLES.length / PAGE_SIZE),
-        next: page < BLOG_ARTICLES.length / PAGE_SIZE ? page + 1 : null,
-        previous: page >= 0 ? page - 1 : null,
-        blogs: BLOG_ARTICLES.filter((article) =>
-            tags.length > 0
-                ? article.tags.some((tag) => tags.includes(tag))
-                : true,
-        ).slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE),
+        total: filteredBlogs.length,
+        next: filteredBlogs[index + PAGE_SIZE]?.slug,
+        blogs,
     };
 };
