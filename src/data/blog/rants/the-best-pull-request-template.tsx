@@ -17,12 +17,12 @@ function TheBestPullRequestTemplate() {
             <BlogParagraph>
                 A good description on a pull request is essential for the
                 reviewer to understand the changes that have been made. At a
-                glance, it should tell the review exactly what the changes are,
-                why they were made, and how they can be tested. If these
-                criteria are met, the reviewer can quickly assess the changes
-                and provide feedback. If not, the reviewer will either need to
-                spend more time understanding the changes, blindly approve the
-                changes, or just ignore the pull request entirely.
+                glance, it should tell the reviewer exactly what the changes are
+                and how they can be tested. If these criteria are met, the
+                reviewer can quickly assess the changes and provide feedback. If
+                not, the reviewer will either need to spend more time
+                understanding the changes, blindly approve the changes, or just
+                ignore the pull request entirely.
             </BlogParagraph>
             <BlogParagraph>
                 I have seen many articles on this topic which suggest requiring
