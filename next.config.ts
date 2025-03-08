@@ -46,7 +46,6 @@ const nextConfig: NextConfig = {
     productionBrowserSourceMaps: true,
     experimental: {
         reactCompiler: true,
-        viewTransition: true,
     },
     async headers() {
         return [
