@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/components/ui/link";
 import Routes from "@/constants/Routes";
 import { Button } from "@/components/ui/button";
 
