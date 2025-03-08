@@ -17,7 +17,7 @@ const eslintConfig = [
 eslintConfig.push({
     plugins: { "react-compiler": reactCompiler },
     rules: {
-        "react-compiler/require-compiler": "error",
+        "react-compiler/react-compiler": "error",
     },
 });
 
