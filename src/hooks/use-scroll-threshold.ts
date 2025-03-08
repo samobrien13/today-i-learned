@@ -1,8 +1,16 @@
 import { useEffect } from "react";
 
-function useScrollThreshold(fetchNextPage: () => void, hasNextPage: boolean) {
+function useScrollThreshold(
+    fetchNextPage: () => void,
+    hasNextPage: boolean,
+    isFetchingNextPage: boolean,
+) {
     useEffect(() => {
         const handleScroll = () => {
+            if (isFetchingNextPage) {
+                return;
+            }
+
             const thresholdPercentage = 0.4;
 
             const documentHeight = document.documentElement.scrollHeight;
@@ -23,7 +31,7 @@ function useScrollThreshold(fetchNextPage: () => void, hasNextPage: boolean) {
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
-    }, [fetchNextPage, hasNextPage]);
+    }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 }
 
 export default useScrollThreshold;
