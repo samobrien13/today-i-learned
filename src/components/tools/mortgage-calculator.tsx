@@ -56,6 +56,8 @@ function MortgageCalculator() {
         ),
     );
 
+    console.log(paymentSets);
+
     const maxSetLength = Math.max(
         ...paymentSets.map((paymentSet) => paymentSet.length),
     );
