@@ -1,3 +1,4 @@
+import { unstable_ViewTransition as ViewTransition } from "react";
 import Tab from "@/components/ui/tab";
 import { Link } from "@/components/ui/link";
 import {
@@ -71,23 +72,21 @@ async function Tools({ searchParams }: { searchParams: SearchParams }) {
                 </div>
             ) : null}
             {filteredTools.map((tool) => (
-                <Card
-                    key={tool.title}
-                    style={{
-                        viewTransitionName: `${tool.slug}-card`,
-                    }}
-                >
-                    <Link href={Routes.TOOL(tool.slug)}>
-                        <CardHeader>
-                            <CardTitle>{tool.title}</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <CardDescription>
-                                {tool.description}
-                            </CardDescription>
-                        </CardContent>
-                    </Link>
-                </Card>
+                <ViewTransition name={`${tool.slug}-card`} key={tool.title}>
+                    <Card
+                    >
+                        <Link href={Routes.TOOL(tool.slug)}>
+                            <CardHeader>
+                                <CardTitle>{tool.title}</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <CardDescription>
+                                    {tool.description}
+                                </CardDescription>
+                            </CardContent>
+                        </Link>
+                    </Card>
+                </ViewTransition>
             ))}
         </Tab>
     );

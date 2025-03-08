@@ -1,6 +1,7 @@
 import { Link } from "@/components/ui/link";
 import Routes from "@/constants/Routes";
 import { Button } from "@/components/ui/button";
+import { unstable_ViewTransition as ViewTransition } from "react";
 
 export default function Home() {
     return (
@@ -10,26 +11,16 @@ export default function Home() {
             </h1>
             <p>A collection of my creations</p>
             <div className="flex flex-row items-center justify-center gap-4">
-                <Button asChild variant="secondary">
-                    <Link
-                        href={Routes.RANTS([])}
-                        style={{
-                            viewTransitionName: "tab-rants",
-                        }}
-                    >
-                        Rants
-                    </Link>
-                </Button>
-                <Button asChild variant="secondary">
-                    <Link
-                        href={Routes.TOOLS([])}
-                        style={{
-                            viewTransitionName: "tab-tools",
-                        }}
-                    >
-                        Tools
-                    </Link>
-                </Button>
+                <ViewTransition name="tab-rants">
+                    <Button asChild variant="secondary">
+                        <Link href={Routes.RANTS([])}>Rants</Link>
+                    </Button>
+                </ViewTransition>
+                <ViewTransition name="tab-tools">
+                    <Button asChild variant="secondary">
+                        <Link href={Routes.TOOLS([])}>Tools</Link>
+                    </Button>
+                </ViewTransition>
             </div>
         </section>
     );

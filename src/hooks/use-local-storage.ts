@@ -10,29 +10,28 @@ export default function useLocalStorage<T>(
     // Pass initial state function to useState so logic is only executed once
     const [storedValue, setStoredValue] = useState<T>(() => initialValue);
 
-    const initialize = () => {
-        if (isServer) {
-            return initialValue;
-        }
-        try {
-            // Get from local storage by key
-            const item = window.localStorage.getItem(key);
-            // Parse stored json or if none return initialValue
-            return item ? JSON.parse(item) : initialValue;
-        } catch (error) {
-            // If error also return initialValue
-            console.log(error);
-            return initialValue;
-        }
-    };
-
     /* prevents hydration error so that state is only initialized after server is defined */
     useEffect(() => {
+        const initialize = () => {
+            if (isServer) {
+                return initialValue;
+            }
+            try {
+                // Get from local storage by key
+                const item = window.localStorage.getItem(key);
+                // Parse stored json or if none return initialValue
+                return item ? JSON.parse(item) : initialValue;
+            } catch (error) {
+                // If error also return initialValue
+                console.log(error);
+                return initialValue;
+            }
+        };
+
         if (!isServer) {
             setStoredValue(initialize());
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [initialValue, key]);
 
     // Return a wrapped version of useState's setter function that ...
     // ... persists the new value to localStorage.

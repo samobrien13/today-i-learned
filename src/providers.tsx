@@ -1,9 +1,12 @@
 "use client";
 
-import { ViewTransitions } from "next-view-transitions";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/toaster";
-import { useEffect, useState } from "react";
+import {
+    useEffect,
+    useState,
+    unstable_ViewTransition as ViewTransition,
+} from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 type ProvidersProps = {
@@ -20,14 +23,14 @@ function Providers({ children }: ProvidersProps) {
     }, []);
 
     return (
-        <ViewTransitions>
+        <ViewTransition>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
                 <QueryClientProvider client={client}>
                     <Toaster />
                     {children}
                 </QueryClientProvider>
             </ThemeProvider>
-        </ViewTransitions>
+        </ViewTransition>
     );
 }
 
