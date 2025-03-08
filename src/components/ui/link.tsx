@@ -1,4 +1,3 @@
-import { Link as NextViewLink } from "next-view-transitions";
 import NextLink from "next/link";
 import clsx from "clsx";
 
@@ -8,7 +7,7 @@ type LinkComponentProps = React.ComponentProps<typeof NextLink> & {
 
 function Link({ external, className, ...props }: LinkComponentProps) {
     return (
-        <NextViewLink
+        <NextLink
             {...props}
             target={external ? "_blank" : undefined}
             rel={external ? "noopener noreferrer" : undefined}

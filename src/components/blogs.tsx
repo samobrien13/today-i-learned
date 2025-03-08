@@ -1,5 +1,6 @@
 "use client";
 
+import { unstable_ViewTransition as ViewTransition } from "react";
 import Routes from "@/constants/Routes";
 import { Badge } from "./ui/badge";
 import { Link } from "./ui/link";
@@ -65,21 +66,19 @@ function Blogs({ tags, allTags }: BlogsProps) {
                     <Link href={`/rants/${article.slug}`}>
                         <article className="flex flex-col">
                             <CardHeader>
-                                <p
-                                    className="text-xs font-semibold"
-                                    style={{
-                                        viewTransitionName: `blog-article-date-${article.slug}`,
-                                    }}
-                                >
-                                    {formatDate(article.date)}
-                                </p>
-                                <CardTitle
-                                    style={{
-                                        viewTransitionName: `blog-article-title-${article.slug}`,
-                                    }}
-                                >
-                                    {article.title}
-                                </CardTitle>
+                                <ViewTransition name={`blog-article-date-${article.slug}`}>
+                                    <p
+                                        className="text-xs font-semibold"
+                                    >
+                                        {formatDate(article.date)}
+                                    </p>
+                                </ViewTransition>
+                                <ViewTransition name={`blog-article-title-${article.slug}`}>
+                                    <CardTitle
+                                    >
+                                        {article.title}
+                                    </CardTitle>
+                                </ViewTransition>
                             </CardHeader>
                             <CardContent>
                                 <CardDescription>

@@ -1,3 +1,4 @@
+import { unstable_ViewTransition as ViewTransition } from "react";
 import { formatDate } from "@/lib/date";
 import { Link } from "../link";
 import { Badge } from "../badge";
@@ -13,22 +14,14 @@ function Blog({ title, description, date, slug, component, tags }: BlogProps) {
     return (
         <article className="flex flex-1 flex-col gap-8">
             <header>
-                <h1
-                    className="text-2xl font-semibold text-primary"
-                    style={{
-                        viewTransitionName: `blog-article-title-${slug}`,
-                    }}
-                >
-                    {title}
-                </h1>
-                <p
-                    className="text-sm font-semibold"
-                    style={{
-                        viewTransitionName: `blog-article-date-${slug}`,
-                    }}
-                >
-                    {formatDate(date)}
-                </p>
+                <ViewTransition name={`blog-article-title-${slug}`}>
+                    <h1 className="text-2xl font-semibold text-primary">
+                        {title}
+                    </h1>
+                </ViewTransition>
+                <ViewTransition name={`blog-article-date-${slug}`}>
+                    <p className="text-sm font-semibold">{formatDate(date)}</p>
+                </ViewTransition>
             </header>
             <div>{component}</div>
             <div className="flex flex-row items-center gap-2">
