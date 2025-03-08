@@ -22,10 +22,10 @@ export function useBlogs(tagsArray: string[]) {
             }
             return previousPage;
         },
-        initialPageParam: 0,
+        initialPageParam: 1,
     });
 
-    useScrollThreshold(query.fetchNextPage, query.hasNextPage);
+    useScrollThreshold(query.fetchNextPage, query.hasNextPage, query.isFetchingNextPage);
 
     return {
         ...query,
