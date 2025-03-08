@@ -54,6 +54,7 @@ async function Tools({ searchParams }: { searchParams: SearchParams }) {
                             <Link
                                 key={tag}
                                 href={Routes.TOOLS(Array.from(set))}
+                                replace
                             >
                                 <Badge
                                     variant={

@@ -31,9 +31,10 @@ async function Rants({ searchParams }: { searchParams: SearchParams }) {
         ...new Set(BLOG_ARTICLES.flatMap((article) => article.tags)),
     ];
 
-    await queryClient.prefetchQuery({
-        queryKey: ["blogs", tagsArray, 0],
-        queryFn: () => getBlogs(tagsArray, 0),
+    await queryClient.prefetchInfiniteQuery({
+        initialPageParam: 0,
+        queryKey: ["blogs", tagsArray],
+        queryFn: ({ pageParam }) => getBlogs(tagsArray, pageParam as number),
     });
 
     return (

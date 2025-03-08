@@ -19,7 +19,7 @@ type BlogsProps = {
 };
 
 function Blogs({ tags, allTags }: BlogsProps) {
-    const { data: blogs } = useBlogs(tags);
+    const { blogs } = useBlogs(tags);
 
     // Prehydrated so this should never be null
     if (!blogs) {
