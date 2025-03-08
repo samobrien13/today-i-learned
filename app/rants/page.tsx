@@ -1,17 +1,13 @@
 import Tab from "@/components/ui/tab";
 import { BLOG_ARTICLES } from "@/data/blog";
-import { formatDate } from "@/lib/date";
-import { Link } from "@/components/ui/link";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
 import { Metadata } from "next";
-import Routes from "@/constants/Routes";
-import { Badge } from "@/components/ui/badge";
+import { getBlogs } from "@/actions/blogs";
+import Blogs from "@/components/blogs";
+import {
+    dehydrate,
+    HydrationBoundary,
+    QueryClient,
+} from "@tanstack/react-query";
 
 export const metadata: Metadata = {
     title: "Rants",
@@ -26,85 +22,28 @@ type SearchParams = Promise<{
 }>;
 
 async function Rants({ searchParams }: { searchParams: SearchParams }) {
+    const queryClient = new QueryClient();
+
     const { "tags[]": tags } = await searchParams;
     const tagsArray = tags ? (Array.isArray(tags) ? tags : [tags]) : [];
 
-    const tagsSet = new Set(tagsArray);
-    const allTags = new Set(BLOG_ARTICLES.flatMap((article) => article.tags));
+    const allTags = [
+        ...new Set(BLOG_ARTICLES.flatMap((article) => article.tags)),
+    ];
 
-    const filteredArticles =
-        tagsArray.length > 0
-            ? BLOG_ARTICLES.filter((article) =>
-                  article.tags.some((tag) => tagsSet.has(tag)),
-              )
-            : BLOG_ARTICLES;
+    await queryClient.prefetchQuery({
+        queryKey: ["blogs", tagsArray, 0],
+        queryFn: () => getBlogs(tagsArray, 0),
+    });
 
     return (
         <Tab
             title={metadata.title as string}
             subtitle={metadata.description as string}
         >
-            {allTags.size > 0 ? (
-                <div className="flex flex-row flex-wrap gap-2 pb-4">
-                    {Array.from(allTags).map((tag) => {
-                        const isSelected = tagsSet.has(tag);
-                        const set = new Set(tagsSet);
-
-                        if (isSelected) {
-                            set.delete(tag);
-                        } else {
-                            set.add(tag);
-                        }
-
-                        return (
-                            <Link
-                                key={tag}
-                                href={Routes.RANTS(Array.from(set))}
-                            >
-                                <Badge
-                                    variant={
-                                        tagsArray.includes(tag)
-                                            ? "default"
-                                            : "secondary"
-                                    }
-                                >
-                                    {tag}
-                                </Badge>
-                            </Link>
-                        );
-                    })}
-                </div>
-            ) : null}
-            {filteredArticles.map((article) => (
-                <Card key={article.slug}>
-                    <Link href={`/rants/${article.slug}`}>
-                        <article className="flex flex-col">
-                            <CardHeader>
-                                <p
-                                    className="text-xs font-semibold"
-                                    style={{
-                                        viewTransitionName: `blog-article-date-${article.slug}`,
-                                    }}
-                                >
-                                    {formatDate(article.date)}
-                                </p>
-                                <CardTitle
-                                    style={{
-                                        viewTransitionName: `blog-article-title-${article.slug}`,
-                                    }}
-                                >
-                                    {article.title}
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <CardDescription>
-                                    {article.description}
-                                </CardDescription>
-                            </CardContent>
-                        </article>
-                    </Link>
-                </Card>
-            ))}
+            <HydrationBoundary state={dehydrate(queryClient)}>
+                <Blogs tags={tagsArray} allTags={allTags} />
+            </HydrationBoundary>
         </Tab>
     );
 }
