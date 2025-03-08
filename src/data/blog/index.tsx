@@ -11,6 +11,7 @@ import { HOW_TO_TEST_NEXT_JS_APP_ROUTER } from "./rants/how-to-test-next-js-app-
 import { HOW_MUCH_TIME_THE_RBA_RATE_CUT_WILL_SAVE_YOU } from "./rants/how-much-time-the-rba-rate-cut-will-save-you";
 import { HOW_TO_IMPLEMENT_DEEP_LINKS_WITH_EXPO_ROUTER } from "./rants/how-to-implement-deep-links-with-expo-router";
 import { PLEASE_USE_REACT_QUERY } from "./rants/please-use-react-query";
+import { THE_BEST_PULL_REQUEST_TEMPLATE } from "./rants/the-best-pull-request-template";
 
 export type BlogData = {
     title: string;
@@ -22,6 +23,7 @@ export type BlogData = {
 } & Metadata;
 
 export const BLOG_ARTICLES: BlogData[] = [
+    THE_BEST_PULL_REQUEST_TEMPLATE,
     PLEASE_USE_REACT_QUERY,
     HOW_TO_IMPLEMENT_DEEP_LINKS_WITH_EXPO_ROUTER,
     HOW_MUCH_TIME_THE_RBA_RATE_CUT_WILL_SAVE_YOU,
