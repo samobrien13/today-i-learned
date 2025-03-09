@@ -14,7 +14,17 @@ type ProvidersProps = {
 };
 
 function Providers({ children }: ProvidersProps) {
-    const [client] = useState(new QueryClient());
+    const [client] = useState(
+        () =>
+            new QueryClient({
+                defaultOptions: {
+                    queries: {
+                        // Avoid refetching data immediately on page load
+                        staleTime: 1000 * 60,
+                    },
+                },
+            }),
+    );
 
     useEffect(() => {
         if ("serviceWorker" in navigator) {
