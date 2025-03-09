@@ -2,7 +2,7 @@
 
 import { BLOG_ARTICLES } from "@/data/blog";
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 8;
 
 export const getBlogs = async (tags: string[], cursor?: string) => {
     const index = cursor
