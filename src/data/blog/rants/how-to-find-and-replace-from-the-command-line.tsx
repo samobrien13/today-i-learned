@@ -42,7 +42,7 @@ function HowToFindAndReplaceFromTheCommandLine() {
                 The following command will do the job on OSX:
             </BlogParagraph>
             <CodeBlock language="bash">
-                {`LC_ALL=C find ./ -type f -exec sed -i '' -e & '/find text/replace text/' {} \;`}
+                {`LC_ALL=C find ./ -type f -exec sed -i '' -e & '/find text/replace text/' {} \\;`}
             </CodeBlock>
             <BlogUnorderedList>
                 <BlogListItem>
@@ -72,14 +72,14 @@ function HowToFindAndReplaceFromTheCommandLine() {
                 different delimiter like |:
             </BlogParagraph>
             <CodeBlock language="bash">
-                {`LC_ALL=C find ./ -type f -exec sed -i '' -e & 's|find/text|replace/text|' {} \;`}
+                {`LC_ALL=C find ./ -type f -exec sed -i '' -e & 's|find/text|replace/text|' {} \\;`}
             </CodeBlock>
             <BlogParagraph>
                 If modifying a large number of files, consider using xargs to
                 avoid spawning a new sed process for each file:
             </BlogParagraph>
             <CodeBlock language="bash">
-                {`LC_ALL=C find ./ -type f -exec grep -Iq . {} ; -print | xargs sed -i '' -e '/find text/replace text/' {} \;`}
+                {`LC_ALL=C find ./ -type f -exec grep -Iq . {} ; -print | xargs sed -i '' -e '/find text/replace text/' {} \\;`}
             </CodeBlock>
             <BlogParagraph>
                 The grep command is used to filter out binary files, because
