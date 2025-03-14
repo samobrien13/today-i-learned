@@ -11,6 +11,7 @@ import {
     Card,
     CardContent,
     CardDescription,
+    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
@@ -79,55 +80,54 @@ function RubberDuck() {
                     <CardTitle>{RUBBER_DUCK.title}</CardTitle>
                     <CardDescription>{RUBBER_DUCK.description}</CardDescription>
                 </CardHeader>
-                <CardContent className="p-0">
-                    <div
-                        ref={chatRef}
-                        className="h-96 flex-1 overflow-y-auto p-4"
-                    >
-                        {messages.length === 0 ? (
-                            <div className="mt-4 text-center text-muted-foreground">
-                                Ask me any tech question!
-                            </div>
-                        ) : (
-                            messages.map((message, index) => (
+                <CardContent
+                    ref={chatRef}
+                    className="h-96 overflow-y-auto border-b"
+                >
+                    {messages.length === 0 ? (
+                        <div className="text-center text-muted-foreground">
+                            Ask me any tech question!
+                        </div>
+                    ) : (
+                        messages.map((message, index) => (
+                            <div
+                                key={index}
+                                className={`flex flex-row items-end gap-2 pb-4 ${
+                                    message.sender === "user"
+                                        ? "justify-end text-right"
+                                        : "justify-start text-left"
+                                }`}
+                            >
+                                {message.sender === "bot" ? (
+                                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-muted">
+                                        <Image
+                                            src="/images/rubber-duck.png"
+                                            alt="Rubber Duck"
+                                            width={20}
+                                            height={20}
+                                            className="inline-block object-contain"
+                                            priority
+                                        />
+                                    </div>
+                                ) : null}
                                 <div
-                                    key={index}
-                                    className={`flex flex-row items-end gap-2 pb-4 ${
+                                    className={`inline-block px-4 py-2 ${
                                         message.sender === "user"
-                                            ? "justify-end text-right"
-                                            : "justify-start text-left"
+                                            ? "justify-start rounded-r-lg rounded-tl-lg bg-primary text-primary-foreground"
+                                            : "rounded-l-lg rounded-br-lg bg-secondary text-secondary-foreground"
                                     }`}
                                 >
-                                    {message.sender === "bot" ? (
-                                        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-muted">
-                                            <Image
-                                                src="/images/rubber-duck.png"
-                                                alt="Rubber Duck"
-                                                width={20}
-                                                height={20}
-                                                className="inline-block object-contain"
-                                                priority
-                                            />
-                                        </div>
-                                    ) : null}
-                                    <div
-                                        className={`inline-block px-4 py-2 ${
-                                            message.sender === "user"
-                                                ? "justify-start rounded-r-lg rounded-tl-lg bg-primary text-primary-foreground"
-                                                : "rounded-l-lg rounded-br-lg bg-secondary text-secondary-foreground"
-                                        }`}
-                                    >
-                                        {message.text}
-                                    </div>
+                                    {message.text}
                                 </div>
-                            ))
-                        )}
-                    </div>
-
+                            </div>
+                        ))
+                    )}
+                </CardContent>
+                <CardFooter>
                     <form
                         ref={formRef}
                         onSubmit={handleSubmit}
-                        className="flex flex-row gap-4 border-t p-6"
+                        className="flex flex-row gap-4"
                     >
                         <Input
                             ref={inputRef}
@@ -139,7 +139,7 @@ function RubberDuck() {
                             <SendIcon size={24} />
                         </Button>
                     </form>
-                </CardContent>
+                </CardFooter>
             </Card>
         </ViewTransition>
     );

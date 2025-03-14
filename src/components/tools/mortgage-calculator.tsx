@@ -100,13 +100,13 @@ function MortgageCalculator() {
                                                 values.map((v, i) =>
                                                     i === index
                                                         ? {
-                                                            ...v,
-                                                            interestRate:
-                                                                parseFloat(
-                                                                    e.target
-                                                                        .value,
-                                                                ),
-                                                        }
+                                                              ...v,
+                                                              interestRate:
+                                                                  parseFloat(
+                                                                      e.target
+                                                                          .value,
+                                                                  ),
+                                                          }
                                                         : v,
                                                 ),
                                             );
@@ -130,12 +130,12 @@ function MortgageCalculator() {
                                                 values.map((v, i) =>
                                                     i === index
                                                         ? {
-                                                            ...v,
-                                                            payment: parseInt(
-                                                                e.target
-                                                                    .value,
-                                                            ),
-                                                        }
+                                                              ...v,
+                                                              payment: parseInt(
+                                                                  e.target
+                                                                      .value,
+                                                              ),
+                                                          }
                                                         : v,
                                                 ),
                                             );
@@ -159,12 +159,12 @@ function MortgageCalculator() {
                                                 values.map((v, i) =>
                                                     i === index
                                                         ? {
-                                                            ...v,
-                                                            offset: parseInt(
-                                                                e.target
-                                                                    .value,
-                                                            ),
-                                                        }
+                                                              ...v,
+                                                              offset: parseInt(
+                                                                  e.target
+                                                                      .value,
+                                                              ),
+                                                          }
                                                         : v,
                                                 ),
                                             );
@@ -201,17 +201,17 @@ function MortgageCalculator() {
                                         interestRate:
                                             values.length > 0
                                                 ? values[values.length - 1]
-                                                    .interestRate
+                                                      .interestRate
                                                 : 5,
                                         payment:
                                             values.length > 0
                                                 ? values[values.length - 1]
-                                                    .payment
+                                                      .payment
                                                 : 5000,
                                         offset:
                                             values.length > 0
                                                 ? values[values.length - 1]
-                                                    .offset
+                                                      .offset
                                                 : 0,
                                     },
                                 ])
@@ -226,7 +226,7 @@ function MortgageCalculator() {
                             maxSetLength={maxSetLength}
                         />
                     ) : null}
-                    <Table className="mb-6">
+                    <Table>
                         <TableHeader>
                             <TableRow>
                                 <TableCell>Years to 0</TableCell>
