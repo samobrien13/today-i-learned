@@ -20,7 +20,7 @@ export async function GET() {
         feed.item({
             title: post.title,
             description: post.description,
-            url: `${siteUrl}/blog/${post.slug}`,
+            url: `${siteUrl}/rants/${post.slug}`,
             date: post.date,
         });
     });
