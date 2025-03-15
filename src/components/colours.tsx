@@ -13,8 +13,7 @@ import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Copy } from "lucide-react";
-import { keys } from "@/constants/colours";
-import { HSL } from "@/lib/colours";
+import { cssVar, HSL, keys } from "@/lib/colours";
 
 type Colour = {
     name: string;
@@ -33,9 +32,7 @@ function Colours() {
             const newPalette: Map<string, Colour> = new Map();
             keys.forEach((key) => {
                 if (key === "transparent") return;
-                const value = window
-                    .getComputedStyle(document.documentElement)
-                    .getPropertyValue(`--${key}`);
+                const value = cssVar(`--${key}`);
                 newPalette.set(key, {
                     name: key,
                     h: Number(value.split(" ")[0]),
@@ -48,16 +45,18 @@ function Colours() {
     }, [theme]);
 
     const css = Array.from(customColours.values())
-        .map((color) => `--${color.name}: ${color.h} ${color.s}% ${color.l}%`)
+        .map((color) => {
+            document.documentElement.style.setProperty(
+                `--${color.name}`,
+                `${color.h}, ${color.s}%, ${color.l}%`,
+            );
+
+            return `--${color.name}: ${color.h} ${color.s}% ${color.l}%`;
+        })
         .join(";\n\t\t\t\t\t");
 
     return (
         <>
-            <style>{`
-                .theme-custom {
-                    ${css}
-                }
-            `}</style>
             <Table>
                 <TableHeader>
                     <TableRow>
@@ -133,7 +132,7 @@ function Colours() {
                             </TableCell>
                             <TableCell>
                                 <div
-                                    className="ml-auto mr-0 h-8 w-8 rounded-md"
+                                    className="mr-0 ml-auto h-8 w-8 rounded-md"
                                     style={{
                                         backgroundColor: `hsl(${color.h}, ${color.s}%, ${color.l}%)`,
                                     }}

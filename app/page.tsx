@@ -6,7 +6,7 @@ import { unstable_ViewTransition as ViewTransition } from "react";
 export default function Home() {
     return (
         <section className="flex flex-1 flex-col gap-12 text-center md:justify-center md:pb-20">
-            <h1 className="bg-gradient-to-r from-primary to-primary-foreground bg-clip-text text-center font-mono text-5xl leading-relaxed text-transparent">
+            <h1 className="bg-linear-to-r from-primary to-primary-foreground bg-clip-text text-center font-mono text-5xl leading-relaxed text-transparent">
                 Today I Learned
             </h1>
             <p>A collection of my creations</p>
