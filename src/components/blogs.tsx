@@ -5,13 +5,7 @@ import Routes from "@/constants/Routes";
 import { Badge } from "./ui/badge";
 import { Link } from "./ui/link";
 import { formatRelativeDate } from "@/lib/date";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "./ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { useBlogs } from "@/hooks/use-blogs";
 
 type BlogsProps = {
@@ -66,24 +60,24 @@ function Blogs({ tags, allTags }: BlogsProps) {
                     <Link href={`/rants/${article.slug}`}>
                         <article className="flex flex-col">
                             <CardHeader>
-                                <ViewTransition
-                                    name={`blog-article-date-${article.slug}`}
-                                >
-                                    <p className="text-xs font-semibold">
-                                        {formatRelativeDate(article.date)}
-                                    </p>
-                                </ViewTransition>
-                                <ViewTransition
-                                    name={`blog-article-title-${article.slug}`}
-                                >
-                                    <CardTitle>{article.title}</CardTitle>
-                                </ViewTransition>
-                            </CardHeader>
-                            <CardContent>
+                                <div className="flex flex-col gap-2">
+                                    <ViewTransition
+                                        name={`blog-article-date-${article.slug}`}
+                                    >
+                                        <p className="text-xs font-semibold">
+                                            {formatRelativeDate(article.date)}
+                                        </p>
+                                    </ViewTransition>
+                                    <ViewTransition
+                                        name={`blog-article-title-${article.slug}`}
+                                    >
+                                        <CardTitle>{article.title}</CardTitle>
+                                    </ViewTransition>
+                                </div>
                                 <CardDescription>
                                     {article.description}
                                 </CardDescription>
-                            </CardContent>
+                            </CardHeader>
                         </article>
                     </Link>
                 </Card>

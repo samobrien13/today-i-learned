@@ -73,17 +73,14 @@ async function Tools({ searchParams }: { searchParams: SearchParams }) {
             ) : null}
             {filteredTools.map((tool) => (
                 <ViewTransition name={`${tool.slug}-card`} key={tool.title}>
-                    <Card
-                    >
+                    <Card>
                         <Link href={Routes.TOOL(tool.slug)}>
                             <CardHeader>
                                 <CardTitle>{tool.title}</CardTitle>
-                            </CardHeader>
-                            <CardContent>
                                 <CardDescription>
                                     {tool.description}
                                 </CardDescription>
-                            </CardContent>
+                            </CardHeader>
                         </Link>
                     </Card>
                 </ViewTransition>
