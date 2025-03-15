@@ -32,6 +32,7 @@
         "react-chartjs-2": "^5.3.0",
         "react-colorful": "^5.6.1",
         "react-dom": "^19.0.0",
+        "rss": "^1.2.2",
         "tailwindcss-animate": "^1.0.7",
         "zod": "^3.24.2"
     },
@@ -42,6 +43,7 @@
         "@types/react": "^19",
         "@types/react-dom": "^19",
         "@types/react-syntax-highlighter": "^15.5.13",
+        "@types/rss": "^0.0.32",
         "babel-plugin-react-compiler": "19.0.0-beta-714736e-20250131",
         "drizzle-kit": "^0.30.5",
         "eslint": "^9",
