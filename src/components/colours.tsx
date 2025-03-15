@@ -13,7 +13,7 @@ import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Copy } from "lucide-react";
-import { cssVar, HSL, keys } from "@/lib/colours";
+import { cssVar, HSL, keys, setCssVar } from "@/lib/colours";
 
 type Colour = {
     name: string;
@@ -45,14 +45,7 @@ function Colours() {
     }, [theme]);
 
     const css = Array.from(customColours.values())
-        .map((color) => {
-            document.documentElement.style.setProperty(
-                `--${color.name}`,
-                `${color.h}, ${color.s}%, ${color.l}%`,
-            );
-
-            return `--${color.name}: ${color.h} ${color.s}% ${color.l}%`;
-        })
+        .map((color) => `--${color.name}: ${color.h} ${color.s}% ${color.l}%`)
         .join(";\n\t\t\t\t\t");
 
     return (
@@ -84,7 +77,7 @@ function Colours() {
                                     step={0.1}
                                     min={0}
                                     max={360}
-                                    onValueChange={(value) =>
+                                    onValueChange={(value) => {
                                         setCustomColours(
                                             new Map(
                                                 customColours.set(color.name, {
@@ -92,8 +85,12 @@ function Colours() {
                                                     h: value[0],
                                                 }),
                                             ),
-                                        )
-                                    }
+                                        );
+                                        setCssVar(color.name, {
+                                            ...color,
+                                            h: value[0],
+                                        });
+                                    }}
                                 />
                                 <Slider
                                     className="h-4"
@@ -101,7 +98,7 @@ function Colours() {
                                     step={0.1}
                                     min={0}
                                     max={100}
-                                    onValueChange={(value) =>
+                                    onValueChange={(value) => {
                                         setCustomColours(
                                             new Map(
                                                 customColours.set(color.name, {
@@ -109,8 +106,12 @@ function Colours() {
                                                     s: value[0],
                                                 }),
                                             ),
-                                        )
-                                    }
+                                        );
+                                        setCssVar(color.name, {
+                                            ...color,
+                                            s: value[0],
+                                        });
+                                    }}
                                 />
                                 <Slider
                                     className="h-4"
@@ -118,7 +119,7 @@ function Colours() {
                                     step={0.1}
                                     min={0}
                                     max={100}
-                                    onValueChange={(value) =>
+                                    onValueChange={(value) => {
                                         setCustomColours(
                                             new Map(
                                                 customColours.set(color.name, {
@@ -126,8 +127,12 @@ function Colours() {
                                                     l: value[0],
                                                 }),
                                             ),
-                                        )
-                                    }
+                                        );
+                                        setCssVar(color.name, {
+                                            ...color,
+                                            l: value[0],
+                                        });
+                                    }}
                                 />
                             </TableCell>
                             <TableCell>

@@ -32,6 +32,13 @@ export function cssVar(name: string) {
     return getComputedStyle(document.documentElement).getPropertyValue(name);
 }
 
+export function setCssVar(name: string, color: HSL) {
+    document.documentElement.style.setProperty(
+        `--${name}`,
+        `${color.h}, ${color.s}%, ${color.l}%`,
+    );
+}
+
 export type HSL = {
     h: number;
     s: number;
