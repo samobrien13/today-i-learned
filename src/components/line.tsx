@@ -9,7 +9,7 @@ import {
     LineElement,
     Tooltip,
 } from "chart.js";
-import { cssVar } from "@/constants/colours";
+import { cssVar } from "@/lib/colours";
 
 ChartJS.register(
     CategoryScale,
