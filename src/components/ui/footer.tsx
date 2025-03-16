@@ -13,7 +13,7 @@ function Footer() {
                 <Link external href="https://www.linkedin.com/in/samobrien13">
                     <LinkedIn />
                 </Link>
-                <Link href="https://todayilearned.au/rants/feed">
+                <Link href={Routes.FEED}>
                     <RssIcon />
                 </Link>
                 <Link href={Routes.ABOUT} className="px-3 py-2">
