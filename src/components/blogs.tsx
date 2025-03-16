@@ -56,11 +56,11 @@ function Blogs({ tags, allTags }: BlogsProps) {
                     })}
                 </div>
             ) : null}
-            {blogs.map((article, index) => (
+            {blogs.map((article) => (
                 <article key={article.slug}>
                     <Card>
                         <Link href={`/rants/${article.slug}`}>
-                            <CardHeader>
+                            <CardHeader className="justify-start">
                                 <div className="flex flex-row gap-4">
                                     <div className="flex flex-1 flex-col gap-6">
                                         <div className="flex flex-col gap-2">
@@ -86,15 +86,15 @@ function Blogs({ tags, allTags }: BlogsProps) {
                                         </CardDescription>
                                     </div>
 
-                                    {index < 2 ? (
+                                    <div className="flex items-start">
                                         <Image
                                             className="rounded-sm object-contain"
-                                            src={`/images/${article.slug}.webp`}
-                                            width={100}
-                                            height={100}
-                                            alt={article.title}
+                                            src={article.image.src}
+                                            width={128}
+                                            height={128}
+                                            alt={article.image.alt}
                                         />
-                                    ) : null}
+                                    </div>
                                 </div>
                             </CardHeader>
                         </Link>
