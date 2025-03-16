@@ -8,6 +8,10 @@ export const THE_BEST_PULL_REQUEST_TEMPLATE: BlogData = {
     date: "2025-03-08",
     slug: "the-best-pull-request-template",
     tags: ["engineering"],
+    image: {
+        src: "/images/rants/shrek.png",
+        alt: "Shrek",
+    },
     component: <TheBestPullRequestTemplate />,
 };
 

@@ -15,6 +15,10 @@ export const DOTFILES: BlogData = {
     date: "2025-01-21",
     slug: "dotfiles",
     tags: ["engineering"],
+    image: {
+        src: "/images/rants/dotfiles.webp",
+        alt: "Dotfiles",
+    },
     component: <Dotfiles />,
 };
 

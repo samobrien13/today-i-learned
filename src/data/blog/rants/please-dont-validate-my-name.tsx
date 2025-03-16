@@ -8,6 +8,10 @@ export const PLEASE_DONT_VALIDATE_MY_NAME: BlogData = {
     date: "2025-01-26",
     slug: "please-dont-validate-my-name",
     tags: ["engineering"],
+    image: {
+        src: "/images/rants/names.webp",
+        alt: "Name validation",
+    },
     component: <PleaseDontValidateMyName />,
 };
 

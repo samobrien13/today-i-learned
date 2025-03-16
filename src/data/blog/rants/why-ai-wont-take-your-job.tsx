@@ -10,6 +10,10 @@ export const WHY_AI_WONT_TAKE_YOUR_JOB: BlogData = {
     date: "2025-02-09",
     slug: "why-ai-wont-take-your-job",
     tags: ["ai", "engineering"],
+    image: {
+        src: "/images/rants/ai.webp",
+        alt: "AI",
+    },
     component: <WhyAiWontTakeYourJob />,
 };
 
