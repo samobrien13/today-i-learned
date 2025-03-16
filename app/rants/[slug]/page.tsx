@@ -30,6 +30,9 @@ export async function generateMetadata({
         alternates: {
             canonical: `https://todayilearned.au/rants/${blog.slug}`,
         },
+        openGraph: {
+            images: [blog.image.src as string],
+        },
     };
 }
 
