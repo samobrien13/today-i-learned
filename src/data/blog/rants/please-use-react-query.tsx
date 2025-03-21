@@ -11,7 +11,7 @@ export const PLEASE_USE_REACT_QUERY: BlogData = {
     slug: "please-use-react-query",
     tags: ["engineering", "react"],
     image: {
-        src: "/images/rants/react-query.webp",
+        src: "/images/rants/tanstack.png",
         alt: "React Query",
     },
     component: <PleaseUseReactQuery />,
