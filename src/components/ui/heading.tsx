@@ -1,10 +1,15 @@
 "use client";
 
 import { useElementDimensions } from "@/hooks/use-element-dimensions";
+import { cssVar } from "@/lib/colours";
 import { motion, useMotionValue, useTransform } from "motion/react";
 import { useRef } from "react";
 
-function Heading() {
+type HeadingProps = {
+    children: React.ReactNode;
+};
+
+function Heading({ children }: HeadingProps) {
     const ref = useRef<HTMLDivElement>(null);
     const [{ width, height, top, left }, measure] = useElementDimensions(ref);
     const gradientX = useMotionValue(0.5);
@@ -13,9 +18,13 @@ function Heading() {
         () =>
             `conic-gradient(from 0deg at calc(${
                 gradientX.get() * 100
-            }% - ${left}px) calc(${
-                gradientY.get() * 100
-            }% - ${top}px), #0cdcf7, #ff0088, #fff312, #0cdcf7)`,
+            }% - ${left}px) calc(${gradientY.get() * 100}% - ${top}px),
+                hsl(${cssVar("--chart-1")}),
+                hsl(${cssVar("--chart-2")}),
+                hsl(${cssVar("--chart-3")}),
+                hsl(${cssVar("--chart-4")}),
+                hsl(${cssVar("--chart-5")})
+            )`,
     );
 
     return (
@@ -26,18 +35,17 @@ function Heading() {
                 gradientY.set(e.clientY / height);
             }}
         >
-            <motion.div
+            <motion.h1
                 ref={ref}
+                className="bg-clip-text p-16 text-center font-mono text-6xl leading-relaxed text-transparent"
                 style={{
-                    background,
+                    backgroundImage: background,
                     cursor: "none",
                 }}
                 onPointerEnter={() => measure()}
             >
-                <h1 className="text-center font-mono text-5xl text-transparent">
-                    Today I Learned
-                </h1>
-            </motion.div>
+                {children}
+            </motion.h1>
         </div>
     );
 }
