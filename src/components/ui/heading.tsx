@@ -10,7 +10,7 @@ type HeadingProps = {
 };
 
 function Heading({ children }: HeadingProps) {
-    const ref = useRef<HTMLDivElement>(null);
+    const ref = useRef<HTMLHeadingElement>(null);
     const [{ width, height, top, left }, measure] = useElementDimensions(ref);
     const gradientX = useMotionValue(0.5);
     const gradientY = useMotionValue(0.5);
