@@ -1,7 +1,6 @@
 "use client";
 
 import { useElementDimensions } from "@/hooks/use-element-dimensions";
-import { cssVar } from "@/lib/colours";
 import { motion, useMotionValue, useTransform } from "motion/react";
 import { useRef } from "react";
 
@@ -19,11 +18,11 @@ function Heading({ children }: HeadingProps) {
             `conic-gradient(from 0deg at calc(${
                 gradientX.get() * 100
             }% - ${left}px) calc(${gradientY.get() * 100}% - ${top}px),
-                hsl(${cssVar("--chart-1")}),
-                hsl(${cssVar("--chart-2")}),
-                hsl(${cssVar("--chart-3")}),
-                hsl(${cssVar("--chart-4")}),
-                hsl(${cssVar("--chart-5")})
+                hsl(var(--chart-1)),
+                hsl(var(--chart-2)),
+                hsl(var(--chart-3)),
+                hsl(var(--chart-4)),
+                hsl(var(--chart-5))
             )`,
     );
 
