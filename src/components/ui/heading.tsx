@@ -29,6 +29,10 @@ function Heading({ children }: HeadingProps) {
     return (
         <div
             className="flex items-center justify-center"
+            onTouchMove={(e) => {
+                gradientX.set(e.touches[0].clientX / width);
+                gradientY.set(e.touches[0].clientY / height);
+            }}
             onPointerMove={(e) => {
                 gradientX.set(e.clientX / width);
                 gradientY.set(e.clientY / height);
