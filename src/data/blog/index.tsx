@@ -13,12 +13,14 @@ import { HOW_TO_IMPLEMENT_DEEP_LINKS_WITH_EXPO_ROUTER } from "./rants/how-to-imp
 import { PLEASE_USE_REACT_QUERY } from "./rants/please-use-react-query";
 import { THE_BEST_PULL_REQUEST_TEMPLATE } from "./rants/the-best-pull-request-template";
 import { REACT_QUERY_WITH_SERVER_ACTIONS } from "./rants/react-query-with-server-actions";
+import { ImageProps } from "next/image";
 
 export type BlogData = {
     title: string;
     description: string;
     date: string;
     slug: string;
+    image: ImageProps;
     tags: string[];
     component: ReactNode;
 } & Metadata;

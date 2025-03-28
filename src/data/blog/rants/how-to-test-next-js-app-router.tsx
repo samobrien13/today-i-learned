@@ -9,6 +9,10 @@ export const HOW_TO_TEST_NEXT_JS_APP_ROUTER: BlogData = {
     date: "2025-02-10",
     slug: "how-to-test-next-js-app-router",
     tags: ["testing", "engineering", "next.js"],
+    image: {
+        src: "/images/rants/next.webp",
+        alt: "Next.js",
+    },
     component: <HowToTestNextJsAppRouter />,
 };
 

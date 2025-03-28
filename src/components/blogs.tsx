@@ -7,6 +7,7 @@ import { Link } from "./ui/link";
 import { formatRelativeDate } from "@/lib/date";
 import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { useBlogs } from "@/hooks/use-blogs";
+import Image from "next/image";
 
 type BlogsProps = {
     tags: string[];
@@ -56,31 +57,49 @@ function Blogs({ tags, allTags }: BlogsProps) {
                 </div>
             ) : null}
             {blogs.map((article) => (
-                <Card key={article.slug}>
-                    <Link href={`/rants/${article.slug}`}>
-                        <article className="flex flex-col">
-                            <CardHeader>
-                                <div className="flex flex-col gap-2">
-                                    <ViewTransition
-                                        name={`blog-article-date-${article.slug}`}
-                                    >
-                                        <p className="text-xs font-semibold">
-                                            {formatRelativeDate(article.date)}
-                                        </p>
-                                    </ViewTransition>
-                                    <ViewTransition
-                                        name={`blog-article-title-${article.slug}`}
-                                    >
-                                        <CardTitle>{article.title}</CardTitle>
-                                    </ViewTransition>
+                <article key={article.slug}>
+                    <Card>
+                        <Link href={`/rants/${article.slug}`}>
+                            <CardHeader className="justify-start">
+                                <div className="flex flex-row gap-4">
+                                    <div className="flex flex-1 flex-col gap-6">
+                                        <div className="flex flex-col gap-2">
+                                            <ViewTransition
+                                                name={`blog-article-date-${article.slug}`}
+                                            >
+                                                <p className="text-xs font-semibold">
+                                                    {formatRelativeDate(
+                                                        article.date,
+                                                    )}
+                                                </p>
+                                            </ViewTransition>
+                                            <ViewTransition
+                                                name={`blog-article-title-${article.slug}`}
+                                            >
+                                                <CardTitle>
+                                                    {article.title}
+                                                </CardTitle>
+                                            </ViewTransition>
+                                        </div>
+                                        <CardDescription>
+                                            {article.description}
+                                        </CardDescription>
+                                    </div>
+
+                                    <div className="flex items-start">
+                                        <Image
+                                            className="rounded-sm object-contain"
+                                            src={article.image.src}
+                                            width={128}
+                                            height={128}
+                                            alt={article.image.alt}
+                                        />
+                                    </div>
                                 </div>
-                                <CardDescription>
-                                    {article.description}
-                                </CardDescription>
                             </CardHeader>
-                        </article>
-                    </Link>
-                </Card>
+                        </Link>
+                    </Card>
+                </article>
             ))}
         </>
     );
