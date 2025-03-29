@@ -1,6 +1,7 @@
 "use client";
 
 import {
+    exampleSentences,
     type LayoutData,
     layouts,
     Layouts,
@@ -17,6 +18,7 @@ import {
 import { Label } from "../ui/label";
 import { cssVar } from "@/lib/colours";
 import useLocalStorage from "@/hooks/use-local-storage";
+import { Input } from "../ui/input";
 
 export interface KeyboardLayoutCanvasProps {
     keyWidth?: number;
@@ -245,6 +247,9 @@ const KeyboardLayout: React.FC<KeyboardLayoutCanvasProps> = ({
         };
     }, []);
 
+    const exampleSentence =
+        exampleSentences[Math.floor(Math.random() * exampleSentences.length)];
+
     return (
         <div className="flex flex-col gap-4">
             <div className="flex flex-1 flex-col gap-4">
@@ -266,6 +271,7 @@ const KeyboardLayout: React.FC<KeyboardLayoutCanvasProps> = ({
                         ))}
                     </SelectContent>
                 </Select>
+                <Input placeholder={exampleSentence} />
             </div>
             <div className="absolute top-64 left-0 mx-auto flex w-full items-center">
                 <canvas
