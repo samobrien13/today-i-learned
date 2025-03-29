@@ -247,3 +247,26 @@ export const layouts: Record<Layouts, LayoutData> = {
     dvorak: dvorakLayout,
     colemak: colemakLayout,
 };
+
+export const exampleSentences = [
+    "Crazy Fredrick bought many very exquisite opal jewels.",
+    "The quick brown fox jumps over a lazy dog.",
+    "Pack my box with five dozen liquor jugs.",
+    "How quickly daft jumping zebras vex.",
+    "Five quacking zephyrs jolt my wax bed.",
+    "Jived fox nymph grabs quick waltz.",
+    "Bright vixens jump; dozy fowl quack.",
+    "Quick wafting zephyrs blow bold Jim.",
+    "Waltz, bad nymph, for quick jigs pop.",
+    "Jackdaws love my big sphinx of quartz.",
+    "The Sphinx just waves at my black cat quiz.",
+    "My girl wove six dozen plaid jackets before she quit.",
+    "Six big devils from Japan quickly forget how to waltz.",
+    "Big dwarves heckle my top quiz of jumbled functions.",
+    "Few quips galvanized the mock jury box.",
+    "Bawds jog, flick quartz, zip nymphs.",
+    "Waltz, nymph, for quick jigs bid Bud.",
+    "Fix problems quickly with galvanized jets.",
+    "Heavy boxes perform quick waltzes and jigs.",
+    "A wizard's job is to zap chumps quickly in fog.",
+];
