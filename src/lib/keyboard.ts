@@ -276,3 +276,23 @@ export const exampleSentences = [
     "Heavy boxes perform quick waltzes and jigs.",
     "A wizard's job is to zap chumps quickly in fog.",
 ];
+
+function createKeyMap(qwertyLayout: LayoutData, targetLayout: LayoutData) {
+    const map = new Map<string, string>();
+
+    qwertyLayout.forEach((row, rowIndex) => {
+        row.forEach((key) => {
+            const targetKey = targetLayout[rowIndex]?.find(
+                (k) => k.code === key.code,
+            );
+            if (targetKey) {
+                map.set(key.label, targetKey.label);
+            }
+        });
+    });
+
+    return map;
+}
+
+export const qwertyToDvorakMap = createKeyMap(qwertyLayout, dvorakLayout);
+export const qwertyToColemakMap = createKeyMap(qwertyLayout, colemakLayout);

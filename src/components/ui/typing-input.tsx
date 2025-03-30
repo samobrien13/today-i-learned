@@ -1,15 +1,54 @@
-import { exampleSentences } from "@/lib/keyboard";
+import {
+    exampleSentences,
+    Layouts,
+    qwertyToColemakMap,
+    qwertyToDvorakMap,
+} from "@/lib/keyboard";
 import React, { useState, useEffect, useRef, ChangeEvent } from "react";
 
-type TypingInputProps = {
-    sentences?: string[];
+function getRandomSentence() {
+    return exampleSentences[
+        Math.floor(Math.random() * exampleSentences.length)
+    ];
+}
+
+const qwertyToDvorak = {
+    q: "'",
+    w: ",", // ,
+    e: ".", // .
+    r: "p",
+    t: "y",
+    y: "f",
+    u: "g",
+    i: "c",
+    o: "r",
+    p: "l",
+    a: "a",
+    s: "o",
+    d: "e",
+    f: "u",
+    g: "i",
+    h: "d",
+    j: "h",
+    k: "t",
+    l: "n",
+    z: ";", // ;
+    x: "q",
+    c: "j",
+    v: "k",
+    b: "x",
+    n: "b",
+    m: "m",
 };
 
-function TypingInput({ sentences = exampleSentences }: TypingInputProps) {
-    const [targetSentence, setTargetSentence] = useState(
-        sentences[Math.floor(Math.random() * sentences.length)],
-    );
+type TypingInputProps = {
+    targetLayout: Layouts;
+};
+
+function TypingInput({ targetLayout }: TypingInputProps) {
+    const [targetSentence, setTargetSentence] = useState(getRandomSentence());
     const [typedText, setTypedText] = useState<string>("");
+    const [targetText, setTargetText] = useState<string>("");
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
@@ -20,6 +59,20 @@ function TypingInput({ sentences = exampleSentences }: TypingInputProps) {
         const currentTypedText = event.target.value;
 
         setTypedText(currentTypedText);
+        setTargetText(
+            currentTypedText
+                .split("")
+                .map((char) => {
+                    if (targetLayout === "colemak") {
+                        return qwertyToColemakMap.get(char) ?? char;
+                    } else if (targetLayout === "dvorak") {
+                        return qwertyToDvorakMap.get(char) ?? char;
+                    } else {
+                        return char;
+                    }
+                })
+                .join(""),
+        );
 
         // Check for completion
         if (currentTypedText.length === targetSentence.length) {
@@ -28,9 +81,7 @@ function TypingInput({ sentences = exampleSentences }: TypingInputProps) {
     };
 
     const handleNextSentence = (): void => {
-        setTargetSentence(
-            sentences[Math.floor(Math.random() * sentences.length)],
-        );
+        setTargetSentence(getRandomSentence());
         setTypedText("");
         setTimeout(() => inputRef.current?.focus(), 0);
     };
@@ -44,10 +95,10 @@ function TypingInput({ sentences = exampleSentences }: TypingInputProps) {
             if (index < typedText.length) {
                 // Character has been typed
                 charClass =
-                    typedText[index] === char
+                    targetText[index] === char
                         ? "text-green-600"
                         : "text-red-600";
-                if (typedText[index] !== char) {
+                if (targetText[index] !== char) {
                     charClass += " text-destructive underline";
                 }
             } else if (isCurrentChar) {
