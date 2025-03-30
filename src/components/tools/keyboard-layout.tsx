@@ -18,6 +18,7 @@ import { Label } from "../ui/label";
 import { cssVar } from "@/lib/colours";
 import useLocalStorage from "@/hooks/use-local-storage";
 import TypingInput from "../ui/typing-input";
+import useWindowDimensions from "@/hooks/use-window-dimensions";
 
 export interface KeyboardLayoutCanvasProps {
     keyWidth?: number;
@@ -34,9 +35,6 @@ export interface KeyboardLayoutCanvasProps {
     borderRadius?: number;
 }
 
-// --- Default Configuration ---
-const DEFAULT_KEY_WIDTH = 50;
-const DEFAULT_KEY_HEIGHT = 50;
 const DEFAULT_KEY_GAP = 5;
 const DEFAULT_ROW_GAP = 5;
 const DEFAULT_PADDING = 10;
@@ -52,9 +50,7 @@ const colorToCanvas = (color: string) => {
     return `hsl(${cssVar(color).split(" ").join(", ")})`;
 };
 
-const KeyboardLayout: React.FC<KeyboardLayoutCanvasProps> = ({
-    keyWidth = DEFAULT_KEY_WIDTH,
-    keyHeight = DEFAULT_KEY_HEIGHT,
+function KeyboardLayout({
     keyGap = DEFAULT_KEY_GAP,
     rowGap = DEFAULT_ROW_GAP,
     padding = DEFAULT_PADDING,
@@ -65,7 +61,12 @@ const KeyboardLayout: React.FC<KeyboardLayoutCanvasProps> = ({
     textColor = DEFAULT_TEXT_COLOR,
     borderColor = DEFAULT_BORDER_COLOR,
     borderRadius = DEFAULT_BORDER_RADIUS,
-}) => {
+}: KeyboardLayoutCanvasProps) {
+    const { width } = useWindowDimensions();
+
+    const keyWidth = width > 640 ? 50 : width / 20;
+    const keyHeight = keyWidth;
+
     const [targetLayout, setTargetLayout] = useLocalStorage<Layouts>(
         "targetLayout",
         "qwerty",
@@ -184,14 +185,14 @@ const KeyboardLayout: React.FC<KeyboardLayoutCanvasProps> = ({
             });
         },
         [
+            keyWidth,
+            keyHeight,
             backgroundColor,
             keyColor,
             keyPressedColor,
             borderColor,
             textColor,
             fontSize,
-            keyWidth,
-            keyHeight,
             keyGap,
             rowGap,
             padding,
@@ -269,7 +270,7 @@ const KeyboardLayout: React.FC<KeyboardLayoutCanvasProps> = ({
                 </Select>
                 <TypingInput />
             </div>
-            <div className="absolute top-100 left-0 mx-auto flex w-full items-center">
+            <div className="mx-auto flex w-full items-center justify-center">
                 <canvas
                     ref={canvasRef}
                     width={canvasWidth}
@@ -278,6 +279,6 @@ const KeyboardLayout: React.FC<KeyboardLayoutCanvasProps> = ({
             </div>
         </div>
     );
-};
+}
 
 export { KeyboardLayout };

@@ -117,10 +117,6 @@
         }
     }
 
-    body {
-        @apply bg-background text-foreground;
-    }
-
     code {
         counter-reset: step;
         counter-increment: step 0;
