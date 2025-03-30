@@ -23,10 +23,10 @@ export const qwertyLayout: LayoutData = [
         { label: "0", code: "Digit0" },
         { label: "-", code: "Minus" },
         { label: "=", code: "Equal" },
-        { label: "Backspace", code: "Backspace", widthMultiplier: 2 },
+        { label: "⌫", code: "Backspace", widthMultiplier: 2 },
     ],
     [
-        { label: "Tab", code: "Tab", widthMultiplier: 1.5 },
+        { label: "↹", code: "Tab", widthMultiplier: 1.5 },
         { label: "Q", code: "KeyQ" },
         { label: "W", code: "KeyW" },
         { label: "E", code: "KeyE" },
@@ -42,7 +42,7 @@ export const qwertyLayout: LayoutData = [
         { label: "\\", code: "Backslash", widthMultiplier: 1.5 },
     ],
     [
-        { label: "Caps Lock", code: "CapsLock", widthMultiplier: 1.8 },
+        { label: "⇪", code: "CapsLock", widthMultiplier: 1.8 },
         { label: "A", code: "KeyA" },
         { label: "S", code: "KeyS" },
         { label: "D", code: "KeyD" },
@@ -54,10 +54,10 @@ export const qwertyLayout: LayoutData = [
         { label: "L", code: "KeyL" },
         { label: ";", code: "Semicolon" },
         { label: "'", code: "Quote" },
-        { label: "Enter", code: "Enter", widthMultiplier: 2.2 },
+        { label: "↵", code: "Enter", widthMultiplier: 2.2 },
     ],
     [
-        { label: "Shift", code: "ShiftLeft", widthMultiplier: 2.5 },
+        { label: "⇧", code: "ShiftLeft", widthMultiplier: 2.5 },
         { label: "Z", code: "KeyZ" },
         { label: "X", code: "KeyX" },
         { label: "C", code: "KeyC" },
@@ -68,17 +68,16 @@ export const qwertyLayout: LayoutData = [
         { label: ",", code: "Comma" },
         { label: ".", code: "Period" },
         { label: "/", code: "Slash" },
-        { label: "Shift", code: "ShiftRight", widthMultiplier: 2.5 },
+        { label: "⇧", code: "ShiftRight", widthMultiplier: 2.5 },
     ],
     [
-        { label: "Ctrl", code: "ControlLeft", widthMultiplier: 1.5 },
-        { label: "Win", code: "MetaLeft", widthMultiplier: 1.2 },
-        { label: "Alt", code: "AltLeft", widthMultiplier: 1.2 },
-        { label: "Space", code: "Space", widthMultiplier: 6.5 },
-        { label: "Alt", code: "AltRight", widthMultiplier: 1.2 },
-        { label: "Win", code: "MetaRight", widthMultiplier: 1.2 },
-        // { label: 'Menu', code: 'ContextMenu' }, // Often missing or different code
-        { label: "Ctrl", code: "ControlRight", widthMultiplier: 1.5 },
+        { label: "⌃", code: "ControlLeft", widthMultiplier: 1.5 },
+        { label: "⌘", code: "MetaLeft", widthMultiplier: 1.2 },
+        { label: "⌥", code: "AltLeft", widthMultiplier: 1.2 },
+        { label: "␣", code: "Space", widthMultiplier: 6.5 },
+        { label: "⌥", code: "AltRight", widthMultiplier: 1.2 },
+        { label: "⌘", code: "MetaRight", widthMultiplier: 1.2 },
+        { label: "⌃", code: "ControlRight", widthMultiplier: 1.5 },
     ],
 ];
 
@@ -98,11 +97,11 @@ export const dvorakLayout: LayoutData = [
         { label: "0", code: "Digit0" },
         { label: "[", code: "BracketLeft" }, // Dvorak specific
         { label: "]", code: "BracketRight" }, // Dvorak specific
-        { label: "Backspace", code: "Backspace", widthMultiplier: 2 },
+        { label: "⌫", code: "Backspace", widthMultiplier: 2 },
     ],
     // Row 2 (Upper Letter Row)
     [
-        { label: "Tab", code: "Tab", widthMultiplier: 1.5 },
+        { label: "↹", code: "Tab", widthMultiplier: 1.5 },
         { label: "'", code: "KeyQ" }, // Q -> '
         { label: ",", code: "KeyW" }, // W -> ,
         { label: ".", code: "KeyE" }, // E -> .
@@ -119,7 +118,7 @@ export const dvorakLayout: LayoutData = [
     ],
     // Row 3 (Home Row)
     [
-        { label: "Caps Lock", code: "CapsLock", widthMultiplier: 1.8 },
+        { label: "⇪", code: "CapsLock", widthMultiplier: 1.8 },
         { label: "A", code: "KeyA" }, // A -> A (same position)
         { label: "O", code: "KeyS" }, // S -> O
         { label: "E", code: "KeyD" }, // D -> E
@@ -131,11 +130,11 @@ export const dvorakLayout: LayoutData = [
         { label: "N", code: "KeyL" }, // L -> N
         { label: "S", code: "Semicolon" }, // ; -> S
         { label: "-", code: "Quote" }, // ' -> -
-        { label: "Enter", code: "Enter", widthMultiplier: 2.2 },
+        { label: "↵", code: "Enter", widthMultiplier: 2.2 },
     ],
     // Row 4 (Lower Letter Row)
     [
-        { label: "Shift", code: "ShiftLeft", widthMultiplier: 2.5 },
+        { label: "⇧", code: "ShiftLeft", widthMultiplier: 2.5 },
         { label: ";", code: "KeyZ" }, // Z -> ;
         { label: "Q", code: "KeyX" }, // X -> Q
         { label: "J", code: "KeyC" }, // C -> J
@@ -146,18 +145,17 @@ export const dvorakLayout: LayoutData = [
         { label: "W", code: "Comma" }, // , -> W
         { label: "V", code: "Period" }, // . -> V
         { label: "Z", code: "Slash" }, // / -> Z
-        { label: "Shift", code: "ShiftRight", widthMultiplier: 2.5 },
+        { label: "⇧", code: "ShiftRight", widthMultiplier: 2.5 },
     ],
     // Row 5 (Bottom/Space Row) - Same labels/codes as QWERTY
     [
-        { label: "Ctrl", code: "ControlLeft", widthMultiplier: 1.5 },
-        { label: "Win", code: "MetaLeft", widthMultiplier: 1.2 },
-        { label: "Alt", code: "AltLeft", widthMultiplier: 1.2 },
-        { label: "Space", code: "Space", widthMultiplier: 6.5 },
-        { label: "Alt", code: "AltRight", widthMultiplier: 1.2 },
-        { label: "Win", code: "MetaRight", widthMultiplier: 1.2 },
-        // { label: 'Menu', code: 'ContextMenu' }, // Optional
-        { label: "Ctrl", code: "ControlRight", widthMultiplier: 1.5 },
+        { label: "⌃", code: "ControlLeft", widthMultiplier: 1.5 },
+        { label: "⌘", code: "MetaLeft", widthMultiplier: 1.2 },
+        { label: "⌥", code: "AltLeft", widthMultiplier: 1.2 },
+        { label: "␣", code: "Space", widthMultiplier: 6.5 },
+        { label: "⌥", code: "AltRight", widthMultiplier: 1.2 },
+        { label: "⌘", code: "MetaRight", widthMultiplier: 1.2 },
+        { label: "⌃", code: "ControlRight", widthMultiplier: 1.5 },
     ],
 ];
 
@@ -177,11 +175,11 @@ export const colemakLayout: LayoutData = [
         { label: "0", code: "Digit0" },
         { label: "-", code: "Minus" },
         { label: "=", code: "Equal" },
-        { label: "Backspace", code: "Backspace", widthMultiplier: 2 },
+        { label: "⌫", code: "Backspace", widthMultiplier: 2 },
     ],
     // Row 2 (Upper Letter Row)
     [
-        { label: "Tab", code: "Tab", widthMultiplier: 1.5 },
+        { label: "↹", code: "Tab", widthMultiplier: 1.5 },
         { label: "Q", code: "KeyQ" }, // Q -> Q (same)
         { label: "W", code: "KeyW" }, // W -> W (same)
         { label: "F", code: "KeyE" }, // E -> F
@@ -198,9 +196,7 @@ export const colemakLayout: LayoutData = [
     ],
     // Row 3 (Home Row)
     [
-        // Colemak often maps CapsLock to Backspace, but the code remains CapsLock
-        // unless physically rewired. Label can be 'Backspace' or 'Caps Lock'.
-        { label: "Caps Lock", code: "CapsLock", widthMultiplier: 1.8 },
+        { label: "⇪", code: "CapsLock", widthMultiplier: 1.8 },
         { label: "A", code: "KeyA" }, // A -> A (same)
         { label: "R", code: "KeyS" }, // S -> R
         { label: "S", code: "KeyD" }, // D -> S
@@ -212,11 +208,11 @@ export const colemakLayout: LayoutData = [
         { label: "I", code: "KeyL" }, // L -> I
         { label: "O", code: "Semicolon" }, // ; -> O
         { label: "'", code: "Quote" }, // ' -> ' (same)
-        { label: "Enter", code: "Enter", widthMultiplier: 2.2 },
+        { label: "↵", code: "Enter", widthMultiplier: 2.2 },
     ],
     // Row 4 (Lower Letter Row)
     [
-        { label: "Shift", code: "ShiftLeft", widthMultiplier: 2.5 },
+        { label: "⇧", code: "ShiftLeft", widthMultiplier: 2.5 },
         { label: "Z", code: "KeyZ" }, // Z -> Z (same)
         { label: "X", code: "KeyX" }, // X -> X (same)
         { label: "C", code: "KeyC" }, // C -> C (same)
@@ -227,18 +223,17 @@ export const colemakLayout: LayoutData = [
         { label: ",", code: "Comma" }, // , -> , (same)
         { label: ".", code: "Period" }, // . -> . (same)
         { label: "/", code: "Slash" }, // / -> / (same)
-        { label: "Shift", code: "ShiftRight", widthMultiplier: 2.5 },
+        { label: "⇧", code: "ShiftRight", widthMultiplier: 2.5 },
     ],
     // Row 5 (Bottom/Space Row) - Same labels/codes as QWERTY
     [
-        { label: "Ctrl", code: "ControlLeft", widthMultiplier: 1.5 },
-        { label: "Win", code: "MetaLeft", widthMultiplier: 1.2 },
-        { label: "Alt", code: "AltLeft", widthMultiplier: 1.2 },
-        { label: "Space", code: "Space", widthMultiplier: 6.5 },
-        { label: "Alt", code: "AltRight", widthMultiplier: 1.2 },
-        { label: "Win", code: "MetaRight", widthMultiplier: 1.2 },
-        // { label: 'Menu', code: 'ContextMenu' }, // Optional
-        { label: "Ctrl", code: "ControlRight", widthMultiplier: 1.5 },
+        { label: "⌃", code: "ControlLeft", widthMultiplier: 1.5 },
+        { label: "⌘", code: "MetaLeft", widthMultiplier: 1.2 },
+        { label: "⌥", code: "AltLeft", widthMultiplier: 1.2 },
+        { label: "␣", code: "Space", widthMultiplier: 6.5 },
+        { label: "⌥", code: "AltRight", widthMultiplier: 1.2 },
+        { label: "⌘", code: "MetaRight", widthMultiplier: 1.2 },
+        { label: "⌃", code: "ControlRight", widthMultiplier: 1.5 },
     ],
 ];
 
