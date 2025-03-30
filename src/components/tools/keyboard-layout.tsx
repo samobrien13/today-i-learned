@@ -279,7 +279,7 @@ function KeyboardLayout({
                         </Select>
                     </CardHeader>
                     <CardContent>
-                        <TypingInput />
+                        <TypingInput targetLayout={targetLayout} />
                     </CardContent>
                 </Card>
             </div>
