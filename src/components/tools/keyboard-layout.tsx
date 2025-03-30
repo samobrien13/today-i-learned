@@ -19,6 +19,7 @@ import { cssVar } from "@/lib/colours";
 import useLocalStorage from "@/hooks/use-local-storage";
 import TypingInput from "../ui/typing-input";
 import useWindowDimensions from "@/hooks/use-window-dimensions";
+import { Card, CardContent, CardHeader } from "../ui/card";
 
 export interface KeyboardLayoutCanvasProps {
     keyWidth?: number;
@@ -250,25 +251,31 @@ function KeyboardLayout({
     return (
         <div className="flex flex-col gap-4">
             <div className="flex flex-1 flex-col gap-4">
-                <Label>Target Layout</Label>
-                <Select
-                    value={targetLayout}
-                    onValueChange={(value) => {
-                        setTargetLayout(value as Layouts);
-                    }}
-                >
-                    <SelectTrigger>
-                        <SelectValue placeholder="Select a layout" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        {Object.keys(layouts).map((layout) => (
-                            <SelectItem key={layout} value={layout}>
-                                {layout}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
-                <TypingInput />
+                <Card>
+                    <CardHeader>
+                        <Label>Target Layout</Label>
+                        <Select
+                            value={targetLayout}
+                            onValueChange={(value) => {
+                                setTargetLayout(value as Layouts);
+                            }}
+                        >
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select a layout" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {Object.keys(layouts).map((layout) => (
+                                    <SelectItem key={layout} value={layout}>
+                                        {layout}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </CardHeader>
+                    <CardContent>
+                        <TypingInput />
+                    </CardContent>
+                </Card>
             </div>
             <div className="mx-auto flex w-full items-center justify-center">
                 <canvas
