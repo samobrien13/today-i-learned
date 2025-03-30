@@ -467,7 +467,10 @@ function createKeyMap(qwertyLayout: LayoutData, targetLayout: LayoutData) {
                 (k) => k.code === key.code,
             );
             if (targetKey) {
-                map.set(key.label, targetKey.label);
+                map.set(key.label.toLowerCase(), targetKey.label.toLowerCase());
+                if (key.shiftLabel && targetKey.shiftLabel) {
+                    map.set(key.shiftLabel, targetKey.shiftLabel);
+                }
             }
         });
     });
@@ -480,4 +483,8 @@ export const qwertyToColemakMap = createKeyMap(qwertyLayout, colemakLayout);
 export const qwertyToProgrammersDvorakMap = createKeyMap(
     qwertyLayout,
     programmersDvorakLayout,
+);
+export const qwertyToRealProgrammersDvorakMap = createKeyMap(
+    qwertyLayout,
+    realProgrammersDvorakLayout,
 );

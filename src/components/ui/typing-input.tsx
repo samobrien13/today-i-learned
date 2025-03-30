@@ -3,6 +3,8 @@ import {
     Layouts,
     qwertyToColemakMap,
     qwertyToDvorakMap,
+    qwertyToProgrammersDvorakMap,
+    qwertyToRealProgrammersDvorakMap,
 } from "@/lib/keyboard";
 import React, { useState, useEffect, useRef, ChangeEvent } from "react";
 
@@ -63,10 +65,18 @@ function TypingInput({ targetLayout }: TypingInputProps) {
             currentTypedText
                 .split("")
                 .map((char) => {
+                    console.log(char);
                     if (targetLayout === "colemak") {
                         return qwertyToColemakMap.get(char) ?? char;
                     } else if (targetLayout === "dvorak") {
                         return qwertyToDvorakMap.get(char) ?? char;
+                    } else if (targetLayout === "programmersDvorak") {
+                        return qwertyToProgrammersDvorakMap.get(char) ?? char;
+                    } else if (targetLayout === "realProgrammersDvorak") {
+                        console.log(qwertyToRealProgrammersDvorakMap.get(char));
+                        return (
+                            qwertyToRealProgrammersDvorakMap.get(char) ?? char
+                        );
                     } else {
                         return char;
                     }
