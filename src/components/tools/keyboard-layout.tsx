@@ -2,6 +2,7 @@
 
 import {
     type LayoutData,
+    layoutNames,
     layouts,
     Layouts,
     qwertyLayout,
@@ -272,7 +273,7 @@ function KeyboardLayout({
                             <SelectContent>
                                 {Object.keys(layouts).map((layout) => (
                                     <SelectItem key={layout} value={layout}>
-                                        {layout}
+                                        {layoutNames[layout as Layouts]}
                                     </SelectItem>
                                 ))}
                             </SelectContent>
