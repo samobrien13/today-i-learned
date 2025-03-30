@@ -7,7 +7,7 @@ export interface KeyData {
 
 export type LayoutData = KeyData[][];
 
-export type Layouts = "qwerty" | "dvorak" | "colemak";
+export type Layouts = "qwerty" | "dvorak" | "colemak" | "programmersDvorak";
 
 export const qwertyLayout: LayoutData = [
     [
@@ -248,10 +248,101 @@ export const colemakLayout: LayoutData = [
     ],
 ];
 
+export const programmersDvorakLayout: LayoutData = [
+    // Row 1 (Number Row)
+    [
+        { label: "`", shiftLabel: "~", code: "Backquote" },
+        { label: "&", shiftLabel: "1", code: "Digit1" },
+        { label: "[", shiftLabel: "2", code: "Digit2" },
+        { label: "{", shiftLabel: "3", code: "Digit3" },
+        { label: "}", shiftLabel: "4", code: "Digit4" },
+        { label: "(", shiftLabel: "5", code: "Digit5" },
+        { label: "=", shiftLabel: "6", code: "Digit6" },
+        { label: "*", shiftLabel: "7", code: "Digit7" },
+        { label: ")", shiftLabel: "8", code: "Digit8" },
+        { label: "+", shiftLabel: "9", code: "Digit9" },
+        { label: "]", shiftLabel: "0", code: "Digit0" },
+        { label: "!", shiftLabel: "#", code: "Minus" },
+        { label: "#", shiftLabel: "%", code: "Equal" },
+        { label: "⌫", code: "Backspace", widthMultiplier: 2 },
+    ],
+    // Row 2 (Upper Letter Row)
+    [
+        { label: "↹", code: "Tab", widthMultiplier: 1.5 },
+        { label: ";", shiftLabel: ":", code: "KeyQ" },
+        { label: ",", shiftLabel: "<", code: "KeyW" },
+        { label: ".", shiftLabel: ">", code: "KeyE" },
+        { label: "P", code: "KeyR" },
+        { label: "Y", code: "KeyT" },
+        { label: "F", code: "KeyY" },
+        { label: "G", code: "KeyU" },
+        { label: "C", code: "KeyI" },
+        { label: "R", code: "KeyO" },
+        { label: "L", code: "KeyP" },
+        { label: "/", shiftLabel: "?", code: "BracketLeft" },
+        { label: "=", shiftLabel: "+", code: "BracketRight" },
+        {
+            label: "\\",
+            shiftLabel: "|",
+            code: "Backslash",
+            widthMultiplier: 1.5,
+        },
+    ],
+    // Row 3 (Home Row)
+    [
+        { label: "⇪", code: "CapsLock", widthMultiplier: 1.8 },
+        { label: "A", code: "KeyA" },
+        { label: "O", code: "KeyS" },
+        { label: "E", code: "KeyD" },
+        { label: "U", code: "KeyF" },
+        { label: "I", code: "KeyG" },
+        { label: "D", code: "KeyH" },
+        { label: "H", code: "KeyJ" },
+        { label: "T", code: "KeyK" },
+        { label: "N", code: "KeyL" },
+        { label: "S", code: "Semicolon" },
+        { label: "-", shiftLabel: "_", code: "Quote" },
+        { label: "↵", code: "Enter", widthMultiplier: 2.2 },
+    ],
+    // Row 4 (Lower Letter Row)
+    [
+        { label: "⇧", code: "ShiftLeft", widthMultiplier: 2.5 },
+        { label: "'", shiftLabel: '"', code: "KeyZ" },
+        { label: "Q", code: "KeyX" },
+        { label: "J", code: "KeyC" },
+        { label: "K", code: "KeyV" },
+        { label: "X", code: "KeyB" },
+        { label: "B", code: "KeyN" },
+        { label: "M", code: "KeyM" },
+        { label: "W", code: "Comma" },
+        { label: "V", code: "Period" },
+        { label: "Z", code: "Slash" },
+        { label: "⇧", code: "ShiftRight", widthMultiplier: 2.5 },
+    ],
+    // Row 5 (Bottom/Space Row)
+    [
+        { label: "⌃", code: "ControlLeft", widthMultiplier: 1.5 },
+        { label: "⌘", code: "MetaLeft", widthMultiplier: 1.2 },
+        { label: "⌥", code: "AltLeft", widthMultiplier: 1.2 },
+        { label: "␣", code: "Space", widthMultiplier: 6.5 },
+        { label: "⌥", code: "AltRight", widthMultiplier: 1.2 },
+        { label: "⌘", code: "MetaRight", widthMultiplier: 1.2 },
+        { label: "⌃", code: "ControlRight", widthMultiplier: 1.5 },
+    ],
+];
+
 export const layouts: Record<Layouts, LayoutData> = {
     qwerty: qwertyLayout,
     dvorak: dvorakLayout,
     colemak: colemakLayout,
+    programmersDvorak: programmersDvorakLayout,
+};
+
+export const layoutNames: Record<Layouts, string> = {
+    qwerty: "QWERTY",
+    dvorak: "Dvorak",
+    colemak: "Colemak",
+    programmersDvorak: "Programmer's Dvorak",
 };
 
 export const exampleSentences = [
@@ -296,3 +387,7 @@ function createKeyMap(qwertyLayout: LayoutData, targetLayout: LayoutData) {
 
 export const qwertyToDvorakMap = createKeyMap(qwertyLayout, dvorakLayout);
 export const qwertyToColemakMap = createKeyMap(qwertyLayout, colemakLayout);
+export const qwertyToProgrammersDvorakMap = createKeyMap(
+    qwertyLayout,
+    programmersDvorakLayout,
+);
