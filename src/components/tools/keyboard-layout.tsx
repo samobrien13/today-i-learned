@@ -122,8 +122,6 @@ function KeyboardLayout({
                 currentlyPressedKeys.has("ShiftLeft") ||
                 currentlyPressedKeys.has("ShiftRight");
 
-            console.log(shiftPressed);
-
             currentLayout.forEach((row) => {
                 let currentX = padding;
                 row.forEach((key) => {
