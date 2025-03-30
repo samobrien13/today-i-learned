@@ -1,36 +1,16 @@
 import { exampleSentences } from "@/lib/keyboard";
-import React, {
-    useState,
-    useEffect,
-    useRef,
-    useCallback,
-    ChangeEvent,
-} from "react";
+import React, { useState, useEffect, useRef, ChangeEvent } from "react";
 
 type TypingInputProps = {
     sentences?: string[];
 };
 
 function TypingInput({ sentences = exampleSentences }: TypingInputProps) {
-    const [currentSentenceIndex, setCurrentSentenceIndex] = useState<number>(0);
-    const [targetSentence, setTargetSentence] = useState<string>("");
+    const [targetSentence, setTargetSentence] = useState(
+        sentences[Math.floor(Math.random() * sentences.length)],
+    );
     const [typedText, setTypedText] = useState<string>("");
     const inputRef = useRef<HTMLInputElement>(null);
-
-    // Function to load a sentence by index
-    const loadSentence = useCallback(
-        (index: number): void => {
-            const effectiveIndex = index % sentences.length;
-            setTargetSentence(sentences[effectiveIndex]);
-            setTypedText("");
-            setTimeout(() => inputRef.current?.focus(), 0);
-        },
-        [sentences], // Dependency: sentences array
-    );
-
-    useEffect(() => {
-        loadSentence(currentSentenceIndex);
-    }, [loadSentence, currentSentenceIndex]);
 
     useEffect(() => {
         inputRef.current?.focus();
@@ -48,8 +28,11 @@ function TypingInput({ sentences = exampleSentences }: TypingInputProps) {
     };
 
     const handleNextSentence = (): void => {
-        // Increment index, loadSentence will handle wrapping with modulo
-        setCurrentSentenceIndex((prevIndex) => prevIndex + 1);
+        setTargetSentence(
+            sentences[Math.floor(Math.random() * sentences.length)],
+        );
+        setTypedText("");
+        setTimeout(() => inputRef.current?.focus(), 0);
     };
 
     // Render the target sentence with character highlighting
