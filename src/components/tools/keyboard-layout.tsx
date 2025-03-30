@@ -39,7 +39,7 @@ export interface KeyboardLayoutCanvasProps {
 const DEFAULT_KEY_GAP = 5;
 const DEFAULT_ROW_GAP = 5;
 const DEFAULT_PADDING = 10;
-const DEFAULT_FONT_SIZE = 14;
+const DEFAULT_FONT_SIZE = 16;
 const DEFAULT_BG_COLOR = "--background";
 const DEFAULT_KEY_COLOR = "--card";
 const DEFAULT_KEY_PRESSED_COLOR = "--primary";
@@ -118,6 +118,12 @@ function KeyboardLayout({
 
             let currentY = padding;
 
+            const shiftPressed =
+                currentlyPressedKeys.has("ShiftLeft") ||
+                currentlyPressedKeys.has("ShiftRight");
+
+            console.log(shiftPressed);
+
             currentLayout.forEach((row) => {
                 let currentX = padding;
                 row.forEach((key) => {
@@ -175,7 +181,9 @@ function KeyboardLayout({
                     ctx.textAlign = "center";
                     ctx.textBaseline = "middle";
                     ctx.fillText(
-                        key.label,
+                        shiftPressed && key.shiftLabel
+                            ? key.shiftLabel
+                            : key.label,
                         currentX + width / 2,
                         currentY + keyHeight / 2,
                     );
