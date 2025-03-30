@@ -1,5 +1,6 @@
 export interface KeyData {
     label: string;
+    shiftLabel?: string; // Label when shift is held
     code: string; // Corresponds to KeyboardEvent.code
     widthMultiplier?: number;
 }
@@ -10,19 +11,19 @@ export type Layouts = "qwerty" | "dvorak" | "colemak";
 
 export const qwertyLayout: LayoutData = [
     [
-        { label: "`", code: "Backquote" },
-        { label: "1", code: "Digit1" },
-        { label: "2", code: "Digit2" },
-        { label: "3", code: "Digit3" },
-        { label: "4", code: "Digit4" },
-        { label: "5", code: "Digit5" },
-        { label: "6", code: "Digit6" },
-        { label: "7", code: "Digit7" },
-        { label: "8", code: "Digit8" },
-        { label: "9", code: "Digit9" },
-        { label: "0", code: "Digit0" },
-        { label: "-", code: "Minus" },
-        { label: "=", code: "Equal" },
+        { label: "`", shiftLabel: "~", code: "Backquote" },
+        { label: "1", shiftLabel: "!", code: "Digit1" },
+        { label: "2", shiftLabel: "@", code: "Digit2" },
+        { label: "3", shiftLabel: "#", code: "Digit3" },
+        { label: "4", shiftLabel: "$", code: "Digit4" },
+        { label: "5", shiftLabel: "%", code: "Digit5" },
+        { label: "6", shiftLabel: "^", code: "Digit6" },
+        { label: "7", shiftLabel: "&", code: "Digit7" },
+        { label: "8", shiftLabel: "*", code: "Digit8" },
+        { label: "9", shiftLabel: "(", code: "Digit9" },
+        { label: "0", shiftLabel: ")", code: "Digit0" },
+        { label: "-", shiftLabel: "_", code: "Minus" },
+        { label: "=", shiftLabel: "+", code: "Equal" },
         { label: "⌫", code: "Backspace", widthMultiplier: 2 },
     ],
     [
@@ -37,9 +38,14 @@ export const qwertyLayout: LayoutData = [
         { label: "I", code: "KeyI" },
         { label: "O", code: "KeyO" },
         { label: "P", code: "KeyP" },
-        { label: "[", code: "BracketLeft" },
-        { label: "]", code: "BracketRight" },
-        { label: "\\", code: "Backslash", widthMultiplier: 1.5 },
+        { label: "[", shiftLabel: "{", code: "BracketLeft" },
+        { label: "]", shiftLabel: "}", code: "BracketRight" },
+        {
+            label: "\\",
+            shiftLabel: "|",
+            code: "Backslash",
+            widthMultiplier: 1.5,
+        },
     ],
     [
         { label: "⇪", code: "CapsLock", widthMultiplier: 1.8 },
@@ -52,8 +58,8 @@ export const qwertyLayout: LayoutData = [
         { label: "J", code: "KeyJ" },
         { label: "K", code: "KeyK" },
         { label: "L", code: "KeyL" },
-        { label: ";", code: "Semicolon" },
-        { label: "'", code: "Quote" },
+        { label: ";", shiftLabel: ":", code: "Semicolon" },
+        { label: "'", shiftLabel: '"', code: "Quote" },
         { label: "↵", code: "Enter", widthMultiplier: 2.2 },
     ],
     [
@@ -65,9 +71,9 @@ export const qwertyLayout: LayoutData = [
         { label: "B", code: "KeyB" },
         { label: "N", code: "KeyN" },
         { label: "M", code: "KeyM" },
-        { label: ",", code: "Comma" },
-        { label: ".", code: "Period" },
-        { label: "/", code: "Slash" },
+        { label: ",", shiftLabel: "<", code: "Comma" },
+        { label: ".", shiftLabel: ">", code: "Period" },
+        { label: "/", shiftLabel: "?", code: "Slash" },
         { label: "⇧", code: "ShiftRight", widthMultiplier: 2.5 },
     ],
     [
@@ -84,27 +90,27 @@ export const qwertyLayout: LayoutData = [
 export const dvorakLayout: LayoutData = [
     // Row 1 (Number Row) - Same labels/codes as QWERTY for numbers/symbols
     [
-        { label: "`", code: "Backquote" },
-        { label: "1", code: "Digit1" },
-        { label: "2", code: "Digit2" },
-        { label: "3", code: "Digit3" },
-        { label: "4", code: "Digit4" },
-        { label: "5", code: "Digit5" },
-        { label: "6", code: "Digit6" },
-        { label: "7", code: "Digit7" },
-        { label: "8", code: "Digit8" },
-        { label: "9", code: "Digit9" },
-        { label: "0", code: "Digit0" },
-        { label: "[", code: "BracketLeft" }, // Dvorak specific
-        { label: "]", code: "BracketRight" }, // Dvorak specific
+        { label: "`", shiftLabel: "~", code: "Backquote" },
+        { label: "1", shiftLabel: "!", code: "Digit1" },
+        { label: "2", shiftLabel: "@", code: "Digit2" },
+        { label: "3", shiftLabel: "#", code: "Digit3" },
+        { label: "4", shiftLabel: "$", code: "Digit4" },
+        { label: "5", shiftLabel: "%", code: "Digit5" },
+        { label: "6", shiftLabel: "^", code: "Digit6" },
+        { label: "7", shiftLabel: "&", code: "Digit7" },
+        { label: "8", shiftLabel: "*", code: "Digit8" },
+        { label: "9", shiftLabel: "(", code: "Digit9" },
+        { label: "0", shiftLabel: ")", code: "Digit0" },
+        { label: "[", shiftLabel: "{", code: "BracketLeft" }, // Dvorak specific
+        { label: "]", shiftLabel: "}", code: "BracketRight" }, // Dvorak specific
         { label: "⌫", code: "Backspace", widthMultiplier: 2 },
     ],
     // Row 2 (Upper Letter Row)
     [
         { label: "↹", code: "Tab", widthMultiplier: 1.5 },
-        { label: "'", code: "KeyQ" }, // Q -> '
-        { label: ",", code: "KeyW" }, // W -> ,
-        { label: ".", code: "KeyE" }, // E -> .
+        { label: "'", shiftLabel: '"', code: "KeyQ" }, // Q -> '
+        { label: ",", shiftLabel: "<", code: "KeyW" }, // W -> ,
+        { label: ".", shiftLabel: ">", code: "KeyE" }, // E -> .
         { label: "P", code: "KeyR" }, // R -> P
         { label: "Y", code: "KeyT" }, // T -> Y
         { label: "F", code: "KeyY" }, // Y -> F
@@ -112,9 +118,14 @@ export const dvorakLayout: LayoutData = [
         { label: "C", code: "KeyI" }, // I -> C
         { label: "R", code: "KeyO" }, // O -> R
         { label: "L", code: "KeyP" }, // P -> L
-        { label: "/", code: "BracketLeft" }, // [ -> /
-        { label: "=", code: "BracketRight" }, // ] -> =
-        { label: "\\", code: "Backslash", widthMultiplier: 1.5 }, // \ -> \ (same position)
+        { label: "/", shiftLabel: "?", code: "BracketLeft" }, // [ -> /
+        { label: "=", shiftLabel: "+", code: "BracketRight" }, // ] -> =
+        {
+            label: "\\",
+            shiftLabel: "|",
+            code: "Backslash",
+            widthMultiplier: 1.5,
+        }, // \ -> \ (same position)
     ],
     // Row 3 (Home Row)
     [
@@ -135,7 +146,7 @@ export const dvorakLayout: LayoutData = [
     // Row 4 (Lower Letter Row)
     [
         { label: "⇧", code: "ShiftLeft", widthMultiplier: 2.5 },
-        { label: ";", code: "KeyZ" }, // Z -> ;
+        { label: ";", shiftLabel: ":", code: "KeyZ" }, // Z -> ;
         { label: "Q", code: "KeyX" }, // X -> Q
         { label: "J", code: "KeyC" }, // C -> J
         { label: "K", code: "KeyV" }, // V -> K
