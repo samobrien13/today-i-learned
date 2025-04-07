@@ -61,6 +61,7 @@ function MortgageCalculator() {
     );
 
     const tableData = getTableData(paymentSets);
+
     return (
         <ViewTransition name={`${MORTGAGE_CALCULATOR.slug}-card`}>
             <Card className="mx-auto w-full">

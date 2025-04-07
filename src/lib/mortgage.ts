@@ -26,11 +26,12 @@ export function calculatePaymentSet(
         return acc;
     }
 
-    const newAmount = principal - payment + (interest > 0 ? interest : 0);
+    const absInterest = interest > 0 ? interest : 0;
+    const newAmount = principal - payment + absInterest;
 
     return calculatePaymentSet(newAmount, interestRate, payment, offset, [
         ...acc,
-        [principal, interest],
+        [principal, absInterest],
     ]);
 }
 
