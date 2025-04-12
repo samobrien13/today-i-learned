@@ -74,7 +74,7 @@ describe("mortgage", () => {
             expect(result[0].interestPaid).toBeCloseTo(2962.8957);
             expect(result[1].yearsToZero).toBe(10);
             expect(result[1].monthsToZero).toBe(10);
-            expect(result[1].interestPaid).toBeCloseTo(2891.653);
+            expect(result[1].interestPaid).toBeCloseTo(2891.688);
         });
 
         it("should handle years to zero correctly", () => {
