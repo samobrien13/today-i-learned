@@ -50,7 +50,7 @@
         "eslint": "^9",
         "eslint-config-next": "15.2.3",
         "eslint-config-prettier": "^10.0.1",
-        "eslint-plugin-react-compiler": "19.0.0-beta-40c6c23-20250301",
+        "eslint-plugin-react-compiler": "19.0.0-beta-714736e-20250131",
         "postcss": "^8",
         "prettier": "^3.5.3",
         "prettier-plugin-tailwindcss": "^0.6.11",
