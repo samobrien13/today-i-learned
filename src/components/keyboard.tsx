@@ -77,9 +77,9 @@ function parseKeymapString(keymapString: string): KeymapLayout[] {
     const lines = keymapString.trim().split("\n");
     const leftHalf: KeymapLayout = []; // Initialize as empty
     const rightHalf: KeymapLayout = []; // Initialize as empty
-    let leftThumb: KeyData[] = [];
-    let rightThumb: KeyData[] = [];
-    let foundThumbRow = false;
+    const leftThumb: KeyData[] = [];
+    const rightThumb: KeyData[] = [];
+    const foundThumbRow = false;
 
     console.log("Lines:", lines);
     lines.forEach((line, index) => {
@@ -96,77 +96,22 @@ function parseKeymapString(keymapString: string): KeymapLayout[] {
 
         console.log("Keys found:", keys);
 
-        // Heuristic 1: Main rows (expecting 12 keys)
-        if (keys.length === 12) {
-            console.log(` - Treating line ${index + 1} as MAIN row.`);
-            const newLeftRow: KeyData[] = [];
-            const newRightRow: KeyData[] = [];
+        console.log(` - Treating line ${index + 1} as MAIN row.`);
+        const newLeftRow: KeyData[] = [];
+        const newRightRow: KeyData[] = [];
 
-            keys.slice(0, 6).forEach((raw) => {
-                const parsed = parseZmkCode(raw);
-                newLeftRow.push({ ...parsed, raw });
-            });
-            keys.slice(6).forEach((raw) => {
-                const parsed = parseZmkCode(raw);
-                newRightRow.push({ ...parsed, raw });
-            });
+        keys.slice(0, keys.length / 2).forEach((raw) => {
+            const parsed = parseZmkCode(raw);
+            newLeftRow.push({ ...parsed, raw });
+        });
+        keys.slice(keys.length / 2).forEach((raw) => {
+            const parsed = parseZmkCode(raw);
+            newRightRow.push({ ...parsed, raw });
+        });
 
-            if (newLeftRow.length === 6 && newRightRow.length === 6) {
-                leftHalf.push(newLeftRow);
-                rightHalf.push(newRightRow);
-                console.log(`   - Added main row ${leftHalf.length}.`);
-            } else {
-                console.warn(
-                    `   - Failed to split main row correctly on line ${index + 1}.`,
-                );
-            }
-        } else if (keys.length === 8 && !foundThumbRow) {
-            console.log(` - Treating line ${index + 1} as THUMB row.`);
-            const currentLeftThumb: KeyData[] = [];
-            const currentRightThumb: KeyData[] = [];
-
-            keys.slice(0, 4).forEach((raw) => {
-                const parsed = parseZmkCode(raw);
-                const span =
-                    parsed.label === "SPACE" || parsed.label === "ENTER"
-                        ? 2
-                        : 1; // Example span
-                currentLeftThumb.push({ ...parsed, raw, span });
-            });
-            keys.slice(4).forEach((raw) => {
-                const parsed = parseZmkCode(raw);
-                const span =
-                    parsed.label === "SPACE" || parsed.label === "ENTER"
-                        ? 2
-                        : 1; // Example span
-                currentRightThumb.push({ ...parsed, raw, span });
-            });
-
-            if (
-                currentLeftThumb.length === 4 &&
-                currentRightThumb.length === 4
-            ) {
-                leftThumb = currentLeftThumb;
-                rightThumb = currentRightThumb;
-                foundThumbRow = true;
-                console.log(`   - Added thumb row.`);
-            } else {
-                console.warn(
-                    `   - Failed to split thumb row correctly on line ${index + 1}.`,
-                );
-            }
-        } else {
-            console.log(
-                ` - Skipping line ${index + 1}: Did not match main (12) or thumb (8) heuristics.`,
-            );
-        }
+        leftHalf.push(newLeftRow);
+        rightHalf.push(newRightRow);
     });
-
-    console.log("Parsing loop finished.");
-    console.log("Raw parsed main rows (left):", leftHalf.length);
-    console.log("Raw parsed main rows (right):", rightHalf.length);
-    console.log("Raw parsed thumb (left):", leftThumb.length);
-    console.log("Raw parsed thumb (right):", rightThumb.length);
 
     // Assemble the final structure
     const finalLeftHalf = [...leftHalf];
