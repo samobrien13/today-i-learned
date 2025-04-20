@@ -4,11 +4,10 @@ import {
     BlogParagraph,
     BlogUnorderedList,
 } from "@/components/ui/blog";
-import { KeymapDisplay } from "@/components/keyboard";
+import { Lily58 } from "@/components/keyboard";
 import { Link } from "@/components/ui/link";
 import { BlogData } from "@/data/blog";
 import { ArrowUpRight } from "lucide-react";
-import { zmkKeymapString } from "@/lib/keyboard";
 
 export const KEYBOARD_SETUP: BlogData = {
     title: "Keyboard setup",
@@ -200,7 +199,7 @@ function KeyboardSetup() {
                 regular keyboard. I have started on a function layer which is a
                 work in progress, and contains only music navigation for now.
             </BlogParagraph>
-            <KeymapDisplay keymapString={zmkKeymapString} />
+            <Lily58 />
         </>
     );
 }
