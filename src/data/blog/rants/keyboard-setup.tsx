@@ -4,7 +4,6 @@ import {
     BlogParagraph,
     BlogUnorderedList,
 } from "@/components/ui/blog";
-import { Lily58 } from "@/components/keyboard";
 import { Link } from "@/components/ui/link";
 import { BlogData } from "@/data/blog";
 import { ArrowUpRight } from "lucide-react";
@@ -136,70 +135,45 @@ function KeyboardSetup() {
                 40 words per minute, so at this point you are already faster
                 than Brian from marketing.
             </BlogParagraph>
-            <BlogParagraph>
-                From there I have been slowly tinkering with the rest of the
-                layout. I move the symbols around based on some sort of
-                intuitive sense, how often I use them and how easy it is for me
-                to reach them. I don&apos;t mind using my pinky, but the top and
-                bottom rows are hard for me so those 4 keys are reserved for the
-                least used.
-            </BlogParagraph>
-            <BlogParagraph>
-                Numbers I have left on the top row, but I have reordered them. I
-                have odd numbers on the left and even on the right. With 1 and 0
-                closer to the middle as they are the most used, especially in
-                programming. I have left the symbols on their original number
-                keys for continuity with QWERTY. With this layout you also get
-                the added bonus of ( and ) being symmetrical on the index
-                fingers.
-            </BlogParagraph>
-            <BlogParagraph>
-                On QWERTY I mapped jk to escape in Vim, but this doesn&apos;t
-                work with Colemak DH, and I couldn&apos;t find a similar bigram
-                that made sense. I have swapped the escape key with the caps
-                lock key as I never use it, so I can now just use the escape key
-                with my pinky instead of the remap.
-            </BlogParagraph>
-            <BlogParagraph>
-                On the thumb cluster I have left for all the &quot;spacing&quot;
-                type keys. So tab, enter, backspace and space. The layer keys
-                are on the remaining harder to reach thumb keys.
-            </BlogParagraph>
-            <BlogParagraph>
-                I quite like the inner keys on the Lily58 so I moved the Minus
-                and Equals keys to them which is easier to remember than their
-                usual top right positions.
-            </BlogParagraph>
-            <BlogParagraph>
-                The Grave key has always been a horrible stretch and it is quite
-                common in JavaScript to use it for template literals, so I have
-                moved it below the Quote key.
-            </BlogParagraph>
-            <BlogParagraph>
-                The brackets I have then placed either side on the top alpha row
-                as it isn&apos;t too bad a stretch and again it is nice
-                symmetry.
-            </BlogParagraph>
-            <BlogParagraph>
-                From here whatever is left moves to the pinky corners.
-            </BlogParagraph>
             <BlogHeading>Home Row Mods</BlogHeading>
             <BlogParagraph>
                 Perhaps the biggest surprise to me was how I instantly fell in
                 love with the home row mods. Some painful stretches are now
                 gone, namely the OSX screen capture shortcut is now achievable
-                from the home row.
+                from the home row. Some people report issues where you activate
+                the mod layer when you don&apos;t mean to, but I haven&apos;t
+                found this to be an issue yet and you can tweak the timings to
+                your personal preference. You can also shift the modifiers to
+                the bottom row so they are less likely to be pressed by
+                accident.
             </BlogParagraph>
-            <BlogHeading>Layers</BlogHeading>
+            <BlogHeading>Miryoku Layout</BlogHeading>
             <BlogParagraph>
-                I have so far only set up two different layers. The first is the
-                navigation layer which adds arrow keys in the QWERTY Vim
-                positions. I have also added the Page Up and Page Down keys to
-                the top row and the Home and End in the same structure as a
-                regular keyboard. I have started on a function layer which is a
-                work in progress, and contains only music navigation for now.
+                The Miryoku layout is a layout designed for minimal keyboards.
+                The default layout uses Colemak DH and makes use of homerow mods
+                and several layers to fit everything you need on a 40% keyboard.
             </BlogParagraph>
-            <Lily58 />
+            <BlogParagraph>
+                I had been slowly tinkering with the rest of the layout. I move
+                the symbols around based on some sort of intuitive sense, how
+                often I use them and how easy it is for me to reach them. I
+                don&apos;t mind using my pinky, but the top and bottom rows are
+                hard for me so those 4 keys are reserved for the least used.
+            </BlogParagraph>
+            <BlogParagraph>
+                I tried to set up all sorts of different places for the symbols
+                but I just cannot go past the Miryoku layout. Everything is so
+                well thought out, I don&apos;t know how I could improve it.
+            </BlogParagraph>
+            <BlogHeading>Conclusion</BlogHeading>
+            <BlogParagraph>
+                Unfortunately, this means the Lily58 now has too many keys for
+                me, so I will need to buy something else. I am really loving the
+                ability to configure the keyboard to my liking and am a long way
+                off the perfect layout. The thumb cluster is a no brainer for
+                increasing efficiency and adding the home row mods leaves so
+                much space for everything else.
+            </BlogParagraph>
         </>
     );
 }
