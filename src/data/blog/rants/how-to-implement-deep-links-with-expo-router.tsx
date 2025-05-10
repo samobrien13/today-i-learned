@@ -11,7 +11,7 @@ export const HOW_TO_IMPLEMENT_DEEP_LINKS_WITH_EXPO_ROUTER: BlogData = {
     slug: "how-to-implement-deep-links-with-expo-router",
     tags: ["engineering", "expo"],
     image: {
-        src: "/images/rants/deep-link.webp",
+        src: "/images/rants/deep-link.png",
         alt: "Deep link",
     },
     component: <HowToImplementDeepLinksWithExpoRouter />,

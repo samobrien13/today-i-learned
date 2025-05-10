@@ -13,7 +13,7 @@ export const HOW_MUCH_TIME_THE_RBA_RATE_CUT_WILL_SAVE_YOU: BlogData = {
     slug: "how-much-time-the-rba-rate-cut-will-save-you",
     tags: ["finance"],
     image: {
-        src: "/images/rants/mortgage.webp",
+        src: "/images/rants/mortgage.png",
         alt: "Line goes down",
     },
     component: <HowMuchTimeTheRbaRateCutWillSaveYou />,

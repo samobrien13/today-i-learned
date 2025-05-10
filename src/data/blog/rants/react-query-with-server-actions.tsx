@@ -10,7 +10,7 @@ export const REACT_QUERY_WITH_SERVER_ACTIONS: BlogData = {
     slug: "react-query-with-server-actions",
     tags: ["nextjs"],
     image: {
-        src: "/images/rants/react-query-with-server-actions.webp",
+        src: "/images/rants/react-query-with-server-actions.png",
         alt: "React Query with Server Actions",
     },
     component: <ReactQueryWithServerActions />,

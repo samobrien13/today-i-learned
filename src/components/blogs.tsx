@@ -86,13 +86,12 @@ function Blogs({ tags, allTags }: BlogsProps) {
                                         </CardDescription>
                                     </div>
 
-                                    <div className="flex items-start">
+                                    <div className="relative flex h-32 w-32">
                                         <Image
-                                            className="rounded-sm object-contain"
+                                            className="rounded-sm object-cover"
                                             src={article.image.src}
-                                            width={128}
-                                            height={128}
                                             alt={article.image.alt}
+                                            fill
                                         />
                                     </div>
                                 </div>
