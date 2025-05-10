@@ -59,10 +59,10 @@ function Dotfiles() {
             <BlogHeading>Setting up</BlogHeading>
             <BlogParagraph>
                 To initialise my dotfiles on a new machine, I use the following
-                commands to set up a bare git repository:
+                commands to symlink my dotfiles to the correct locations:
             </BlogParagraph>
             <CodeBlock language="bash">
-                {`git clone --bare https://github.com/samobrien13/dotfiles.git $HOME/.cfg\nalias dotfiles='usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'\ndotfiles checkout`}
+                {`git clone https://github.com/samobrien13/dotfiles.git\nbrew install stow\ncd dotfiles\nstow . -D $HOME`}
             </CodeBlock>
             <BlogHeading>Neovim</BlogHeading>
             <BlogParagraph>
