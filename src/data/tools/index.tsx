@@ -7,16 +7,6 @@ import { RubberDuck } from "@/components/tools/rubber-duck";
 
 import { Metadata } from "next";
 import { ReactNode } from "react";
-import { KeyboardLayout } from "@/components/tools/keyboard-layout";
-
-export const KEYBOARD_LAYOUT: ToolData = {
-    title: "Keyboard Layout",
-    description:
-        "A tool to help you find the right keyboard layout for your needs.",
-    slug: "keyboard-layout",
-    tags: ["engineering"],
-    component: <KeyboardLayout />,
-};
 
 export const RUBBER_DUCK: ToolData = {
     title: "Rubber Duck",

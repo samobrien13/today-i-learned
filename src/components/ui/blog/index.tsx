@@ -7,6 +7,7 @@ import Routes from "@/constants/Routes";
 import Share from "../share";
 import Feedback from "../feedback";
 import Likes from "../likes";
+import Image, { ImageProps } from "next/image";
 
 type BlogProps = BlogData;
 
@@ -15,7 +16,7 @@ function Blog({ title, description, date, slug, component, tags }: BlogProps) {
         <article className="flex flex-1 flex-col gap-8">
             <header>
                 <ViewTransition name={`blog-article-title-${slug}`}>
-                    <h1 className="text-2xl font-semibold text-primary">
+                    <h1 className="text-primary text-2xl font-semibold">
                         {title}
                     </h1>
                 </ViewTransition>
@@ -43,7 +44,7 @@ function Blog({ title, description, date, slug, component, tags }: BlogProps) {
 }
 
 export function BlogHeading({ children }: { children: React.ReactNode }) {
-    return <h2 className="pb-2 pt-2 text-xl">{children}</h2>;
+    return <h2 className="pt-2 pb-2 text-xl">{children}</h2>;
 }
 
 export function BlogSubHeading({ children }: { children: React.ReactNode }) {
@@ -56,7 +57,7 @@ export function BlogParagraph({ children }: { children: React.ReactNode }) {
 
 export function BlogCode({ children }: { children: React.ReactNode }) {
     return (
-        <code className="rounded-sm bg-muted p-1 text-sm text-muted-foreground">
+        <code className="bg-muted text-muted-foreground rounded-sm p-1 text-sm">
             {children}
         </code>
     );
@@ -70,6 +71,20 @@ export function BlogUnorderedList({ children }: { children: React.ReactNode }) {
 
 export function BlogListItem({ children }: { children: React.ReactNode }) {
     return <li>{children}</li>;
+}
+
+export function BlogImage({ alt, className, ...rest }: ImageProps) {
+    return (
+        <picture className="relative mb-6 flex aspect-video w-full overflow-hidden">
+            <Image
+                {...rest}
+                className={`border-muted rounded-md border-2 object-cover ${className}`}
+                sizes="(max-width: 768px) 100vw, 768px"
+                fill
+                alt={alt}
+            />
+        </picture>
+    );
 }
 
 export default Blog;

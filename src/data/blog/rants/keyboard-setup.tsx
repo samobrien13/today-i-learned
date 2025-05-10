@@ -1,5 +1,6 @@
 import {
     BlogHeading,
+    BlogImage,
     BlogListItem,
     BlogParagraph,
     BlogUnorderedList,
@@ -7,6 +8,7 @@ import {
 import { Link } from "@/components/ui/link";
 import { BlogData } from "@/data/blog";
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 
 export const KEYBOARD_SETUP: BlogData = {
     title: "Keyboard setup",
@@ -59,10 +61,14 @@ function KeyboardSetup() {
             </BlogParagraph>
             <BlogParagraph>
                 I found most sites confusing and hard to work out what I needed.
-                I eventually settled on Typeractive, as it seemed popular and
-                had free shipping to Australia. They offered the partially
-                assembled boards I was looking for, and have a reassuring
-                interface showing (almost) everything you need to buy.
+                I eventually settled on{" "}
+                <Link external href="https://typeractive.xyz">
+                    Typeractive
+                </Link>
+                , as it seemed popular and had free shipping to Australia. They
+                offered the partially assembled boards I was looking for, and
+                have a reassuring interface showing (almost) everything you need
+                to buy.
             </BlogParagraph>
             <BlogParagraph>
                 I ended up choosing the Lily58. I wasn&apos;t yet convinced
@@ -127,52 +133,108 @@ function KeyboardSetup() {
                 learn.
             </BlogParagraph>
             <BlogParagraph>
-                I used a combination of Keybr, MonkeyType and Ngram to learn. I
-                would recommend about a week to get up to speed to at least be
-                functional in a work environment. Once you get past about 30
-                words per minute the cognitive burden of thinking about where
-                each key is starts to go away. The average person types at about
-                40 words per minute, so at this point you are already faster
-                than Brian from marketing.
+                I used a combination of{" "}
+                <Link external href="https://www.keybr.com">
+                    Keybr
+                </Link>
+                ,{" "}
+                <Link external href="https://monkeytype.com">
+                    MonkeyType
+                </Link>{" "}
+                and{" "}
+                <Link external href="https://ranelpadon.github.io/ngram-type">
+                    Ngram
+                </Link>{" "}
+                to learn. I would recommend about a week to get up to speed to
+                at least be functional in a work environment. Once you get past
+                about 30 words per minute the cognitive burden of thinking about
+                where each key is starts to go away. The average person types at
+                about 40 words per minute, so at this point you are already
+                faster than Brian from marketing.
             </BlogParagraph>
             <BlogHeading>Home Row Mods</BlogHeading>
             <BlogParagraph>
                 Perhaps the biggest surprise to me was how I instantly fell in
-                love with the home row mods. Some painful stretches are now
-                gone, namely the OSX screen capture shortcut is now achievable
-                from the home row. Some people report issues where you activate
-                the mod layer when you don&apos;t mean to, but I haven&apos;t
-                found this to be an issue yet and you can tweak the timings to
-                your personal preference. You can also shift the modifiers to
-                the bottom row so they are less likely to be pressed by
-                accident.
+                love with home row mods. This is where you use your home keys as
+                modifiers when held down. I chose to go with the order (out to
+                in) of Control, Alt, Command and Shift and have found that to
+                work well on OSX. Some painful stretches are now gone, namely
+                the OSX screen capture shortcut is now achievable from the home
+                row. Some people report issues where you activate the mod layer
+                when you don&apos;t mean to, but I haven&apos;t found this to be
+                an issue yet and you can tweak the timings to your personal
+                preference. You can also shift the modifiers to the bottom row
+                so they are less likely to be pressed by accident.
+            </BlogParagraph>
+            <BlogParagraph>
+                I had been slowly tinkering with the rest of the layout. I moved
+                the symbols around based on some sort of intuitive sense, how
+                often I use them and how easy it is for me to reach them. I
+                don&apos;t mind using my pinky, but the top and bottom rows are
+                hard for me so those 4 keys are reserved for the least used. But
+                I could never find the right combination...
             </BlogParagraph>
             <BlogHeading>Miryoku Layout</BlogHeading>
             <BlogParagraph>
                 The Miryoku layout is a layout designed for minimal keyboards.
-                The default layout uses Colemak DH and makes use of homerow mods
-                and several layers to fit everything you need on a 40% keyboard.
-            </BlogParagraph>
-            <BlogParagraph>
-                I had been slowly tinkering with the rest of the layout. I move
-                the symbols around based on some sort of intuitive sense, how
-                often I use them and how easy it is for me to reach them. I
-                don&apos;t mind using my pinky, but the top and bottom rows are
-                hard for me so those 4 keys are reserved for the least used.
+                The default layout conveniently already uses Colemak DH and
+                makes use of homerow mods and several layers to fit everything
+                you need on a 40% keyboard.
             </BlogParagraph>
             <BlogParagraph>
                 I tried to set up all sorts of different places for the symbols
                 but I just cannot go past the Miryoku layout. Everything is so
-                well thought out, I don&apos;t know how I could improve it.
+                well thought out, I don&apos;t really know how I could improve
+                it.
+            </BlogParagraph>
+            <BlogParagraph>
+                One last thing I found useful was caps word functionality. This
+                is very useful in programming where you often have to type
+                constants and such in all caps. Caps word deactivates when you
+                type a space, tab or punctuation. I bound this as a combo to
+                when both of the shift keys are pressed.
             </BlogParagraph>
             <BlogHeading>Conclusion</BlogHeading>
             <BlogParagraph>
                 Unfortunately, this means the Lily58 now has too many keys for
-                me, so I will need to buy something else. I am really loving the
-                ability to configure the keyboard to my liking and am a long way
-                off the perfect layout. The thumb cluster is a no brainer for
-                increasing efficiency and adding the home row mods leaves so
-                much space for everything else.
+                me, so I will need to buy something else. For now I have made
+                myself the Lily36 by modifying{" "}
+                <Link
+                    external
+                    href="https://www.printables.com/model/93298-lily58-case"
+                >
+                    this case
+                </Link>{" "}
+                and getting someone to 3D print it for me, and I am really happy
+                with the result. Complete with some generic rubber feet to tent
+                it slightly and some coloured keycaps arranged in a tetris
+                theme.
+            </BlogParagraph>
+
+            <BlogImage src="/images/rants/lily36.jpg" alt="Lily36" />
+            <BlogParagraph>
+                Once I can type a bit faster I will probably try out the 3x5
+                Corne from Typeractive, which will require switching to choc
+                switches. These{" "}
+                <Link
+                    external
+                    href="https://keebd.com/products/ldsa-low-profile-blank-keycaps"
+                >
+                    LDSA keycaps
+                </Link>{" "}
+                look like they could smooth that transition out a bit, as I have
+                grown to favour the DSA profile compared to something like a
+                Macbook keyboard.
+            </BlogParagraph>
+            <BlogParagraph>
+                Overall I am really loving the ability to configure the keyboard
+                to my liking and may never find the perfect layout or the
+                perfect hardware to go with it. The thumb cluster is a no
+                brainer for increasing efficiency and adding the home row mods
+                leaves so much space for everything else. By reducing the amount
+                of keys and moving to a more efficient layout all of the pain I
+                had in my wrists or pinky fingers has completely disappered,
+                which will definitely help me in the long run.
             </BlogParagraph>
         </>
     );
