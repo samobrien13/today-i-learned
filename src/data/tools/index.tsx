@@ -66,7 +66,6 @@ export type ToolData = {
 } & Metadata;
 
 export const TOOLS: ToolData[] = [
-    KEYBOARD_LAYOUT,
     RUBBER_DUCK,
     COLOUR_CONVERTER,
     THAI_TIME_CONVERTER,
