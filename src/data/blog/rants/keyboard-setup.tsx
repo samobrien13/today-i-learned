@@ -8,7 +8,6 @@ import {
 import { Link } from "@/components/ui/link";
 import { BlogData } from "@/data/blog";
 import { ArrowUpRight } from "lucide-react";
-import Image from "next/image";
 
 export const KEYBOARD_SETUP: BlogData = {
     title: "Keyboard setup",
