@@ -18,7 +18,7 @@ export const HOW_TO_FIND_AND_REPLACE_FROM_THE_COMMAND_LINE: BlogData = {
     slug: "how-to-find-and-replace-from-the-command-line",
     tags: ["engineering"],
     image: {
-        src: "/images/rants/find-and-replace.webp",
+        src: "/images/rants/find-and-replace.png",
         alt: "Find and replace",
     },
     component: <HowToFindAndReplaceFromTheCommandLine />,

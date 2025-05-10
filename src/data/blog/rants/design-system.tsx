@@ -29,7 +29,7 @@ export const DESIGN_SYSTEM: BlogData = {
     slug: "design-system",
     tags: ["design"],
     image: {
-        src: "/images/rants/palette.webp",
+        src: "/images/rants/palette.png",
         alt: "Colour palette",
     },
     component: <DesignSystem />,

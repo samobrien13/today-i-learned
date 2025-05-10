@@ -9,7 +9,7 @@ export const PLEASE_DONT_VALIDATE_MY_NAME: BlogData = {
     slug: "please-dont-validate-my-name",
     tags: ["engineering"],
     image: {
-        src: "/images/rants/names.webp",
+        src: "/images/rants/names.png",
         alt: "Name validation",
     },
     component: <PleaseDontValidateMyName />,

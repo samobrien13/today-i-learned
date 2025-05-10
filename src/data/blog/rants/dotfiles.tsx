@@ -16,7 +16,7 @@ export const DOTFILES: BlogData = {
     slug: "dotfiles",
     tags: ["engineering"],
     image: {
-        src: "/images/rants/dotfiles.webp",
+        src: "/images/rants/dotfiles.png",
         alt: "Dotfiles",
     },
     component: <Dotfiles />,
