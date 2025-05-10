@@ -12,7 +12,7 @@ import { ArrowUpRight } from "lucide-react";
 export const KEYBOARD_SETUP: BlogData = {
     title: "Keyboard setup",
     description: "How to buy a custom keyboard in Australia",
-    date: "2025-01-21",
+    date: "2025-05-10",
     slug: "keyboard-setup",
     tags: ["engineering"],
     component: <KeyboardSetup />,
