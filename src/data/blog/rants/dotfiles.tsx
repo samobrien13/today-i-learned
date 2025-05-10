@@ -83,6 +83,14 @@ function Dotfiles() {
                 includes the tmux-sessionizer script which allows me to lookup
                 all my repos and open them in a new tmux session.
             </BlogParagraph>
+            <BlogHeading>Aerospace</BlogHeading>
+            <BlogParagraph>
+                After years of getting by with the native OSX window manager, I
+                finally found Aerospace. I had tried tools like BetterTouchTool
+                but they were never really what I was looking for. I full screen
+                everything, so being able to assign windows to any key plus the
+                alt key is all I ever needed.
+            </BlogParagraph>
         </>
     );
 }
