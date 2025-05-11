@@ -10,6 +10,10 @@ export const PLEASE_USE_REACT_QUERY: BlogData = {
     date: "2025-03-02",
     slug: "please-use-react-query",
     tags: ["engineering", "react"],
+    image: {
+        src: "/images/rants/tanstack.png",
+        alt: "React Query",
+    },
     component: <PleaseUseReactQuery />,
 };
 

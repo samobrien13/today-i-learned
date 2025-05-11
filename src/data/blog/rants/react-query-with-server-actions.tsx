@@ -9,6 +9,10 @@ export const REACT_QUERY_WITH_SERVER_ACTIONS: BlogData = {
     date: "2025-03-09",
     slug: "react-query-with-server-actions",
     tags: ["nextjs"],
+    image: {
+        src: "/images/rants/react-query-with-server-actions.png",
+        alt: "React Query with Server Actions",
+    },
     component: <ReactQueryWithServerActions />,
 };
 
@@ -256,7 +260,8 @@ export function useAddPost() {
             <BlogParagraph>
                 This all happens on the client side because in this case I
                 don&apos;t want to have any server side logic running as that
-                would opt-out of static rendering and slow down the page load for the content that matters.
+                would opt-out of static rendering and slow down the page load
+                for the content that matters.
             </BlogParagraph>
             <BlogHeading>Conclusion</BlogHeading>
             <BlogParagraph>

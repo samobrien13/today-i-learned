@@ -9,6 +9,10 @@ export const HOW_TO_TELL_THE_TIME_THAI_STYLE: BlogData = {
     date: "2025-01-19",
     slug: "how-to-tell-the-time-thai-style",
     tags: ["langauge"],
+    image: {
+        src: "/images/rants/clock.png",
+        alt: "Clock",
+    },
     component: <HowToTellTheTimeThaiStyle />,
 };
 

@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { ReactNode } from "react";
+import { ImageProps } from "next/image";
 
 import { PLEASE_DONT_VALIDATE_MY_NAME } from "./rants/please-dont-validate-my-name";
 import { HOW_TO_FIND_AND_REPLACE_FROM_THE_COMMAND_LINE } from "./rants/how-to-find-and-replace-from-the-command-line";
@@ -20,6 +21,7 @@ export type BlogData = {
     description: string;
     date: string;
     slug: string;
+    image: ImageProps;
     tags: string[];
     component: ReactNode;
 } & Metadata;

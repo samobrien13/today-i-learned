@@ -15,6 +15,10 @@ export const KEYBOARD_SETUP: BlogData = {
     date: "2025-05-10",
     slug: "keyboard-setup",
     tags: ["engineering"],
+    image: {
+        src: "/images/rants/lily36.jpg",
+        alt: "Lily36",
+    },
     component: <KeyboardSetup />,
 };
 

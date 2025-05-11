@@ -28,6 +28,10 @@ export const DESIGN_SYSTEM: BlogData = {
     date: "2025-01-22",
     slug: "design-system",
     tags: ["design"],
+    image: {
+        src: "/images/rants/palette.png",
+        alt: "Colour palette",
+    },
     component: <DesignSystem />,
 };
 
