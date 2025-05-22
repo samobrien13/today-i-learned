@@ -33,6 +33,7 @@ const supportResponses = [
     "Did you try Googling it?",
     "Did you try doing what the error message says?",
     "Did you clear your cache?",
+    "Have you checked whether you are looking in the right environment?",
 ];
 
 function RubberDuck() {
@@ -85,7 +86,7 @@ function RubberDuck() {
                     className="h-96 overflow-y-auto border-b"
                 >
                     {messages.length === 0 ? (
-                        <div className="text-center text-muted-foreground">
+                        <div className="text-muted-foreground text-center">
                             Ask me any tech question!
                         </div>
                     ) : (
@@ -99,7 +100,7 @@ function RubberDuck() {
                                 }`}
                             >
                                 {message.sender === "bot" ? (
-                                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-muted">
+                                    <div className="bg-muted flex h-9 w-9 items-center justify-center rounded-full">
                                         <Image
                                             src="/images/rubber-duck.png"
                                             alt="Rubber Duck"
@@ -113,8 +114,8 @@ function RubberDuck() {
                                 <div
                                     className={`inline-block px-4 py-2 ${
                                         message.sender === "user"
-                                            ? "justify-start rounded-r-lg rounded-tl-lg bg-primary text-primary-foreground"
-                                            : "rounded-l-lg rounded-br-lg bg-secondary text-secondary-foreground"
+                                            ? "bg-primary text-primary-foreground justify-start rounded-tl-lg rounded-r-lg"
+                                            : "bg-secondary text-secondary-foreground rounded-l-lg rounded-br-lg"
                                     }`}
                                 >
                                     {message.text}
