@@ -4,6 +4,7 @@ import { RecipeGenerator } from "@/components/tools/recipe-generator";
 import { PasswordGenerator } from "@/components/tools/password-generator";
 import { ColourConverter } from "@/components/tools/colour-converter";
 import { RubberDuck } from "@/components/tools/rubber-duck";
+import { CurlBuilder } from "@/components/tools/curl-builder";
 
 import { Metadata } from "next";
 import { ReactNode } from "react";
@@ -57,6 +58,15 @@ export const PASSWORD_GENERATOR: ToolData = {
     component: <PasswordGenerator />,
 };
 
+export const CURL_BUILDER: ToolData = {
+    title: "cURL Builder",
+    description:
+        "Build a nicely formatted cURL command from a URL, method, headers and body.",
+    slug: "curl-builder",
+    tags: ["engineering"],
+    component: <CurlBuilder />,
+};
+
 export type ToolData = {
     title: string;
     description: string;
@@ -66,6 +76,7 @@ export type ToolData = {
 } & Metadata;
 
 export const TOOLS: ToolData[] = [
+    CURL_BUILDER,
     RUBBER_DUCK,
     COLOUR_CONVERTER,
     THAI_TIME_CONVERTER,
