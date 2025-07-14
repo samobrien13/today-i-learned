@@ -51,10 +51,7 @@ function RubberDuck() {
 
         if (!message) return;
 
-        const newMessages: Message[] = [
-            ...messages,
-            { text: message, sender: "user" },
-        ];
+        const newMessages: Message[] = [{ text: message, sender: "user" }];
 
         const randomIndex = Math.floor(Math.random() * supportResponses.length);
         const botResponse = supportResponses[randomIndex];
@@ -135,6 +132,7 @@ function RubberDuck() {
                             name="message"
                             type="text"
                             placeholder="Type your message..."
+                            autoFocus
                         />
                         <Button type="submit">
                             <SendIcon size={24} />
