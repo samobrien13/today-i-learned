@@ -61,7 +61,6 @@ function RubberDuck() {
         }, 500);
 
         formRef.current?.reset();
-        inputRef.current?.blur();
     };
 
     useEffect(() => {
