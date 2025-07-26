@@ -11,6 +11,9 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import useLocalStorage from "@/hooks/use-local-storage";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { formatDate, formatRelativeDate } from "@/lib/date";
 
 type Activity = {
     id: string;
@@ -26,13 +29,34 @@ export default function BabyTracker() {
         [],
     );
 
+    const formatDateTimeLocal = (date: Date) => {
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, "0");
+        const day = date.getDate().toString().padStart(2, "0");
+        const hours = date.getHours().toString().padStart(2, "0");
+        const minutes = date.getMinutes().toString().padStart(2, "0");
+
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+    };
+
+    const [selectedDateTime, setSelectedDateTime] = useState(
+        formatDateTimeLocal(new Date()),
+    );
+
     const addActivity = (type: Activity["type"]) => {
         const newActivity: Activity = {
             id: Date.now().toString(),
             type,
-            timestamp: new Date(),
+            timestamp: new Date(selectedDateTime),
         };
-        setActivities((prev) => [newActivity, ...prev]);
+        setActivities((prev) => {
+            const updatedActivities = [newActivity, ...prev];
+            return updatedActivities.sort(
+                (a, b) =>
+                    new Date(b.timestamp).getTime() -
+                    new Date(a.timestamp).getTime(),
+            );
+        });
     };
 
     const deleteActivity = (id: string) => {
@@ -62,48 +86,20 @@ export default function BabyTracker() {
     };
 
     const formatTime = (date: Date) => {
-        return date.toLocaleTimeString([], {
+        return new Date(date).toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",
             hour12: true,
         });
     };
 
-    const formatDate = (date: Date) => {
-        const today = new Date();
-        const yesterday = new Date(today);
-        yesterday.setDate(yesterday.getDate() - 1);
-
-        if (date.toDateString() === today.toDateString()) {
-            return "Today";
-        } else if (date.toDateString() === yesterday.toDateString()) {
-            return "Yesterday";
-        } else {
-            return date.toLocaleDateString();
-        }
-    };
-
-    const getTimeSince = (date: Date) => {
-        const now = new Date();
-        const diffMs = now.getTime() - date.getTime();
-        const diffMins = Math.floor(diffMs / (1000 * 60));
-        const diffHours = Math.floor(diffMins / 60);
-
-        if (diffMins < 60) {
-            return `${diffMins}m ago`;
-        } else if (diffHours < 24) {
-            return `${diffHours}h ago`;
-        } else {
-            const diffDays = Math.floor(diffHours / 24);
-            return `${diffDays}d ago`;
-        }
-    };
-
     const getLastActivity = (type: Activity["type"]) => {
         const lastActivity = activities.find(
             (activity) => activity.type === type,
         );
-        return lastActivity ? getTimeSince(lastActivity.timestamp) : "Never";
+        return lastActivity
+            ? formatRelativeDate(lastActivity.timestamp)
+            : "Never";
     };
 
     return (
@@ -117,6 +113,13 @@ export default function BabyTracker() {
                         Keep track of your little one&apos;s activities
                     </p>
                 </div>
+
+                <Input
+                    type="datetime-local"
+                    value={selectedDateTime}
+                    onChange={(e) => setSelectedDateTime(e.target.value)}
+                    className="w-full"
+                />
 
                 {/* Quick Action Buttons */}
                 <div className="grid grid-cols-1 gap-3">
@@ -207,7 +210,7 @@ export default function BabyTracker() {
                                                         activity.timestamp,
                                                     )}{" "}
                                                     •{" "}
-                                                    {getTimeSince(
+                                                    {formatRelativeDate(
                                                         activity.timestamp,
                                                     )}
                                                 </div>
@@ -243,7 +246,9 @@ export default function BabyTracker() {
                                         const todayCount = activities.filter(
                                             (activity) =>
                                                 activity.type === type &&
-                                                activity.timestamp.toDateString() ===
+                                                new Date(
+                                                    activity.timestamp,
+                                                ).toDateString() ===
                                                     new Date().toDateString(),
                                         ).length;
 
