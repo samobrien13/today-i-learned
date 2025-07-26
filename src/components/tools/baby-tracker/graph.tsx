@@ -109,6 +109,7 @@ export default function BabyTrackerGraph({
         },
         scales: {
             y: {
+                min: 0,
                 ticks: {
                     stepSize: 1,
                 },

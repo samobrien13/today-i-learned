@@ -17,6 +17,7 @@ import { useState } from "react";
 import { formatDate, formatRelativeDate } from "@/lib/date";
 import BabyTrackerGraph from "./graph";
 import { BABY_TRACKER } from "@/data/tools";
+import { formatTime } from "@/lib/time";
 
 type Activity = {
     id: string;
@@ -102,14 +103,6 @@ export default function BabyTracker() {
         }
     };
 
-    const formatTime = (date: Date) => {
-        return new Date(date).toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: true,
-        });
-    };
-
     const getLastActivity = (type: Activity["type"]) => {
         const lastActivity = activities.find(
             (activity) => activity.type === type,
@@ -127,21 +120,17 @@ export default function BabyTracker() {
                 </h1>
                 <p className="text-gray-600">{BABY_TRACKER.description}</p>
             </div>
-
             <Input
                 type="datetime-local"
                 value={selectedDateTime}
                 onChange={(e) => setSelectedDateTime(e.target.value)}
             />
-
             <Textarea
                 placeholder="Add any notes..."
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
             />
-
-            {/* Quick Action Buttons */}
-            <div className="grid grid-cols-1 gap-3">
+            <div className="flex flex-col gap-3">
                 <Button
                     onClick={() => addActivity("feeding")}
                     className="h-16 bg-green-600 text-lg hover:bg-green-700"
@@ -153,7 +142,6 @@ export default function BabyTracker() {
                         Last: {getLastActivity("feeding")}
                     </span>
                 </Button>
-
                 <Button
                     onClick={() => addActivity("pooping")}
                     className="h-16 bg-amber-600 text-lg hover:bg-amber-700"
@@ -178,8 +166,6 @@ export default function BabyTracker() {
                     </span>
                 </Button>
             </div>
-
-            {/* Recent Activities */}
             <Card>
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
@@ -199,59 +185,52 @@ export default function BabyTracker() {
                             <p>No recent activities to display.</p>
                         </div>
                     ) : (
-                        <div className="max-h-96 space-y-3 overflow-y-auto">
-                            {recentActivities.map((activity) => (
-                                <div
-                                    key={activity.id}
-                                    className="flex items-center justify-between rounded-lg bg-gray-50 p-3"
-                                >
-                                    <div className="flex items-center gap-3">
-                                        <Badge
-                                            className={getActivityColor(
-                                                activity.type,
-                                            )}
-                                        >
-                                            {getActivityIcon(activity.type)}
-                                            <span className="ml-1 capitalize">
-                                                {activity.type}
-                                            </span>
-                                        </Badge>
-                                        <div className="text-sm text-gray-600">
-                                            <div className="font-medium">
-                                                {formatDate(activity.timestamp)}
-                                            </div>
-                                            <div>
-                                                {formatTime(activity.timestamp)}{" "}
-                                                •{" "}
-                                                {formatRelativeDate(
-                                                    activity.timestamp,
-                                                )}
-                                            </div>
-                                            {activity.notes && (
-                                                <div className="text-xs text-gray-500">
-                                                    {activity.notes}
-                                                </div>
+                        recentActivities.map((activity) => (
+                            <div
+                                key={activity.id}
+                                className="flex items-center justify-between rounded-lg bg-gray-50 p-3"
+                            >
+                                <div className="flex items-center gap-3">
+                                    <Badge
+                                        className={getActivityColor(
+                                            activity.type,
+                                        )}
+                                    >
+                                        {getActivityIcon(activity.type)}
+                                        <span className="ml-1 capitalize">
+                                            {activity.type}
+                                        </span>
+                                    </Badge>
+                                    <div className="text-sm text-gray-600">
+                                        <div className="font-medium">
+                                            {formatDate(activity.timestamp)}
+                                        </div>
+                                        <div>
+                                            {formatTime(activity.timestamp)} •{" "}
+                                            {formatRelativeDate(
+                                                activity.timestamp,
                                             )}
                                         </div>
+                                        {activity.notes && (
+                                            <div className="text-xs text-gray-500">
+                                                {activity.notes}
+                                            </div>
+                                        )}
                                     </div>
-                                    <Button
-                                        variant="ghost"
-                                        size="sm"
-                                        onClick={() =>
-                                            deleteActivity(activity.id)
-                                        }
-                                        className="text-red-500 hover:bg-red-50 hover:text-red-700"
-                                    >
-                                        <Trash2 className="h-4 w-4" />
-                                    </Button>
                                 </div>
-                            ))}
-                        </div>
+                                <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => deleteActivity(activity.id)}
+                                    className="text-red-500 hover:bg-red-50 hover:text-red-700"
+                                >
+                                    <Trash2 className="h-4 w-4" />
+                                </Button>
+                            </div>
+                        ))
                     )}
                 </CardContent>
             </Card>
-
-            {/* Summary Stats */}
             {activities.length > 0 && (
                 <Card>
                     <CardHeader>

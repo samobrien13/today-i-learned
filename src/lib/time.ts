@@ -1,3 +1,11 @@
+export function formatTime(date: Date): string {
+    return date.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+    });
+}
+
 // https://stackoverflow.com/a/8395948
 export function parseTime(timeString: string): Date | null {
     if (timeString == "") return null;
