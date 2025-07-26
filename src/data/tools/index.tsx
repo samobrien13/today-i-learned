@@ -8,6 +8,15 @@ import { CurlBuilder } from "@/components/tools/curl-builder";
 
 import { Metadata } from "next";
 import { ReactNode } from "react";
+import BabyTracker from "@/components/tools/baby-tracker";
+
+export const BABY_TRACKER: ToolData = {
+    title: "Baby Tracker",
+    description: "Easily track what goes into and comes out of your baby",
+    slug: "baby-tracker",
+    tags: ["parenting"],
+    component: <BabyTracker />,
+};
 
 export const RUBBER_DUCK: ToolData = {
     title: "Rubber Duck",
@@ -76,6 +85,7 @@ export type ToolData = {
 } & Metadata;
 
 export const TOOLS: ToolData[] = [
+    BABY_TRACKER,
     CURL_BUILDER,
     RUBBER_DUCK,
     COLOUR_CONVERTER,
