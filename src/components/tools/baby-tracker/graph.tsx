@@ -70,14 +70,9 @@ export default function BabyTrackerGraph({
                     ).length;
                 });
 
-                const cumulativeData = data.reduce((acc, val) => {
-                    acc.push((acc.length > 0 ? acc[acc.length - 1] : 0) + val);
-                    return acc;
-                }, [] as number[]);
-
                 return {
                     label: type.charAt(0).toUpperCase() + type.slice(1),
-                    data: cumulativeData,
+                    data: data,
                     borderColor:
                         type === "feeding"
                             ? `hsl(${cssVar("--chart-1")})`
@@ -119,4 +114,3 @@ export default function BabyTrackerGraph({
 
     return <Line options={options} data={data} />;
 }
-

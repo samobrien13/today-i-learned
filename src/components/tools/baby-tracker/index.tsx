@@ -1,6 +1,13 @@
 "use client";
 
-import { Baby, Utensils, Droplets, Trash2, Clock } from "lucide-react";
+import {
+    Baby,
+    Utensils,
+    Droplets,
+    Trash2,
+    Clock,
+    PlusCircle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -18,6 +25,15 @@ import { formatDate, formatRelativeDate } from "@/lib/date";
 import BabyTrackerGraph from "./graph";
 import { BABY_TRACKER } from "@/data/tools";
 import { formatTime } from "@/lib/time";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
 
 type Activity = {
     id: string;
@@ -34,6 +50,10 @@ export default function BabyTracker() {
         [],
     );
     const [notes, setNotes] = useState("");
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [activityType, setActivityType] = useState<Activity["type"] | null>(
+        null,
+    );
 
     const getRecentActivities = () => {
         const twentyFourHoursAgo = new Date();
@@ -75,6 +95,8 @@ export default function BabyTracker() {
             );
         });
         setNotes("");
+        setIsDialogOpen(false);
+        setActivityType(null);
     };
 
     const deleteActivity = (id: string) => {
@@ -113,160 +135,219 @@ export default function BabyTracker() {
     };
 
     return (
-        <div className="flex flex-col gap-6">
-            <div className="text-center">
-                <h1 className="mb-2 text-3xl font-bold text-gray-900">
-                    {BABY_TRACKER.title}
-                </h1>
-                <p className="text-gray-600">{BABY_TRACKER.description}</p>
-            </div>
-            <Input
-                type="datetime-local"
-                value={selectedDateTime}
-                onChange={(e) => setSelectedDateTime(e.target.value)}
-            />
-            <Textarea
-                placeholder="Add any notes..."
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-            />
-            <div className="flex flex-col gap-3">
-                <Button
-                    onClick={() => addActivity("feeding")}
-                    className="h-16 bg-green-600 text-lg hover:bg-green-700"
-                    size="lg"
-                >
-                    <Utensils className="mr-2 h-6 w-6" />
-                    Log Feeding
-                    <span className="ml-auto text-sm opacity-75">
-                        Last: {getLastActivity("feeding")}
-                    </span>
-                </Button>
-                <Button
-                    onClick={() => addActivity("pooping")}
-                    className="h-16 bg-amber-600 text-lg hover:bg-amber-700"
-                    size="lg"
-                >
-                    <Baby className="mr-2 h-6 w-6" />
-                    Log Pooping
-                    <span className="ml-auto text-sm opacity-75">
-                        Last: {getLastActivity("pooping")}
-                    </span>
-                </Button>
-
-                <Button
-                    onClick={() => addActivity("wee")}
-                    className="h-16 bg-blue-600 text-lg hover:bg-blue-700"
-                    size="lg"
-                >
-                    <Droplets className="mr-2 h-6 w-6" />
-                    Log Wee
-                    <span className="ml-auto text-sm opacity-75">
-                        Last: {getLastActivity("wee")}
-                    </span>
-                </Button>
-            </div>
-            <Card>
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                        <Clock className="h-5 w-5" />
-                        Recent Activities
-                    </CardTitle>
-                    <CardDescription>
-                        {recentActivities.length === 0
-                            ? "No activities logged in the last 24 hours"
-                            : `${recentActivities.length} activities logged in the last 24 hours`}
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
-                    {recentActivities.length === 0 ? (
-                        <div className="py-8 text-center text-gray-500">
-                            <Baby className="mx-auto mb-3 h-12 w-12 opacity-50" />
-                            <p>No recent activities to display.</p>
-                        </div>
-                    ) : (
-                        recentActivities.map((activity) => (
-                            <div
-                                key={activity.id}
-                                className="flex items-center justify-between rounded-lg bg-gray-50 p-3"
-                            >
-                                <div className="flex items-center gap-3">
-                                    <Badge
-                                        className={getActivityColor(
-                                            activity.type,
-                                        )}
-                                    >
-                                        {getActivityIcon(activity.type)}
-                                        <span className="ml-1 capitalize">
-                                            {activity.type}
-                                        </span>
-                                    </Badge>
-                                    <div className="text-sm text-gray-600">
-                                        <div className="font-medium">
-                                            {formatDate(activity.timestamp)}
-                                        </div>
-                                        <div>
-                                            {formatTime(activity.timestamp)} •{" "}
-                                            {formatRelativeDate(
-                                                activity.timestamp,
-                                            )}
-                                        </div>
-                                        {activity.notes && (
-                                            <div className="text-xs text-gray-500">
-                                                {activity.notes}
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                                <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => deleteActivity(activity.id)}
-                                    className="text-red-500 hover:bg-red-50 hover:text-red-700"
-                                >
-                                    <Trash2 className="h-4 w-4" />
-                                </Button>
-                            </div>
-                        ))
-                    )}
-                </CardContent>
-            </Card>
-            {activities.length > 0 && (
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                    <DialogTitle>Add {activityType}</DialogTitle>
+                </DialogHeader>
+                <div className="grid gap-4 py-4">
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <label htmlFor="datetime" className="text-right">
+                            Date & Time
+                        </label>
+                        <Input
+                            id="datetime"
+                            type="datetime-local"
+                            value={selectedDateTime}
+                            onChange={(e) =>
+                                setSelectedDateTime(e.target.value)
+                            }
+                            className="col-span-3"
+                        />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <label htmlFor="notes" className="text-right">
+                            Notes
+                        </label>
+                        <Textarea
+                            id="notes"
+                            placeholder="Add any notes..."
+                            value={notes}
+                            onChange={(e) => setNotes(e.target.value)}
+                            className="col-span-3"
+                        />
+                    </div>
+                </div>
+                <DialogFooter>
+                    <Button
+                        onClick={() => {
+                            if (activityType) {
+                                addActivity(activityType);
+                            }
+                            setIsDialogOpen(false);
+                        }}
+                    >
+                        Save changes
+                    </Button>
+                </DialogFooter>
+            </DialogContent>
+            <div className="flex flex-col gap-6">
+                <div className="text-center">
+                    <h1 className="mb-2 text-3xl font-bold text-gray-900">
+                        {BABY_TRACKER.title}
+                    </h1>
+                    <p className="text-gray-600">{BABY_TRACKER.description}</p>
+                </div>
+                <div className="flex flex-col gap-3">
+                    <DialogTrigger asChild>
+                        <Button
+                            onClick={() => {
+                                setActivityType("feeding");
+                                setIsDialogOpen(true);
+                            }}
+                            className="h-16 bg-green-600 text-lg hover:bg-green-700"
+                            size="lg"
+                        >
+                            <Utensils className="mr-2 h-6 w-6" />
+                            Log Feeding
+                            <span className="ml-auto text-sm opacity-75">
+                                Last: {getLastActivity("feeding")}
+                            </span>
+                        </Button>
+                    </DialogTrigger>
+                    <DialogTrigger asChild>
+                        <Button
+                            onClick={() => {
+                                setActivityType("pooping");
+                                setIsDialogOpen(true);
+                            }}
+                            className="h-16 bg-amber-600 text-lg hover:bg-amber-700"
+                            size="lg"
+                        >
+                            <Baby className="mr-2 h-6 w-6" />
+                            Log Pooping
+                            <span className="ml-auto text-sm opacity-75">
+                                Last: {getLastActivity("pooping")}
+                            </span>
+                        </Button>
+                    </DialogTrigger>
+                    <DialogTrigger asChild>
+                        <Button
+                            onClick={() => {
+                                setActivityType("wee");
+                                setIsDialogOpen(true);
+                            }}
+                            className="h-16 bg-blue-600 text-lg hover:bg-blue-700"
+                            size="lg"
+                        >
+                            <Droplets className="mr-2 h-6 w-6" />
+                            Log Wee
+                            <span className="ml-auto text-sm opacity-75">
+                                Last: {getLastActivity("wee")}
+                            </span>
+                        </Button>
+                    </DialogTrigger>
+                </div>
                 <Card>
                     <CardHeader>
-                        <CardTitle>Today&apos;s Summary</CardTitle>
+                        <CardTitle className="flex items-center gap-2">
+                            <Clock className="h-5 w-5" />
+                            Recent Activities
+                        </CardTitle>
+                        <CardDescription>
+                            {recentActivities.length === 0
+                                ? "No activities logged in the last 24 hours"
+                                : `${recentActivities.length} activities logged in the last 24 hours`}
+                        </CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <div className="grid grid-cols-3 gap-4 pt-4 text-center">
-                            {(["feeding", "pooping", "wee"] as const).map(
-                                (type) => {
-                                    const todayCount = activities.filter(
-                                        (activity) =>
-                                            activity.type === type &&
-                                            new Date(
-                                                activity.timestamp,
-                                            ).toDateString() ===
-                                                new Date().toDateString(),
-                                    ).length;
-
-                                    return (
-                                        <div key={type} className="space-y-1">
-                                            <div className="text-2xl font-bold text-gray-900">
-                                                {todayCount}
+                        {recentActivities.length === 0 ? (
+                            <div className="py-8 text-center text-gray-500">
+                                <Baby className="mx-auto mb-3 h-12 w-12 opacity-50" />
+                                <p>No recent activities to display.</p>
+                            </div>
+                        ) : (
+                            recentActivities.map((activity) => (
+                                <div
+                                    key={activity.id}
+                                    className="flex items-center justify-between rounded-lg bg-gray-50 p-3"
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <Badge
+                                            className={getActivityColor(
+                                                activity.type,
+                                            )}
+                                        >
+                                            {getActivityIcon(activity.type)}
+                                            <span className="ml-1 capitalize">
+                                                {activity.type}
+                                            </span>
+                                        </Badge>
+                                        <div className="text-sm text-gray-600">
+                                            <div className="font-medium">
+                                                {formatDate(activity.timestamp)}
                                             </div>
-                                            <div className="text-sm text-gray-600 capitalize">
-                                                {type}
-                                                {todayCount !== 1 ? "s" : ""}
+                                            <div>
+                                                {formatTime(activity.timestamp)}{" "}
+                                                •{" "}
+                                                {formatRelativeDate(
+                                                    activity.timestamp,
+                                                )}
                                             </div>
+                                            {activity.notes && (
+                                                <div className="text-xs text-gray-500">
+                                                    {activity.notes}
+                                                </div>
+                                            )}
                                         </div>
-                                    );
-                                },
-                            )}
-                        </div>
+                                    </div>
+                                    <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        onClick={() =>
+                                            deleteActivity(activity.id)
+                                        }
+                                        className="text-red-500 hover:bg-red-50 hover:text-red-700"
+                                    >
+                                        <Trash2 className="h-4 w-4" />
+                                    </Button>
+                                </div>
+                            ))
+                        )}
                     </CardContent>
                 </Card>
-            )}
-            <BabyTrackerGraph activities={activities} />
-        </div>
+                {activities.length > 0 && (
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Today&apos;s Summary</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="grid grid-cols-3 gap-4 pt-4 text-center">
+                                {(["feeding", "pooping", "wee"] as const).map(
+                                    (type) => {
+                                        const todayCount = activities.filter(
+                                            (activity) =>
+                                                activity.type === type &&
+                                                new Date(
+                                                    activity.timestamp,
+                                                ).toDateString() ===
+                                                    new Date().toDateString(),
+                                        ).length;
+
+                                        return (
+                                            <div
+                                                key={type}
+                                                className="space-y-1"
+                                            >
+                                                <div className="text-2xl font-bold text-gray-900">
+                                                    {todayCount}
+                                                </div>
+                                                <div className="text-sm text-gray-600 capitalize">
+                                                    {type}
+                                                    {todayCount !== 1
+                                                        ? "s"
+                                                        : ""}
+                                                </div>
+                                            </div>
+                                        );
+                                    },
+                                )}
+                            </div>
+                        </CardContent>
+                    </Card>
+                )}
+                <BabyTrackerGraph activities={activities} />
+            </div>
+        </Dialog>
     );
 }
