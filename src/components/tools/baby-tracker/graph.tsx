@@ -37,7 +37,14 @@ export default function BabyTrackerGraph({
     activities,
 }: BabyTrackerGraphProps) {
     const processData = () => {
-        const sortedActivities = [...activities].sort(
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+        const filteredActivities = activities.filter(
+            (activity) => new Date(activity.timestamp) >= sevenDaysAgo,
+        );
+
+        const sortedActivities = [...filteredActivities].sort(
             (a, b) =>
                 new Date(a.timestamp).getTime() -
                 new Date(b.timestamp).getTime(),

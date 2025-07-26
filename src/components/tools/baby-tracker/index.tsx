@@ -31,6 +31,16 @@ export default function BabyTracker() {
         [],
     );
 
+    const getRecentActivities = () => {
+        const twentyFourHoursAgo = new Date();
+        twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
+        return activities.filter(
+            (activity) => new Date(activity.timestamp) >= twentyFourHoursAgo,
+        );
+    };
+
+    const recentActivities = getRecentActivities();
+
     const formatDateTimeLocal = (date: Date) => {
         const year = date.getFullYear();
         const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -167,20 +177,20 @@ export default function BabyTracker() {
                         Recent Activities
                     </CardTitle>
                     <CardDescription>
-                        {activities.length === 0
-                            ? "No activities logged yet"
-                            : `${activities.length} activities logged`}
+                        {recentActivities.length === 0
+                            ? "No activities logged in the last 24 hours"
+                            : `${recentActivities.length} activities logged in the last 24 hours`}
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    {activities.length === 0 ? (
+                    {recentActivities.length === 0 ? (
                         <div className="py-8 text-center text-gray-500">
                             <Baby className="mx-auto mb-3 h-12 w-12 opacity-50" />
-                            <p>Start tracking your baby&apos;s activities!</p>
+                            <p>No recent activities to display.</p>
                         </div>
                     ) : (
                         <div className="max-h-96 space-y-3 overflow-y-auto">
-                            {activities.map((activity) => (
+                            {recentActivities.map((activity) => (
                                 <div
                                     key={activity.id}
                                     className="flex items-center justify-between rounded-lg bg-gray-50 p-3"
