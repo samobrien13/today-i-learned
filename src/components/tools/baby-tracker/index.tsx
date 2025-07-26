@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { formatDate, formatRelativeDate } from "@/lib/date";
 import BabyTrackerGraph from "./graph";
+import { BABY_TRACKER } from "@/data/tools";
 
 type Activity = {
     id: string;
@@ -107,11 +108,9 @@ export default function BabyTracker() {
         <div className="flex flex-col gap-6">
             <div className="text-center">
                 <h1 className="mb-2 text-3xl font-bold text-gray-900">
-                    Baby Tracker
+                    {BABY_TRACKER.title}
                 </h1>
-                <p className="text-gray-600">
-                    Keep track of your little one&apos;s activities
-                </p>
+                <p className="text-gray-600">{BABY_TRACKER.description}</p>
             </div>
 
             <Input
