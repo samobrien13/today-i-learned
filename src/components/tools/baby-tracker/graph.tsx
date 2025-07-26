@@ -107,6 +107,13 @@ export default function BabyTrackerGraph({
                 text: "Daily Running Totals",
             },
         },
+        scales: {
+            y: {
+                ticks: {
+                    stepSize: 1,
+                },
+            },
+        },
     };
 
     return <Line options={options} data={data} />;
