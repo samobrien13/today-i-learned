@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import useLocalStorage from "@/hooks/use-local-storage";
+import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { formatDate, formatRelativeDate } from "@/lib/date";
@@ -21,6 +22,7 @@ type Activity = {
     id: string;
     type: "feeding" | "pooping" | "wee";
     timestamp: Date;
+    notes?: string;
 };
 
 const STORAGE_KEY = "baby-tracker-activities";
@@ -30,6 +32,7 @@ export default function BabyTracker() {
         STORAGE_KEY,
         [],
     );
+    const [notes, setNotes] = useState("");
 
     const getRecentActivities = () => {
         const twentyFourHoursAgo = new Date();
@@ -60,6 +63,7 @@ export default function BabyTracker() {
             id: Date.now().toString(),
             type,
             timestamp: new Date(selectedDateTime),
+            notes,
         };
         setActivities((prev) => {
             const updatedActivities = [newActivity, ...prev];
@@ -69,6 +73,7 @@ export default function BabyTracker() {
                     new Date(a.timestamp).getTime(),
             );
         });
+        setNotes("");
     };
 
     const deleteActivity = (id: string) => {
@@ -127,7 +132,12 @@ export default function BabyTracker() {
                 type="datetime-local"
                 value={selectedDateTime}
                 onChange={(e) => setSelectedDateTime(e.target.value)}
-                className="w-full"
+            />
+
+            <Textarea
+                placeholder="Add any notes..."
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
             />
 
             {/* Quick Action Buttons */}
@@ -217,6 +227,11 @@ export default function BabyTracker() {
                                                     activity.timestamp,
                                                 )}
                                             </div>
+                                            {activity.notes && (
+                                                <div className="text-xs text-gray-500">
+                                                    {activity.notes}
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                     <Button
