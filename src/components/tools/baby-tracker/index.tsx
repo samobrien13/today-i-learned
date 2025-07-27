@@ -7,6 +7,7 @@ import {
     Trash2,
     Clock,
     PlusCircle,
+    PencilIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,7 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import useLocalStorage from "@/hooks/use-local-storage";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { formatDate, formatRelativeDate } from "@/lib/date";
 import BabyTrackerGraph from "./graph";
 import { BABY_TRACKER } from "@/data/tools";
@@ -28,7 +29,6 @@ import { formatTime } from "@/lib/time";
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
@@ -49,11 +49,17 @@ export default function BabyTracker() {
         STORAGE_KEY,
         [],
     );
-    const [notes, setNotes] = useState("");
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [activityType, setActivityType] = useState<Activity["type"] | null>(
         null,
     );
+    const [editingActivity, setEditingActivity] = useState<Activity | null>(
+        null,
+    );
+    const [selectedDateTime, setSelectedDateTime] = useState(
+        formatDate(new Date()),
+    );
+    const [selectedNotes, setSelectedNotes] = useState("");
 
     const getRecentActivities = () => {
         const twentyFourHoursAgo = new Date();
@@ -75,28 +81,54 @@ export default function BabyTracker() {
         return `${year}-${month}-${day}T${hours}:${minutes}`;
     };
 
-    const [selectedDateTime, setSelectedDateTime] = useState(
-        formatDateTimeLocal(new Date()),
-    );
-
-    const addActivity = (type: Activity["type"]) => {
-        const newActivity: Activity = {
-            id: Date.now().toString(),
-            type,
-            timestamp: new Date(selectedDateTime),
-            notes,
-        };
-        setActivities((prev) => {
-            const updatedActivities = [newActivity, ...prev];
-            return updatedActivities.sort(
-                (a, b) =>
-                    new Date(b.timestamp).getTime() -
-                    new Date(a.timestamp).getTime(),
+    useEffect(() => {
+        if (editingActivity) {
+            setSelectedDateTime(
+                formatDateTimeLocal(new Date(editingActivity.timestamp)),
             );
-        });
-        setNotes("");
+            setSelectedNotes(editingActivity.notes || "");
+            setActivityType(editingActivity.type);
+        } else {
+            setSelectedDateTime(formatDateTimeLocal(new Date()));
+            setSelectedNotes("");
+            setActivityType(null);
+        }
+    }, [editingActivity]);
+
+    const saveActivity = (type: Activity["type"]) => {
+        if (editingActivity) {
+            // Editing existing activity
+            setActivities((prev) =>
+                prev.map((activity) =>
+                    activity.id === editingActivity.id
+                        ? {
+                              ...activity,
+                              timestamp: new Date(selectedDateTime),
+                              notes: selectedNotes,
+                          }
+                        : activity,
+                ),
+            );
+        } else {
+            // Adding new activity
+            const newActivity: Activity = {
+                id: Date.now().toString(),
+                type,
+                timestamp: new Date(selectedDateTime),
+                notes: selectedNotes,
+            };
+            setActivities((prev) => {
+                const updatedActivities = [newActivity, ...prev];
+                return updatedActivities.sort(
+                    (a, b) =>
+                        new Date(b.timestamp).getTime() -
+                        new Date(a.timestamp).getTime(),
+                );
+            });
+        }
         setIsDialogOpen(false);
         setActivityType(null);
+        setEditingActivity(null);
     };
 
     const deleteActivity = (id: string) => {
@@ -135,10 +167,22 @@ export default function BabyTracker() {
     };
 
     return (
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <Dialog
+            open={isDialogOpen}
+            onOpenChange={(change) => {
+                setIsDialogOpen(change);
+                if (!change) {
+                    setEditingActivity(null);
+                    setSelectedDateTime(formatDateTimeLocal(new Date()));
+                    setSelectedNotes("");
+                }
+            }}
+        >
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Add {activityType}</DialogTitle>
+                    <DialogTitle>
+                        {editingActivity ? "Edit" : "Add"} {activityType}
+                    </DialogTitle>
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
                     <div className="grid grid-cols-4 items-center gap-4">
@@ -162,17 +206,29 @@ export default function BabyTracker() {
                         <Textarea
                             id="notes"
                             placeholder="Add any notes..."
-                            value={notes}
-                            onChange={(e) => setNotes(e.target.value)}
+                            value={selectedNotes}
+                            onChange={(e) => setSelectedNotes(e.target.value)}
                             className="col-span-3"
                         />
                     </div>
                 </div>
                 <DialogFooter>
+                    {editingActivity && (
+                        <Button
+                            variant="destructive"
+                            onClick={() => {
+                                deleteActivity(editingActivity.id);
+                                setIsDialogOpen(false);
+                                setEditingActivity(null);
+                            }}
+                        >
+                            Delete
+                        </Button>
+                    )}
                     <Button
                         onClick={() => {
                             if (activityType) {
-                                addActivity(activityType);
+                                saveActivity(activityType);
                             }
                             setIsDialogOpen(false);
                         }}
@@ -260,7 +316,11 @@ export default function BabyTracker() {
                             recentActivities.map((activity) => (
                                 <div
                                     key={activity.id}
-                                    className="flex items-center justify-between rounded-lg bg-gray-50 p-3"
+                                    className="hover:bg-accent mb-2 flex cursor-pointer items-center justify-between rounded-lg p-3 shadow-sm transition-colors"
+                                    onClick={() => {
+                                        setEditingActivity(activity);
+                                        setIsDialogOpen(true);
+                                    }}
                                 >
                                     <div className="flex items-center gap-3">
                                         <Badge
@@ -291,15 +351,8 @@ export default function BabyTracker() {
                                             )}
                                         </div>
                                     </div>
-                                    <Button
-                                        variant="ghost"
-                                        size="sm"
-                                        onClick={() =>
-                                            deleteActivity(activity.id)
-                                        }
-                                        className="text-red-500 hover:bg-red-50 hover:text-red-700"
-                                    >
-                                        <Trash2 className="h-4 w-4" />
+                                    <Button disabled variant="ghost" size="sm">
+                                        <PencilIcon className="h-4 w-4" />
                                     </Button>
                                 </div>
                             ))

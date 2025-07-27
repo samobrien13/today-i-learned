@@ -99,7 +99,7 @@ export default function BabyTrackerGraph({
             },
             title: {
                 display: true,
-                text: "Daily Running Totals",
+                text: "Daily Totals",
             },
         },
         scales: {
