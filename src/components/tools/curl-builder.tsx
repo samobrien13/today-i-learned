@@ -13,8 +13,9 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { ToolData } from ".";
 
-function CurlBuilder() {
+function CurlBuilder({ title }: ToolData) {
     const [url, setUrl] = useState("https://api.example.com");
     const [method, setMethod] = useState("GET");
     const [headers, setHeaders] = useState("Content-Type: application/json");
@@ -33,7 +34,7 @@ function CurlBuilder() {
 
     return (
         <div className="space-y-4">
-            <Heading>cURL Builder</Heading>
+            <Heading>{title}</Heading>
             <div className="space-y-2">
                 <Label htmlFor="url">URL</Label>
                 <Input
@@ -84,4 +85,3 @@ function CurlBuilder() {
 }
 
 export { CurlBuilder };
-

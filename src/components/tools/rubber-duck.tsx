@@ -1,12 +1,6 @@
 "use client";
 
-import {
-    unstable_ViewTransition as ViewTransition,
-    FormEvent,
-    useEffect,
-    useRef,
-    useState,
-} from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import {
     Card,
     CardContent,
@@ -15,11 +9,11 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import { RUBBER_DUCK } from "@/data/tools";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { SendIcon } from "lucide-react";
 import Image from "next/image";
+import { ToolData } from ".";
 
 type Message = {
     text: string;
@@ -36,7 +30,7 @@ const supportResponses = [
     "Have you checked whether you are looking in the right environment?",
 ];
 
-function RubberDuck() {
+function RubberDuck({ title, description }: ToolData) {
     const [messages, setMessages] = useState<Message[]>([]);
     const formRef = useRef<HTMLFormElement>(null);
     const chatRef = useRef<HTMLDivElement>(null);
@@ -71,75 +65,73 @@ function RubberDuck() {
     }, [messages]);
 
     return (
-        <ViewTransition name={`${RUBBER_DUCK.slug}-card`}>
-            <Card className="mx-auto w-full">
-                <CardHeader className="border-b">
-                    <CardTitle>{RUBBER_DUCK.title}</CardTitle>
-                    <CardDescription>{RUBBER_DUCK.description}</CardDescription>
-                </CardHeader>
-                <CardContent
-                    ref={chatRef}
-                    className="h-96 overflow-y-auto border-b"
-                >
-                    {messages.length === 0 ? (
-                        <div className="text-muted-foreground text-center">
-                            Ask me any tech question!
-                        </div>
-                    ) : (
-                        messages.map((message, index) => (
+        <Card className="mx-auto w-full">
+            <CardHeader className="border-b">
+                <CardTitle>{title}</CardTitle>
+                <CardDescription>{description}</CardDescription>
+            </CardHeader>
+            <CardContent
+                ref={chatRef}
+                className="h-96 overflow-y-auto border-b"
+            >
+                {messages.length === 0 ? (
+                    <div className="text-muted-foreground text-center">
+                        Ask me any tech question!
+                    </div>
+                ) : (
+                    messages.map((message, index) => (
+                        <div
+                            key={index}
+                            className={`flex flex-row items-end gap-2 pb-4 ${
+                                message.sender === "user"
+                                    ? "justify-end text-right"
+                                    : "justify-start text-left"
+                            }`}
+                        >
+                            {message.sender === "bot" ? (
+                                <div className="bg-muted flex h-9 w-9 items-center justify-center rounded-full">
+                                    <Image
+                                        src="/images/rubber-duck.png"
+                                        alt="Rubber Duck"
+                                        width={20}
+                                        height={20}
+                                        className="inline-block object-contain"
+                                        priority
+                                    />
+                                </div>
+                            ) : null}
                             <div
-                                key={index}
-                                className={`flex flex-row items-end gap-2 pb-4 ${
+                                className={`inline-block px-4 py-2 ${
                                     message.sender === "user"
-                                        ? "justify-end text-right"
-                                        : "justify-start text-left"
+                                        ? "bg-primary text-primary-foreground justify-start rounded-tl-lg rounded-r-lg"
+                                        : "bg-secondary text-secondary-foreground rounded-l-lg rounded-br-lg"
                                 }`}
                             >
-                                {message.sender === "bot" ? (
-                                    <div className="bg-muted flex h-9 w-9 items-center justify-center rounded-full">
-                                        <Image
-                                            src="/images/rubber-duck.png"
-                                            alt="Rubber Duck"
-                                            width={20}
-                                            height={20}
-                                            className="inline-block object-contain"
-                                            priority
-                                        />
-                                    </div>
-                                ) : null}
-                                <div
-                                    className={`inline-block px-4 py-2 ${
-                                        message.sender === "user"
-                                            ? "bg-primary text-primary-foreground justify-start rounded-tl-lg rounded-r-lg"
-                                            : "bg-secondary text-secondary-foreground rounded-l-lg rounded-br-lg"
-                                    }`}
-                                >
-                                    {message.text}
-                                </div>
+                                {message.text}
                             </div>
-                        ))
-                    )}
-                </CardContent>
-                <CardFooter>
-                    <form
-                        ref={formRef}
-                        onSubmit={handleSubmit}
-                        className="flex flex-row gap-4"
-                    >
-                        <Input
-                            ref={inputRef}
-                            name="message"
-                            type="text"
-                            placeholder="Type your message..."
-                            autoFocus
-                        />
-                        <Button type="submit">
-                            <SendIcon size={24} />
-                        </Button>
-                    </form>
-                </CardFooter>
-            </Card>
-        </ViewTransition>
+                        </div>
+                    ))
+                )}
+            </CardContent>
+            <CardFooter>
+                <form
+                    ref={formRef}
+                    onSubmit={handleSubmit}
+                    className="flex flex-row gap-4"
+                >
+                    <Input
+                        ref={inputRef}
+                        name="message"
+                        type="text"
+                        placeholder="Type your message..."
+                        autoFocus
+                    />
+                    <Button type="submit">
+                        <SendIcon size={24} />
+                    </Button>
+                </form>
+            </CardFooter>
+        </Card>
     );
 }
 

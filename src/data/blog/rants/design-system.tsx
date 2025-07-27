@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Colours } from "@/components/colours";
 import { ColourConverter } from "@/components/tools/colour-converter";
+import { COLOUR_CONVERTER } from "@/components/tools";
 
 export const DESIGN_SYSTEM: BlogData = {
     title: "Design System",
@@ -85,7 +86,12 @@ function DesignSystem() {
                 how this works.
             </BlogParagraph>
             <div className="pb-4">
-                <ColourConverter />
+                <ColourConverter
+                    title={COLOUR_CONVERTER.title}
+                    description={COLOUR_CONVERTER.description}
+                    slug={COLOUR_CONVERTER.slug}
+                    tags={COLOUR_CONVERTER.tags}
+                />
             </div>
             <BlogSubHeading>Default</BlogSubHeading>
             <BlogParagraph>
