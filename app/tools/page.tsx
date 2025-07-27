@@ -7,7 +7,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import { TOOLS } from "@/data/tools";
+import { TOOLS } from "@/components/tools";
 import Routes from "@/constants/Routes";
 import { Metadata } from "next";
 import { Badge } from "@/components/ui/badge";

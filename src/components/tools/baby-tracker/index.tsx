@@ -16,7 +16,6 @@ import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { formatDate, formatRelativeDate } from "@/lib/date";
 import BabyTrackerGraph from "./graph";
-import { BABY_TRACKER } from "@/data/tools";
 import { formatTime } from "@/lib/time";
 import {
     Dialog,
@@ -26,6 +25,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
+import { ToolData } from "..";
 
 type Activity = {
     id: string;
@@ -36,7 +36,7 @@ type Activity = {
 
 const STORAGE_KEY = "baby-tracker-activities";
 
-export default function BabyTracker() {
+function BabyTracker({ title, description }: ToolData) {
     const [activities, setActivities] = useLocalStorage<Activity[]>(
         STORAGE_KEY,
         [],
@@ -232,9 +232,9 @@ export default function BabyTracker() {
             <div className="flex flex-col gap-6">
                 <div className="text-center">
                     <h1 className="mb-2 text-3xl font-bold text-gray-900">
-                        {BABY_TRACKER.title}
+                        {title}
                     </h1>
-                    <p className="text-gray-600">{BABY_TRACKER.description}</p>
+                    <p className="text-gray-600">{description}</p>
                 </div>
                 <div className="flex flex-col gap-3">
                     <DialogTrigger asChild>
@@ -396,3 +396,5 @@ export default function BabyTracker() {
         </Dialog>
     );
 }
+
+export { BabyTracker };

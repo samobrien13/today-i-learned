@@ -1,3 +1,4 @@
+import { THAI_TIME_CONVERTER } from "@/components/tools";
 import { ThaiTimeConverter } from "@/components/tools/thai-time-converter";
 import { BlogHeading, BlogParagraph } from "@/components/ui/blog";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
@@ -197,7 +198,12 @@ function HowToTellTheTimeThaiStyle() {
                 latin alphabet instead of the Thai script. Definitely learn how
                 to read Thai script if you want to learn Thai!
             </BlogParagraph>
-            <ThaiTimeConverter />
+            <ThaiTimeConverter
+                title={THAI_TIME_CONVERTER.title}
+                description={THAI_TIME_CONVERTER.description}
+                slug={THAI_TIME_CONVERTER.slug}
+                tags={THAI_TIME_CONVERTER.tags}
+            />
         </>
     );
 }

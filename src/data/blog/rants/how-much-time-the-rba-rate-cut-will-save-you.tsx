@@ -1,4 +1,5 @@
 import { Line } from "@/components/line";
+import { MORTGAGE_CALCULATOR } from "@/components/tools";
 import { MortgageCalculator } from "@/components/tools/mortgage-calculator";
 import { BlogParagraph } from "@/components/ui/blog";
 import { Card } from "@/components/ui/card";
@@ -73,7 +74,12 @@ function HowMuchTimeTheRbaRateCutWillSaveYou() {
             <BlogParagraph>
                 Try out my mortgage calculator for yourself below:
             </BlogParagraph>
-            <MortgageCalculator />
+            <MortgageCalculator
+                title={MORTGAGE_CALCULATOR.title}
+                description={MORTGAGE_CALCULATOR.description}
+                slug={MORTGAGE_CALCULATOR.slug}
+                tags={MORTGAGE_CALCULATOR.tags}
+            />
         </>
     );
 }

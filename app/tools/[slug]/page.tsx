@@ -1,4 +1,5 @@
-import { TOOLS } from "@/data/tools";
+import { unstable_ViewTransition as ViewTransition } from "react";
+import { TOOLS } from "@/components/tools";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -40,7 +41,18 @@ async function ToolPage({ params }: ToolPageProps) {
         notFound();
     }
 
-    return <section className="flex-1">{tool.component}</section>;
+    return (
+        <section className="flex-1">
+            <ViewTransition name={`${tool.slug}-card`}>
+                {tool.component({
+                    title: tool.title,
+                    description: tool.description,
+                    slug: tool.slug,
+                    tags: tool.tags,
+                })}
+            </ViewTransition>
+        </section>
+    );
 }
 
 export default ToolPage;
