@@ -1,14 +1,6 @@
 "use client";
 
-import {
-    Baby,
-    Utensils,
-    Droplets,
-    Trash2,
-    Clock,
-    PlusCircle,
-    PencilIcon,
-} from "lucide-react";
+import { Baby, Utensils, Droplets, Clock, PencilIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
     Card,
