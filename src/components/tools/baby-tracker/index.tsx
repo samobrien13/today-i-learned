@@ -30,6 +30,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { ToolData } from "..";
+import { Label } from "@/components/ui/label";
 
 type Activity = {
     id: string;
@@ -131,14 +132,14 @@ function BabyTracker({ title, description }: ToolData) {
         }
     };
 
-    const getActivityColor = (type: Activity["type"]) => {
+    const getActivityVariant = (type: Activity["type"]) => {
         switch (type) {
             case "feeding":
-                return "bg-green-100 text-green-800 border-green-200";
+                return "default";
             case "pooping":
-                return "bg-amber-100 text-amber-800 border-amber-200";
+                return "secondary";
             case "wee":
-                return "bg-blue-100 text-blue-800 border-blue-200";
+                return "outline";
         }
     };
 
@@ -191,9 +192,9 @@ function BabyTracker({ title, description }: ToolData) {
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
                         <div className="grid grid-cols-4 items-center gap-4">
-                            <label htmlFor="datetime" className="text-right">
+                            <Label htmlFor="datetime" className="text-right">
                                 Date & Time
-                            </label>
+                            </Label>
                             <Input
                                 id="datetime"
                                 type="datetime-local"
@@ -205,9 +206,9 @@ function BabyTracker({ title, description }: ToolData) {
                             />
                         </div>
                         <div className="grid grid-cols-4 items-center gap-4">
-                            <label htmlFor="notes" className="text-right">
+                            <Label htmlFor="notes" className="text-right">
                                 Notes
-                            </label>
+                            </Label>
                             <Textarea
                                 id="notes"
                                 placeholder="Add any notes..."
@@ -250,8 +251,8 @@ function BabyTracker({ title, description }: ToolData) {
                                 setActivityType("feeding");
                                 setIsDialogOpen(true);
                             }}
-                            className="h-16 bg-green-600 text-lg hover:bg-green-700"
                             size="lg"
+                            variant="default"
                         >
                             <Utensils className="mr-2 h-6 w-6" />
                             Log Feeding
@@ -266,8 +267,8 @@ function BabyTracker({ title, description }: ToolData) {
                                 setActivityType("pooping");
                                 setIsDialogOpen(true);
                             }}
-                            className="h-16 bg-amber-600 text-lg hover:bg-amber-700"
                             size="lg"
+                            variant="secondary"
                         >
                             <Baby className="mr-2 h-6 w-6" />
                             Log Pooping
@@ -282,8 +283,8 @@ function BabyTracker({ title, description }: ToolData) {
                                 setActivityType("wee");
                                 setIsDialogOpen(true);
                             }}
-                            className="h-16 bg-blue-600 text-lg hover:bg-blue-700"
                             size="lg"
+                            variant="outline"
                         >
                             <Droplets className="mr-2 h-6 w-6" />
                             Log Wee
@@ -305,58 +306,54 @@ function BabyTracker({ title, description }: ToolData) {
                                 : `${recentActivities.length} activities logged in the last 24 hours`}
                         </CardDescription>
                     </CardHeader>
-                    <CardContent>
-                        {recentActivities.length === 0 ? (
-                            <div className="py-8 text-center text-gray-500">
-                                <Baby className="mx-auto mb-3 h-12 w-12 opacity-50" />
-                                <p>No recent activities to display.</p>
-                            </div>
-                        ) : (
-                            recentActivities.map((activity) => (
-                                <div
-                                    key={activity.id}
-                                    className="hover:bg-accent mb-2 flex cursor-pointer items-center justify-between rounded-lg p-3 shadow-sm transition-colors"
-                                    onClick={() => {
-                                        setEditingActivity(activity);
-                                        setIsDialogOpen(true);
-                                    }}
-                                >
-                                    <div className="flex items-center gap-3">
-                                        <Badge
-                                            className={getActivityColor(
-                                                activity.type,
-                                            )}
-                                        >
-                                            {getActivityIcon(activity.type)}
-                                            <span className="ml-1 capitalize">
-                                                {activity.type}
-                                            </span>
-                                        </Badge>
-                                        <div className="text-sm text-gray-600">
-                                            <div className="font-medium">
-                                                {formatDate(activity.timestamp)}
-                                            </div>
-                                            <div>
-                                                {formatTime(activity.timestamp)}{" "}
-                                                •{" "}
-                                                {formatRelativeDate(
-                                                    activity.timestamp,
-                                                )}
-                                            </div>
-                                            {activity.notes && (
-                                                <div className="text-xs text-gray-500">
-                                                    {activity.notes}
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
-                                    <Button disabled variant="ghost" size="sm">
-                                        <PencilIcon className="h-4 w-4" />
-                                    </Button>
+                    {recentActivities.length === 0 ? (
+                        <div className="py-8 text-center text-gray-500">
+                            <Baby className="mx-auto mb-3 h-12 w-12 opacity-50" />
+                            <p>No recent activities to display.</p>
+                        </div>
+                    ) : (
+                        recentActivities.map((activity) => (
+                            <div
+                                key={activity.id}
+                                className="active:bg-accent hover:bg-accent mb-2 flex cursor-pointer flex-row items-center justify-between gap-3 p-6"
+                                onClick={() => {
+                                    setEditingActivity(activity);
+                                    setIsDialogOpen(true);
+                                }}
+                            >
+                                <div className="flex w-24">
+                                    <Badge
+                                        variant={getActivityVariant(
+                                            activity.type,
+                                        )}
+                                        className="flex-1 justify-center"
+                                    >
+                                        {getActivityIcon(activity.type)}
+                                        <span className="ml-1 capitalize">
+                                            {activity.type}
+                                        </span>
+                                    </Badge>
                                 </div>
-                            ))
-                        )}
-                    </CardContent>
+                                <div className="flex-1 text-sm text-gray-600">
+                                    <div className="font-medium">
+                                        {formatDate(activity.timestamp)}
+                                    </div>
+                                    <div>
+                                        {formatTime(activity.timestamp)} •{" "}
+                                        {formatRelativeDate(activity.timestamp)}
+                                    </div>
+                                    {activity.notes && (
+                                        <div className="text-xs text-gray-500">
+                                            {activity.notes}
+                                        </div>
+                                    )}
+                                </div>
+                                <Button disabled variant="ghost" size="sm">
+                                    <PencilIcon className="h-4 w-4" />
+                                </Button>
+                            </div>
+                        ))
+                    )}
                 </Card>
                 {activities.length > 0 && (
                     <Card>
