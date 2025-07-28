@@ -14,7 +14,11 @@ import useLocalStorage from "@/hooks/use-local-storage";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
-import { formatDate, formatRelativeDate } from "@/lib/date";
+import {
+    formatDate,
+    formatDateTimeLocal,
+    formatRelativeDate,
+} from "@/lib/date";
 import BabyTrackerGraph from "./graph";
 import { formatTime } from "@/lib/time";
 import {
@@ -63,16 +67,6 @@ function BabyTracker({ title, description }: ToolData) {
 
     const recentActivities = getRecentActivities();
 
-    const formatDateTimeLocal = (date: Date) => {
-        const year = date.getFullYear();
-        const month = (date.getMonth() + 1).toString().padStart(2, "0");
-        const day = date.getDate().toString().padStart(2, "0");
-        const hours = date.getHours().toString().padStart(2, "0");
-        const minutes = date.getMinutes().toString().padStart(2, "0");
-
-        return `${year}-${month}-${day}T${hours}:${minutes}`;
-    };
-
     useEffect(() => {
         if (editingActivity) {
             setSelectedDateTime(
@@ -89,7 +83,6 @@ function BabyTracker({ title, description }: ToolData) {
 
     const saveActivity = (type: Activity["type"]) => {
         if (editingActivity) {
-            // Editing existing activity
             setActivities((prev) =>
                 prev.map((activity) =>
                     activity.id === editingActivity.id
@@ -157,6 +150,18 @@ function BabyTracker({ title, description }: ToolData) {
             ? formatRelativeDate(lastActivity.timestamp)
             : "Never";
     };
+
+    useEffect(() => {
+        const onFocus = () => {
+            setSelectedDateTime(formatDate(new Date()));
+        };
+
+        window.addEventListener("focus", onFocus);
+
+        return () => {
+            window.removeEventListener("focus", onFocus);
+        };
+    }, []);
 
     return (
         <Dialog
