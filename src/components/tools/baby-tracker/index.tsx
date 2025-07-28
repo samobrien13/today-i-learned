@@ -175,63 +175,66 @@ function BabyTracker({ title, description }: ToolData) {
             }}
         >
             <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                    <DialogTitle>
-                        {editingActivity ? "Edit" : "Add"} {activityType}
-                    </DialogTitle>
-                </DialogHeader>
-                <div className="grid gap-4 py-4">
-                    <div className="grid grid-cols-4 items-center gap-4">
-                        <label htmlFor="datetime" className="text-right">
-                            Date & Time
-                        </label>
-                        <Input
-                            id="datetime"
-                            type="datetime-local"
-                            value={selectedDateTime}
-                            onChange={(e) =>
-                                setSelectedDateTime(e.target.value)
-                            }
-                            className="col-span-3"
-                        />
+                <form
+                    onSubmit={(e) => {
+                        e.preventDefault();
+
+                        if (activityType) {
+                            saveActivity(activityType);
+                        }
+                    }}
+                >
+                    <DialogHeader>
+                        <DialogTitle>
+                            {editingActivity ? "Edit" : "Add"} {activityType}
+                        </DialogTitle>
+                    </DialogHeader>
+                    <div className="grid gap-4 py-4">
+                        <div className="grid grid-cols-4 items-center gap-4">
+                            <label htmlFor="datetime" className="text-right">
+                                Date & Time
+                            </label>
+                            <Input
+                                id="datetime"
+                                type="datetime-local"
+                                value={selectedDateTime}
+                                onChange={(e) =>
+                                    setSelectedDateTime(e.target.value)
+                                }
+                                className="col-span-3"
+                            />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                            <label htmlFor="notes" className="text-right">
+                                Notes
+                            </label>
+                            <Textarea
+                                id="notes"
+                                placeholder="Add any notes..."
+                                value={selectedNotes}
+                                onChange={(e) =>
+                                    setSelectedNotes(e.target.value)
+                                }
+                                className="col-span-3"
+                            />
+                        </div>
                     </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                        <label htmlFor="notes" className="text-right">
-                            Notes
-                        </label>
-                        <Textarea
-                            id="notes"
-                            placeholder="Add any notes..."
-                            value={selectedNotes}
-                            onChange={(e) => setSelectedNotes(e.target.value)}
-                            className="col-span-3"
-                        />
-                    </div>
-                </div>
-                <DialogFooter>
-                    {editingActivity && (
-                        <Button
-                            variant="destructive"
-                            onClick={() => {
-                                deleteActivity(editingActivity.id);
-                                setIsDialogOpen(false);
-                                setEditingActivity(null);
-                            }}
-                        >
-                            Delete
-                        </Button>
-                    )}
-                    <Button
-                        onClick={() => {
-                            if (activityType) {
-                                saveActivity(activityType);
-                            }
-                            setIsDialogOpen(false);
-                        }}
-                    >
-                        Save changes
-                    </Button>
-                </DialogFooter>
+                    <DialogFooter>
+                        {editingActivity && (
+                            <Button
+                                variant="destructive"
+                                onClick={() => {
+                                    deleteActivity(editingActivity.id);
+                                    setIsDialogOpen(false);
+                                    setEditingActivity(null);
+                                }}
+                            >
+                                Delete
+                            </Button>
+                        )}
+                        <Button type="submit">Save changes</Button>
+                    </DialogFooter>
+                </form>
             </DialogContent>
             <div className="flex flex-col gap-6">
                 <div className="text-center">
