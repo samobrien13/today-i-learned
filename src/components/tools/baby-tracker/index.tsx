@@ -315,7 +315,7 @@ function BabyTracker({ title, description }: ToolData) {
                         recentActivities.map((activity) => (
                             <div
                                 key={activity.id}
-                                className="active:bg-accent hover:bg-accent mb-2 flex cursor-pointer flex-row items-center justify-between gap-3 p-6"
+                                className="active:bg-accent hover:bg-accent flex cursor-pointer flex-row items-center justify-between gap-3 px-6 py-4"
                                 onClick={() => {
                                     setEditingActivity(activity);
                                     setIsDialogOpen(true);
