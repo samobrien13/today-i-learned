@@ -170,7 +170,6 @@ function BabyTracker({ title, description }: ToolData) {
                 setIsDialogOpen(change);
                 if (!change) {
                     setEditingActivity(null);
-                    setSelectedDateTime(formatDateTimeLocal(new Date()));
                     setSelectedNotes("");
                 }
             }}
