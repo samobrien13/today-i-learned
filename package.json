@@ -48,7 +48,7 @@
     "@types/react-syntax-highlighter": "^15.5.13",
     "@types/rss": "^0.0.32",
     "babel-plugin-react-compiler": "19.0.0-beta-714736e-20250131",
-    "drizzle-kit": "^0.30.6",
+    "drizzle-kit": "^0.31.4",
     "eslint": "^9",
     "eslint-config-next": "15.4.4",
     "eslint-config-prettier": "^10.0.1",
