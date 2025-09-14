@@ -6,6 +6,7 @@ import { ColourConverter } from "./colour-converter";
 import { RubberDuck } from "./rubber-duck";
 import { CurlBuilder } from "./curl-builder";
 import { BabyTracker } from "./baby-tracker";
+import { Whiteboard } from "./whiteboard";
 
 import { Metadata } from "next";
 import { ReactNode } from "react";
@@ -76,6 +77,14 @@ export const CURL_BUILDER: Tool = {
     component: (props) => <CurlBuilder {...props} />,
 };
 
+export const WHITEBOARD: Tool = {
+    title: "Whiteboard",
+    description: "A collaborative whiteboard for you and your team",
+    slug: "whiteboard",
+    tags: ["collaboration"],
+    component: (props) => <Whiteboard {...props} />,
+};
+
 export type ToolData = {
     title: string;
     description: string;
@@ -96,4 +105,5 @@ export const TOOLS: Tool[] = [
     MORTGAGE_CALCULATOR,
     RECIPE_GENERATOR,
     PASSWORD_GENERATOR,
+    WHITEBOARD,
 ];

@@ -61,7 +61,7 @@ export default function RootLayout({
                 </Script>
             </head>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} bg-background text-foreground !min-w-full antialiased`}
+                className={`${geistSans.variable} ${geistMono.variable} bg-background text-foreground !min-w-full antialiased transition-colors`}
             >
                 <div className="md:mx-auto md:max-w-2xl">
                     <Providers>
