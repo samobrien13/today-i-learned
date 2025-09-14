@@ -19,6 +19,7 @@ function Whiteboard({ title }: ToolData) {
         cursor,
         sendMarkdown,
         sendCursor,
+        isConnected, // Destructure isConnected
     } = useWhiteboard();
 
     useEffect(() => {
@@ -64,6 +65,7 @@ function Whiteboard({ title }: ToolData) {
                     </div>
                 </div>
             )}
+            {isConnected && <p>Connected!</p>} {/* Display connection status */}
             <div className="grid grid-cols-2 gap-4">
                 <Textarea
                     className="h-96 w-full rounded-md border p-4"

@@ -7,6 +7,7 @@ export const useWhiteboard = () => {
     const [offer, setOffer] = useState("");
     const [markdown, setMarkdown] = useState("");
     const [cursor, setCursor] = useState({ x: 0, y: 0 });
+    const [isConnected, setIsConnected] = useState(false); // New state for connection status
 
     useEffect(() => {
         if (peer) {
@@ -17,6 +18,21 @@ export const useWhiteboard = () => {
                 } else if (message.type === "cursor") {
                     setCursor(message.payload);
                 }
+            });
+
+            peer.on("connect", () => {
+                setIsConnected(true); // Set connected status to true
+                console.log("Peer connected!");
+            });
+
+            peer.on("close", () => {
+                setIsConnected(false); // Set connected status to false on close
+                console.log("Peer disconnected!");
+            });
+
+            peer.on("error", (err) => {
+                console.error("Peer error:", err);
+                setIsConnected(false); // Set connected status to false on error
             });
         }
     }, [peer]);
@@ -37,13 +53,15 @@ export const useWhiteboard = () => {
     };
 
     const sendMarkdown = (markdown: string) => {
-        if (peer) {
+        if (peer && isConnected) {
+            // Only send if connected
             peer.send(JSON.stringify({ type: "markdown", payload: markdown }));
         }
     };
 
     const sendCursor = (cursor: { x: number; y: number }) => {
-        if (peer) {
+        if (peer && isConnected) {
+            // Only send if connected
             peer.send(JSON.stringify({ type: "cursor", payload: cursor }));
         }
     };
@@ -58,5 +76,6 @@ export const useWhiteboard = () => {
         cursor,
         sendMarkdown,
         sendCursor,
+        isConnected, // Return isConnected state
     };
 };
