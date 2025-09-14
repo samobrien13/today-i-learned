@@ -1,16 +1,15 @@
-
-import Peer from 'simple-peer';
+import Peer from "simple-peer";
 
 export const createPeer = (initiator: boolean) => {
-  const peer = new Peer({ initiator });
+    const peer = new Peer({ initiator });
 
-  peer.on('signal', (data) => {
-    console.log('SIGNAL', JSON.stringify(data));
-  });
+    peer.on("signal", (data) => {
+        console.log("SIGNAL", JSON.stringify(data));
+    });
 
-  peer.on('data', (data) => {
-    console.log('data: ' + data);
-  });
+    peer.on("data", (data) => {
+        console.log("data: " + data);
+    });
 
-  return peer;
+    return peer;
 };
