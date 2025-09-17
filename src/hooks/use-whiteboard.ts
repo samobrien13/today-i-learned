@@ -1,16 +1,25 @@
 import { useState, useEffect } from "react";
-import { createPeer } from "@/lib/whiteboard";
 import Peer from "simple-peer";
+
+declare global {
+    interface Window {
+        peer: Peer.Instance;
+    }
+}
 
 export const useWhiteboard = () => {
     const [peer, setPeer] = useState<Peer.Instance | null>(null);
     const [offer, setOffer] = useState("");
+    const [answer, setAnswer] = useState("");
     const [markdown, setMarkdown] = useState("");
     const [cursor, setCursor] = useState({ x: 0, y: 0 });
-    const [isConnected, setIsConnected] = useState(false); // New state for connection status
+    const [isConnected, setIsConnected] = useState(false);
 
     useEffect(() => {
         if (peer) {
+            if (!window.peer) {
+                window.peer = peer;
+            }
             peer.on("data", (data) => {
                 const message = JSON.parse(data.toString());
                 if (message.type === "markdown") {
@@ -21,35 +30,49 @@ export const useWhiteboard = () => {
             });
 
             peer.on("connect", () => {
-                setIsConnected(true); // Set connected status to true
-                console.log("Peer connected!");
+                setIsConnected(true);
             });
 
             peer.on("close", () => {
-                setIsConnected(false); // Set connected status to false on close
-                console.log("Peer disconnected!");
+                setIsConnected(false);
+                setPeer(null);
             });
 
             peer.on("error", (err) => {
                 console.error("Peer error:", err);
-                setIsConnected(false); // Set connected status to false on error
+                setIsConnected(false);
             });
         }
+
+        return () => {
+            if (peer) {
+                peer.destroy();
+            }
+        };
     }, [peer]);
 
-    const createPeerInstance = () => {
-        const newPeer = createPeer(true);
+    const initiateConnection = (isInitiator: boolean) => {
+        const newPeer = new Peer({ initiator: isInitiator, trickle: false });
+
         newPeer.on("signal", (data) => {
-            setOffer(JSON.stringify(data));
+            if (isInitiator) {
+                setOffer(JSON.stringify(data));
+            } else {
+                setAnswer(JSON.stringify(data));
+            }
         });
+
         setPeer(newPeer);
         return newPeer;
     };
 
-    const connectToPeer = (offer: string) => {
-        const newPeer = createPeer(false);
-        newPeer.signal(JSON.parse(offer));
-        setPeer(newPeer);
+    const handleIncomingSignal = (incomingSignal: string) => {
+        if (!peer) {
+            const newPeer = initiateConnection(false);
+            newPeer.signal(JSON.parse(incomingSignal));
+        } else {
+            peer.signal(JSON.parse(incomingSignal));
+        }
     };
 
     const sendMarkdown = (markdown: string) => {
@@ -68,14 +91,15 @@ export const useWhiteboard = () => {
 
     return {
         peer,
-        createPeer: createPeerInstance,
-        connectToPeer,
+        initiateConnection,
+        handleIncomingSignal,
         offer,
         markdown,
         setMarkdown,
         cursor,
         sendMarkdown,
         sendCursor,
-        isConnected, // Return isConnected state
+        isConnected,
+        answer,
     };
 };

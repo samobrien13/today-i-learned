@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import localforage from "localforage";
 import { useWhiteboard } from "@/hooks/use-whiteboard";
@@ -11,24 +10,18 @@ import { Textarea } from "@/components/ui/textarea";
 
 function Whiteboard({ title }: ToolData) {
     const {
-        createPeer,
-        connectToPeer,
+        peer,
+        initiateConnection,
+        handleIncomingSignal,
         offer,
         markdown,
         setMarkdown,
         cursor,
         sendMarkdown,
         sendCursor,
-        isConnected, // Destructure isConnected
+        isConnected,
+        answer,
     } = useWhiteboard();
-
-    useEffect(() => {
-        localforage.getItem("whiteboard-content").then((value) => {
-            if (value) {
-                setMarkdown(value as string);
-            }
-        });
-    }, [setMarkdown]);
 
     const handleMarkdownChange = (
         event: React.ChangeEvent<HTMLTextAreaElement>,
@@ -45,13 +38,26 @@ function Whiteboard({ title }: ToolData) {
     return (
         <div className="flex flex-col gap-4" onMouseMove={handleMouseMove}>
             <Heading>{title}</Heading>
-            <div className="flex gap-4">
-                <Button onClick={createPeer}>Create Shareable Link</Button>
+            {peer ? (
                 <Textarea
-                    placeholder="Paste link here to connect"
-                    onChange={(e) => connectToPeer(e.target.value)}
+                    placeholder="Paste answer here to complete connection"
+                    onChange={(e) => handleIncomingSignal(e.target.value)}
                 />
-            </div>
+            ) : (
+                <div className="flex gap-4">
+                    <Button onClick={() => initiateConnection(true)}>
+                        Create Shareable Link
+                    </Button>
+                    <span>or</span>
+                    <Textarea
+                        placeholder="Paste offer here to connect"
+                        onChange={(e) => {
+                            console.log("Offer Textarea onChange fired!");
+                            handleIncomingSignal(e.target.value);
+                        }}
+                    />
+                </div>
+            )}
             {offer && (
                 <div className="flex flex-col gap-2">
                     <p>Share this link with a friend:</p>
@@ -59,6 +65,21 @@ function Whiteboard({ title }: ToolData) {
                         <Textarea readOnly value={offer} />
                         <Button
                             onClick={() => navigator.clipboard.writeText(offer)}
+                        >
+                            Copy
+                        </Button>
+                    </div>
+                </div>
+            )}
+            {answer && (
+                <div className="flex flex-col gap-2">
+                    <p>Send this answer back:</p>
+                    <div className="flex gap-2">
+                        <Textarea readOnly value={answer} />
+                        <Button
+                            onClick={() =>
+                                navigator.clipboard.writeText(answer)
+                            }
                         >
                             Copy
                         </Button>

@@ -97,6 +97,7 @@ type Tool = ToolData & {
 } & Metadata;
 
 export const TOOLS: Tool[] = [
+    WHITEBOARD,
     BABY_TRACKER,
     CURL_BUILDER,
     RUBBER_DUCK,
@@ -105,5 +106,4 @@ export const TOOLS: Tool[] = [
     MORTGAGE_CALCULATOR,
     RECIPE_GENERATOR,
     PASSWORD_GENERATOR,
-    WHITEBOARD,
 ];
