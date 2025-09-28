@@ -15,6 +15,7 @@ import { PLEASE_USE_REACT_QUERY } from "./rants/please-use-react-query";
 import { THE_BEST_PULL_REQUEST_TEMPLATE } from "./rants/the-best-pull-request-template";
 import { REACT_QUERY_WITH_SERVER_ACTIONS } from "./rants/react-query-with-server-actions";
 import { KEYBOARD_SETUP } from "./rants/keyboard-setup";
+import { WHERE_AI_MIGHT_BE_USEFUL } from "./rants/where-ai-might-be-useful";
 
 export type BlogData = {
     title: string;
@@ -27,6 +28,7 @@ export type BlogData = {
 } & Metadata;
 
 export const BLOG_ARTICLES: BlogData[] = [
+    WHERE_AI_MIGHT_BE_USEFUL,
     KEYBOARD_SETUP,
     REACT_QUERY_WITH_SERVER_ACTIONS,
     THE_BEST_PULL_REQUEST_TEMPLATE,
