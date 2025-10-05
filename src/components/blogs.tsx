@@ -88,6 +88,7 @@ function Blogs({ tags, allTags }: BlogsProps) {
 
                                     <div className="relative flex h-32 w-32">
                                         <Image
+                                            priority
                                             className="rounded-sm object-cover"
                                             src={article.image.src}
                                             alt={article.image.alt}
