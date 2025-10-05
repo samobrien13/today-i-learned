@@ -2,14 +2,9 @@ import type { NextConfig } from "next";
 
 const CONTENT_SECURITY_POLICY = `
     default-src 'self';
-    script-src 'self' ${
-        process.env.NODE_ENV === "production"
-            ? ""
-            : `'unsafe-eval' 'unsafe-inline'`
-    }
-        https://www.googletagmanager.com https://vercel.live;
+    script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://vercel.live;
     frame-src 'self' https://vercel.live;
-    style-src 'self' ${process.env.NODE_ENV === "production" ? "" : `'unsafe-inline'`};
+    style-src 'self' 'unsafe-inline';
     img-src * blob: data:;
     media-src 'none';
     connect-src *;
