@@ -30,7 +30,10 @@ function Blog({ title, description, date, slug, component, tags }: BlogProps) {
                 {tags.length > 0
                     ? Array.from(new Set(tags)).map((tag) => {
                           return (
-                              <Link key={tag} href={Routes.RANTS([tag])}>
+                              <Link
+                                  key={tag}
+                                  href={Routes.RANTS_WITH_TAGS([tag])}
+                              >
                                   <Badge variant="secondary">{tag}</Badge>
                               </Link>
                           );

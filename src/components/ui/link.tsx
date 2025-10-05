@@ -1,18 +1,24 @@
 import NextLink from "next/link";
 import clsx from "clsx";
 
-type LinkComponentProps = React.ComponentProps<typeof NextLink> & {
+type LinkComponentProps<RouteType> = React.ComponentProps<
+    typeof NextLink<RouteType>
+> & {
     external?: boolean;
 };
 
-function Link({ external, className, ...props }: LinkComponentProps) {
+function Link<RouteType>({
+    external,
+    className,
+    ...props
+}: LinkComponentProps<RouteType>) {
     return (
-        <NextLink
+        <NextLink<RouteType>
             {...props}
             target={external ? "_blank" : undefined}
             rel={external ? "noopener noreferrer" : undefined}
             className={clsx(
-                "transition-all hover:text-muted-foreground [&_span]:font-mono",
+                "hover:text-muted-foreground transition-all [&_span]:font-mono",
                 className,
                 {
                     "font-mono [word-spacing:-4px]":
