@@ -91,7 +91,8 @@ function Blogs({ tags, allTags }: BlogsProps) {
                                             className="rounded-sm object-cover"
                                             src={article.image.src}
                                             alt={article.image.alt}
-                                            fill
+                                            height={256}
+                                            width={256}
                                         />
                                     </div>
                                 </div>
