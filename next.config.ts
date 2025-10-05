@@ -44,6 +44,7 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
     productionBrowserSourceMaps: true,
+    typedRoutes: true,
     experimental: {
         reactCompiler: true,
         viewTransition: true,

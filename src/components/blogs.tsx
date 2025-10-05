@@ -39,7 +39,7 @@ function Blogs({ tags, allTags }: BlogsProps) {
                         return (
                             <Link
                                 key={tag}
-                                href={Routes.RANTS(Array.from(set))}
+                                href={Routes.RANTS_WITH_TAGS(Array.from(set))}
                                 replace
                             >
                                 <Badge

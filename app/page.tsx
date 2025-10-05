@@ -13,12 +13,12 @@ export default function Home() {
                 <div className="flex flex-row items-center justify-center gap-4">
                     <ViewTransition name="tab-rants">
                         <Button asChild variant="secondary">
-                            <Link href={Routes.RANTS([])}>Rants</Link>
+                            <Link href={Routes.RANTS}>Rants</Link>
                         </Button>
                     </ViewTransition>
                     <ViewTransition name="tab-tools">
                         <Button asChild variant="secondary">
-                            <Link href={Routes.TOOLS([])}>Tools</Link>
+                            <Link href={Routes.TOOLS}>Tools</Link>
                         </Button>
                     </ViewTransition>
                 </div>
