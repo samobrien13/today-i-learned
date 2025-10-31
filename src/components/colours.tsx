@@ -11,7 +11,7 @@ import { Slider } from "@/components/ui/slider";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { Copy } from "lucide-react";
 import { cssVar, HSL, keys, setCssVar } from "@/lib/colours";
 
@@ -21,7 +21,6 @@ type Colour = {
 
 function Colours() {
     const { theme } = useTheme();
-    const { toast } = useToast();
     const [customColours, setCustomColours] = useState<Map<string, Colour>>(
         new Map(),
     );
@@ -152,8 +151,7 @@ function Colours() {
                 variant="outline"
                 onClick={() => {
                     navigator.clipboard.writeText(css);
-                    toast({
-                        title: "CSS variables copied to clipboard",
+                    toast("CSS variables copied to clipboard", {
                         duration: 2000,
                     });
                 }}

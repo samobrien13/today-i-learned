@@ -11,11 +11,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { Copy, RefreshCw } from "lucide-react";
 import { generatePassword } from "@/lib/password";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { ToolData } from ".";
 
 function PasswordGenerator({ title, description }: ToolData) {
-    const { toast } = useToast();
     const [password, setPassword] = useState("");
 
     useEffect(() => {
@@ -55,8 +54,7 @@ function PasswordGenerator({ title, description }: ToolData) {
                             variant="outline"
                             onClick={() => {
                                 navigator.clipboard.writeText(password);
-                                toast({
-                                    title: "Password copied to clipboard",
+                                toast("Password copied to clipboard", {
                                     duration: 2000,
                                 });
                             }}
