@@ -1,4 +1,4 @@
-import { unstable_ViewTransition as ViewTransition } from "react";
+import { ViewTransition } from "react";
 import { formatDate } from "@/lib/date";
 import { Link } from "../link";
 import { Badge } from "../badge";

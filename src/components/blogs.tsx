@@ -1,6 +1,6 @@
 "use client";
 
-import { unstable_ViewTransition as ViewTransition } from "react";
+import { ViewTransition } from "react";
 import Routes from "@/constants/Routes";
 import { Badge } from "./ui/badge";
 import { Link } from "./ui/link";

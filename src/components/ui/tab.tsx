@@ -1,4 +1,4 @@
-import { unstable_ViewTransition as ViewTransition } from "react";
+import { ViewTransition } from "react";
 
 type TabProps = {
     title: string;
@@ -11,12 +11,12 @@ function Tab({ title, subtitle, children }: TabProps) {
         <section className="flex flex-1 flex-col gap-6">
             <div className="flex flex-col gap-2">
                 <ViewTransition name={`tab-${title.toLowerCase()}`}>
-                    <h1 className="text-2xl font-semibold text-primary">
+                    <h1 className="text-primary text-2xl font-semibold">
                         {title}
                     </h1>
                 </ViewTransition>
                 {subtitle ? (
-                    <p className="text-sm text-muted-foreground">{subtitle}</p>
+                    <p className="text-muted-foreground text-sm">{subtitle}</p>
                 ) : null}
             </div>
             <div className="flex flex-col gap-4">{children}</div>
