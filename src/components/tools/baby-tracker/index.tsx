@@ -69,12 +69,14 @@ function BabyTracker({ title, description }: ToolData) {
 
     const recentActivities = getRecentActivities();
 
-    if (!editingActivity) {
+    if (!editingActivity && prevActivity) {
         setPreviousActivity(null);
         setSelectedDateTime(formatDateTimeLocal(new Date()));
         setSelectedNotes("");
         setActivityType(null);
-    } else if (editingActivity?.id !== prevActivity?.id) {
+    }
+
+    if (editingActivity && editingActivity.id !== prevActivity?.id) {
         setPreviousActivity(editingActivity);
         setSelectedDateTime(
             formatDateTimeLocal(new Date(editingActivity.timestamp)),
