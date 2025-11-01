@@ -8,7 +8,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { Slider } from "@/components/ui/slider";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -20,13 +20,15 @@ type Colour = {
 } & HSL;
 
 function Colours() {
-    const { theme } = useTheme();
+    const { resolvedTheme: theme } = useTheme();
+    const [prevTheme, setPrevTheme] = useState(theme);
+
     const [customColours, setCustomColours] = useState<Map<string, Colour>>(
         new Map(),
     );
 
-    useEffect(() => {
-        // Update as a callback to ensure the latest theme is used
+    if (theme !== prevTheme) {
+        setPrevTheme(theme);
         setCustomColours(() => {
             const newPalette: Map<string, Colour> = new Map();
             keys.forEach((key) => {
@@ -41,7 +43,7 @@ function Colours() {
             });
             return newPalette;
         });
-    }, [theme]);
+    }
 
     const css = Array.from(customColours.values())
         .map((color) => `--${color.name}: ${color.h} ${color.s}% ${color.l}%`)
