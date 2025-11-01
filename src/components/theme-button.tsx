@@ -1,10 +1,9 @@
 "use client";
 
-import { Moon, Settings, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
-import clsx from "clsx";
 
 function ThemeButton() {
     const { resolvedTheme: theme, setTheme } = useTheme();
