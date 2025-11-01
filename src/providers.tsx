@@ -1,12 +1,8 @@
 "use client";
 
 import { ThemeProvider } from "next-themes";
-import { Toaster } from "@/components/ui/toaster";
-import {
-    useEffect,
-    useState,
-    unstable_ViewTransition as ViewTransition,
-} from "react";
+import { Toaster } from "@/components/ui/sonner";
+import { useEffect, useState, ViewTransition } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 type ProvidersProps = {

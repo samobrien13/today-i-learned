@@ -2,7 +2,7 @@
 
 import { Copy, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { Card, CardDescription } from "./card";
 import { BundledLanguage, createHighlighter, ThemeInput } from "shiki";
 import { JavaScript, TypeScript } from "./icons";
@@ -70,12 +70,19 @@ const theme: ThemeInput = {
 // This shouldn't work with await?
 const highlighter = await createHighlighter({
     themes: [theme],
-    langs: ["typescript", "javascript", "json", "bash", "shell", "css", "html", "markdown"],
+    langs: [
+        "typescript",
+        "javascript",
+        "json",
+        "bash",
+        "shell",
+        "css",
+        "html",
+        "markdown",
+    ],
 });
 
 function CodeBlock({ language, filename, children }: CodeBlockProps) {
-    const { toast } = useToast();
-
     const code = highlighter.codeToHtml(children, {
         lang: language,
         theme: "today-i-learned",
@@ -111,8 +118,7 @@ function CodeBlock({ language, filename, children }: CodeBlockProps) {
                     size="icon"
                     onClick={() => {
                         navigator.clipboard.writeText(children);
-                        toast({
-                            title: "Code copied to clipboard",
+                        toast("Code copied to clipboard", {
                             duration: 2000,
                         });
                     }}

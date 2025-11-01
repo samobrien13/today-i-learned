@@ -8,10 +8,10 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { Slider } from "@/components/ui/slider";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { Copy } from "lucide-react";
 import { cssVar, HSL, keys, setCssVar } from "@/lib/colours";
 
@@ -20,14 +20,15 @@ type Colour = {
 } & HSL;
 
 function Colours() {
-    const { theme } = useTheme();
-    const { toast } = useToast();
+    const { resolvedTheme: theme } = useTheme();
+    const [prevTheme, setPrevTheme] = useState(theme);
+
     const [customColours, setCustomColours] = useState<Map<string, Colour>>(
         new Map(),
     );
 
-    useEffect(() => {
-        // Update as a callback to ensure the latest theme is used
+    if (theme !== prevTheme) {
+        setPrevTheme(theme);
         setCustomColours(() => {
             const newPalette: Map<string, Colour> = new Map();
             keys.forEach((key) => {
@@ -42,7 +43,7 @@ function Colours() {
             });
             return newPalette;
         });
-    }, [theme]);
+    }
 
     const css = Array.from(customColours.values())
         .map((color) => `--${color.name}: ${color.h} ${color.s}% ${color.l}%`)
@@ -152,8 +153,7 @@ function Colours() {
                 variant="outline"
                 onClick={() => {
                     navigator.clipboard.writeText(css);
-                    toast({
-                        title: "CSS variables copied to clipboard",
+                    toast("CSS variables copied to clipboard", {
                         duration: 2000,
                     });
                 }}

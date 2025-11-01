@@ -1,6 +1,6 @@
 "use client";
 
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { Share2 } from "lucide-react";
 import { Button } from "./button";
 
@@ -11,8 +11,6 @@ type ShareProps = {
 };
 
 function Share({ title, text, url }: ShareProps) {
-    const { toast } = useToast();
-
     return (
         <Button
             size="icon"
@@ -33,8 +31,7 @@ function Share({ title, text, url }: ShareProps) {
                     });
                 } else {
                     navigator.clipboard.writeText(url ?? window.location.href);
-                    toast({
-                        title: "URL copied to clipboard",
+                    toast("URL copied to clipboard", {
                         duration: 2000,
                     });
                 }

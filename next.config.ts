@@ -45,8 +45,8 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
     productionBrowserSourceMaps: true,
     typedRoutes: true,
+    reactCompiler: true,
     experimental: {
-        reactCompiler: true,
         viewTransition: true,
     },
     async headers() {

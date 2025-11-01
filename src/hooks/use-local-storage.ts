@@ -1,32 +1,22 @@
-import { SetStateAction, useEffect, useState } from "react";
-
-const isServer = typeof window === "undefined";
+import { SetStateAction, useState } from "react";
 
 export default function useLocalStorage<T>(
     key: string,
     initialValue: T,
 ): [T, (value: SetStateAction<T>) => void] {
-    const [storedValue, setStoredValue] = useState<T>(() => initialValue);
-
-    /* prevents hydration error so that state is only initialized after server is defined */
-    useEffect(() => {
-        const initialize = () => {
-            if (isServer) {
-                return initialValue;
-            }
-            try {
-                const item = window.localStorage.getItem(key);
-                return item ? JSON.parse(item) : initialValue;
-            } catch (error) {
-                console.log(error);
-                return initialValue;
-            }
-        };
-
-        if (!isServer) {
-            setStoredValue(initialize());
+    const [storedValue, setStoredValue] = useState<T>(() => {
+        if (typeof window === "undefined") {
+            return initialValue;
         }
-    }, [initialValue, key]);
+
+        try {
+            const item = window.localStorage.getItem(key);
+            return item ? JSON.parse(item) : initialValue;
+        } catch (error) {
+            console.log(error);
+            return initialValue;
+        }
+    });
 
     const setValue = (value: SetStateAction<T>) => {
         try {

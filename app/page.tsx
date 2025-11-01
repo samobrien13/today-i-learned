@@ -2,7 +2,7 @@ import { Link } from "@/components/ui/link";
 import Routes from "@/constants/Routes";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
-import { unstable_ViewTransition as ViewTransition } from "react";
+import { ViewTransition } from "react";
 
 export default function Home() {
     return (

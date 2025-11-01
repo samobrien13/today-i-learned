@@ -1,4 +1,4 @@
-import { unstable_ViewTransition as ViewTransition } from "react";
+import { ViewTransition } from "react";
 import Tab from "@/components/ui/tab";
 import { Link } from "@/components/ui/link";
 import {
