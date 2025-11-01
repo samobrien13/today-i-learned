@@ -53,6 +53,7 @@ function BabyTracker({ title, description }: ToolData) {
     const [editingActivity, setEditingActivity] = useState<Activity | null>(
         null,
     );
+    const [prevActivity, setPreviousActivity] = useState<Activity | null>(null);
     const [selectedDateTime, setSelectedDateTime] = useState(
         formatDate(new Date()),
     );
@@ -68,19 +69,19 @@ function BabyTracker({ title, description }: ToolData) {
 
     const recentActivities = getRecentActivities();
 
-    useEffect(() => {
-        if (editingActivity) {
-            setSelectedDateTime(
-                formatDateTimeLocal(new Date(editingActivity.timestamp)),
-            );
-            setSelectedNotes(editingActivity.notes || "");
-            setActivityType(editingActivity.type);
-        } else {
-            setSelectedDateTime(formatDateTimeLocal(new Date()));
-            setSelectedNotes("");
-            setActivityType(null);
-        }
-    }, [editingActivity]);
+    if (!editingActivity) {
+        setPreviousActivity(null);
+        setSelectedDateTime(formatDateTimeLocal(new Date()));
+        setSelectedNotes("");
+        setActivityType(null);
+    } else if (editingActivity?.id !== prevActivity?.id) {
+        setPreviousActivity(editingActivity);
+        setSelectedDateTime(
+            formatDateTimeLocal(new Date(editingActivity.timestamp)),
+        );
+        setSelectedNotes(editingActivity.notes || "");
+        setActivityType(editingActivity.type);
+    }
 
     const saveActivity = (type: Activity["type"]) => {
         if (editingActivity) {
