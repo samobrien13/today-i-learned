@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import {
     hslToHex,
     hslToRGB,
+    hslToOklch,
     hexToRGB,
     hexToHSL,
     rgbToHex,
@@ -31,6 +32,7 @@ function ColourConverter({ title, description }: ToolData) {
     const [hsl, setHSL] = useState<HSL>({ h: 0, s: 0, l: 0 });
     const [rgb, setRGB] = useState<RGB>({ r: 0, g: 0, b: 0 });
     const [hex, setHEX] = useState<HEX>("#000000");
+    const [oklch, setOklch] = useState({ l: 0, c: 0, h: 0 });
 
     const [hueError, setHueError] = useState(false);
     const [saturationError, setSaturationError] = useState(false);
@@ -67,6 +69,7 @@ function ColourConverter({ title, description }: ToolData) {
                             setHEX(value);
                             setRGB(hexToRGB(value));
                             setHSL(hexToHSL(value));
+                            setOklch(hslToOklch(hsl));
                         }}
                     />
                     <div
