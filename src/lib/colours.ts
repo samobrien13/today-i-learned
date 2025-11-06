@@ -131,7 +131,7 @@ function oklabToOklch(L: number, a: number, b: number) {
     return [L, C, h_deg];
 }
 
-export function hslToOklch(h: number, s: number, l: number): OKLCH {
+export function hslToOklch({ h, s, l }: HSL): OKLCH {
     const [r_srgb, g_srgb, b_srgb] = hslToSrgb(h, s, l);
 
     const r_linear = sRgbToLinearRgb(r_srgb);
@@ -145,6 +145,37 @@ export function hslToOklch(h: number, s: number, l: number): OKLCH {
     const [l_oklch, c_oklch, h_oklch] = oklabToOklch(ok_L, ok_a, ok_b);
 
     return { l: l_oklch, c: c_oklch, h: h_oklch };
+}
+
+export const hexToOklch = (hex: HEX): OKLCH => {
+    return hslToOklch(hexToHSL(hex));
+};
+
+export function validateOklch(oklch: OKLCH): boolean {
+    return (
+        oklch.l >= 0 &&
+        oklch.l <= 100 &&
+        oklch.c >= 0 &&
+        oklch.c <= 100 &&
+        oklch.h >= 0 &&
+        oklch.h <= 360
+    );
+}
+
+export function oklchToHSL(oklch: OKLCH): HSL {
+    return {
+        h: oklch.h,
+        s: oklch.c * (oklch.l / 100),
+        l: oklch.l,
+    };
+}
+
+export function oklchToHex(oklch: OKLCH): HEX {
+    return hslToHex(oklchToHSL(oklch));
+}
+
+export function oklchToRGB(oklch: OKLCH): RGB {
+    return hslToRGB(oklchToHSL(oklch));
 }
 
 export function validateHSL(hsl: HSL): boolean {

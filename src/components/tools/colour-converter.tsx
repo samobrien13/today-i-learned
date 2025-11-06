@@ -14,7 +14,6 @@ import { Label } from "@/components/ui/label";
 import {
     hslToHex,
     hslToRGB,
-    hslToOklch,
     hexToRGB,
     hexToHSL,
     rgbToHex,
@@ -25,6 +24,11 @@ import {
     validateHSL,
     validateRGB,
     validateHEX,
+    hexToOklch,
+    validateOklch,
+    oklchToRGB,
+    oklchToHex,
+    oklchToHSL,
 } from "@/lib/colours";
 import { ToolData } from ".";
 
@@ -33,6 +37,8 @@ function ColourConverter({ title, description }: ToolData) {
     const [rgb, setRGB] = useState<RGB>({ r: 0, g: 0, b: 0 });
     const [hex, setHEX] = useState<HEX>("#000000");
     const [oklch, setOklch] = useState({ l: 0, c: 0, h: 0 });
+
+    const [chromaError, setChromaError] = useState(false);
 
     const [hueError, setHueError] = useState(false);
     const [saturationError, setSaturationError] = useState(false);
@@ -69,7 +75,7 @@ function ColourConverter({ title, description }: ToolData) {
                             setHEX(value);
                             setRGB(hexToRGB(value));
                             setHSL(hexToHSL(value));
-                            setOklch(hslToOklch(hsl));
+                            setOklch(hexToOklch(value));
                         }}
                     />
                     <div
@@ -78,6 +84,98 @@ function ColourConverter({ title, description }: ToolData) {
                             backgroundColor: hex,
                         }}
                     />
+                </div>
+                <div className="flex flex-col gap-3 md:flex-row">
+                    <div className="flex flex-1 flex-col gap-2">
+                        <Label htmlFor="oklch-l">Lightness</Label>
+                        <Input
+                            id="oklch-l"
+                            type="number"
+                            step={1}
+                            min={0}
+                            max={100}
+                            value={isNaN(oklch.l) ? "" : oklch.l}
+                            onChange={(e) => {
+                                const newOklch = {
+                                    ...oklch,
+                                    l: parseFloat(e.target.value),
+                                };
+                                setOklch(newOklch);
+
+                                if (validateOklch(newOklch)) {
+                                    setHSL(oklchToHSL(newOklch));
+                                    setRGB(oklchToRGB(newOklch));
+                                    setHEX(oklchToHex(newOklch));
+                                    clearErrors();
+                                } else {
+                                    setHueError(true);
+                                }
+                            }}
+                        />
+                        <div className="text-destructive h-5 text-sm">
+                            {hueError ? "Must be between 0 and 360" : null}
+                        </div>
+                    </div>
+                    <div className="flex flex-1 flex-col gap-2">
+                        <Label htmlFor="oklch-c">Chroma</Label>
+                        <Input
+                            id="oklch-c"
+                            type="number"
+                            value={isNaN(oklch.c) ? "" : oklch.c}
+                            step={1}
+                            min={0}
+                            max={100}
+                            onChange={(e) => {
+                                const newOklch = {
+                                    ...oklch,
+                                    c: parseFloat(e.target.value),
+                                };
+                                setOklch(newOklch);
+
+                                if (validateOklch(newOklch)) {
+                                    setHSL(oklchToHSL(newOklch));
+                                    setRGB(oklchToRGB(newOklch));
+                                    setHEX(oklchToHex(newOklch));
+                                    clearErrors();
+                                } else {
+                                    setSaturationError(true);
+                                }
+                            }}
+                        />
+                        <div className="text-destructive h-5 text-sm">
+                            {chromaError ? "Must be between 0 and 100" : null}
+                        </div>
+                    </div>
+                    <div className="flex flex-1 flex-col gap-2">
+                        <Label htmlFor="oklch-h">Hue</Label>
+                        <Input
+                            id="oklch-h"
+                            type="number"
+                            value={isNaN(oklch.h) ? "" : oklch.h}
+                            step={1}
+                            min={0}
+                            max={360}
+                            onChange={(e) => {
+                                const newOklch = {
+                                    ...oklch,
+                                    c: parseFloat(e.target.value),
+                                };
+                                setOklch(newOklch);
+
+                                if (validateOklch(newOklch)) {
+                                    setHSL(oklchToHSL(newOklch));
+                                    setRGB(oklchToRGB(newOklch));
+                                    setHEX(oklchToHex(newOklch));
+                                    clearErrors();
+                                } else {
+                                    setHueError(true);
+                                }
+                            }}
+                        />
+                        <div className="text-destructive h-5 text-sm">
+                            {hueError ? "Must be between 0 and 360" : null}
+                        </div>
+                    </div>
                 </div>
                 <div className="flex flex-col gap-3 md:flex-row">
                     <div className="flex flex-1 flex-col gap-2">
