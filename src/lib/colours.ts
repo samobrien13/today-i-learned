@@ -58,31 +58,6 @@ export type OKLCH = {
     h: number;
 };
 
-function hslToSrgb(h: number, s: number, l: number) {
-    const c = (1 - Math.abs(2 * l - 1)) * s;
-    const h_prime = h / 60;
-    const x = c * (1 - Math.abs((h_prime % 2) - 1));
-    const m = l - c / 2;
-
-    let r_prime, g_prime, b_prime;
-    if (h_prime >= 0 && h_prime < 1) {
-        [r_prime, g_prime, b_prime] = [c, x, 0];
-    } else if (h_prime >= 1 && h_prime < 2) {
-        [r_prime, g_prime, b_prime] = [x, c, 0];
-    } else if (h_prime >= 2 && h_prime < 3) {
-        [r_prime, g_prime, b_prime] = [0, c, x];
-    } else if (h_prime >= 3 && h_prime < 4) {
-        [r_prime, g_prime, b_prime] = [0, x, c];
-    } else if (h_prime >= 4 && h_prime < 5) {
-        [r_prime, g_prime, b_prime] = [x, 0, c];
-    } else {
-        // h_prime >= 5 && h_prime < 6
-        [r_prime, g_prime, b_prime] = [c, 0, x];
-    }
-
-    return [r_prime + m, g_prime + m, b_prime + m];
-}
-
 function sRgbToLinearRgb(c: number) {
     if (c <= 0.04045) {
         return c / 12.92;
@@ -91,14 +66,26 @@ function sRgbToLinearRgb(c: number) {
     }
 }
 
-function linearRgbToXyz(r: number, g: number, b: number) {
+type XYZ = {
+    x: number;
+    y: number;
+    z: number;
+};
+
+function linearRgbToXyz({ r, g, b }: RGB) {
     const x = r * 0.4124564 + g * 0.3575761 + b * 0.1804375;
     const y = r * 0.2126729 + g * 0.7151522 + b * 0.072175;
     const z = r * 0.0193339 + g * 0.119192 + b * 0.9503041;
-    return [x, y, z];
+    return { x, y, z };
 }
 
-function xyzToOklab(x: number, y: number, z: number) {
+type Oklab = {
+    l: number;
+    a: number;
+    b: number;
+};
+
+function xyzToOklab({ x, y, z }: XYZ): Oklab {
     const l = x * 0.8189330101 + y * 0.3618667424 + z * -0.1288597137;
     const m = x * 0.0329845436 + y * 0.9293118715 + z * 0.0361456387;
     const s = x * 0.0482003018 + y * 0.2643662691 + z * 0.633851707;
@@ -107,19 +94,25 @@ function xyzToOklab(x: number, y: number, z: number) {
     const m_prime = Math.cbrt(m);
     const s_prime = Math.cbrt(s);
 
-    const L =
-        0.2104542553 * l_prime + 0.793617785 * m_prime - 0.0040720468 * s_prime;
-    const a =
-        1.9779984951 * l_prime - 2.428592205 * m_prime + 0.4505937099 * s_prime;
-    const b =
-        0.0259040371 * l_prime + 0.7827717662 * m_prime - 0.808675766 * s_prime;
-
-    return [L, a, b];
+    return {
+        l:
+            0.2104542553 * l_prime +
+            0.793617785 * m_prime -
+            0.0040720468 * s_prime,
+        a:
+            1.9779984951 * l_prime -
+            2.428592205 * m_prime +
+            0.4505937099 * s_prime,
+        b:
+            0.0259040371 * l_prime +
+            0.7827717662 * m_prime -
+            0.808675766 * s_prime,
+    };
 }
 
-function oklabToOklch(L: number, a: number, b: number) {
+function oklabToOklch({ l, a, b }: Oklab): OKLCH {
     // Convert from Cartesian (a, b) to Polar (C, h)
-    const C = Math.sqrt(a * a + b * b);
+    const c = Math.sqrt(a * a + b * b);
     const h_rad = Math.atan2(b, a);
     let h_deg = h_rad * (180 / Math.PI);
 
@@ -128,35 +121,35 @@ function oklabToOklch(L: number, a: number, b: number) {
         h_deg += 360;
     }
 
-    return [L, C, h_deg];
+    return { l, c, h: h_deg };
+}
+
+export function rgbToOklch({ r, g, b }: RGB): OKLCH {
+    const { x, y, z } = linearRgbToXyz({
+        r: sRgbToLinearRgb(r),
+        g: sRgbToLinearRgb(g),
+        b: sRgbToLinearRgb(b),
+    });
+    const { l, a, b: ok_b } = xyzToOklab({ x, y, z });
+    return oklabToOklch({ l, a, b: ok_b });
 }
 
 export function hslToOklch({ h, s, l }: HSL): OKLCH {
-    const [r_srgb, g_srgb, b_srgb] = hslToSrgb(h, s, l);
+    const { r, g, b } = hslToRGB({ h, s, l });
 
-    const r_linear = sRgbToLinearRgb(r_srgb);
-    const g_linear = sRgbToLinearRgb(g_srgb);
-    const b_linear = sRgbToLinearRgb(b_srgb);
-
-    const [x, y, z] = linearRgbToXyz(r_linear, g_linear, b_linear);
-
-    const [ok_L, ok_a, ok_b] = xyzToOklab(x, y, z);
-
-    const [l_oklch, c_oklch, h_oklch] = oklabToOklch(ok_L, ok_a, ok_b);
-
-    return { l: l_oklch, c: c_oklch, h: h_oklch };
+    return rgbToOklch({ r, g, b });
 }
 
 export const hexToOklch = (hex: HEX): OKLCH => {
-    return hslToOklch(hexToHSL(hex));
+    return rgbToOklch(hexToRGB(hex));
 };
 
 export function validateOklch(oklch: OKLCH): boolean {
     return (
         oklch.l >= 0 &&
-        oklch.l <= 100 &&
+        oklch.l <= 1 &&
         oklch.c >= 0 &&
-        oklch.c <= 100 &&
+        oklch.c <= 0.4 &&
         oklch.h >= 0 &&
         oklch.h <= 360
     );

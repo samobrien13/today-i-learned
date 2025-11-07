@@ -51,6 +51,7 @@ function ColourConverter({ title, description }: ToolData) {
     const [hexError, setHexError] = useState(false);
 
     const clearErrors = () => {
+        setChromaError(false);
         setHueError(false);
         setSaturationError(false);
         setLightnessError(false);
@@ -138,7 +139,7 @@ function ColourConverter({ title, description }: ToolData) {
                                     setHEX(oklchToHex(newOklch));
                                     clearErrors();
                                 } else {
-                                    setSaturationError(true);
+                                    setChromaError(true);
                                 }
                             }}
                         />
@@ -158,7 +159,7 @@ function ColourConverter({ title, description }: ToolData) {
                             onChange={(e) => {
                                 const newOklch = {
                                     ...oklch,
-                                    c: parseFloat(e.target.value),
+                                    h: parseFloat(e.target.value),
                                 };
                                 setOklch(newOklch);
 
