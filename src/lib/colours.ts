@@ -121,7 +121,11 @@ function oklabToOklch({ l, a, b }: Oklab): OKLCH {
         h_deg += 360;
     }
 
-    return { l, c, h: h_deg };
+    return {
+        l: Math.round(l) / 100,
+        c: Math.round(c) / 100,
+        h: Math.round(h_deg),
+    };
 }
 
 export function rgbToOklch({ r, g, b }: RGB): OKLCH {

@@ -29,6 +29,8 @@ import {
     oklchToRGB,
     oklchToHex,
     oklchToHSL,
+    hslToOklch,
+    rgbToOklch,
 } from "@/lib/colours";
 import { ToolData } from ".";
 
@@ -38,7 +40,9 @@ function ColourConverter({ title, description }: ToolData) {
     const [hex, setHEX] = useState<HEX>("#000000");
     const [oklch, setOklch] = useState({ l: 0, c: 0, h: 0 });
 
-    const [chromaError, setChromaError] = useState(false);
+    const [okLightnessError, setOKLightnessError] = useState(false);
+    const [okChromaError, setOKChromaError] = useState(false);
+    const [okHueError, setOKHueError] = useState(false);
 
     const [hueError, setHueError] = useState(false);
     const [saturationError, setSaturationError] = useState(false);
@@ -51,7 +55,9 @@ function ColourConverter({ title, description }: ToolData) {
     const [hexError, setHexError] = useState(false);
 
     const clearErrors = () => {
-        setChromaError(false);
+        setOKLightnessError(false);
+        setOKChromaError(false);
+        setOKHueError(false);
         setHueError(false);
         setSaturationError(false);
         setLightnessError(false);
@@ -92,9 +98,9 @@ function ColourConverter({ title, description }: ToolData) {
                         <Input
                             id="oklch-l"
                             type="number"
-                            step={1}
+                            step={0.01}
                             min={0}
-                            max={100}
+                            max={1}
                             value={isNaN(oklch.l) ? "" : oklch.l}
                             onChange={(e) => {
                                 const newOklch = {
@@ -109,12 +115,14 @@ function ColourConverter({ title, description }: ToolData) {
                                     setHEX(oklchToHex(newOklch));
                                     clearErrors();
                                 } else {
-                                    setHueError(true);
+                                    setOKLightnessError(true);
                                 }
                             }}
                         />
                         <div className="text-destructive h-5 text-sm">
-                            {hueError ? "Must be between 0 and 360" : null}
+                            {okLightnessError
+                                ? "Must be between 0 and 1"
+                                : null}
                         </div>
                     </div>
                     <div className="flex flex-1 flex-col gap-2">
@@ -123,9 +131,9 @@ function ColourConverter({ title, description }: ToolData) {
                             id="oklch-c"
                             type="number"
                             value={isNaN(oklch.c) ? "" : oklch.c}
-                            step={1}
+                            step={0.01}
                             min={0}
-                            max={100}
+                            max={0.4}
                             onChange={(e) => {
                                 const newOklch = {
                                     ...oklch,
@@ -139,12 +147,12 @@ function ColourConverter({ title, description }: ToolData) {
                                     setHEX(oklchToHex(newOklch));
                                     clearErrors();
                                 } else {
-                                    setChromaError(true);
+                                    setOKChromaError(true);
                                 }
                             }}
                         />
                         <div className="text-destructive h-5 text-sm">
-                            {chromaError ? "Must be between 0 and 100" : null}
+                            {okChromaError ? "Must be between 0 and 0.4" : null}
                         </div>
                     </div>
                     <div className="flex flex-1 flex-col gap-2">
@@ -169,12 +177,12 @@ function ColourConverter({ title, description }: ToolData) {
                                     setHEX(oklchToHex(newOklch));
                                     clearErrors();
                                 } else {
-                                    setHueError(true);
+                                    setOKHueError(true);
                                 }
                             }}
                         />
                         <div className="text-destructive h-5 text-sm">
-                            {hueError ? "Must be between 0 and 360" : null}
+                            {okHueError ? "Must be between 0 and 360" : null}
                         </div>
                     </div>
                 </div>
@@ -196,6 +204,7 @@ function ColourConverter({ title, description }: ToolData) {
                                 setHSL(newHSL);
 
                                 if (validateHSL(newHSL)) {
+                                    setOklch(hslToOklch(newHSL));
                                     setRGB(hslToRGB(newHSL));
                                     setHEX(hslToHex(newHSL));
                                     clearErrors();
@@ -209,7 +218,7 @@ function ColourConverter({ title, description }: ToolData) {
                         </div>
                     </div>
                     <div className="flex flex-1 flex-col gap-2">
-                        <Label>Saturation</Label>
+                        <Label htmlFor="hsl-s">Saturation</Label>
                         <Input
                             id="hsl-s"
                             type="number"
@@ -225,6 +234,7 @@ function ColourConverter({ title, description }: ToolData) {
                                 setHSL(newHSL);
 
                                 if (validateHSL(newHSL)) {
+                                    setOklch(hslToOklch(newHSL));
                                     setRGB(hslToRGB(newHSL));
                                     setHEX(hslToHex(newHSL));
                                     clearErrors();
@@ -240,7 +250,7 @@ function ColourConverter({ title, description }: ToolData) {
                         </div>
                     </div>
                     <div className="flex flex-1 flex-col gap-2">
-                        <Label>Lightness</Label>
+                        <Label htmlFor="hsl-l">Lightness</Label>
                         <Input
                             id="hsl-l"
                             type="number"
@@ -256,6 +266,7 @@ function ColourConverter({ title, description }: ToolData) {
                                 setHSL(newHSL);
 
                                 if (validateHSL(newHSL)) {
+                                    setOklch(hslToOklch(newHSL));
                                     setRGB(hslToRGB(newHSL));
                                     setHEX(hslToHex(newHSL));
                                     clearErrors();
@@ -289,6 +300,7 @@ function ColourConverter({ title, description }: ToolData) {
                                 setRGB(newRGB);
 
                                 if (validateRGB(newRGB)) {
+                                    setOklch(rgbToOklch(newRGB));
                                     setHSL(rgbToHSL(newRGB));
                                     setHEX(rgbToHex(newRGB));
                                     clearErrors();
@@ -302,7 +314,7 @@ function ColourConverter({ title, description }: ToolData) {
                         </div>
                     </div>
                     <div className="flex flex-1 flex-col gap-2">
-                        <Label>Green</Label>
+                        <Label htmlFor="rgb-g">Green</Label>
                         <Input
                             id="rgb-g"
                             type="number"
@@ -318,6 +330,7 @@ function ColourConverter({ title, description }: ToolData) {
                                 setRGB(newRGB);
 
                                 if (validateRGB(newRGB)) {
+                                    setOklch(rgbToOklch(newRGB));
                                     setHSL(rgbToHSL(newRGB));
                                     setHEX(rgbToHex(newRGB));
                                     clearErrors();
@@ -331,7 +344,7 @@ function ColourConverter({ title, description }: ToolData) {
                         </div>
                     </div>
                     <div className="flex flex-1 flex-col gap-2">
-                        <Label>Blue</Label>
+                        <Label htmlFor="rgb-b">Blue</Label>
                         <Input
                             id="rgb-b"
                             type="number"
@@ -347,6 +360,7 @@ function ColourConverter({ title, description }: ToolData) {
                                 setRGB(newRGB);
 
                                 if (validateRGB(newRGB)) {
+                                    setOklch(rgbToOklch(newRGB));
                                     setHSL(rgbToHSL(newRGB));
                                     setHEX(rgbToHex(newRGB));
                                     clearErrors();
@@ -371,6 +385,7 @@ function ColourConverter({ title, description }: ToolData) {
                             setHEX(newHex);
 
                             if (validateHEX(newHex)) {
+                                setOklch(hexToOklch(newHex));
                                 setRGB(hexToRGB(newHex));
                                 setHSL(hexToHSL(newHex));
                                 clearErrors();
