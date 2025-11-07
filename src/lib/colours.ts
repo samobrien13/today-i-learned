@@ -128,6 +128,77 @@ function oklabToOklch({ l, a, b }: Oklab): OKLCH {
     };
 }
 
+export function oklchToRgb({ l, c, h }: OKLCH): RGB {
+    const { l: lab_l, a, b } = oklchToOklab({ l, c, h });
+
+    const { x, y, z } = oklabToXyz({ l: lab_l, a, b });
+    const { r: lr, g: lg, b: lb } = xyzToLinearSrgb({ x, y, z });
+    const { r, g, b: rgb_b } = linearSrgbToRgb({ r: lr, g: lg, b: lb });
+    const clamp = (val: number) =>
+        Math.max(0, Math.min(Math.round(val * 255), 255));
+
+    return { r: clamp(r), g: clamp(g), b: clamp(rgb_b) };
+}
+
+function oklchToOklab({ l, c, h }: OKLCH): Oklab {
+    // Handle achromatic colors (greys)
+    if (c < 0.000001 || isNaN(h)) {
+        return { l, a: 0, b: 0 };
+    }
+
+    const h_rad = (h * Math.PI) / 180;
+    const a = c * Math.cos(h_rad);
+    const b = c * Math.sin(h_rad);
+    return { l, a, b };
+}
+
+function oklabToXyz({ l, a, b }: Oklab): XYZ {
+    // Oklab to non-linear LMS
+    const l_ = l + 0.3963377774 * a + 0.2158037573 * b;
+    const m_ = l - 0.1055613458 * a - 0.0638541728 * b;
+    const s_ = l - 0.0894841775 * a - 1.291485548 * b;
+
+    // Non-linear LMS to linear LMS
+    const l_cubed = l_ * l_ * l_;
+    const m_cubed = m_ * m_ * m_;
+    const s_cubed = s_ * s_ * s_;
+
+    // Linear LMS to XYZ
+    const x =
+        1.2270138511 * l_cubed - 0.5577999807 * m_cubed + 0.281256149 * s_cubed;
+    const y =
+        -0.0405801784 * l_cubed +
+        1.1122568696 * m_cubed -
+        0.0716766787 * s_cubed;
+    const z =
+        -0.0763812845 * l_cubed -
+        0.4214819784 * m_cubed +
+        1.5861632204 * s_cubed;
+
+    return { x, y, z };
+}
+
+function xyzToLinearSrgb({ x, y, z }: XYZ) {
+    const lr = 3.2404542 * x - 1.5371385 * y - 0.4985314 * z;
+    const lg = -0.969266 * x + 1.8760108 * y + 0.041556 * z;
+    const lb = 0.0556434 * x - 0.2040259 * y + 1.0572252 * z;
+    return { r: lr, g: lg, b: lb };
+}
+
+/**
+ * Step 4: Converts linear sRGB to sRGB (gamma correction).
+ */
+function linearSrgbToRgb({ r: lr, g: lg, b: lb }: RGB): RGB {
+    const nonlinear = (c: number) => {
+        // Note: Clipping linear values to 0-1 range before gamma correction
+        const v = Math.max(0, Math.min(1, c));
+        return v <= 0.0031308
+            ? v * 12.92
+            : 1.055 * Math.pow(v, 1 / 2.4) - 0.055;
+    };
+    return { r: nonlinear(lr), g: nonlinear(lg), b: nonlinear(lb) };
+}
+
 export function rgbToOklch({ r, g, b }: RGB): OKLCH {
     const { x, y, z } = linearRgbToXyz({
         r: sRgbToLinearRgb(r),
@@ -318,7 +389,6 @@ export function hexToHSL(hex: HEX): HSL {
         h = h * 60;
     }
 
-    // Round and normalize values
     h = Math.round(h * 100) / 100;
     s = Math.round(s * 100 * 100) / 100;
     l = Math.round(l * 100 * 100) / 100;
