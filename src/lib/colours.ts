@@ -122,13 +122,13 @@ function oklabToOklch({ l, a, b }: Oklab): OKLCH {
     }
 
     return {
-        l: Math.round(l) / 100,
-        c: Math.round(c) / 100,
-        h: Math.round(h_deg),
+        l: l / 100,
+        c: c / 100,
+        h: h_deg,
     };
 }
 
-export function oklchToRgb({ l, c, h }: OKLCH): RGB {
+export function oklchToRGB({ l, c, h }: OKLCH): RGB {
     const { l: lab_l, a, b } = oklchToOklab({ l, c, h });
 
     const { x, y, z } = oklabToXyz({ l: lab_l, a, b });
@@ -209,10 +209,8 @@ export function rgbToOklch({ r, g, b }: RGB): OKLCH {
     return oklabToOklch({ l, a, b: ok_b });
 }
 
-export function hslToOklch({ h, s, l }: HSL): OKLCH {
-    const { r, g, b } = hslToRGB({ h, s, l });
-
-    return rgbToOklch({ r, g, b });
+export function hslToOklch(hsl: HSL): OKLCH {
+    return rgbToOklch(hslToRGB(hsl));
 }
 
 export const hexToOklch = (hex: HEX): OKLCH => {
@@ -231,19 +229,11 @@ export function validateOklch(oklch: OKLCH): boolean {
 }
 
 export function oklchToHSL(oklch: OKLCH): HSL {
-    return {
-        h: oklch.h,
-        s: oklch.c * (oklch.l / 100),
-        l: oklch.l,
-    };
+    return rgbToHSL(oklchToRGB(oklch));
 }
 
 export function oklchToHex(oklch: OKLCH): HEX {
-    return hslToHex(oklchToHSL(oklch));
-}
-
-export function oklchToRGB(oklch: OKLCH): RGB {
-    return hslToRGB(oklchToHSL(oklch));
+    return rgbToHex(oklchToRGB(oklch));
 }
 
 export function validateHSL(hsl: HSL): boolean {
