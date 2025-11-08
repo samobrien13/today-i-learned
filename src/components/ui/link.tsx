@@ -17,14 +17,10 @@ function Link<RouteType>({
             {...props}
             target={external ? "_blank" : undefined}
             rel={external ? "noopener noreferrer" : undefined}
-            className={clsx(
-                "hover:text-muted-foreground transition-all [&_span]:font-mono",
-                className,
-                {
-                    "font-mono [word-spacing:-4px]":
-                        typeof props.children === "string",
-                },
-            )}
+            className={clsx("transition-all", className, {
+                "text-muted-foreground hover:text-foreground":
+                    typeof props.children === "string",
+            })}
         />
     );
 }

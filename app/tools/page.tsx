@@ -72,7 +72,7 @@ async function Tools({ searchParams }: { searchParams: SearchParams }) {
             ) : null}
             {filteredTools.map((tool) => (
                 <ViewTransition name={`${tool.slug}-card`} key={tool.title}>
-                    <Card>
+                    <Card className="hover:bg-background">
                         <Link href={Routes.TOOL(tool.slug)}>
                             <CardHeader>
                                 <CardTitle>{tool.title}</CardTitle>

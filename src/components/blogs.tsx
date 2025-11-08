@@ -5,7 +5,13 @@ import Routes from "@/constants/Routes";
 import { Badge } from "./ui/badge";
 import { Link } from "./ui/link";
 import { formatRelativeDate } from "@/lib/date";
-import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "./ui/card";
 import { useBlogs } from "@/hooks/use-blogs";
 import Image from "next/image";
 
@@ -56,52 +62,52 @@ function Blogs({ tags, allTags }: BlogsProps) {
                     })}
                 </div>
             ) : null}
-            {blogs.map((article) => (
-                <article key={article.slug}>
-                    <Card>
-                        <Link href={`/rants/${article.slug}`}>
-                            <CardHeader className="justify-start">
-                                <div className="flex flex-row gap-4">
-                                    <div className="flex flex-1 flex-col gap-6">
-                                        <div className="flex flex-col gap-2">
-                                            <ViewTransition
-                                                name={`blog-article-date-${article.slug}`}
-                                            >
-                                                <p className="text-xs font-semibold">
-                                                    {formatRelativeDate(
-                                                        article.date,
-                                                    )}
-                                                </p>
-                                            </ViewTransition>
-                                            <ViewTransition
-                                                name={`blog-article-title-${article.slug}`}
-                                            >
-                                                <CardTitle>
-                                                    {article.title}
-                                                </CardTitle>
-                                            </ViewTransition>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                {blogs.map((article) => (
+                    <article key={article.slug}>
+                        <Card className="hover:bg-background h-full">
+                            <Link href={`/rants/${article.slug}`}>
+                                <CardHeader className="relative min-h-[240px]">
+                                    <Image
+                                        priority
+                                        className="rounded-sm object-cover"
+                                        src={article.image.src}
+                                        alt={article.image.alt}
+                                        fill
+                                    />
+                                </CardHeader>
+                                <CardContent className="justify-start">
+                                    <div className="flex flex-row gap-4">
+                                        <div className="flex flex-1 flex-col gap-6">
+                                            <div className="flex flex-col gap-2">
+                                                <ViewTransition
+                                                    name={`blog-article-date-${article.slug}`}
+                                                >
+                                                    <p className="text-xs font-semibold">
+                                                        {formatRelativeDate(
+                                                            article.date,
+                                                        )}
+                                                    </p>
+                                                </ViewTransition>
+                                                <ViewTransition
+                                                    name={`blog-article-title-${article.slug}`}
+                                                >
+                                                    <CardTitle>
+                                                        {article.title}
+                                                    </CardTitle>
+                                                </ViewTransition>
+                                            </div>
+                                            <CardDescription>
+                                                {article.description}
+                                            </CardDescription>
                                         </div>
-                                        <CardDescription>
-                                            {article.description}
-                                        </CardDescription>
                                     </div>
-
-                                    <div className="relative flex h-32 w-32">
-                                        <Image
-                                            priority
-                                            className="rounded-sm object-cover"
-                                            src={article.image.src}
-                                            alt={article.image.alt}
-                                            height={256}
-                                            width={256}
-                                        />
-                                    </div>
-                                </div>
-                            </CardHeader>
-                        </Link>
-                    </Card>
-                </article>
-            ))}
+                                </CardContent>
+                            </Link>
+                        </Card>
+                    </article>
+                ))}
+            </div>
         </>
     );
 }
