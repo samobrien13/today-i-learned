@@ -11,9 +11,7 @@ function Tab({ title, subtitle, children }: TabProps) {
         <section className="flex flex-1 flex-col gap-6">
             <div className="flex flex-col gap-2">
                 <ViewTransition name={`tab-${title.toLowerCase()}`}>
-                    <h1 className="text-primary text-2xl font-semibold">
-                        {title}
-                    </h1>
+                    <h1 className="text-xl font-semibold">{title}</h1>
                 </ViewTransition>
                 {subtitle ? (
                     <p className="text-muted-foreground text-sm">{subtitle}</p>

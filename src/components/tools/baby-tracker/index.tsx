@@ -381,7 +381,7 @@ function BabyTracker({ title, description }: ToolData) {
                                                 key={type}
                                                 className="space-y-1"
                                             >
-                                                <div className="text-2xl font-bold text-gray-900">
+                                                <div className="text-xl font-bold text-gray-900">
                                                     {todayCount}
                                                 </div>
                                                 <div className="text-sm text-gray-600 capitalize">
