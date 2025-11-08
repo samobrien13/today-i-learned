@@ -58,75 +58,17 @@ export type OKLCH = {
     h: number;
 };
 
-function sRgbToLinearRgb(c: number) {
-    if (c <= 0.04045) {
-        return c / 12.92;
-    } else {
-        return Math.pow((c + 0.055) / 1.055, 2.4);
-    }
-}
-
 type XYZ = {
     x: number;
     y: number;
     z: number;
 };
 
-function linearRgbToXyz({ r, g, b }: RGB) {
-    const x = r * 0.4124564 + g * 0.3575761 + b * 0.1804375;
-    const y = r * 0.2126729 + g * 0.7151522 + b * 0.072175;
-    const z = r * 0.0193339 + g * 0.119192 + b * 0.9503041;
-    return { x, y, z };
-}
-
 type Oklab = {
     l: number;
     a: number;
     b: number;
 };
-
-function xyzToOklab({ x, y, z }: XYZ): Oklab {
-    const l = x * 0.8189330101 + y * 0.3618667424 + z * -0.1288597137;
-    const m = x * 0.0329845436 + y * 0.9293118715 + z * 0.0361456387;
-    const s = x * 0.0482003018 + y * 0.2643662691 + z * 0.633851707;
-
-    const l_prime = Math.cbrt(l);
-    const m_prime = Math.cbrt(m);
-    const s_prime = Math.cbrt(s);
-
-    return {
-        l:
-            0.2104542553 * l_prime +
-            0.793617785 * m_prime -
-            0.0040720468 * s_prime,
-        a:
-            1.9779984951 * l_prime -
-            2.428592205 * m_prime +
-            0.4505937099 * s_prime,
-        b:
-            0.0259040371 * l_prime +
-            0.7827717662 * m_prime -
-            0.808675766 * s_prime,
-    };
-}
-
-function oklabToOklch({ l, a, b }: Oklab): OKLCH {
-    // Convert from Cartesian (a, b) to Polar (C, h)
-    const c = Math.sqrt(a * a + b * b);
-    const h_rad = Math.atan2(b, a);
-    let h_deg = h_rad * (180 / Math.PI);
-
-    // Ensure hue is in the [0, 360] range
-    if (h_deg < 0) {
-        h_deg += 360;
-    }
-
-    return {
-        l: l / 100,
-        c: c / 100,
-        h: h_deg,
-    };
-}
 
 export function oklchToRGB({ l, c, h }: OKLCH): RGB {
     const { l: lab_l, a, b } = oklchToOklab({ l, c, h });
@@ -200,13 +142,70 @@ function linearSrgbToRgb({ r: lr, g: lg, b: lb }: RGB): RGB {
 }
 
 export function rgbToOklch({ r, g, b }: RGB): OKLCH {
-    const { x, y, z } = linearRgbToXyz({
-        r: sRgbToLinearRgb(r),
-        g: sRgbToLinearRgb(g),
-        b: sRgbToLinearRgb(b),
-    });
-    const { l, a, b: ok_b } = xyzToOklab({ x, y, z });
-    return oklabToOklch({ l, a, b: ok_b });
+    const {
+        r: lr,
+        g: lg,
+        b: lb,
+    } = rgbToLinearSrgb({ r: r / 255, g: g / 255, b: b / 255 });
+    const { x, y, z } = linearSrgbToXyz({ r: lr, g: lg, b: lb });
+    const { l, a, b: oklab_b } = xyzToOklab({ x, y, z });
+    return oklabToOklch({ l, a, b: oklab_b });
+}
+
+// --- Helper Functions ---
+
+/**
+ * Step 1: Converts sRGB (gamma-corrected) to linear sRGB.
+ */
+function rgbToLinearSrgb({ r, g, b }: RGB): RGB {
+    const linear = (c: number) =>
+        c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    return {
+        r: linear(r),
+        g: linear(g),
+        b: linear(b),
+    };
+}
+
+function linearSrgbToXyz({ r, g, b }: RGB): XYZ {
+    const x = r * 0.4124564 + g * 0.3575761 + b * 0.1804375;
+    const y = r * 0.2126729 + g * 0.7151522 + b * 0.072175;
+    const z = r * 0.0193339 + g * 0.119192 + b * 0.9503041;
+    return { x, y, z };
+}
+
+function xyzToOklab({ x, y, z }: XYZ): Oklab {
+    // XYZ to LMS (cone response)
+    const l = 0.8189330101 * x + 0.3618667424 * y - 0.1288597137 * z;
+    const m = 0.0329845436 * x + 0.9293118715 * y + 0.0361456387 * z;
+    const s = 0.0482003018 * x + 0.2643662691 * y + 0.633851707 * z;
+
+    // Apply non-linearity (cube root)
+    const l_ = Math.cbrt(l);
+    const m_ = Math.cbrt(m);
+    const s_ = Math.cbrt(s);
+
+    // LMS to Oklab
+    const oklab_l = 0.2104542553 * l_ + 0.793617785 * m_ - 0.0040720468 * s_;
+    const a = 1.9779984951 * l_ - 2.428592205 * m_ + 0.4505937099 * s_;
+    const b = 0.0259040371 * l_ + 0.7827717662 * m_ - 0.808675766 * s_;
+
+    return { l: oklab_l, a, b };
+}
+
+function oklabToOklch({ l, a, b }: Oklab): OKLCH {
+    // Calculate Chroma (C)
+    const c = Math.sqrt(a * a + b * b);
+
+    // Calculate Hue (h)
+    const h_rad = Math.atan2(b, a);
+    const h_deg = (h_rad * 180) / Math.PI;
+
+    // Normalize hue to be between 0 and 360
+    // If c is 0 (or very close), hue is undefined (NaN)
+    const h = c < 0.000001 ? NaN : (h_deg + 360) % 360;
+
+    return { l, c, h };
 }
 
 export function hslToOklch(hsl: HSL): OKLCH {
