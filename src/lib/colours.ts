@@ -70,6 +70,10 @@ type Oklab = {
     b: number;
 };
 
+export function oklabToHsl(oklab: Oklab): HSL {
+    return rgbToHSL(linearSrgbToRgb(xyzToLinearSrgb(oklabToXyz(oklab))));
+}
+
 export function oklchToRGB({ l, c, h }: OKLCH): RGB {
     const { l: lab_l, a, b } = oklchToOklab({ l, c, h });
 
@@ -152,11 +156,6 @@ export function rgbToOklch({ r, g, b }: RGB): OKLCH {
     return oklabToOklch({ l, a, b: oklab_b });
 }
 
-// --- Helper Functions ---
-
-/**
- * Step 1: Converts sRGB (gamma-corrected) to linear sRGB.
- */
 function rgbToLinearSrgb({ r, g, b }: RGB): RGB {
     const linear = (c: number) =>
         c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);

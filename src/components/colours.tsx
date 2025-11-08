@@ -13,7 +13,7 @@ import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Copy } from "lucide-react";
-import { cssVar, HSL, keys, setCssVar } from "@/lib/colours";
+import { cssVar, HSL, keys, oklabToHsl, setCssVar } from "@/lib/colours";
 
 type Colour = {
     name: string;
@@ -21,7 +21,7 @@ type Colour = {
 
 function Colours() {
     const { resolvedTheme: theme } = useTheme();
-    const [prevTheme, setPrevTheme] = useState(theme);
+    const [prevTheme, setPrevTheme] = useState<string>();
 
     const [customColours, setCustomColours] = useState<Map<string, Colour>>(
         new Map(),
@@ -34,11 +34,24 @@ function Colours() {
             keys.forEach((key) => {
                 if (key === "transparent") return;
                 const value = cssVar(`--${key}`);
+                const regex = /\((.*?)\)/g;
+                const matches = [...value.matchAll(regex)];
+                if (!matches) return;
+                const results = matches.map((match) => match[1]);
+
+                const values = results[0].split(" ");
+                console.log(values);
+                const { h, s, l } = oklabToHsl({
+                    l: Number(values[0].replace("%", "")),
+                    a: Number(values[1]),
+                    b: Number(values[2]),
+                });
+
                 newPalette.set(key, {
                     name: key,
-                    h: Number(value.split(" ")[0]),
-                    s: Number(value.split(" ")[1].replace("%", "")),
-                    l: Number(value.split(" ")[2].replace("%", "")),
+                    h,
+                    s,
+                    l,
                 });
             });
             return newPalette;
@@ -140,7 +153,7 @@ function Colours() {
                                 <div
                                     className="mr-0 ml-auto h-8 w-8 rounded-md"
                                     style={{
-                                        backgroundColor: `hsl(${color.h}, ${color.s}%, ${color.l}%)`,
+                                        backgroundColor: `(${color.h}, ${color.s}%, ${color.l}%)`,
                                     }}
                                 />
                             </TableCell>
