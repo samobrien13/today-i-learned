@@ -29,7 +29,7 @@ export const RUBBER_DUCK: Tool = {
 
 export const COLOUR_CONVERTER: Tool = {
     title: "Colour Converter",
-    description: "Convert a colour between HSL, RGB and HEX formats",
+    description: "Convert a colour between OKLCH, HSL, RGB and HEX formats",
     slug: "colour-converter",
     tags: ["design"],
     component: (props) => <ColourConverter {...props} />,
