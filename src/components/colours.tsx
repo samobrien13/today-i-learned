@@ -153,7 +153,7 @@ function Colours() {
                                 <div
                                     className="mr-0 ml-auto h-8 w-8 rounded-md"
                                     style={{
-                                        backgroundColor: `(${color.h}, ${color.s}%, ${color.l}%)`,
+                                        backgroundColor: `hsl(${color.h}, ${color.s}%, ${color.l}%)`,
                                     }}
                                 />
                             </TableCell>

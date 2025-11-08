@@ -35,7 +35,7 @@ export function cssVar(name: string) {
 export function setCssVar(name: string, color: HSL) {
     document.documentElement.style.setProperty(
         `--${name}`,
-        `${color.h}, ${color.s}%, ${color.l}%`,
+        `hsl(${color.h}, ${color.s}%, ${color.l}%)`,
     );
 }
 
