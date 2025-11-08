@@ -18,50 +18,50 @@ const theme: ThemeInput = {
     settings: [
         {
             settings: {
-                background: "hsl(var(--card-background))",
-                foreground: "hsl(var(--card-foreground))",
+                background: "var(--card-background)",
+                foreground: "var(--card-foreground)",
             },
         },
         {
             scope: ["class"],
             settings: {
-                foreground: "hsl(var(--primary))",
+                foreground: "var(--primary)",
             },
         },
         {
             scope: ["variable", "parameter"],
             settings: {
-                foreground: "hsl(var(--chart-1))",
+                foreground: "var(--chart-1)",
             },
         },
         {
             scope: ["string", "regexp", "meta.type"],
             settings: {
-                foreground: "hsl(var(--chart-2))",
+                foreground: "var(--chart-2)",
             },
         },
         {
             scope: ["number", "entity"],
             settings: {
-                foreground: "hsl(var(--chart-3))",
+                foreground: "var(--chart-3)",
             },
         },
         {
             scope: ["constant"],
             settings: {
-                foreground: "hsl(var(--chart-4))",
+                foreground: "var(--chart-4)",
             },
         },
         {
             scope: ["operator", "storage", "keyword"],
             settings: {
-                foreground: "hsl(var(--chart-5))",
+                foreground: "var(--chart-5)",
             },
         },
         {
             scope: ["comment", "punctuation"],
             settings: {
-                foreground: "hsl(var(--muted-foreground))",
+                foreground: "var(--muted-foreground)",
             },
         },
     ],
