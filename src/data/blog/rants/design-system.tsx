@@ -38,7 +38,7 @@ export const DESIGN_SYSTEM: BlogData = {
 
 function DesignSystem() {
     return (
-        <div className="theme-custom">
+        <>
             <BlogParagraph>
                 I highly recommend{" "}
                 <Link href="https://www.refactoringui.com/" external>
@@ -166,8 +166,16 @@ function DesignSystem() {
                 Finally we have a set of chart colours that are used whenever a
                 splash of colour is needed, mainly for syntax highlighting.
             </BlogParagraph>
+            <BlogSubHeading>Customising</BlogSubHeading>
+            <BlogParagraph>
+                I previously made my own customiser here, but{" "}
+                <Link href="https://tweakcn.com/" external>
+                    tweakcn
+                </Link>{" "}
+                is so good it&apos;s no longer worth it.
+            </BlogParagraph>
             <Colours />
-        </div>
+        </>
     );
 }
 

@@ -30,24 +30,24 @@ function Line({ paymentSets, maxSetLength }: LineProps) {
             redraw
             className="py-4"
             title="Years to 0"
-            color="hsl(var(--chart-3))"
+            color="var(--chart-3)"
             options={{
                 scales: {
                     y: {
                         grid: {
-                            color: `hsl(${cssVar("--muted-foreground")})`,
+                            color: cssVar("--muted-foreground"),
                         },
                         ticks: {
-                            color: `hsl(${cssVar("--card-foreground")})`,
+                            color: cssVar("--card-foreground"),
                         },
                         min: 0,
                     },
                     x: {
                         grid: {
-                            color: `hsl(${cssVar("--muted-foreground")})`,
+                            color: cssVar("--muted-foreground"),
                         },
                         ticks: {
-                            color: `hsl(${cssVar("--card-foreground")})`,
+                            color: cssVar("--card-foreground"),
                             maxTicksLimit: maxSetLength / 12,
                             stepSize: 12,
                         },
@@ -61,8 +61,8 @@ function Line({ paymentSets, maxSetLength }: LineProps) {
                 datasets: paymentSets.map((paymentSet, index) => ({
                     label: `Set ${index + 1}`,
                     data: paymentSet.map(([principal]) => principal),
-                    borderColor: `hsl(${cssVar(`--chart-${index + 1}`)})`,
-                    backgroundColor: `hsl(${cssVar(`--chart-${index + 1}`)}`,
+                    borderColor: cssVar(`--chart-${index + 1}`),
+                    backgroundColor: cssVar(`--chart-${index + 1}`),
                     pointRadius: 0,
                     fill: false,
                     tension: 0.1,

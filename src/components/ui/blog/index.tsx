@@ -16,9 +16,7 @@ function Blog({ title, description, date, slug, component, tags }: BlogProps) {
         <article className="flex flex-1 flex-col gap-8">
             <header>
                 <ViewTransition name={`blog-article-title-${slug}`}>
-                    <h1 className="text-primary text-2xl font-semibold">
-                        {title}
-                    </h1>
+                    <h1 className="text-xl font-semibold">{title}</h1>
                 </ViewTransition>
                 <ViewTransition name={`blog-article-date-${slug}`}>
                     <p className="text-sm font-semibold">{formatDate(date)}</p>
@@ -47,7 +45,7 @@ function Blog({ title, description, date, slug, component, tags }: BlogProps) {
 }
 
 export function BlogHeading({ children }: { children: React.ReactNode }) {
-    return <h2 className="pt-2 pb-2 text-xl">{children}</h2>;
+    return <h2 className="pt-2 pb-2 text-lg font-semibold">{children}</h2>;
 }
 
 export function BlogSubHeading({ children }: { children: React.ReactNode }) {
