@@ -46,7 +46,7 @@ function HowToFindAndReplaceFromTheCommandLine() {
                 The following command will do the job on OSX:
             </BlogParagraph>
             <CodeBlock language="bash">
-                {`LC_ALL=C find ./ -type f -exec sed -i '' -e & '/find text/replace text/' {} \\;`}
+                {`LC_ALL=C find ./ -type f -exec sed -i '' -e 's/find text/replace text/g' {} \\;`}
             </CodeBlock>
             <BlogUnorderedList>
                 <BlogListItem>
