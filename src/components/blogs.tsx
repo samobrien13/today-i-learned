@@ -61,7 +61,7 @@ function Blogs({ tags, allTags }: BlogsProps) {
                     <Card>
                         <Link href={`/rants/${article.slug}`}>
                             <CardHeader className="justify-start">
-                                <div className="flex flex-row gap-4">
+                                <div className="flex flex-col-reverse gap-4 sm:flex-row">
                                     <div className="flex flex-1 flex-col gap-6">
                                         <div className="flex flex-col gap-2">
                                             <ViewTransition
