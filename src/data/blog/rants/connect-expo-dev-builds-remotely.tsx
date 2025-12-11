@@ -1,4 +1,5 @@
 import {
+    BlogCode,
     BlogListItem,
     BlogParagraph,
     BlogUnorderedList,
@@ -6,24 +7,21 @@ import {
 import { Link } from "@/components/ui/link";
 import { BlogData } from "@/data/blog";
 
-const HOW_TO_REMOTELY_CONNECT_AN_EXPO_DEVELOPMENT_BUILD_TO_YOUR_LOCAL_DEV_SERVER: BlogData =
-    {
-        title: "How to remotely connect an Expo development build to your local dev server",
-        description:
-            "A guide on connecting your Expo development build to a local development server, even when debugging remotely.",
-        date: "2025-12-11",
-        slug: "how-to-remotely-connect-an-expo-development-build-to-your-local-dev-server",
-        tags: ["engineering", "expo"],
-        image: {
-            src: "/images/rants/tailscale.png",
-            alt: "Tailscale",
-        },
-        component: (
-            <HowToRemotelyConnectAnExpoDevelopmentBuildToYourLocalDevServer />
-        ),
-    };
+const CONNECT_EXPO_DEV_BUILDS_REMOTELY: BlogData = {
+    title: "Connect Expo Dev Builds Remotely",
+    description:
+        "How to connect your Expo development build to a local development server from a remote device",
+    date: "2025-12-11",
+    slug: "connect-expo-dev-builds-remotely",
+    tags: ["engineering", "expo"],
+    image: {
+        src: "/images/rants/tailscale.png",
+        alt: "Tailscale",
+    },
+    component: <ConnectExpoDevBuildsRemotely />,
+};
 
-function HowToRemotelyConnectAnExpoDevelopmentBuildToYourLocalDevServer() {
+function ConnectExpoDevBuildsRemotely() {
     return (
         <>
             <BlogParagraph>
@@ -49,7 +47,7 @@ function HowToRemotelyConnectAnExpoDevelopmentBuildToYourLocalDevServer() {
                 solutions.
             </BlogParagraph>
             <BlogParagraph>
-                I then had the thought that
+                I then had the thought that{" "}
                 <Link href="https://tailscale.com/" external>
                     Tailscale
                 </Link>{" "}
@@ -62,44 +60,56 @@ function HowToRemotelyConnectAnExpoDevelopmentBuildToYourLocalDevServer() {
                     Install{" "}
                     <Link href="https://tailscale.com/" external>
                         Tailscale
-                    </Link>
-                    on both your computer and the device(s) you want to use
+                    </Link>{" "}
+                    on both your computer running Expo and the device(s) you
+                    want to use
                 </BlogListItem>
                 <BlogListItem>
                     Create a Tailscale account and create a new tailnet
                 </BlogListItem>
                 <BlogListItem>
-                    Connect both devices to the same Tailscale network
+                    Connect both devices to the same tailnet
                 </BlogListItem>
                 <BlogListItem>
                     Install your expo development build app on your device
                 </BlogListItem>
                 <BlogListItem>
-                    Open the{" "}
-                    <Link href="https://expo.dev/" external>
-                        Expo Go
-                    </Link>{" "}
-                    app and click on the{" "}
-                    <Link href="https://expo.dev/" external>
-                        Connect to a development server
-                    </Link>{" "}
-                    button
+                    Run the development server on your computer using the usual{" "}
+                    <BlogCode>expo start</BlogCode> command
                 </BlogListItem>
                 <BlogListItem>
-                    Enter your Tailscale key and click{" "}
-                    <Link href="https://expo.dev/" external>
-                        Connect
-                    </Link>
+                    Run{" "}
+                    <BlogCode>
+                        tailscale serve --https=8081 localhost:8081
+                    </BlogCode>{" "}
+                    and copy the url output (you can use http but iOS requires
+                    https to work)
                 </BlogListItem>
                 <BlogListItem>
-                    Select the{" "}
-                    <Link href="https://expo.dev/" external>
-                        Connect to a development server
-                    </Link>{" "}
-                    option
+                    Open the expo development build app on your device and paste
+                    the url to connect
                 </BlogListItem>
+                <BlogParagraph>
+                    That&apos;s it! You should now be loading the code from your
+                    development server on your device.
+                </BlogParagraph>
+                <BlogParagraph>
+                    If you also have a local backend API you can expose these
+                    via the same serve command as well. You can then change the
+                    environment variables in your expo app to point to your
+                    tailscale url instead of localhost.
+                </BlogParagraph>
+                <BlogParagraph>
+                    You can add these commands to your{" "}
+                    <BlogCode>package.json</BlogCode> scripts to make it easier
+                    to run them.
+                </BlogParagraph>
+                <BlogParagraph>
+                    This method is also useful for connecting to local web
+                    servers from a real device.
+                </BlogParagraph>
             </BlogUnorderedList>
         </>
     );
 }
-export default HOW_TO_REMOTELY_CONNECT_AN_EXPO_DEVELOPMENT_BUILD_TO_YOUR_LOCAL_DEV_SERVER;
+export { CONNECT_EXPO_DEV_BUILDS_REMOTELY };
