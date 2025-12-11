@@ -8,7 +8,7 @@ import { Link } from "@/components/ui/link";
 import { BlogData } from "@/data/blog";
 
 const CONNECT_EXPO_DEV_BUILDS_REMOTELY: BlogData = {
-    title: "Connect Expo Dev Builds Remotely",
+    title: "Connect Expo dev builds remotely",
     description:
         "How to connect your Expo development build to a local development server from a remote device",
     date: "2025-12-11",
@@ -40,11 +40,11 @@ function ConnectExpoDevBuildsRemotely() {
                 local APIs you are developing against.
             </BlogParagraph>
             <BlogParagraph>
-                I started searching for solutions, seeing that Expo is supposed
-                to work over LAN, however if you are on a work computer chances
-                are you don&apos;t have access to your firewall to allow this
-                traffic. Beyond this there aren&apos;t many documented
-                solutions.
+                I started searching for solutions, and found that Expo is
+                supposed to work over LAN by default. However if you are on a
+                work computer chances are you don&apos;t have access to your
+                firewall to allow this traffic. Beyond this there aren&apos;t
+                many documented solutions.
             </BlogParagraph>
             <BlogParagraph>
                 I then had the thought that{" "}
@@ -82,33 +82,32 @@ function ConnectExpoDevBuildsRemotely() {
                     <BlogCode>
                         tailscale serve --https=8081 localhost:8081
                     </BlogCode>{" "}
-                    and copy the url output (you can use http but iOS requires
-                    https to work)
+                    and copy the url output (https is required for iOS)
                 </BlogListItem>
                 <BlogListItem>
                     Open the expo development build app on your device and paste
                     the url to connect
                 </BlogListItem>
-                <BlogParagraph>
-                    That&apos;s it! You should now be loading the code from your
-                    development server on your device.
-                </BlogParagraph>
-                <BlogParagraph>
-                    If you also have a local backend API you can expose these
-                    via the same serve command as well. You can then change the
-                    environment variables in your expo app to point to your
-                    tailscale url instead of localhost.
-                </BlogParagraph>
-                <BlogParagraph>
-                    You can add these commands to your{" "}
-                    <BlogCode>package.json</BlogCode> scripts to make it easier
-                    to run them.
-                </BlogParagraph>
-                <BlogParagraph>
-                    This method is also useful for connecting to local web
-                    servers from a real device.
-                </BlogParagraph>
             </BlogUnorderedList>
+            <BlogParagraph>
+                If you also have a local backend API you can expose these via
+                the same serve command as well. You can then change the
+                environment variables in your expo app to point to your
+                tailscale url instead of localhost.
+            </BlogParagraph>
+            <BlogParagraph>
+                You can add these commands to your{" "}
+                <BlogCode>package.json</BlogCode> scripts to make it easier to
+                run them.
+            </BlogParagraph>
+            <BlogParagraph>
+                This method is also useful for connecting to local web servers
+                from a real device.
+            </BlogParagraph>
+            <BlogParagraph>
+                That&apos;s it! You should now be loading the code from your
+                development server on your device.
+            </BlogParagraph>
         </>
     );
 }
