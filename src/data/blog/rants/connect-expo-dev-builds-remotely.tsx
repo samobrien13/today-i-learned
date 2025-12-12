@@ -4,6 +4,7 @@ import {
     BlogParagraph,
     BlogUnorderedList,
 } from "@/components/ui/blog";
+import { CodeBlock } from "@/components/ui/code-block";
 import { Link } from "@/components/ui/link";
 import { BlogData } from "@/data/blog";
 
@@ -80,15 +81,39 @@ function ConnectExpoDevBuildsRemotely() {
                 <BlogListItem>
                     Run{" "}
                     <BlogCode>
-                        tailscale serve --https=8081 localhost:8081
+                        tailscale serve --http=8081 localhost:8081
                     </BlogCode>{" "}
-                    and copy the url output (https is required for iOS)
+                    and copy the url output
                 </BlogListItem>
                 <BlogListItem>
                     Open the expo development build app on your device and paste
                     the url to connect
                 </BlogListItem>
             </BlogUnorderedList>
+            <BlogParagraph>
+                Originally I ran serve using https as iOS doesn&apos;t support
+                http by default. However I was seeing errors running Android
+                where it was attempting to fetch assets from http. You need to
+                add the following to your <BlogCode>app.config.ts</BlogCode> to
+                support http on iOS so you can use both platforms at once. You
+                can exclude this setting from non-development builds.
+            </BlogParagraph>
+            <CodeBlock filename="app.config.ts" language="typescript">
+                {`{
+...
+  ios: {
+    ...
+    infoPlist: {
+      ...
+      NSLocalNetworkUsageDescription: "Needed for Expo Dev Client",
+      NSAppTransportSecurity: {
+        NSAllowsArbitraryLoads: true,
+      },
+    },
+  },
+...
+}`}
+            </CodeBlock>
             <BlogParagraph>
                 If you also have a local backend API you can expose these via
                 the same serve command as well. You can then change the
