@@ -25,7 +25,8 @@ function CurlBuilder({ title }: ToolData) {
 
     const headersArray = headers
         .split("\n")
-        .map((header) => `-H '${header.trim()}' \\`);
+        .map((header) => `-H '${header.trim()}' \\`)
+        .join("\n\t");
     const bodyArray = body.split("\n").join("\n\t");
 
     const curlCommand = `curl -X ${method} '${url}' \\
