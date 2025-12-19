@@ -95,7 +95,9 @@ function BabyTracker({ title, description }: ToolData) {
                 formatDateTimeLocal(new Date(editingActivity.endTime!)),
             );
         } else {
-            setSelectedDateTime(formatDateTimeLocal(new Date(editingActivity.time)));
+            setSelectedDateTime(
+                formatDateTimeLocal(new Date(editingActivity.time)),
+            );
         }
         setSelectedNotes(editingActivity.notes || "");
         setActivityType(editingActivity.type);
@@ -144,8 +146,7 @@ function BabyTracker({ title, description }: ToolData) {
                 const updatedActivities = [newActivity, ...prev];
                 return updatedActivities.sort(
                     (a, b) =>
-                        new Date(b.time).getTime() -
-                        new Date(a.time).getTime(),
+                        new Date(b.time).getTime() - new Date(a.time).getTime(),
                 );
             });
         }
@@ -188,9 +189,7 @@ function BabyTracker({ title, description }: ToolData) {
         const lastActivity = activities.find(
             (activity) => activity.type === type,
         );
-        return lastActivity
-            ? formatRelativeDate(lastActivity.time)
-            : "Never";
+        return lastActivity ? formatRelativeDate(lastActivity.time) : "Never";
     };
 
     useEffect(() => {
@@ -322,10 +321,10 @@ function BabyTracker({ title, description }: ToolData) {
             </DialogContent>
             <div className="flex flex-col gap-6">
                 <div className="text-center">
-                    <h1 className="mb-2 text-3xl font-bold text-gray-900">
+                    <h1 className="text-foreground mb-2 text-3xl font-bold">
                         {title}
                     </h1>
-                    <p className="text-gray-600">{description}</p>
+                    <p className="text-muted-foreground">{description}</p>
                 </div>
                 <div className="flex flex-col gap-3">
                     <DialogTrigger asChild>
@@ -406,7 +405,7 @@ function BabyTracker({ title, description }: ToolData) {
                         </CardDescription>
                     </CardHeader>
                     {recentActivities.length === 0 ? (
-                        <div className="py-8 text-center text-gray-500">
+                        <div className="text-muted-foreground py-8 text-center">
                             <Baby className="mx-auto mb-3 h-12 w-12 opacity-50" />
                             <p>No recent activities to display.</p>
                         </div>
@@ -433,7 +432,7 @@ function BabyTracker({ title, description }: ToolData) {
                                         </span>
                                     </Badge>
                                 </div>
-                                <div className="flex-1 text-sm text-gray-600">
+                                <div className="text-muted-foreground flex-1 text-sm">
                                     {activity.type === "sleeping" ? (
                                         <>
                                             <div className="font-medium">
@@ -466,7 +465,7 @@ function BabyTracker({ title, description }: ToolData) {
                                         </>
                                     )}
                                     {activity.notes && (
-                                        <div className="text-xs text-gray-500">
+                                        <div className="text-muted-foreground text-xs">
                                             {activity.notes}
                                         </div>
                                     )}
@@ -485,87 +484,82 @@ function BabyTracker({ title, description }: ToolData) {
                         </CardHeader>
                         <CardContent>
                             <div className="grid grid-cols-4 gap-4 pt-4 text-center">
-                                {([
-                                    "feeding",
-                                    "pooping",
-                                    "wee",
-                                    "sleeping",
-                                ] as const).map((type) => {
-                                        const todayCount = activities.filter(
-                                            (activity) =>
-                                                activity.type === type &&
-                                                new Date(
-                                                    activity.time,
-                                                ).toDateString() ===
-                                                    new Date().toDateString(),
+                                {(
+                                    [
+                                        "feeding",
+                                        "pooping",
+                                        "wee",
+                                        "sleeping",
+                                    ] as const
+                                ).map((type) => {
+                                    const todayCount = activities.filter(
+                                        (activity) =>
+                                            activity.type === type &&
+                                            new Date(
+                                                activity.time,
+                                            ).toDateString() ===
+                                                new Date().toDateString(),
+                                    );
+
+                                    if (type === "sleeping") {
+                                        const totalSleep = todayCount.reduce(
+                                            (acc, activity) => {
+                                                if (
+                                                    activity.startTime &&
+                                                    activity.endTime
+                                                ) {
+                                                    return (
+                                                        acc +
+                                                        (new Date(
+                                                            activity.endTime,
+                                                        ).getTime() -
+                                                            new Date(
+                                                                activity.startTime,
+                                                            ).getTime())
+                                                    );
+                                                }
+                                                return acc;
+                                            },
+                                            0,
                                         );
 
-                                        if (type === "sleeping") {
-                                            const totalSleep =
-                                                todayCount.reduce(
-                                                    (acc, activity) => {
-                                                        if (
-                                                            activity.startTime &&
-                                                            activity.endTime
-                                                        ) {
-                                                            return (
-                                                                acc +
-                                                                (new Date(
-                                                                    activity.endTime,
-                                                                ).getTime() -
-                                                                    new Date(
-                                                                        activity.startTime,
-                                                                    ).getTime())
-                                                            );
-                                                        }
-                                                        return acc;
-                                                    },
-                                                    0,
-                                                );
-
-                                            const hours = Math.floor(
-                                                totalSleep /
-                                                    (1000 * 60 * 60),
-                                            );
-                                            const minutes = Math.floor(
-                                                (totalSleep %
-                                                    (1000 * 60 * 60)) /
-                                                    (1000 * 60),
-                                            );
-
-                                            return (
-                                                <div
-                                                    key={type}
-                                                    className="space-y-1"
-                                                >
-                                                    <div className="text-xl font-bold text-gray-900">
-                                                        {hours}h {minutes}m
-                                                    </div>
-                                                    <div className="text-sm text-gray-600 capitalize">
-                                                        Sleep
-                                                    </div>
-                                                </div>
-                                            );
-                                        }
+                                        const hours = Math.floor(
+                                            totalSleep / (1000 * 60 * 60),
+                                        );
+                                        const minutes = Math.floor(
+                                            (totalSleep % (1000 * 60 * 60)) /
+                                                (1000 * 60),
+                                        );
 
                                         return (
                                             <div
                                                 key={type}
                                                 className="space-y-1"
                                             >
-                                                <div className="text-xl font-bold text-gray-900">
-                                                    {todayCount.length}
+                                                <div className="text-foreground text-xl font-bold">
+                                                    {hours}h {minutes}m
                                                 </div>
-                                                <div className="text-sm text-gray-600 capitalize">
-                                                    {type}
-                                                    {todayCount.length !== 1
-                                                        ? "s"
-                                                        : ""}
+                                                <div className="text-muted-foreground text-sm capitalize">
+                                                    Sleep
                                                 </div>
                                             </div>
                                         );
-                                    },
-                                )}
+                                    }
+
+                                    return (
+                                        <div key={type} className="space-y-1">
+                                            <div className="text-foreground text-xl font-bold">
+                                                {todayCount.length}
+                                            </div>
+                                            <div className="text-muted-foreground text-sm capitalize">
+                                                {type}
+                                                {todayCount.length !== 1
+                                                    ? "s"
+                                                    : ""}
+                                            </div>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </CardContent>
                     </Card>
