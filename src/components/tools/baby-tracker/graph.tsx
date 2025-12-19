@@ -48,9 +48,7 @@ export default function BabyTrackerGraph({
         );
 
         const sortedActivities = [...filteredActivities].sort(
-            (a, b) =>
-                new Date(a.time).getTime() -
-                new Date(b.time).getTime(),
+            (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime(),
         );
 
         const labels = [
@@ -61,50 +59,48 @@ export default function BabyTrackerGraph({
             ),
         ];
 
-        const datasets = (["feeding", "pooping", "wee", "sleeping"] as const).map(
-            (type) => {
-                const data = labels.map((label) => {
-                    if (type === "sleeping") {
-                        return sortedActivities
-                            .filter(
-                                (activity) =>
-                                    new Date(
-                                        activity.time,
-                                    ).toLocaleDateString() === label &&
-                                    activity.type === type,
-                            )
-                            .reduce((total, activity) => {
-                                if (activity.startTime && activity.endTime) {
-                                    const diff =
-                                        new Date(activity.endTime).getTime() -
-                                        new Date(activity.startTime).getTime();
-                                    return total + diff / (1000 * 60 * 60); // convert to hours
-                                }
-                                return total;
-                            }, 0);
-                    }
-                    return sortedActivities.filter(
-                        (activity) =>
-                            new Date(activity.time).toLocaleDateString() ===
-                                label && activity.type === type,
-                    ).length;
-                });
+        const datasets = (
+            ["feeding", "pooping", "wee", "sleeping"] as const
+        ).map((type) => {
+            const data = labels.map((label) => {
+                if (type === "sleeping") {
+                    return sortedActivities
+                        .filter(
+                            (activity) =>
+                                new Date(activity.time).toLocaleDateString() ===
+                                    label && activity.type === type,
+                        )
+                        .reduce((total, activity) => {
+                            if (activity.startTime && activity.endTime) {
+                                const diff =
+                                    new Date(activity.endTime).getTime() -
+                                    new Date(activity.startTime).getTime();
+                                return total + diff / (1000 * 60 * 60); // convert to hours
+                            }
+                            return total;
+                        }, 0);
+                }
+                return sortedActivities.filter(
+                    (activity) =>
+                        new Date(activity.time).toLocaleDateString() ===
+                            label && activity.type === type,
+                ).length;
+            });
 
-                return {
-                    label: type.charAt(0).toUpperCase() + type.slice(1),
-                    data: data,
-                    borderColor:
-                        type === "feeding"
-                            ? `hsl(${cssVar("--chart-1")})`
-                            : type === "pooping"
-                              ? `hsl(${cssVar("--chart-2")})`
-                              : type === "wee"
-                                ? `hsl(${cssVar("--chart-3")})`
-                                : `hsl(${cssVar("--chart-4")})`,
-                    yAxisID: type === "sleeping" ? "y1" : "y",
-                };
-            },
-        );
+            return {
+                label: type.charAt(0).toUpperCase() + type.slice(1),
+                data: data,
+                borderColor:
+                    type === "feeding"
+                        ? cssVar("--chart-1")
+                        : type === "pooping"
+                          ? cssVar("--chart-2")
+                          : type === "wee"
+                            ? cssVar("--chart-3")
+                            : cssVar("--chart-4"),
+                yAxisID: type === "sleeping" ? "y1" : "y",
+            };
+        });
 
         return {
             labels,
