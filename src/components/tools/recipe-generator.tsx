@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { CheckedState } from "@radix-ui/react-checkbox";
 import { ChatGPT } from "@/components/ui/icons";
 import { ToolData } from ".";
 
@@ -49,7 +48,7 @@ function RecipeGenerator({ title, description }: ToolData) {
         }
     };
 
-    const onChange = (checked: CheckedState, value: string) => {
+    const onChange = (checked: boolean, value: string) => {
         if (checked) {
             setSelectedIngredients([...selectedIngredients, value]);
         } else {
