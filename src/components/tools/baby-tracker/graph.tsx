@@ -25,8 +25,11 @@ ChartJS.register(
 
 type Activity = {
     id: string;
-    type: "feeding" | "pooping" | "wee";
-    timestamp: Date;
+    type: "feeding" | "pooping" | "wee" | "sleeping";
+    time: Date;
+    startTime?: Date;
+    endTime?: Date;
+    notes?: string;
 };
 
 type BabyTrackerGraphProps = {
@@ -41,32 +44,49 @@ export default function BabyTrackerGraph({
         sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
         const filteredActivities = activities.filter(
-            (activity) => new Date(activity.timestamp) >= sevenDaysAgo,
+            (activity) => new Date(activity.time) >= sevenDaysAgo,
         );
 
         const sortedActivities = [...filteredActivities].sort(
             (a, b) =>
-                new Date(a.timestamp).getTime() -
-                new Date(b.timestamp).getTime(),
+                new Date(a.time).getTime() -
+                new Date(b.time).getTime(),
         );
 
         const labels = [
             ...new Set(
                 sortedActivities.map((activity) =>
-                    new Date(activity.timestamp).toLocaleDateString(),
+                    new Date(activity.time).toLocaleDateString(),
                 ),
             ),
         ];
 
-        const datasets = (["feeding", "pooping", "wee"] as const).map(
+        const datasets = (["feeding", "pooping", "wee", "sleeping"] as const).map(
             (type) => {
                 const data = labels.map((label) => {
+                    if (type === "sleeping") {
+                        return sortedActivities
+                            .filter(
+                                (activity) =>
+                                    new Date(
+                                        activity.time,
+                                    ).toLocaleDateString() === label &&
+                                    activity.type === type,
+                            )
+                            .reduce((total, activity) => {
+                                if (activity.startTime && activity.endTime) {
+                                    const diff =
+                                        new Date(activity.endTime).getTime() -
+                                        new Date(activity.startTime).getTime();
+                                    return total + diff / (1000 * 60 * 60); // convert to hours
+                                }
+                                return total;
+                            }, 0);
+                    }
                     return sortedActivities.filter(
                         (activity) =>
-                            new Date(
-                                activity.timestamp,
-                            ).toLocaleDateString() === label &&
-                            activity.type === type,
+                            new Date(activity.time).toLocaleDateString() ===
+                                label && activity.type === type,
                     ).length;
                 });
 
@@ -78,7 +98,10 @@ export default function BabyTrackerGraph({
                             ? `hsl(${cssVar("--chart-1")})`
                             : type === "pooping"
                               ? `hsl(${cssVar("--chart-2")})`
-                              : `hsl(${cssVar("--chart-3")})`,
+                              : type === "wee"
+                                ? `hsl(${cssVar("--chart-3")})`
+                                : `hsl(${cssVar("--chart-4")})`,
+                    yAxisID: type === "sleeping" ? "y1" : "y",
                 };
             },
         );
@@ -104,9 +127,34 @@ export default function BabyTrackerGraph({
         },
         scales: {
             y: {
+                type: "linear" as const,
+                display: true,
+                position: "left" as const,
+                title: {
+                    display: true,
+                    text: "Count",
+                },
                 min: 0,
                 ticks: {
                     stepSize: 1,
+                },
+            },
+            y1: {
+                type: "linear" as const,
+                display: true,
+                position: "right" as const,
+                title: {
+                    display: true,
+                    text: "Hours",
+                },
+                grid: {
+                    drawOnChartArea: false,
+                },
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: "Date",
                 },
             },
         },

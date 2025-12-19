@@ -1,6 +1,6 @@
 "use client";
 
-import { Baby, Utensils, Droplets, Clock, PencilIcon } from "lucide-react";
+import { Baby, Utensils, Droplets, Clock, PencilIcon, Bed } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -18,6 +18,7 @@ import {
     formatDate,
     formatDateTimeLocal,
     formatRelativeDate,
+    formatDateDifference,
 } from "@/lib/date";
 import BabyTrackerGraph from "./graph";
 import { formatTime } from "@/lib/time";
@@ -34,8 +35,10 @@ import { Label } from "@/components/ui/label";
 
 type Activity = {
     id: string;
-    type: "feeding" | "pooping" | "wee";
-    timestamp: Date;
+    type: "feeding" | "pooping" | "wee" | "sleeping";
+    time: Date;
+    startTime?: Date;
+    endTime?: Date;
     notes?: string;
 };
 
@@ -57,13 +60,19 @@ function BabyTracker({ title, description }: ToolData) {
     const [selectedDateTime, setSelectedDateTime] = useState(
         formatDate(new Date()),
     );
+    const [selectedStartTime, setSelectedStartTime] = useState(
+        formatDateTimeLocal(new Date()),
+    );
+    const [selectedEndTime, setSelectedEndTime] = useState(
+        formatDateTimeLocal(new Date()),
+    );
     const [selectedNotes, setSelectedNotes] = useState("");
 
     const getRecentActivities = () => {
         const twentyFourHoursAgo = new Date();
         twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
         return activities.filter(
-            (activity) => new Date(activity.timestamp) >= twentyFourHoursAgo,
+            (activity) => new Date(activity.time) >= twentyFourHoursAgo,
         );
     };
 
@@ -78,9 +87,16 @@ function BabyTracker({ title, description }: ToolData) {
 
     if (editingActivity && editingActivity.id !== prevActivity?.id) {
         setPreviousActivity(editingActivity);
-        setSelectedDateTime(
-            formatDateTimeLocal(new Date(editingActivity.timestamp)),
-        );
+        if (editingActivity.type === "sleeping") {
+            setSelectedStartTime(
+                formatDateTimeLocal(new Date(editingActivity.startTime!)),
+            );
+            setSelectedEndTime(
+                formatDateTimeLocal(new Date(editingActivity.endTime!)),
+            );
+        } else {
+            setSelectedDateTime(formatDateTimeLocal(new Date(editingActivity.time)));
+        }
         setSelectedNotes(editingActivity.notes || "");
         setActivityType(editingActivity.type);
     }
@@ -90,28 +106,46 @@ function BabyTracker({ title, description }: ToolData) {
             setActivities((prev) =>
                 prev.map((activity) =>
                     activity.id === editingActivity.id
-                        ? {
-                              ...activity,
-                              timestamp: new Date(selectedDateTime),
-                              notes: selectedNotes,
-                          }
+                        ? activity.type === "sleeping"
+                            ? {
+                                  ...activity,
+                                  startTime: new Date(selectedStartTime),
+                                  endTime: new Date(selectedEndTime),
+                                  time: new Date(selectedStartTime),
+                                  notes: selectedNotes,
+                              }
+                            : {
+                                  ...activity,
+                                  time: new Date(selectedDateTime),
+                                  notes: selectedNotes,
+                              }
                         : activity,
                 ),
             );
         } else {
             // Adding new activity
-            const newActivity: Activity = {
-                id: Date.now().toString(),
-                type,
-                timestamp: new Date(selectedDateTime),
-                notes: selectedNotes,
-            };
+            const newActivity: Activity =
+                type === "sleeping"
+                    ? {
+                          id: Date.now().toString(),
+                          type,
+                          time: new Date(selectedStartTime),
+                          startTime: new Date(selectedStartTime),
+                          endTime: new Date(selectedEndTime),
+                          notes: selectedNotes,
+                      }
+                    : {
+                          id: Date.now().toString(),
+                          type,
+                          time: new Date(selectedDateTime),
+                          notes: selectedNotes,
+                      };
             setActivities((prev) => {
                 const updatedActivities = [newActivity, ...prev];
                 return updatedActivities.sort(
                     (a, b) =>
-                        new Date(b.timestamp).getTime() -
-                        new Date(a.timestamp).getTime(),
+                        new Date(b.time).getTime() -
+                        new Date(a.time).getTime(),
                 );
             });
         }
@@ -132,6 +166,8 @@ function BabyTracker({ title, description }: ToolData) {
                 return <Baby className="h-4 w-4" />;
             case "wee":
                 return <Droplets className="h-4 w-4" />;
+            case "sleeping":
+                return <Bed className="h-4 w-4" />;
         }
     };
 
@@ -143,6 +179,8 @@ function BabyTracker({ title, description }: ToolData) {
                 return "secondary";
             case "wee":
                 return "outline";
+            case "sleeping":
+                return "destructive";
         }
     };
 
@@ -151,7 +189,7 @@ function BabyTracker({ title, description }: ToolData) {
             (activity) => activity.type === type,
         );
         return lastActivity
-            ? formatRelativeDate(lastActivity.timestamp)
+            ? formatRelativeDate(lastActivity.time)
             : "Never";
     };
 
@@ -194,20 +232,62 @@ function BabyTracker({ title, description }: ToolData) {
                         </DialogTitle>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="datetime" className="text-right">
-                                Date & Time
-                            </Label>
-                            <Input
-                                id="datetime"
-                                type="datetime-local"
-                                value={selectedDateTime}
-                                onChange={(e) =>
-                                    setSelectedDateTime(e.target.value)
-                                }
-                                className="col-span-3"
-                            />
-                        </div>
+                        {activityType === "sleeping" ? (
+                            <>
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label
+                                        htmlFor="starttime"
+                                        className="text-right"
+                                    >
+                                        Start Time
+                                    </Label>
+                                    <Input
+                                        id="starttime"
+                                        type="datetime-local"
+                                        value={selectedStartTime}
+                                        onChange={(e) =>
+                                            setSelectedStartTime(e.target.value)
+                                        }
+                                        className="col-span-3"
+                                    />
+                                </div>
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label
+                                        htmlFor="endtime"
+                                        className="text-right"
+                                    >
+                                        End Time
+                                    </Label>
+                                    <Input
+                                        id="endtime"
+                                        type="datetime-local"
+                                        value={selectedEndTime}
+                                        onChange={(e) =>
+                                            setSelectedEndTime(e.target.value)
+                                        }
+                                        className="col-span-3"
+                                    />
+                                </div>
+                            </>
+                        ) : (
+                            <div className="grid grid-cols-4 items-center gap-4">
+                                <Label
+                                    htmlFor="datetime"
+                                    className="text-right"
+                                >
+                                    Date & Time
+                                </Label>
+                                <Input
+                                    id="datetime"
+                                    type="datetime-local"
+                                    value={selectedDateTime}
+                                    onChange={(e) =>
+                                        setSelectedDateTime(e.target.value)
+                                    }
+                                    className="col-span-3"
+                                />
+                            </div>
+                        )}
                         <div className="grid grid-cols-4 items-center gap-4">
                             <Label htmlFor="notes" className="text-right">
                                 Notes
@@ -296,6 +376,22 @@ function BabyTracker({ title, description }: ToolData) {
                             </span>
                         </Button>
                     </DialogTrigger>
+                    <DialogTrigger asChild>
+                        <Button
+                            onClick={() => {
+                                setActivityType("sleeping");
+                                setIsDialogOpen(true);
+                            }}
+                            size="lg"
+                            variant="destructive"
+                        >
+                            <Bed className="mr-2 h-6 w-6" />
+                            Log Sleep
+                            <span className="ml-auto text-sm opacity-75">
+                                Last: {getLastActivity("sleeping")}
+                            </span>
+                        </Button>
+                    </DialogTrigger>
                 </div>
                 <Card>
                     <CardHeader>
@@ -338,13 +434,37 @@ function BabyTracker({ title, description }: ToolData) {
                                     </Badge>
                                 </div>
                                 <div className="flex-1 text-sm text-gray-600">
-                                    <div className="font-medium">
-                                        {formatDate(activity.timestamp)}
-                                    </div>
-                                    <div>
-                                        {formatTime(activity.timestamp)} •{" "}
-                                        {formatRelativeDate(activity.timestamp)}
-                                    </div>
+                                    {activity.type === "sleeping" ? (
+                                        <>
+                                            <div className="font-medium">
+                                                {formatTime(
+                                                    activity.startTime!,
+                                                )}{" "}
+                                                -{" "}
+                                                {formatTime(activity.endTime!)}
+                                            </div>
+                                            <div>
+                                                {formatDateDifference(
+                                                    new Date(
+                                                        activity.startTime!,
+                                                    ),
+                                                    new Date(activity.endTime!),
+                                                )}
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div className="font-medium">
+                                                {formatDate(activity.time)}
+                                            </div>
+                                            <div>
+                                                {formatTime(activity.time)} •{" "}
+                                                {formatRelativeDate(
+                                                    activity.time,
+                                                )}
+                                            </div>
+                                        </>
+                                    )}
                                     {activity.notes && (
                                         <div className="text-xs text-gray-500">
                                             {activity.notes}
@@ -364,17 +484,69 @@ function BabyTracker({ title, description }: ToolData) {
                             <CardTitle>Today&apos;s Summary</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <div className="grid grid-cols-3 gap-4 pt-4 text-center">
-                                {(["feeding", "pooping", "wee"] as const).map(
-                                    (type) => {
+                            <div className="grid grid-cols-4 gap-4 pt-4 text-center">
+                                {([
+                                    "feeding",
+                                    "pooping",
+                                    "wee",
+                                    "sleeping",
+                                ] as const).map((type) => {
                                         const todayCount = activities.filter(
                                             (activity) =>
                                                 activity.type === type &&
                                                 new Date(
-                                                    activity.timestamp,
+                                                    activity.time,
                                                 ).toDateString() ===
                                                     new Date().toDateString(),
-                                        ).length;
+                                        );
+
+                                        if (type === "sleeping") {
+                                            const totalSleep =
+                                                todayCount.reduce(
+                                                    (acc, activity) => {
+                                                        if (
+                                                            activity.startTime &&
+                                                            activity.endTime
+                                                        ) {
+                                                            return (
+                                                                acc +
+                                                                (new Date(
+                                                                    activity.endTime,
+                                                                ).getTime() -
+                                                                    new Date(
+                                                                        activity.startTime,
+                                                                    ).getTime())
+                                                            );
+                                                        }
+                                                        return acc;
+                                                    },
+                                                    0,
+                                                );
+
+                                            const hours = Math.floor(
+                                                totalSleep /
+                                                    (1000 * 60 * 60),
+                                            );
+                                            const minutes = Math.floor(
+                                                (totalSleep %
+                                                    (1000 * 60 * 60)) /
+                                                    (1000 * 60),
+                                            );
+
+                                            return (
+                                                <div
+                                                    key={type}
+                                                    className="space-y-1"
+                                                >
+                                                    <div className="text-xl font-bold text-gray-900">
+                                                        {hours}h {minutes}m
+                                                    </div>
+                                                    <div className="text-sm text-gray-600 capitalize">
+                                                        Sleep
+                                                    </div>
+                                                </div>
+                                            );
+                                        }
 
                                         return (
                                             <div
@@ -382,11 +554,11 @@ function BabyTracker({ title, description }: ToolData) {
                                                 className="space-y-1"
                                             >
                                                 <div className="text-xl font-bold text-gray-900">
-                                                    {todayCount}
+                                                    {todayCount.length}
                                                 </div>
                                                 <div className="text-sm text-gray-600 capitalize">
                                                     {type}
-                                                    {todayCount !== 1
+                                                    {todayCount.length !== 1
                                                         ? "s"
                                                         : ""}
                                                 </div>
