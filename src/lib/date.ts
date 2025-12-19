@@ -56,3 +56,16 @@ export const formatDateTimeLocal = (date: Date) => {
 
     return `${year}-${month}-${day}T${hours}:${minutes}`;
 };
+
+export const formatDateDifference = (date1: Date, date2: Date) => {
+    const diff = Math.abs(date1.getTime() - date2.getTime());
+    const minutes = Math.floor(diff / (1000 * 60));
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+
+    if (hours > 0) {
+        return `${hours}h ${remainingMinutes}m`;
+    }
+
+    return `${remainingMinutes}m`;
+};
