@@ -12,14 +12,16 @@ export default function Home() {
                 <p>A collection of creations</p>
                 <div className="flex flex-row items-center justify-center gap-4">
                     <ViewTransition name="tab-rants">
-                        <Button asChild variant="secondary">
-                            <Link href={Routes.RANTS}>Rants</Link>
-                        </Button>
+                        <Button
+                            render={<Link href={Routes.RANTS}>Rants</Link>}
+                            variant="secondary"
+                        />
                     </ViewTransition>
                     <ViewTransition name="tab-tools">
-                        <Button asChild variant="secondary">
-                            <Link href={Routes.TOOLS}>Tools</Link>
-                        </Button>
+                        <Button
+                            render={<Link href={Routes.TOOLS}>Tools</Link>}
+                            variant="secondary"
+                        />
                     </ViewTransition>
                 </div>
             </div>

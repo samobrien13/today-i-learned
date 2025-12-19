@@ -17,7 +17,9 @@ import { ToolData } from ".";
 
 function CurlBuilder({ title }: ToolData) {
     const [url, setUrl] = useState("https://api.example.com");
-    const [method, setMethod] = useState("GET");
+    const [method, setMethod] = useState<
+        "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | null
+    >("GET");
     const [headers, setHeaders] = useState("Content-Type: application/json");
     const [body, setBody] = useState(`{
     "key": "value"

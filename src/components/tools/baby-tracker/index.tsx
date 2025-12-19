@@ -327,70 +327,79 @@ function BabyTracker({ title, description }: ToolData) {
                     <p className="text-muted-foreground">{description}</p>
                 </div>
                 <div className="flex flex-col gap-3">
-                    <DialogTrigger asChild>
-                        <Button
-                            onClick={() => {
-                                setActivityType("feeding");
-                                setIsDialogOpen(true);
-                            }}
-                            size="lg"
-                            variant="default"
-                        >
-                            <Utensils className="mr-2 h-6 w-6" />
-                            Log Feeding
-                            <span className="ml-auto text-sm opacity-75">
-                                Last: {getLastActivity("feeding")}
-                            </span>
-                        </Button>
-                    </DialogTrigger>
-                    <DialogTrigger asChild>
-                        <Button
-                            onClick={() => {
-                                setActivityType("pooping");
-                                setIsDialogOpen(true);
-                            }}
-                            size="lg"
-                            variant="secondary"
-                        >
-                            <Baby className="mr-2 h-6 w-6" />
-                            Log Pooping
-                            <span className="ml-auto text-sm opacity-75">
-                                Last: {getLastActivity("pooping")}
-                            </span>
-                        </Button>
-                    </DialogTrigger>
-                    <DialogTrigger asChild>
-                        <Button
-                            onClick={() => {
-                                setActivityType("wee");
-                                setIsDialogOpen(true);
-                            }}
-                            size="lg"
-                            variant="outline"
-                        >
-                            <Droplets className="mr-2 h-6 w-6" />
-                            Log Wee
-                            <span className="ml-auto text-sm opacity-75">
-                                Last: {getLastActivity("wee")}
-                            </span>
-                        </Button>
-                    </DialogTrigger>
-                    <DialogTrigger asChild>
-                        <Button
-                            onClick={() => {
-                                setActivityType("sleeping");
-                                setIsDialogOpen(true);
-                            }}
-                            size="lg"
-                            variant="destructive"
-                        >
-                            <Bed className="mr-2 h-6 w-6" />
-                            Log Sleep
-                            <span className="ml-auto text-sm opacity-75">
-                                Last: {getLastActivity("sleeping")}
-                            </span>
-                        </Button>
-                    </DialogTrigger>
+                    <DialogTrigger
+                        render={
+                            <Button
+                                onClick={() => {
+                                    setActivityType("feeding");
+                                    setIsDialogOpen(true);
+                                }}
+                                size="lg"
+                                variant="default"
+                            >
+                                <Utensils className="mr-2 h-6 w-6" />
+                                Log Feeding
+                                <span className="ml-auto text-sm opacity-75">
+                                    Last: {getLastActivity("feeding")}
+                                </span>
+                            </Button>
+                        }
+                    />
+
+                    <DialogTrigger
+                        render={
+                            <Button
+                                onClick={() => {
+                                    setActivityType("pooping");
+                                    setIsDialogOpen(true);
+                                }}
+                                size="lg"
+                                variant="secondary"
+                            >
+                                <Baby className="mr-2 h-6 w-6" />
+                                Log Pooping
+                                <span className="ml-auto text-sm opacity-75">
+                                    Last: {getLastActivity("pooping")}
+                                </span>
+                            </Button>
+                        }
+                    />
+                    <DialogTrigger
+                        render={
+                            <Button
+                                onClick={() => {
+                                    setActivityType("wee");
+                                    setIsDialogOpen(true);
+                                }}
+                                size="lg"
+                                variant="outline"
+                            >
+                                <Droplets className="mr-2 h-6 w-6" />
+                                Log Wee
+                                <span className="ml-auto text-sm opacity-75">
+                                    Last: {getLastActivity("wee")}
+                                </span>
+                            </Button>
+                        }
+                    />
+                    <DialogTrigger
+                        render={
+                            <Button
+                                onClick={() => {
+                                    setActivityType("sleeping");
+                                    setIsDialogOpen(true);
+                                }}
+                                size="lg"
+                                variant="destructive"
+                            >
+                                <Bed className="mr-2 h-6 w-6" />
+                                Log Sleep
+                                <span className="ml-auto text-sm opacity-75">
+                                    Last: {getLastActivity("sleeping")}
+                                </span>
+                            </Button>
+                        }
+                    />
                 </div>
                 <Card>
                     <CardHeader>
