@@ -111,19 +111,23 @@ function RecipeGenerator({ title, description }: ToolData) {
                         </section>
                     );
                 })}
-                <Button asChild disabled className="mt-2">
-                    <a
-                        href={
-                            selectedIngredients.length === 0
-                                ? undefined
-                                : `https://chatgpt.com?q=${query}`
-                        }
-                        target="_blank"
-                    >
-                        Generate
-                        <ChatGPT />
-                    </a>
-                </Button>
+                <Button
+                    disabled
+                    className="mt-2"
+                    render={
+                        <a
+                            href={
+                                selectedIngredients.length === 0
+                                    ? undefined
+                                    : `https://chatgpt.com?q=${query}`
+                            }
+                            target="_blank"
+                        >
+                            Generate
+                            <ChatGPT />
+                        </a>
+                    }
+                />
             </CardContent>
         </Card>
     );

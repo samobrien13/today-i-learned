@@ -41,22 +41,28 @@ function Time() {
                     </p>
                 )}
                 <div className="flex flex-col gap-2">
-                    <Button asChild variant="secondary">
-                        <Link
-                            href={`https://translate.google.com.au/?sl=auto&tl=en&text=${thaiTime}&op=translate`}
-                            external
-                        >
-                            <GoogleTranslate />
-                        </Link>
-                    </Button>
-                    <Button asChild variant="secondary">
-                        <Link
-                            href={`https://chatgpt.com?q=Explain%20${thaiTime}%20in%20English%20based%20on%20the%20Thai%20way%20of%20telling%20time`}
-                            external
-                        >
-                            <ChatGPT />
-                        </Link>
-                    </Button>
+                    <Button
+                        variant="secondary"
+                        render={
+                            <Link
+                                href={`https://translate.google.com.au/?sl=auto&tl=en&text=${thaiTime}&op=translate`}
+                                external
+                            >
+                                <GoogleTranslate />
+                            </Link>
+                        }
+                    />
+                    <Button
+                        variant="secondary"
+                        render={
+                            <Link
+                                href={`https://chatgpt.com?q=Explain%20${thaiTime}%20in%20English%20based%20on%20the%20Thai%20way%20of%20telling%20time`}
+                                external
+                            >
+                                <ChatGPT />
+                            </Link>
+                        }
+                    />
                 </div>
             </div>
         </>

@@ -7,9 +7,7 @@ const NotFoundPage = () => {
             <title>Page not found | TIL</title>
             <h1 className="text-lg">Yeah, nah</h1>
             <p>Sorry, the page you were looking for was not found.</p>
-            <Button asChild>
-                <Link href="/">Back to home</Link>
-            </Button>
+            <Button render={<Link href="/">Back to home</Link>} />
         </section>
     );
 };
