@@ -33,14 +33,38 @@ import {
 import { ToolData } from "..";
 import { Label } from "@/components/ui/label";
 
-type Activity = {
+type ActivityBase = {
     id: string;
-    type: "feeding" | "pooping" | "wee" | "sleeping";
-    time: Date;
-    startTime?: Date;
-    endTime?: Date;
     notes?: string;
 };
+
+type FeedingActivity = ActivityBase & {
+    type: "feeding";
+    time: Date;
+};
+
+type PoopingActivity = ActivityBase & {
+    type: "pooping";
+    time: Date;
+};
+
+type WeeActivity = ActivityBase & {
+    type: "wee";
+    time: Date;
+};
+
+type SleepingActivity = ActivityBase & {
+    type: "sleeping";
+    time: Date;
+    startTime: Date;
+    endTime: Date;
+};
+
+type Activity =
+    | FeedingActivity
+    | PoopingActivity
+    | WeeActivity
+    | SleepingActivity;
 
 const STORAGE_KEY = "baby-tracker-activities";
 
@@ -89,10 +113,10 @@ function BabyTracker({ title, description }: ToolData) {
         setPreviousActivity(editingActivity);
         if (editingActivity.type === "sleeping") {
             setSelectedStartTime(
-                formatDateTimeLocal(new Date(editingActivity.startTime!)),
+                formatDateTimeLocal(new Date(editingActivity.startTime)),
             );
             setSelectedEndTime(
-                formatDateTimeLocal(new Date(editingActivity.endTime!)),
+                formatDateTimeLocal(new Date(editingActivity.endTime)),
             );
         } else {
             setSelectedDateTime(
@@ -106,42 +130,67 @@ function BabyTracker({ title, description }: ToolData) {
     const saveActivity = (type: Activity["type"]) => {
         if (editingActivity) {
             setActivities((prev) =>
-                prev.map((activity) =>
-                    activity.id === editingActivity.id
-                        ? activity.type === "sleeping"
-                            ? {
-                                  ...activity,
-                                  startTime: new Date(selectedStartTime),
-                                  endTime: new Date(selectedEndTime),
-                                  time: new Date(selectedStartTime),
-                                  notes: selectedNotes,
-                              }
-                            : {
-                                  ...activity,
-                                  time: new Date(selectedDateTime),
-                                  notes: selectedNotes,
-                              }
-                        : activity,
-                ),
+                prev.map((activity) => {
+                    if (activity.id !== editingActivity.id) {
+                        return activity;
+                    }
+
+                    if (activity.type === "sleeping") {
+                        return {
+                            ...activity,
+                            startTime: new Date(selectedStartTime),
+                            endTime: new Date(selectedEndTime),
+                            time: new Date(selectedStartTime),
+                            notes: selectedNotes,
+                        };
+                    }
+
+                    return {
+                        ...activity,
+                        time: new Date(selectedDateTime),
+                        notes: selectedNotes,
+                    };
+                }),
             );
         } else {
             // Adding new activity
-            const newActivity: Activity =
-                type === "sleeping"
-                    ? {
-                          id: Date.now().toString(),
-                          type,
-                          time: new Date(selectedStartTime),
-                          startTime: new Date(selectedStartTime),
-                          endTime: new Date(selectedEndTime),
-                          notes: selectedNotes,
-                      }
-                    : {
-                          id: Date.now().toString(),
-                          type,
-                          time: new Date(selectedDateTime),
-                          notes: selectedNotes,
-                      };
+            let newActivity: Activity;
+            switch (type) {
+                case "feeding":
+                    newActivity = {
+                        id: Date.now().toString(),
+                        type: "feeding",
+                        time: new Date(selectedDateTime),
+                        notes: selectedNotes,
+                    };
+                    break;
+                case "pooping":
+                    newActivity = {
+                        id: Date.now().toString(),
+                        type: "pooping",
+                        time: new Date(selectedDateTime),
+                        notes: selectedNotes,
+                    };
+                    break;
+                case "wee":
+                    newActivity = {
+                        id: Date.now().toString(),
+                        type: "wee",
+                        time: new Date(selectedDateTime),
+                        notes: selectedNotes,
+                    };
+                    break;
+                case "sleeping":
+                    newActivity = {
+                        id: Date.now().toString(),
+                        type: "sleeping",
+                        time: new Date(selectedStartTime),
+                        startTime: new Date(selectedStartTime),
+                        endTime: new Date(selectedEndTime),
+                        notes: selectedNotes,
+                    };
+                    break;
+            }
             setActivities((prev) => {
                 const updatedActivities = [newActivity, ...prev];
                 return updatedActivities.sort(
@@ -195,6 +244,8 @@ function BabyTracker({ title, description }: ToolData) {
     useEffect(() => {
         const onFocus = () => {
             setSelectedDateTime(formatDate(new Date()));
+            setSelectedStartTime(formatDateTimeLocal(new Date()));
+            setSelectedEndTime(formatDateTimeLocal(new Date()));
         };
 
         window.addEventListener("focus", onFocus);
@@ -445,18 +496,15 @@ function BabyTracker({ title, description }: ToolData) {
                                     {activity.type === "sleeping" ? (
                                         <>
                                             <div className="font-medium">
-                                                {formatTime(
-                                                    activity.startTime!,
-                                                )}{" "}
-                                                -{" "}
-                                                {formatTime(activity.endTime!)}
+                                                {formatTime(activity.startTime)}{" "}
+                                                - {formatTime(activity.endTime)}
                                             </div>
                                             <div>
                                                 {formatDateDifference(
                                                     new Date(
-                                                        activity.startTime!,
+                                                        activity.startTime,
                                                     ),
-                                                    new Date(activity.endTime!),
+                                                    new Date(activity.endTime),
                                                 )}
                                             </div>
                                         </>
@@ -514,8 +562,7 @@ function BabyTracker({ title, description }: ToolData) {
                                         const totalSleep = todayCount.reduce(
                                             (acc, activity) => {
                                                 if (
-                                                    activity.startTime &&
-                                                    activity.endTime
+                                                    activity.type === "sleeping"
                                                 ) {
                                                     return (
                                                         acc +
