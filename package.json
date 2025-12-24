@@ -43,7 +43,7 @@
         "@types/rss": "^0.0.32",
         "babel-plugin-react-compiler": "1.0.0",
         "drizzle-kit": "^0.31.8",
-        "eslint": "^9.39.1",
+        "eslint": "^9.39.2",
         "eslint-config-next": "16.1.0",
         "eslint-config-prettier": "^10.0.1",
         "eslint-plugin-react-hooks": "^7.0.1",
