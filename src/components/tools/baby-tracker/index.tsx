@@ -295,9 +295,19 @@ function BabyTracker({ title, description }: ToolData) {
                                         id="starttime"
                                         type="datetime-local"
                                         value={selectedStartTime}
-                                        onChange={(e) =>
-                                            setSelectedStartTime(e.target.value)
-                                        }
+                                        onChange={(e) => {
+                                            setSelectedStartTime(
+                                                e.target.value,
+                                            );
+                                            if (
+                                                new Date(e.target.value) >
+                                                new Date(selectedEndTime)
+                                            ) {
+                                                setSelectedEndTime(
+                                                    e.target.value,
+                                                );
+                                            }
+                                        }}
                                         className="col-span-3"
                                     />
                                 </div>
