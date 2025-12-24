@@ -93,10 +93,10 @@ function BabyTracker({ title, description }: ToolData) {
     const [selectedNotes, setSelectedNotes] = useState("");
 
     const getRecentActivities = () => {
-        const twentyFourHoursAgo = new Date();
-        twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
+        const fortyEightHoursAgo = new Date();
+        fortyEightHoursAgo.setHours(fortyEightHoursAgo.getHours() - 48);
         return activities.filter(
-            (activity) => new Date(activity.time) >= twentyFourHoursAgo,
+            (activity) => new Date(activity.time) >= fortyEightHoursAgo,
         );
     };
 
@@ -455,8 +455,8 @@ function BabyTracker({ title, description }: ToolData) {
                         </CardTitle>
                         <CardDescription>
                             {recentActivities.length === 0
-                                ? "No activities logged in the last 24 hours"
-                                : `${recentActivities.length} activities logged in the last 24 hours`}
+                                ? "No activities logged in the last 48 hours"
+                                : `${recentActivities.length} activities logged in the last 48 hours`}
                         </CardDescription>
                     </CardHeader>
                     {recentActivities.length === 0 ? (
