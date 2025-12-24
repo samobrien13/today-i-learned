@@ -153,29 +153,14 @@ function BabyTracker({ title, description }: ToolData) {
                 }),
             );
         } else {
-            // Adding new activity
             let newActivity: Activity;
             switch (type) {
                 case "feeding":
-                    newActivity = {
-                        id: Date.now().toString(),
-                        type: "feeding",
-                        time: new Date(selectedDateTime),
-                        notes: selectedNotes,
-                    };
-                    break;
                 case "pooping":
-                    newActivity = {
-                        id: Date.now().toString(),
-                        type: "pooping",
-                        time: new Date(selectedDateTime),
-                        notes: selectedNotes,
-                    };
-                    break;
                 case "wee":
                     newActivity = {
                         id: Date.now().toString(),
-                        type: "wee",
+                        type,
                         time: new Date(selectedDateTime),
                         notes: selectedNotes,
                     };
