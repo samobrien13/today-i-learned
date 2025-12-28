@@ -21,13 +21,21 @@ function Likes({ slug }: LikesProps) {
         <div className="flex flex-col gap-6">
             <div className="flex flex-row gap-2">
                 <form action={() => addLike()}>
-                    <Button variant="outline" disabled={likes.userLiked}>
+                    <Button
+                        type="submit"
+                        variant="outline"
+                        disabled={likes.userLiked}
+                    >
                         <ThumbsUp />
                         {likes.count}
                     </Button>
                 </form>
                 <form action={() => addDislike()}>
-                    <Button variant="outline" disabled={likes.userLiked}>
+                    <Button
+                        type="submit"
+                        variant="outline"
+                        disabled={likes.userLiked}
+                    >
                         <ThumbsDown />
                     </Button>
                 </form>
