@@ -1,0 +1,28 @@
+name: Migrate
+
+on: [push]
+
+jobs:
+    migrate:
+        runs-on: ubuntu-latest
+        environment: ${{ github.ref == 'refs/heads/master' && 'Production' || 'Preview' }}
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Install pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 10.21.0
+
+            - uses: actions/setup-node@v6
+              with:
+                  node-version: "22"
+                  cache: "pnpm"
+
+            - name: 📦 Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: 🦅 Run database migrations
+              run: pnpm db:push
+              env:
+                  DATABASE_URL: ${{ secrets.DATABASE_URL }}
