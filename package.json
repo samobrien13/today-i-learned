@@ -8,6 +8,7 @@
         "start": "next start",
         "lint": "eslint .",
         "test": "vitest run",
+        "db:push": "npx drizzle-kit push",
         "format": "prettier --write ."
     },
     "dependencies": {
