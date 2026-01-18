@@ -7,7 +7,7 @@ jobs:
         runs-on: ubuntu-latest
         environment: ${{ github.ref == 'refs/heads/master' && 'Production' || 'Preview' }}
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
 
             - name: Install pnpm
               uses: pnpm/action-setup@v4
