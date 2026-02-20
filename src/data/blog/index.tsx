@@ -16,6 +16,7 @@ import { THE_BEST_PULL_REQUEST_TEMPLATE } from "./rants/the-best-pull-request-te
 import { REACT_QUERY_WITH_SERVER_ACTIONS } from "./rants/react-query-with-server-actions";
 import { KEYBOARD_SETUP } from "./rants/keyboard-setup";
 import { CONNECT_EXPO_DEV_BUILDS_REMOTELY } from "./rants/connect-expo-dev-builds-remotely";
+import { RULE_OF_3 } from "./rants/rule-of-3";
 
 export type BlogData = {
     title: string;
@@ -28,6 +29,7 @@ export type BlogData = {
 } & Metadata;
 
 export const BLOG_ARTICLES: BlogData[] = [
+    RULE_OF_3,
     CONNECT_EXPO_DEV_BUILDS_REMOTELY,
     KEYBOARD_SETUP,
     REACT_QUERY_WITH_SERVER_ACTIONS,
