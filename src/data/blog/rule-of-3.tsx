@@ -49,7 +49,10 @@ function RuleOf3() {
                 certain design and will lead to a lot of wasted time as you have
                 to rewrite tests and the feature as your design evolves. Better
                 to let the code solidify and even go through a few iterations
-                before writing tests that cement the behaviour of the code.
+                before writing tests that cement the behaviour of the code. Of
+                course it takes some discipline to ensure you actually go back
+                and write those tests, but it&apos;s a much more efficient way
+                to work.
             </BlogParagraph>
         </>
     );
