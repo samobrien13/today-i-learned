@@ -43,7 +43,7 @@
         "@types/react-syntax-highlighter": "^15.5.13",
         "@types/rss": "^0.0.32",
         "babel-plugin-react-compiler": "1.0.0",
-        "drizzle-kit": "^0.31.8",
+        "drizzle-kit": "^0.31.9",
         "eslint": "^9.39.2",
         "eslint-config-next": "16.1.6",
         "eslint-config-prettier": "^10.0.1",
