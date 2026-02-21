@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { converter, Oklch, Rgb, Hsl, formatHex } from "culori";
+import { converter, Oklch, Rgb, Hsl, formatHex, parse } from "culori";
 import {
     validateHSL,
     validateRGB,
@@ -114,6 +114,21 @@ function ColourConverter({ title, description }: ToolData) {
                                         clearErrors();
                                     } else {
                                         setOKLightnessError(true);
+                                    }
+                                }}
+                                onPaste={(e) => {
+                                    const pastedData =
+                                        e.clipboardData.getData("text");
+                                    const parsed = parse(pastedData);
+                                    if (parsed && parsed.mode === "oklch") {
+                                        e.preventDefault();
+
+                                        setOklch(parsed);
+                                        const newRgb = rgbConverter(parsed);
+                                        setHSL(hslConverter(parsed));
+                                        setRGB(newRgb);
+                                        setHEX(formatHex(newRgb));
+                                        clearErrors();
                                     }
                                 }}
                             />
@@ -222,6 +237,20 @@ function ColourConverter({ title, description }: ToolData) {
                                         setHueError(true);
                                     }
                                 }}
+                                onPaste={(e) => {
+                                    const pastedData =
+                                        e.clipboardData.getData("text");
+                                    const parsed = parse(pastedData);
+                                    if (parsed && parsed.mode === "hsl") {
+                                        e.preventDefault();
+                                        setHSL(parsed);
+                                        const newRgb = rgbConverter(parsed);
+                                        setOklch(oklchConverter(parsed));
+                                        setRGB(newRgb);
+                                        setHEX(formatHex(newRgb));
+                                        clearErrors();
+                                    }
+                                }}
                             />
                             <div className="text-destructive h-5 text-sm">
                                 {hueError ? "Must be between 0 and 360" : null}
@@ -321,6 +350,19 @@ function ColourConverter({ title, description }: ToolData) {
                                         clearErrors();
                                     } else {
                                         setRedError(true);
+                                    }
+                                }}
+                                onPaste={(e) => {
+                                    const pastedData =
+                                        e.clipboardData.getData("text");
+                                    const parsed = parse(pastedData);
+                                    if (parsed && parsed.mode === "rgb") {
+                                        e.preventDefault();
+                                        setRGB(parsed);
+                                        setOklch(oklchConverter(parsed));
+                                        setHSL(hslConverter(parsed));
+                                        setHEX(formatHex(parsed));
+                                        clearErrors();
                                     }
                                 }}
                             />
