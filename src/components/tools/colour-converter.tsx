@@ -11,34 +11,29 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { converter, Oklch, Rgb, Hsl, formatHex, parse } from "culori";
 import {
-    hslToHex,
-    hslToRGB,
-    hexToRGB,
-    hexToHSL,
-    rgbToHex,
-    rgbToHSL,
-    type HSL,
-    type RGB,
-    type HEX,
     validateHSL,
     validateRGB,
     validateHEX,
-    hexToOklch,
     validateOklch,
-    oklchToRGB,
-    oklchToHex,
-    oklchToHSL,
-    hslToOklch,
-    rgbToOklch,
 } from "@/lib/colours";
 import { ToolData } from ".";
 
+const rgbConverter = converter("rgb");
+const hslConverter = converter("hsl");
+const oklchConverter = converter("oklch");
+
 function ColourConverter({ title, description }: ToolData) {
-    const [hsl, setHSL] = useState<HSL>({ h: 0, s: 0, l: 0 });
-    const [rgb, setRGB] = useState<RGB>({ r: 0, g: 0, b: 0 });
-    const [hex, setHEX] = useState<HEX>("#000000");
-    const [oklch, setOklch] = useState({ l: 0, c: 0, h: 0 });
+    const [hsl, setHSL] = useState<Hsl>({ mode: "hsl", h: 0, s: 0, l: 0 });
+    const [rgb, setRGB] = useState<Rgb>({ mode: "rgb", r: 0, g: 0, b: 0 });
+    const [hex, setHEX] = useState("#000000");
+    const [oklch, setOklch] = useState<Oklch>({
+        mode: "oklch",
+        l: 0,
+        c: 0,
+        h: 0,
+    });
 
     const [okLightnessError, setOKLightnessError] = useState(false);
     const [okChromaError, setOKChromaError] = useState(false);
@@ -80,9 +75,9 @@ function ColourConverter({ title, description }: ToolData) {
                         color={hex}
                         onChange={(value) => {
                             setHEX(value);
-                            setRGB(hexToRGB(value));
-                            setHSL(hexToHSL(value));
-                            setOklch(hexToOklch(value));
+                            setRGB(rgbConverter(value) as Rgb);
+                            setHSL(hslConverter(value) as Hsl);
+                            setOklch(oklchConverter(value) as Oklch);
                         }}
                     />
                     <div
@@ -112,12 +107,28 @@ function ColourConverter({ title, description }: ToolData) {
                                     setOklch(newOklch);
 
                                     if (validateOklch(newOklch)) {
-                                        setHSL(oklchToHSL(newOklch));
-                                        setRGB(oklchToRGB(newOklch));
-                                        setHEX(oklchToHex(newOklch));
+                                        const newRgb = rgbConverter(newOklch);
+                                        setHSL(hslConverter(newOklch));
+                                        setRGB(newRgb);
+                                        setHEX(formatHex(newRgb));
                                         clearErrors();
                                     } else {
                                         setOKLightnessError(true);
+                                    }
+                                }}
+                                onPaste={(e) => {
+                                    const pastedData =
+                                        e.clipboardData.getData("text");
+                                    const parsed = parse(pastedData);
+                                    if (parsed && parsed.mode === "oklch") {
+                                        e.preventDefault();
+
+                                        setOklch(parsed);
+                                        const newRgb = rgbConverter(parsed);
+                                        setHSL(hslConverter(parsed));
+                                        setRGB(newRgb);
+                                        setHEX(formatHex(newRgb));
+                                        clearErrors();
                                     }
                                 }}
                             />
@@ -144,9 +155,10 @@ function ColourConverter({ title, description }: ToolData) {
                                     setOklch(newOklch);
 
                                     if (validateOklch(newOklch)) {
-                                        setHSL(oklchToHSL(newOklch));
-                                        setRGB(oklchToRGB(newOklch));
-                                        setHEX(oklchToHex(newOklch));
+                                        const newRgb = rgbConverter(newOklch);
+                                        setHSL(hslConverter(newOklch));
+                                        setRGB(newRgb);
+                                        setHEX(formatHex(newRgb));
                                         clearErrors();
                                     } else {
                                         setOKChromaError(true);
@@ -164,7 +176,9 @@ function ColourConverter({ title, description }: ToolData) {
                             <Input
                                 id="oklch-h"
                                 type="number"
-                                value={isNaN(oklch.h) ? "" : oklch.h}
+                                value={
+                                    !oklch.h || isNaN(oklch.h) ? "" : oklch.h
+                                }
                                 step={1}
                                 min={0}
                                 max={360}
@@ -176,9 +190,10 @@ function ColourConverter({ title, description }: ToolData) {
                                     setOklch(newOklch);
 
                                     if (validateOklch(newOklch)) {
-                                        setHSL(oklchToHSL(newOklch));
-                                        setRGB(oklchToRGB(newOklch));
-                                        setHEX(oklchToHex(newOklch));
+                                        const newRgb = rgbConverter(newOklch);
+                                        setHSL(hslConverter(newOklch));
+                                        setRGB(newRgb);
+                                        setHEX(formatHex(newRgb));
                                         clearErrors();
                                     } else {
                                         setOKHueError(true);
@@ -204,7 +219,7 @@ function ColourConverter({ title, description }: ToolData) {
                                 step={1}
                                 min={0}
                                 max={360}
-                                value={isNaN(hsl.h) ? "" : hsl.h}
+                                value={!hsl.h || isNaN(hsl.h) ? "" : hsl.h}
                                 onChange={(e) => {
                                     const newHSL = {
                                         ...hsl,
@@ -213,12 +228,27 @@ function ColourConverter({ title, description }: ToolData) {
                                     setHSL(newHSL);
 
                                     if (validateHSL(newHSL)) {
-                                        setOklch(hslToOklch(newHSL));
-                                        setRGB(hslToRGB(newHSL));
-                                        setHEX(hslToHex(newHSL));
+                                        const newRgb = rgbConverter(newHSL);
+                                        setOklch(oklchConverter(newHSL));
+                                        setRGB(newRgb);
+                                        setHEX(formatHex(newRgb));
                                         clearErrors();
                                     } else {
                                         setHueError(true);
+                                    }
+                                }}
+                                onPaste={(e) => {
+                                    const pastedData =
+                                        e.clipboardData.getData("text");
+                                    const parsed = parse(pastedData);
+                                    if (parsed && parsed.mode === "hsl") {
+                                        e.preventDefault();
+                                        setHSL(parsed);
+                                        const newRgb = rgbConverter(parsed);
+                                        setOklch(oklchConverter(parsed));
+                                        setRGB(newRgb);
+                                        setHEX(formatHex(newRgb));
+                                        clearErrors();
                                     }
                                 }}
                             />
@@ -243,9 +273,10 @@ function ColourConverter({ title, description }: ToolData) {
                                     setHSL(newHSL);
 
                                     if (validateHSL(newHSL)) {
-                                        setOklch(hslToOklch(newHSL));
-                                        setRGB(hslToRGB(newHSL));
-                                        setHEX(hslToHex(newHSL));
+                                        const newRgb = rgbConverter(newHSL);
+                                        setOklch(oklchConverter(newHSL));
+                                        setRGB(newRgb);
+                                        setHEX(formatHex(newRgb));
                                         clearErrors();
                                     } else {
                                         setSaturationError(true);
@@ -275,9 +306,10 @@ function ColourConverter({ title, description }: ToolData) {
                                     setHSL(newHSL);
 
                                     if (validateHSL(newHSL)) {
-                                        setOklch(hslToOklch(newHSL));
-                                        setRGB(hslToRGB(newHSL));
-                                        setHEX(hslToHex(newHSL));
+                                        const newRgb = rgbConverter(newHSL);
+                                        setOklch(oklchConverter(newHSL));
+                                        setRGB(newRgb);
+                                        setHEX(formatHex(newRgb));
                                         clearErrors();
                                     } else {
                                         setLightnessError(true);
@@ -312,12 +344,25 @@ function ColourConverter({ title, description }: ToolData) {
                                     setRGB(newRGB);
 
                                     if (validateRGB(newRGB)) {
-                                        setOklch(rgbToOklch(newRGB));
-                                        setHSL(rgbToHSL(newRGB));
-                                        setHEX(rgbToHex(newRGB));
+                                        setOklch(oklchConverter(newRGB));
+                                        setHSL(hslConverter(newRGB));
+                                        setHEX(formatHex(newRGB));
                                         clearErrors();
                                     } else {
                                         setRedError(true);
+                                    }
+                                }}
+                                onPaste={(e) => {
+                                    const pastedData =
+                                        e.clipboardData.getData("text");
+                                    const parsed = parse(pastedData);
+                                    if (parsed && parsed.mode === "rgb") {
+                                        e.preventDefault();
+                                        setRGB(parsed);
+                                        setOklch(oklchConverter(parsed));
+                                        setHSL(hslConverter(parsed));
+                                        setHEX(formatHex(parsed));
+                                        clearErrors();
                                     }
                                 }}
                             />
@@ -342,9 +387,9 @@ function ColourConverter({ title, description }: ToolData) {
                                     setRGB(newRGB);
 
                                     if (validateRGB(newRGB)) {
-                                        setOklch(rgbToOklch(newRGB));
-                                        setHSL(rgbToHSL(newRGB));
-                                        setHEX(rgbToHex(newRGB));
+                                        setOklch(oklchConverter(newRGB));
+                                        setHSL(hslConverter(newRGB));
+                                        setHEX(formatHex(newRGB));
                                         clearErrors();
                                     } else {
                                         setGreenError(true);
@@ -374,9 +419,9 @@ function ColourConverter({ title, description }: ToolData) {
                                     setRGB(newRGB);
 
                                     if (validateRGB(newRGB)) {
-                                        setOklch(rgbToOklch(newRGB));
-                                        setHSL(rgbToHSL(newRGB));
-                                        setHEX(rgbToHex(newRGB));
+                                        setOklch(oklchConverter(newRGB));
+                                        setHSL(hslConverter(newRGB));
+                                        setHEX(formatHex(newRGB));
                                         clearErrors();
                                     } else {
                                         setBlueError(true);
@@ -400,9 +445,9 @@ function ColourConverter({ title, description }: ToolData) {
                             setHEX(newHex);
 
                             if (validateHEX(newHex)) {
-                                setOklch(hexToOklch(newHex));
-                                setRGB(hexToRGB(newHex));
-                                setHSL(hexToHSL(newHex));
+                                setOklch(oklchConverter(newHex) as Oklch);
+                                setRGB(rgbConverter(newHex) as Rgb);
+                                setHSL(hslConverter(newHex) as Hsl);
                                 clearErrors();
                             } else {
                                 setHexError(true);
