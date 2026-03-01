@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/blog";
 import { BlogData } from "@/data/blog";
 
-export const RULE_OF_3: BlogData = {
+export const WHY_ARE_DATES_SO_HARD: BlogData = {
     title: "Why are dates so hard?",
     description:
         "Why dates and timezones are so hard to work with, and a simple approach to reasoning about them.",
