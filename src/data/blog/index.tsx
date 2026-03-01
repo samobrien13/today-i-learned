@@ -17,6 +17,7 @@ import { REACT_QUERY_WITH_SERVER_ACTIONS } from "./react-query-with-server-actio
 import { KEYBOARD_SETUP } from "./keyboard-setup";
 import { CONNECT_EXPO_DEV_BUILDS_REMOTELY } from "./connect-expo-dev-builds-remotely";
 import { RULE_OF_3 } from "./rule-of-3";
+import { WHY_ARE_DATES_SO_HARD } from "./why-are-dates-so-hard";
 
 export type BlogData = {
     title: string;
@@ -29,6 +30,7 @@ export type BlogData = {
 } & Metadata;
 
 export const BLOG_ARTICLES: BlogData[] = [
+    WHY_ARE_DATES_SO_HARD,
     RULE_OF_3,
     CONNECT_EXPO_DEV_BUILDS_REMOTELY,
     KEYBOARD_SETUP,
