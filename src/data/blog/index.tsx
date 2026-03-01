@@ -30,6 +30,7 @@ export type BlogData = {
 } & Metadata;
 
 export const BLOG_ARTICLES: BlogData[] = [
+    WHY_ARE_DATES_SO_HARD,
     RULE_OF_3,
     CONNECT_EXPO_DEV_BUILDS_REMOTELY,
     KEYBOARD_SETUP,
