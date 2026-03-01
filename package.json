@@ -54,7 +54,7 @@
         "prettier": "^3.8.1",
         "prettier-plugin-tailwindcss": "^0.7.2",
         "shiki": "^3.22.0",
-        "tailwindcss": "^4.1.18",
+        "tailwindcss": "^4.2.1",
         "vitest": "^4.0.17"
     },
     "pnpm": {
