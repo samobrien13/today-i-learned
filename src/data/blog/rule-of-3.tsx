@@ -6,7 +6,7 @@ export const RULE_OF_3: BlogData = {
     description: "The rule of three and why DRY isn't always the best approach",
     date: "2026-02-21",
     slug: "rule-of-3",
-    tags: ["programming", "refactoring"],
+    tags: ["engineering", "refactoring"],
     image: {
         src: "/images/rants/triangle.png",
         alt: "Rule of 3",
