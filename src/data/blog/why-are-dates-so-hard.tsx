@@ -9,10 +9,10 @@ import { BlogData } from "@/data/blog";
 export const WHY_ARE_DATES_SO_HARD: BlogData = {
     title: "Why are dates so hard?",
     description:
-        "Why dates and timezones are so hard to work with, and a simple approach to reasoning about them.",
+        "Why dates and timezones are so hard to work with, and a simple approach to reasoning about them",
     date: "2026-03-01",
     slug: "why-are-dates-so-hard",
-    tags: ["programming"],
+    tags: ["engineering"],
     image: {
         src: "/images/rants/dates.png",
         alt: "A clock melting at the thought of working with dates and timezones",
