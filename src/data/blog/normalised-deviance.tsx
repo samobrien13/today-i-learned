@@ -33,13 +33,6 @@ function NormalisedDeviance() {
                 software development and it&apos;s organisations, and it&apos;s
                 important to recognise it and take steps to avoid it.
             </BlogParagraph>
-            <BlogHeading>What is Normalised Deviance?</BlogHeading>
-            <BlogParagraph>
-                Normalised deviance occurs when people become so accustomed to
-                deviant behaviour that they start to see it as normal. Deviance
-                builds up and becomes so ingrained in the culture that people no
-                longer question it.
-            </BlogParagraph>
             <BlogParagraph>
                 Some examples I have seen over the years include:
                 <ul>
