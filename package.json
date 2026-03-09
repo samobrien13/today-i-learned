@@ -53,7 +53,7 @@
         "postcss": "^8",
         "prettier": "^3.8.1",
         "prettier-plugin-tailwindcss": "^0.7.2",
-        "shiki": "^3.22.0",
+        "shiki": "^4.0.2",
         "tailwindcss": "^4.2.1",
         "vitest": "^4.0.18"
     },
