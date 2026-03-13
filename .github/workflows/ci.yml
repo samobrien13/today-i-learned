@@ -24,5 +24,8 @@ jobs:
             - name: 🧹 Lint
               run: pnpm lint --max-warnings=0
 
+            - name: 🪄 Format
+              run: pnpm format:check
+
             - name: 🧪 Test
               run: pnpm test
