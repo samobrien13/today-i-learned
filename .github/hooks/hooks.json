@@ -11,6 +11,13 @@
             }
         ],
         "preToolUse": [],
-        "postToolUse": []
+        "postToolUse": [
+            {
+                "type": "command",
+                "bash": "bash .github/hooks/run-format-lint-on-write.sh",
+                "cwd": ".",
+                "timeoutSec": 180
+            }
+        ]
     }
 }
