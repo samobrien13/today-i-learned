@@ -2,6 +2,7 @@
     "name": "today-i-learned",
     "version": "0.1.0",
     "private": true,
+    "type": "module",
     "scripts": {
         "dev": "next dev",
         "build": "next build",
@@ -52,6 +53,7 @@
         "eslint-config-prettier": "^10.0.1",
         "eslint-plugin-react-hooks": "^7.0.1",
         "postcss": "^8",
+        "postcss-load-config": "^6.0.1",
         "prettier": "^3.8.1",
         "prettier-plugin-tailwindcss": "^0.7.2",
         "shiki": "^4.0.2",
