@@ -76,6 +76,13 @@ function AiPsychosis() {
                 that specific niche. For everything else, strong consideration
                 and intentional delivery always wins out.
             </BlogParagraph>
+            <BlogParagraph>
+                There is a minimum amount of time you must spend to truely understand
+                anything. With the use of AI you are either shifting that
+                learning to the review phase (something no one ever enjoyed), or
+                you&apos;re skipping it out entirely. Neither of these
+                outcomes is desirable for anyone.
+            </BlogParagraph>
             <BlogHeading>Self driving cars</BlogHeading>
             <BlogParagraph>
                 Where else in life have we ever accepted 95% accurate is good
@@ -129,9 +136,10 @@ function AiPsychosis() {
             <BlogHeading>Conclusion</BlogHeading>
             <BlogParagraph>
                 AI will become just another tool in the white collar tool belt.
-                The data is murky, and the path unknown. What we know is what
-                has worked until now, will continue to work in the future. Deep
-                work and proper thinking cannot be replaced by this tool.
+                Certain niches will be created that can offload some of the dead
+                work that no one wants to do. The data is murky, and the path unknown.
+                What we know is what has worked until now, will continue to work
+                in the future. Deep work and proper thinking cannot be replaced by this tool.
             </BlogParagraph>
             <BlogParagraph>
                 Never have we run so hard towards a technology with no clear upside
