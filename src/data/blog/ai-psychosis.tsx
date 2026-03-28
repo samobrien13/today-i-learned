@@ -9,8 +9,8 @@ export const AI_PSYCHOSIS: BlogData = {
     slug: "ai-psychosis",
     tags: ["ai"],
     image: {
-        src: "/images/rants/ai.png",
-        alt: "AI",
+        src: "/images/rants/psychosis.png",
+        alt: "The voices in my head are all telling me to change",
     },
     component: <AiPsychosis />,
 };
