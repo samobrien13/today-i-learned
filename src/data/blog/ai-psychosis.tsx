@@ -35,13 +35,13 @@ function AiPsychosis() {
             </BlogParagraph>
             <BlogParagraph>
                 In recent history, the metaverse failed to gain any traction
-                among the masses, with as little as
+                among the masses,
                 <Link
                     external
                     href="https://www.esafety.gov.au/research/the-metaverse"
                 >
-                    4%
-                </Link>
+                    with as little as 4%
+                </Link>{" "}
                 of the population having participated.
             </BlogParagraph>
             <BlogParagraph>
