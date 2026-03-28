@@ -134,6 +134,10 @@ function AiPsychosis() {
                 work and proper thinking cannot be replaced by this tool.
             </BlogParagraph>
             <BlogParagraph>
+                Never have we run so hard towards a technology with no clear upside
+                and so many obvious downsides.
+            </BlogParagraph>
+            <BlogParagraph>
                 It is safest to preserve your brain and sit on the sidelines
                 while it plays out. You won&apos;t get left behind, and you
                 might be one of the few thinkers left that can clean up the
