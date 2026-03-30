@@ -58,7 +58,7 @@
         "prettier-plugin-tailwindcss": "^0.7.2",
         "shiki": "^4.0.2",
         "tailwindcss": "^4.2.1",
-        "vitest": "^4.1.1"
+        "vitest": "^4.1.2"
     },
     "pnpm": {
         "overrides": {
