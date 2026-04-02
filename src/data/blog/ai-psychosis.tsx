@@ -36,7 +36,7 @@ function AiPsychosis() {
             </BlogParagraph>
             <BlogParagraph>
                 In recent history, the metaverse failed to gain any traction
-                among the masses,
+                among the masses,{" "}
                 <Link
                     external
                     href="https://www.esafety.gov.au/research/the-metaverse"
@@ -68,10 +68,11 @@ function AiPsychosis() {
                 have learned in a similar amount of time.
             </BlogParagraph>
             <BlogParagraph>
-                Ok, lets say we can now develop features twice as fast, great!
-                That&apos;s twice as many features that will never get used.
-                Writing code has never been the hard part. Working out what to
-                build is. AI doesn&apos;t know, though it will try and tell you.
+                Ok, let&apso;s say we can now develop features twice as fast,
+                great! That&apos;s twice as many features that will never get
+                used. Writing code has never been the hard part. Working out
+                what to build is. AI doesn&apos;t know, though it will try and
+                tell you.
             </BlogParagraph>
             <BlogParagraph>
                 Nothing of value was ever built in a day. There is a time and a
@@ -126,7 +127,7 @@ function AiPsychosis() {
                 I have noticed in myself that heavy use of AI has already
                 affected my ability to think. The more we go down this path the
                 worse it will get. Everyone will be walking around with rotted
-                brains. The mental health affects will pale in comparison to the
+                brains. The mental health effects will pale in comparison to the
                 introduction of smartphones and social media. We just won&apos;t
                 know for another 10 years.
             </BlogParagraph>
