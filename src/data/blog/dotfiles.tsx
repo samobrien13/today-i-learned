@@ -66,7 +66,7 @@ function Dotfiles() {
                 commands to symlink my dotfiles to the correct locations:
             </BlogParagraph>
             <CodeBlock language="bash">
-                {`git clone https://github.com/samobrien13/dotfiles.git\nbrew install stow\ncd dotfiles\nstow . -D $HOME`}
+                {`git clone https://github.com/samobrien13/dotfiles.git\nbrew install stow\ncd dotfiles\nstow -t ~ --no-folding .`}
             </CodeBlock>
             <BlogHeading>Neovim</BlogHeading>
             <BlogParagraph>
