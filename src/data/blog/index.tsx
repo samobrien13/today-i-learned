@@ -20,6 +20,7 @@ import { RULE_OF_3 } from "./rule-of-3";
 import { WHY_ARE_DATES_SO_HARD } from "./why-are-dates-so-hard";
 import { NORMALISED_DEVIANCE } from "./normalised-deviance";
 import { AI_PSYCHOSIS } from "./ai-psychosis";
+import { THE_GOAL } from "./the-goal";
 
 export type BlogData = {
     title: string;
@@ -32,6 +33,7 @@ export type BlogData = {
 } & Metadata;
 
 export const BLOG_ARTICLES: BlogData[] = [
+    THE_GOAL,
     AI_PSYCHOSIS,
     NORMALISED_DEVIANCE,
     WHY_ARE_DATES_SO_HARD,
