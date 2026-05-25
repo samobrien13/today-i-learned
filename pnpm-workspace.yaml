@@ -1,11 +1,11 @@
 overrides:
-  '@types/react': 19.2.14
-  '@types/react-dom': 19.2.3
+    "@types/react": 19.2.14
+    "@types/react-dom": 19.2.3
 publicHoistPattern:
-  - '*@nextui-org/*'
-  - '*eslint*'
+    - "*@nextui-org/*"
+    - "*eslint*"
 allowBuilds:
-  esbuild: true
-  msw: true
-  sharp: true
-  unrs-resolver: true
+    esbuild: true
+    msw: true
+    sharp: true
+    unrs-resolver: true
