@@ -1,4 +1,4 @@
 [tools]
 node = "24.14.0"
-pnpm = "10.32.1"
+pnpm = "11.3.0"
 terraform = "1.15.4"
