@@ -1,8 +1,9 @@
 terraform {
+  required_version = "1.15.4"
   required_providers {
     vercel = {
       source  = "vercel/vercel"
-      version = "~> 0.3"
+      version = "5.3.0"
     }
   }
 }
@@ -12,11 +13,22 @@ provider "vercel" {
 }
 
 resource "vercel_project" "default" {
-  name      = "today-i-learned"
-  framework = "nextjs"
+  name                                 = "today-i-learned"
+  framework                            = "nextjs"
+  node_version                         = "24.x"
+  build_machine_type                   = null
+  enable_affected_projects_deployments = false
+  enable_preview_feedback              = false
+  enable_production_feedback           = false
   git_repository = {
     type = "github"
     repo = "samobrien13/today-i-learned"
+  }
+  resource_config = {
+    fluid = true
+    function_default_regions = [
+      "syd1",
+    ]
   }
 }
 
