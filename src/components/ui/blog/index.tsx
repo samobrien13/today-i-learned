@@ -8,12 +8,14 @@ import Share from "../share";
 import Feedback from "../feedback";
 import Likes from "../likes";
 import Image, { ImageProps } from "next/image";
+import { ReadingProgress } from "@/components/ui/reading-progress";
 
 type BlogProps = BlogData;
 
 function Blog({ title, description, date, slug, component, tags }: BlogProps) {
     return (
-        <article className="flex flex-1 flex-col gap-8">
+        <article className="flex flex-1 flex-col gap-8 py-12">
+            <ReadingProgress />
             <header>
                 <ViewTransition name={`blog-article-title-${slug}`}>
                     <h1 className="text-xl font-semibold">{title}</h1>
