@@ -1,11 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-    Progress,
-    ProgressTrack,
-    ProgressIndicator,
-} from "@/components/ui/progress";
+import { Progress } from "@/components/ui/progress";
 
 function ReadingProgress() {
     const [progress, setProgress] = useState(0);
@@ -29,12 +25,8 @@ function ReadingProgress() {
     return (
         <Progress
             value={progress}
-            className="sticky top-0 z-50 -mx-4 gap-0 md:-mx-0"
-        >
-            <ProgressTrack className="h-0.5 rounded-none bg-transparent">
-                <ProgressIndicator className="bg-primary" />
-            </ProgressTrack>
-        </Progress>
+            className="sticky top-0 z-50 -mx-4 gap-0 md:mx-0"
+        />
     );
 }
 

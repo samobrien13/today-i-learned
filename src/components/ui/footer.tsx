@@ -5,7 +5,7 @@ import { RssIcon } from "lucide-react";
 
 function Footer() {
     return (
-        <footer className="mt-12 flex flex-col gap-4">
+        <footer className="flex flex-col gap-4">
             <div className="flex flex-row items-center gap-2">
                 <Link external href="https://github.com/samobrien13">
                     <Github />
