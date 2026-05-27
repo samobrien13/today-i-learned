@@ -1,5 +1,5 @@
 import Blog from "@/components/ui/blog";
-import { BLOG_ARTICLES } from "@/data/blog";
+import { BLOG_ARTICLES } from "@/features/rants/data";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -44,7 +44,11 @@ async function RantPage({ params }: RantPageProps) {
         notFound();
     }
 
-    return <Blog {...blog} />;
+    return (
+        <>
+            <Blog {...blog} />
+        </>
+    );
 }
 
 export default RantPage;

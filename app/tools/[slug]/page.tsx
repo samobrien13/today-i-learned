@@ -1,5 +1,5 @@
 import { ViewTransition } from "react";
-import { TOOLS } from "@/components/tools";
+import { TOOLS } from "@/features/tools/components";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -42,7 +42,7 @@ async function ToolPage({ params }: ToolPageProps) {
     }
 
     return (
-        <section className="flex-1">
+        <section className="flex-1 py-8 md:py-12">
             <ViewTransition name={`${tool.slug}-card`}>
                 {tool.component({
                     title: tool.title,

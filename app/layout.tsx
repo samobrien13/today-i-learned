@@ -81,7 +81,7 @@ export default function RootLayout({
                 </Script>
             </head>
             <body
-                className={`${jetbrainsMono.variable} bg-background text-foreground !min-w-full antialiased`}
+                className={`${jetbrainsMono.variable} bg-background text-foreground min-w-full! antialiased`}
             >
                 <div className="md:mx-auto md:max-w-2xl">
                     <Providers>

@@ -8,7 +8,7 @@ type TabProps = {
 
 function Tab({ title, subtitle, children }: TabProps) {
     return (
-        <section className="flex flex-1 flex-col gap-6">
+        <section className="flex flex-1 flex-col gap-6 py-8 md:py-12">
             <div className="flex flex-col gap-2">
                 <ViewTransition name={`tab-${title.toLowerCase()}`}>
                     <h1 className="text-xl font-semibold">{title}</h1>

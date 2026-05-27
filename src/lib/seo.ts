@@ -1,6 +1,6 @@
 import Routes from "@/constants/Routes";
-import { BLOG_ARTICLES } from "@/data/blog";
-import { TOOLS } from "@/components/tools";
+import { BLOG_ARTICLES } from "@/features/rants/data";
+import { TOOLS } from "@/features/tools/components";
 
 type SiteMapRoute = {
     path: string;
