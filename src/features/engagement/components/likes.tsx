@@ -2,7 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import { ThumbsDown, ThumbsUp } from "lucide-react";
-import { useDislike, useLike, useLikes } from "@/features/engagement/hooks/use-likes";
+import {
+    useDislike,
+    useLike,
+    useLikes,
+} from "@/features/engagement/hooks/use-likes";
 
 type LikesProps = {
     slug: string;

@@ -11,7 +11,10 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Line } from "@/components/line";
-import { calculatePaymentSet, getTableData } from "@/features/tools/lib/mortgage";
+import {
+    calculatePaymentSet,
+    getTableData,
+} from "@/features/tools/lib/mortgage";
 import { Fragment } from "react";
 import { Button } from "@/components/ui/button";
 import { PlusIcon, TrashIcon } from "lucide-react";

@@ -3,7 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useAddFeedback, useFeedback } from "@/features/engagement/hooks/use-feedback";
+import {
+    useAddFeedback,
+    useFeedback,
+} from "@/features/engagement/hooks/use-feedback";
 
 type FeedbackProps = {
     slug: string;

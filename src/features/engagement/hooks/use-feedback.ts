@@ -1,4 +1,7 @@
-import { addFeedback, getFeedback } from "@/features/engagement/actions/feedback";
+import {
+    addFeedback,
+    getFeedback,
+} from "@/features/engagement/actions/feedback";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function useFeedback(slug: string) {

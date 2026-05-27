@@ -1,4 +1,8 @@
-import { getLikes, addLike, addDislike } from "@/features/engagement/actions/likes";
+import {
+    getLikes,
+    addLike,
+    addDislike,
+} from "@/features/engagement/actions/likes";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function useLikes(slug: string) {

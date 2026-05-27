@@ -5,7 +5,12 @@ import Routes from "@/constants/Routes";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "@/components/ui/link";
 import { formatRelativeDate } from "@/lib/date";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+    Card,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
 import { useBlogs } from "@/features/rants/hooks/use-blogs";
 import Image from "next/image";
 
