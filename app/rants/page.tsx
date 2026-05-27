@@ -1,8 +1,8 @@
 import Tab from "@/components/ui/tab";
-import { BLOG_ARTICLES } from "@/data/blog";
+import { BLOG_ARTICLES } from "@/features/rants/data";
 import { Metadata } from "next";
-import { getBlogs } from "@/actions/blogs";
-import Blogs from "@/components/blogs";
+import { getBlogs } from "@/features/rants/actions/blogs";
+import Blogs from "@/features/rants/components/blogs";
 import {
     dehydrate,
     HydrationBoundary,

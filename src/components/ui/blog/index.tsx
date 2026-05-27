@@ -2,11 +2,11 @@ import { ViewTransition } from "react";
 import { formatDate } from "@/lib/date";
 import { Link } from "../link";
 import { Badge } from "../badge";
-import { BlogData } from "@/data/blog";
+import { BlogData } from "@/features/rants/data";
 import Routes from "@/constants/Routes";
-import Share from "../share";
-import Feedback from "../feedback";
-import Likes from "../likes";
+import Share from "@/features/engagement/components/share";
+import Feedback from "@/features/engagement/components/feedback";
+import Likes from "@/features/engagement/components/likes";
 import Image, { ImageProps } from "next/image";
 import { ReadingProgress } from "./reading-progress";
 
@@ -14,7 +14,7 @@ type BlogProps = BlogData;
 
 function Blog({ title, description, date, slug, component, tags }: BlogProps) {
     return (
-        <article className="flex flex-1 flex-col gap-8 py-12">
+        <article className="flex flex-1 flex-col gap-8 py-8 md:py-12">
             <ReadingProgress />
             <header>
                 <ViewTransition name={`blog-article-title-${slug}`}>

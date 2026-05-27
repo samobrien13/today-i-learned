@@ -1,5 +1,5 @@
 import Blog from "@/components/ui/blog";
-import { BLOG_ARTICLES } from "@/data/blog";
+import { BLOG_ARTICLES } from "@/features/rants/data";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
