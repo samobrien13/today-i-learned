@@ -11,7 +11,7 @@ Use `mise install` to install the correct version.
 
 ## Commands
 
-Always use `pnpm` for all project commands.
+Always use `pnpm` for all project commands and dependency management.
 
 Use `pnpm test` to run tests. Always run tests before completing a task.
 Use `pnpm lint` to run linting. Always lint before completing a task.
@@ -34,14 +34,14 @@ React `ViewTransition` is used to animate navigation between pages where applica
 Folder structure is feature based modeled on Bulletproof React.
 Always locate files and functions as close to the feature as necessary.
 
-## TailwindCSS
+## UI
 
 Tailwind v4 using semantic colours defined in `app/globals.css`. Never use raw values or default tailwind colours.
 
-## ShadCN
-
 ShadCN is used for UI components. Always check for existing components before creating custom UI.
 If no component exists, search the shadcn registry using `npx shadcn@latest search`.
+
+Use `lucide-react` for icons. Brand icons should copy the official SVG into the `src/components/ui/icons` folder.
 
 ## Database
 
