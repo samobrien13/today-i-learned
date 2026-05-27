@@ -1,7 +1,9 @@
 import {
     BlogHeading,
+    BlogListItem,
     BlogParagraph,
     BlogSubHeading,
+    BlogUnorderedList,
 } from "@/components/ui/blog";
 import { BlogData } from ".";
 
@@ -35,21 +37,21 @@ function NormalisedDeviance() {
             </BlogParagraph>
             <BlogParagraph>
                 Some examples I have seen over the years include:
-                <ul>
-                    <li>
-                        Production, staging and development environments all
-                        connecting to the same production CRM instance.
-                    </li>
-                    <li>
-                        Developers manually re-running failed jobs in a queue
-                        each day
-                    </li>
-                    <li>
-                        Commenting out code in order to make your local
-                        environment work
-                    </li>
-                </ul>
             </BlogParagraph>
+            <BlogUnorderedList>
+                <BlogListItem>
+                    Production, staging and development environments all
+                    connecting to the same production CRM instance.
+                </BlogListItem>
+                <BlogListItem>
+                    Developers manually re-running failed jobs in a queue each
+                    day
+                </BlogListItem>
+                <BlogListItem>
+                    Commenting out code in order to make your local environment
+                    work
+                </BlogListItem>
+            </BlogUnorderedList>
             <BlogHeading>How to Avoid Normalised Deviance</BlogHeading>
             <BlogSubHeading>New Starters</BlogSubHeading>
             <BlogParagraph>
