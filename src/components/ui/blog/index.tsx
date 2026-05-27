@@ -8,7 +8,7 @@ import Share from "../share";
 import Feedback from "../feedback";
 import Likes from "../likes";
 import Image, { ImageProps } from "next/image";
-import { ReadingProgress } from "@/components/ui/reading-progress";
+import { ReadingProgress } from "./reading-progress";
 
 type BlogProps = BlogData;
 
