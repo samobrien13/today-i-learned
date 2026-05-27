@@ -1,11 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import {
-    Progress,
-    ProgressTrack,
-    ProgressIndicator,
-} from "@/components/ui/progress";
+import { Progress } from "@/components/ui/progress";
 
 function ReadingProgress() {
     const [progress, setProgress] = useState(0);
