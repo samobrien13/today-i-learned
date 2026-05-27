@@ -44,7 +44,7 @@ function ReadingProgress() {
             <div ref={sentinelRef} className="h-0 w-full" aria-hidden />
             <Progress
                 value={progress}
-                className="sticky top-0 z-50 -mx-4 -my-6 gap-0 transition-opacity duration-300 md:mx-0"
+                className="sticky top-0 z-50 -mx-4 -mt-12 -mb-6 gap-0 transition-opacity duration-300 md:mx-0"
                 style={{ opacity: isStuck ? 1 : 0 }}
             />
         </>
