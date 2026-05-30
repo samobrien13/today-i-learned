@@ -55,7 +55,7 @@
         "eslint-plugin-react-hooks": "^7.0.1",
         "postcss": "^8",
         "postcss-load-config": "^6.0.1",
-        "prettier": "^3.8.1",
+        "prettier": "^3.8.3",
         "prettier-plugin-tailwindcss": "^0.7.2",
         "shadcn": "^4.8.0",
         "shiki": "^4.0.2",
