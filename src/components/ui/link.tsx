@@ -1,11 +1,13 @@
-import NextLink from "next/link";
+import NextLink, { LinkProps } from "next/link";
 import clsx from "clsx";
 
-type LinkComponentProps<RouteType> = React.ComponentProps<
-    typeof NextLink<RouteType>
-> & {
-    external?: boolean;
-};
+type LinkComponentProps<RouteType> = Omit<
+    React.AnchorHTMLAttributes<HTMLAnchorElement>,
+    keyof LinkProps<RouteType>
+> &
+    LinkProps<RouteType> & {
+        external?: boolean;
+    };
 
 function Link<RouteType>({
     external,
@@ -13,7 +15,7 @@ function Link<RouteType>({
     ...props
 }: LinkComponentProps<RouteType>) {
     return (
-        <NextLink<RouteType>
+        <NextLink
             {...props}
             target={external ? "_blank" : undefined}
             rel={external ? "noopener noreferrer" : undefined}
