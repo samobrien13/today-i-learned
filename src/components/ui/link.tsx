@@ -15,7 +15,7 @@ function Link<RouteType>({
     ...props
 }: LinkComponentProps<RouteType>) {
     return (
-        <NextLink<RouteType>
+        <NextLink
             {...props}
             target={external ? "_blank" : undefined}
             rel={external ? "noopener noreferrer" : undefined}
