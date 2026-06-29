@@ -1,13 +1,14 @@
 export type ChildcareSubsidyChildren = "one" | "more";
 
-const ONE_CHILD = {
+const BASE_RATE = {
     baseIncome: 88520,
     basePercentage: 90,
     decrementStep: 5000,
 } as const;
 
-const MORE_THAN_ONE_CHILD = {
+const HIGHER_RATE = {
     baseIncome: 141321,
+    maxIncome: 367563,
     basePercentage: 95,
     decrementStep: 3000,
 } as const;
@@ -27,8 +28,20 @@ function calculateSubsidy(
     return Math.max(0, basePercentage - increments);
 }
 
-// TODO: fix higher rate subsidy
-export function calculateChildcareSubsidy(
+export function calculateChildcareSubsidy(income: number): number {
+    if (isNaN(income)) {
+        return 0;
+    }
+
+    return calculateSubsidy(
+        income,
+        BASE_RATE.baseIncome,
+        BASE_RATE.basePercentage,
+        BASE_RATE.decrementStep,
+    );
+}
+
+export function calculateHigherChildcareSubsidy(
     income: number,
     children: ChildcareSubsidyChildren,
 ): number {
@@ -36,20 +49,20 @@ export function calculateChildcareSubsidy(
         return 0;
     }
 
-    if (children === "one") {
+    if (children === "one" || income > HIGHER_RATE.maxIncome) {
         return calculateSubsidy(
             income,
-            ONE_CHILD.baseIncome,
-            ONE_CHILD.basePercentage,
-            ONE_CHILD.decrementStep,
+            BASE_RATE.baseIncome,
+            BASE_RATE.basePercentage,
+            BASE_RATE.decrementStep,
         );
     }
 
     return calculateSubsidy(
         income,
-        MORE_THAN_ONE_CHILD.baseIncome,
-        MORE_THAN_ONE_CHILD.basePercentage,
-        MORE_THAN_ONE_CHILD.decrementStep,
+        HIGHER_RATE.baseIncome,
+        HIGHER_RATE.basePercentage,
+        HIGHER_RATE.decrementStep,
     );
 }
 
