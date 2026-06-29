@@ -6,6 +6,7 @@ import { ColourConverter } from "./colour-converter";
 import { RubberDuck } from "./rubber-duck";
 import { CurlBuilder } from "./curl-builder";
 import { BabyTracker } from "./baby-tracker";
+import { ChildcareSubsidyCalculator } from "./childcare-subsidy-calculator";
 
 import { Metadata } from "next";
 import { ReactNode } from "react";
@@ -16,6 +17,15 @@ export const BABY_TRACKER: Tool = {
     slug: "baby-tracker",
     tags: ["parenting"],
     component: (props) => <BabyTracker {...props} />,
+};
+
+export const CHILDCARE_SUBSIDY_CALCULATOR: Tool = {
+    title: "Childcare Subsidy Calculator",
+    description:
+        "Calculate your childcare subsidy percentage based on combined household income",
+    slug: "childcare-subsidy-calculator",
+    tags: ["finance", "parenting"],
+    component: (props) => <ChildcareSubsidyCalculator {...props} />,
 };
 
 export const RUBBER_DUCK: Tool = {
@@ -89,6 +99,7 @@ type Tool = ToolData & {
 
 export const TOOLS: Tool[] = [
     BABY_TRACKER,
+    CHILDCARE_SUBSIDY_CALCULATOR,
     CURL_BUILDER,
     RUBBER_DUCK,
     COLOUR_CONVERTER,
