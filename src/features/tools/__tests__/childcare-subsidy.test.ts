@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { calculateChildcareSubsidy } from "../lib/childcare-subsidy";
+import {
+    calculateAnnualChildcareBenefit,
+    calculateChildcareSubsidy,
+} from "../lib/childcare-subsidy";
 
 describe("childcare-subsidy", () => {
     describe(calculateChildcareSubsidy.name, () => {
@@ -51,6 +54,38 @@ describe("childcare-subsidy", () => {
             it("floors to 0% for very high incomes", () => {
                 expect(calculateChildcareSubsidy(1000000, "more")).toBe(0);
             });
+        });
+    });
+
+    describe(calculateAnnualChildcareBenefit.name, () => {
+        it("returns 0 for NaN inputs", () => {
+            expect(calculateAnnualChildcareBenefit(NaN, 3, 200)).toBe(0);
+            expect(calculateAnnualChildcareBenefit(50, NaN, 200)).toBe(0);
+            expect(calculateAnnualChildcareBenefit(50, 3, NaN)).toBe(0);
+        });
+
+        it("returns 0 when subsidy percentage is 0", () => {
+            expect(calculateAnnualChildcareBenefit(0, 5, 200)).toBe(0);
+        });
+
+        it("returns 0 when no days are worked", () => {
+            expect(calculateAnnualChildcareBenefit(90, 0, 200)).toBe(0);
+        });
+
+        it("calculates the full year benefit at 90% for 1 day at $200/day", () => {
+            // 90 * 1 * 200 * 52 / 100 = 9,360
+            expect(calculateAnnualChildcareBenefit(90, 1, 200)).toBe(9360);
+        });
+
+        it("calculates the full year benefit at 50% for 3 days at $200/day", () => {
+            // 50 * 3 * 200 * 52 / 100 = 15,600
+            expect(calculateAnnualChildcareBenefit(50, 3, 200)).toBe(15600);
+        });
+
+        it("scales linearly with the daily cost", () => {
+            const at200 = calculateAnnualChildcareBenefit(80, 5, 200);
+            const at150 = calculateAnnualChildcareBenefit(80, 5, 150);
+            expect(at150).toBe(Math.round((at200 * 150) / 200));
         });
     });
 });
