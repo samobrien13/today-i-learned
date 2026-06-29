@@ -47,7 +47,7 @@ function CurlBuilder({ title }: ToolData) {
                 />
             </div>
             <div className="space-y-2">
-                <Label htmlFor="method">Method</Label>{" "}
+                <Label htmlFor="method">Method</Label>
                 <Select value={method} onValueChange={setMethod}>
                     <SelectTrigger>
                         <SelectValue />

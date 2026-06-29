@@ -8,7 +8,6 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import { Heading } from "@/components/ui/heading";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -18,22 +17,35 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
 import {
     calculateChildcareSubsidy,
     ChildcareSubsidyChildren,
 } from "@/features/tools/lib/childcare-subsidy";
 import { ToolData } from ".";
+import { calculateEffectiveTaxRate, calculateTax } from "@/lib/tax";
+import { Field, FieldLabel } from "@/components/ui/field";
+import { Heading } from "@/components/ui/heading";
 
-const MIN_INCOME = 0;
-const MAX_INCOME = 600000;
-const STEP_INCOME = 1000;
-
-function ChildcareSubsidyCalculator({ title, description }: ToolData) {
-    const [income, setIncome] = useState(88520);
+function ChildcareSubsidyCalculator({
+    title,
+    description,
+}: Pick<ToolData, "title" | "description">) {
     const [children, setChildren] = useState<ChildcareSubsidyChildren>("one");
-
-    const subsidy = calculateChildcareSubsidy(income, children);
+    const [daysWorked, setDaysWorked] = useState(3);
+    const [primaryIncome, setPrimaryIncome] = useState(90000);
+    const [secondaryIncome, setSecondaryIncome] = useState(90000);
+    const [childCareDayRate, setChildCareDayRate] = useState(180);
+    const weightedIncome = Math.round(daysWorked * 0.2 * secondaryIncome);
+    const taxOnIncome = calculateTax(secondaryIncome);
+    const taxRate = calculateEffectiveTaxRate(secondaryIncome);
+    const subsidyPercentage = calculateChildcareSubsidy(
+        primaryIncome + weightedIncome,
+        children,
+    );
+    const childCareDayRateWithSubsidy = Math.round(
+        childCareDayRate - (childCareDayRate * subsidyPercentage) / 100,
+    );
+    const yearlyCost = childCareDayRateWithSubsidy * daysWorked * 52;
 
     return (
         <Card className="mx-auto w-full">
@@ -42,32 +54,75 @@ function ChildcareSubsidyCalculator({ title, description }: ToolData) {
                 <CardDescription>{description}</CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col gap-6">
-                <div className="flex flex-col gap-2">
-                    <Label htmlFor="income">Combined household income</Label>
+                <Field>
+                    <FieldLabel htmlFor="daysWorked">
+                        Number of days worked
+                    </FieldLabel>
+                    <Select
+                        value={daysWorked}
+                        onValueChange={(value) => setDaysWorked(value!)}
+                    >
+                        <SelectTrigger>
+                            <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="1">1</SelectItem>
+                            <SelectItem value="2">2</SelectItem>
+                            <SelectItem value="3">3</SelectItem>
+                            <SelectItem value="4">4</SelectItem>
+                            <SelectItem value="5">5</SelectItem>
+                        </SelectContent>
+                    </Select>
+                </Field>
+                <Field>
+                    <FieldLabel htmlFor="primaryIncome">
+                        Primary Income
+                    </FieldLabel>
                     <Input
-                        id="income"
-                        type="number"
-                        min={MIN_INCOME}
-                        max={MAX_INCOME}
-                        step={STEP_INCOME}
-                        value={isNaN(income) ? "" : income}
+                        id="primaryIncome"
+                        value={primaryIncome}
                         onChange={(e) =>
-                            setIncome(parseInt(e.target.value, 10))
+                            setPrimaryIncome(parseInt(e.target.value))
                         }
+                        type="number"
+                        min={0}
+                        max={10000000}
+                        step={1000}
                     />
-                    <Slider
-                        orientation="horizontal"
-                        id="income-slider"
-                        value={[income]}
-                        min={MIN_INCOME}
-                        max={MAX_INCOME}
-                        step={STEP_INCOME}
-                        onValueChange={(value) =>
-                            setIncome(Array.isArray(value) ? value[0] : value)
+                </Field>
+                <Field>
+                    <FieldLabel htmlFor="secondaryIncome">
+                        Secondary Income (if full time)
+                    </FieldLabel>
+                    <Input
+                        id="secondaryIncome"
+                        value={secondaryIncome}
+                        onChange={(e) =>
+                            setSecondaryIncome(parseInt(e.target.value))
                         }
+                        type="number"
+                        min={0}
+                        max={10000000}
+                        step={1000}
                     />
-                </div>
-                <div className="flex flex-col gap-2">
+                </Field>
+                <Field>
+                    <FieldLabel htmlFor="childCareDayRate">
+                        Child Care Day Rate
+                    </FieldLabel>
+                    <Input
+                        id="childCareDayRate"
+                        value={childCareDayRate}
+                        onChange={(e) =>
+                            setChildCareDayRate(parseInt(e.target.value))
+                        }
+                        type="number"
+                        min={100}
+                        max={300}
+                        step={10}
+                    />
+                </Field>
+                <Field>
                     <Label htmlFor="children">Number of children</Label>
                     <Select
                         value={children}
@@ -85,8 +140,17 @@ function ChildcareSubsidyCalculator({ title, description }: ToolData) {
                             </SelectItem>
                         </SelectContent>
                     </Select>
+                </Field>
+                <div className="flex flex-row gap-4 text-center">
+                    <div className="flex flex-1 flex-col justify-center gap-2">
+                        <div>Child Care Subsidy Rate</div>
+                        <Heading>{subsidyPercentage}%</Heading>
+                    </div>
+                    <div className="flex flex-1 flex-col justify-center gap-2">
+                        <div>Yearly Child Care Cost</div>
+                        <Heading>${yearlyCost}</Heading>
+                    </div>
                 </div>
-                <Heading>{`${subsidy}%`}</Heading>
             </CardContent>
         </Card>
     );
