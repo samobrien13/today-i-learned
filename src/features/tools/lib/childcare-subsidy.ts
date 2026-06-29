@@ -27,6 +27,7 @@ function calculateSubsidy(
     return Math.max(0, basePercentage - increments);
 }
 
+// TODO: fix higher rate subsidy
 export function calculateChildcareSubsidy(
     income: number,
     children: ChildcareSubsidyChildren,
@@ -52,26 +53,20 @@ export function calculateChildcareSubsidy(
     );
 }
 
-/**
- * Calculates the annual dollar value of the Child Care Subsidy given a
- * subsidy percentage, the number of days the parent works per week, and
- * the daily cost of childcare. Assumes the parent uses one day of care
- * per day worked, across 52 weeks of the year.
- */
 export function calculateAnnualChildcareBenefit(
     subsidyPercentage: number,
-    daysWorkedPerWeek: number,
+    daysAttendedPerWeek: number,
     dailyCost: number,
 ): number {
     if (
         isNaN(subsidyPercentage) ||
-        isNaN(daysWorkedPerWeek) ||
+        isNaN(daysAttendedPerWeek) ||
         isNaN(dailyCost)
     ) {
         return 0;
     }
 
     return Math.round(
-        (subsidyPercentage * daysWorkedPerWeek * dailyCost * 52) / 100,
+        (subsidyPercentage * daysAttendedPerWeek * dailyCost * 52) / 100,
     );
 }

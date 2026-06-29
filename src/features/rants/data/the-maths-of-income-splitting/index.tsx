@@ -97,10 +97,10 @@ function TheMathsOfIncomeSplitting() {
                 CCS adds the component of another wage so this calculation is
                 done.
             </BlogParagraph>
-            <BlogSubHeading>
-                Childcare subsidy with both parents at median wage
-            </BlogSubHeading>
-            <ChildcareSubsidyCalculator title="test" description="test" />
+            <ChildcareSubsidyCalculator
+                title="Childcare Subsidy Calculator"
+                description="Calculate your childcare subsidy percentage based on combined household income"
+            />
             <BlogSubHeading>Income splitting at the median wage</BlogSubHeading>
             <BlogParagraph>
                 Splitting the median wage would assign earnings of $45,000 each.
@@ -108,7 +108,6 @@ function TheMathsOfIncomeSplitting() {
             <BlogSubHeading>
                 Childcare subsidy at the median wage
             </BlogSubHeading>
-            <BlogParagraph>1, 2, 3, 4 and 5 days a week.</BlogParagraph>
             <BlogHeading>Secondary effects of the childcare model</BlogHeading>
             <BlogParagraph>
                 Working produces many benefits not accounted for in the income
