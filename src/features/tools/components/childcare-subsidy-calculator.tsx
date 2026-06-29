@@ -55,10 +55,8 @@ function ChildcareSubsidyCalculator({ title, description }: ToolData) {
                             setIncome(parseInt(e.target.value, 10))
                         }
                     />
-                </div>
-                <div className="flex flex-col gap-2">
-                    <Label htmlFor="income-slider">Income</Label>
                     <Slider
+                        orientation="horizontal"
                         id="income-slider"
                         value={[income]}
                         min={MIN_INCOME}
