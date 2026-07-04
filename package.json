@@ -61,7 +61,7 @@
         "shiki": "^4.1.0",
         "tailwindcss": "^4.2.2",
         "typescript": "^6.0.3",
-        "vitest": "^4.1.2"
+        "vitest": "^4.1.9"
     },
     "packageManager": "pnpm@11.3.0"
 }
