@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { SubmitEventHandler, useEffect, useRef } from "react";
 import {
     Card,
     CardContent,
@@ -23,7 +23,7 @@ function RubberDuck({ title, description }: ToolData) {
     const { data: messages, isPending, isError } = useMessages();
     const sendMessageMutation = useSendMessage();
 
-    const handleSubmit = (e: SubmitEvent) => {
+    const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target as HTMLFormElement);
