@@ -24,10 +24,12 @@ export const useSendMessage = () => {
         websocketRef.current = websocket;
 
         websocket.onopen = () => {
-            console.log("connected");
+            console.log("ws connected");
+        };
+        websocket.onerror = (error) => {
+            console.error(error);
         };
         websocket.onmessage = (event) => {
-            console.log(event);
             const newData = JSON.parse(event.data);
             const currentData = queryClient.getQueryData([
                 "rubber-duck",
