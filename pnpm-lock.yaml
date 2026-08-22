@@ -7045,18 +7045,6 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.5
 
-  fdir@6.5.0(picomatch@4.0.5):
-    optionalDependencies:
-      picomatch: 4.0.5
-
-  fdir@6.5.0(picomatch@4.0.5):
-    optionalDependencies:
-      picomatch: 4.0.5
-
-  fdir@6.5.0(picomatch@4.0.5):
-    optionalDependencies:
-      picomatch: 4.0.5
-
   fetch-blob@3.2.0:
     dependencies:
       node-domexception: 1.0.0
@@ -7948,12 +7936,6 @@ snapshots:
   picocolors@1.1.1: {}
 
   picomatch@2.3.2: {}
-
-  picomatch@4.0.5: {}
-
-  picomatch@4.0.5: {}
-
-  picomatch@4.0.5: {}
 
   picomatch@4.0.5: {}
 
