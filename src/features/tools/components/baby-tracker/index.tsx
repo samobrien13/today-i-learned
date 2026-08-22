@@ -61,10 +61,7 @@ type SleepingActivity = ActivityBase & {
 };
 
 type Activity =
-    | FeedingActivity
-    | PoopingActivity
-    | WeeActivity
-    | SleepingActivity;
+    FeedingActivity | PoopingActivity | WeeActivity | SleepingActivity;
 
 const STORAGE_KEY = "baby-tracker-activities";
 
