@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { SubmitEventHandler, useEffect, useRef } from "react";
 import {
     Card,
     CardContent,
@@ -14,29 +14,16 @@ import { Input } from "@/components/ui/input";
 import { SendIcon } from "lucide-react";
 import Image from "next/image";
 import { ToolData } from ".";
-
-type Message = {
-    text: string;
-    sender: "user" | "bot";
-};
-
-const supportResponses = [
-    "Did you try turning it off and on again?",
-    "Did you delete your node_modules and re-install?",
-    "Did you update your environment variables?",
-    "Did you try Googling it?",
-    "Did you try doing what the error message says?",
-    "Did you clear your cache?",
-    "Have you checked whether you are looking in the right environment?",
-];
+import { useMessages, useSendMessage } from "../hooks/use-messages";
 
 function RubberDuck({ title, description }: ToolData) {
-    const [messages, setMessages] = useState<Message[]>([]);
     const formRef = useRef<HTMLFormElement>(null);
     const chatRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+    const { data: messages, isPending, isError } = useMessages();
+    const sendMessageMutation = useSendMessage();
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target as HTMLFormElement);
@@ -45,14 +32,7 @@ function RubberDuck({ title, description }: ToolData) {
 
         if (!message) return;
 
-        const newMessages: Message[] = [{ text: message, sender: "user" }];
-
-        const randomIndex = Math.floor(Math.random() * supportResponses.length);
-        const botResponse = supportResponses[randomIndex];
-
-        setTimeout(() => {
-            setMessages([...newMessages, { text: botResponse, sender: "bot" }]);
-        }, 500);
+        sendMessageMutation.mutate({ sender: "user", text: message });
 
         formRef.current?.reset();
     };
@@ -63,6 +43,14 @@ function RubberDuck({ title, description }: ToolData) {
             behavior: "smooth",
         });
     }, [messages]);
+
+    if (isPending) {
+        return <p>Loading...</p>;
+    }
+
+    if (isError) {
+        throw new Error("Failed to get messages");
+    }
 
     return (
         <Card className="mx-auto w-full">
