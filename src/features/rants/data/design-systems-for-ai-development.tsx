@@ -100,6 +100,15 @@ function DesignSystemsForAiDevelopment() {
                 consumers, and the building block library that it wraps, but it
                 will need minimal business context, if any.
             </BlogParagraph>
+            <BlogParagraph>
+                The Figma MCP generally does a good enough job of copying over
+                markup and design intent, though a messy Figma can result in
+                misunderstandings. The more the design tokens can match the
+                code, the less likely these trivial mistakes. Agents can be
+                asked to push back on bespoke colours and shadows being
+                introduced to maintain the consistency. In an ideal world, using
+                Code Connect would solve this, but I haven&apos;t got there yet!
+            </BlogParagraph>
             <BlogHeading>Adding it all up</BlogHeading>
             <BlogParagraph>
                 With these rules in place I have had a lot of success in making
@@ -107,7 +116,10 @@ function DesignSystemsForAiDevelopment() {
                 added to the design system with minimal human intervention, and
                 you can be confident that it has the majority of the details you
                 care about right the first time. Often it requires a quick
-                visual check and some minor adjustments before shipping.
+                visual check and some minor adjustments before shipping. What
+                would have previously taken days or weeks and required an entire
+                team to maintain can now be done in a few prompts with a link to
+                a Figma file.
             </BlogParagraph>
             <BlogParagraph>
                 Implementing the design system also becomes easier, as agents
