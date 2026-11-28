@@ -9,8 +9,8 @@ export const DESIGN_SYSTEMS_FOR_AI_DEVELOPMENT: BlogData = {
     slug: "design-systems-for-ai-development",
     tags: ["design", "ai"],
     image: {
-        src: "/images/rants/palette.png",
-        alt: "Colour palette",
+        src: "/images/rants/ai-design-system.jpg",
+        alt: "A robotic arm painting UI components onto a holographic screen",
     },
     component: <DesignSystemsForAiDevelopment />,
 };
