@@ -87,12 +87,42 @@ function DesignSystemsForAiDevelopment() {
                 should the need ever arise. All of these libraries make building
                 highly complex interactions straigtforward, giving you the
                 perfect building blocks to build your own ShadCN, without
-                looking like every ShadCN website of the last few years.
+                necessarily looking like every other ShadCN website.
             </BlogParagraph>
             <BlogHeading>Context</BlogHeading>
-            <BlogParagraph>One level above and below</BlogParagraph>
-            <BlogHeading>Conclusion</BlogHeading>
-            <BlogParagraph>Content</BlogParagraph>
+            <BlogParagraph>
+                A general rule for the context needed for a repository is to
+                provide enough detail for one level above and one level below. A
+                frontend needs to know about an API that it calls, but not the
+                details beyond that. It needs to know where the design system is
+                located and how to use it, but can skip over the implementation
+                details. The design system itself should know about its
+                consumers, and the building block library that it wraps, but it
+                will need minimal business context, if any.
+            </BlogParagraph>
+            <BlogHeading>Adding it all up</BlogHeading>
+            <BlogParagraph>
+                With these rules in place I have had a lot of success in making
+                seismic changes safely at speed. A complex new component can be
+                added to the design system with minimal human intervention, and
+                you can be confident that it has the majority of the details you
+                care about right the first time. Often it requires a quick
+                visual check and some minor adjustments before shipping.
+            </BlogParagraph>
+            <BlogParagraph>
+                Implementing the design system also becomes easier, as agents
+                are much better at humans (at least the ones I have worked with)
+                at recognising existing components and pushing back on designers
+                when given the right information.
+            </BlogParagraph>
+            <BlogParagraph>
+                Some amount of discipline is still required, it is still easy
+                enough to work around a limitation with a quick !important or a
+                copy and paste. Optimising the design system surface area for
+                just enough customisability is the key. Unrestricted design will
+                result in a fragmented user experience, but a system too
+                restrictive may encourage the same.
+            </BlogParagraph>
         </>
     );
 }
