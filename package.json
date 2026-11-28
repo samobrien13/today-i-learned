@@ -32,7 +32,7 @@
         "postgres": "^3.4.9",
         "react": "19.2.6",
         "react-chartjs-2": "^5.3.1",
-        "react-colorful": "^5.6.1",
+        "react-colorful": "^5.8.0",
         "react-dom": "19.2.7",
         "rss": "^1.2.2",
         "sonner": "^2.0.8",
